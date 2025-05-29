@@ -62,26 +62,26 @@ playPauseBtn.addEventListener('click', () => {
 
 #record {
   position: absolute;
-  top: -40px;
-  left: -40px;
+  top: -30px;
+  left: -30px;
   width: 40px;
   height: 40px;
   border-radius: 100%;
-  display: block;
-  transition: transform 1s ease, top 1s ease, opacity 1s ease;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
   z-index: 1;
-  opacity: 1;
 }
 
 .playing #record {
+  opacity: 1;
   animation: spin 3s linear infinite;
-  top: 100vh; /* Move off-screen downward */
-  opacity: 0;
 }
 
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
 
 </style>
