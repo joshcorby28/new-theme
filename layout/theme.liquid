@@ -70,6 +70,33 @@
       footer {
       display:none;
     }
+
+      .player {
+  text-align: center;
+}
+
+#playPauseBtn {
+  font-size: 40px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+#record {
+  margin-top: 20px;
+  width: 200px;
+  height: 200px;
+  display: none;
+  animation: spin 3s linear infinite;
+}
+
+.playing #record {
+  display: block;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
     </style>
   {% endif %}
 
@@ -81,6 +108,36 @@
     }
   </style>
   {% endif %}
+
+    <div class="player">
+  <button id="playPauseBtn">▶️</button>
+  <img id="record" src="record.png" alt="Record" />
+  <audio id="audio" src="your-song.mp3"></audio>
+</div>
+
+    <script>
+      const playPauseBtn = document.getElementById('playPauseBtn');
+const record = document.getElementById('record');
+const audio = document.getElementById('audio');
+const player = document.querySelector('.player');
+
+let isPlaying = false;
+
+playPauseBtn.addEventListener('click', () => {
+  if (isPlaying) {
+    audio.pause();
+    playPauseBtn.textContent = '▶️';
+    player.classList.remove('playing');
+  } else {
+    audio.play();
+    playPauseBtn.textContent = '⏸️';
+    player.classList.add('playing');
+  }
+  isPlaying = !isPlaying;
+});
+
+    </script>
+
 
     {{ content_for_layout }}
 
