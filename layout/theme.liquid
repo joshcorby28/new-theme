@@ -16,11 +16,11 @@
   </head>
 
   <body id="hidden-theme">
+    <canvas id="grain"></canvas>
     {% sections 'header-group' %}
 
     {{ content_for_layout }}
 
-<canvas id="grain"></canvas>
 <script>
   const canvas = document.getElementById('grain');
   const ctx = canvas.getContext('2d');
