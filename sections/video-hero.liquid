@@ -70,7 +70,7 @@
     padding: 40px;
     text-align: {{ section.settings.text_alignment }};
     box-sizing: border-box;
-    max-width: {{ section.settings.content_width }}px;
+    max-width: {{ section.settings.content_width }}%;
     margin: 0 auto;
     left: 0;
     right: 0;
@@ -377,12 +377,12 @@
     {
       "type": "range",
       "id": "content_width",
-      "min": 300,
-      "max": 1400,
-      "step": 50,
-      "unit": "px",
+      "min": 30,
+      "max": 100,
+      "step": 2,
+      "unit": "%",
       "label": "Content width",
-      "default": 800
+      "default": 100
     },
     {
       "type": "color",
