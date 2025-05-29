@@ -13,7 +13,7 @@
       "type": "custom-section",
       "blocks": {
         "ai_gen_block_e479f57_9QBBYF": {
-          "type": "ai_gen_block_e479f57",
+          "type": "video-hero",
           "settings": {
             "width_mode": "full_width",
             "container_width": 1200,
