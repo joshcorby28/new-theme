@@ -21,7 +21,7 @@
     {{ content_for_layout }}
 
     {% # Grunge Overlay Effect %}
-
+   {% if settings.grunge-effect %}
     <script>
       var options = {
         animate: true,
@@ -45,6 +45,7 @@
         pointer-events: none;
       }
     </style>
+  {% endif %}
 
     {% sections 'footer-group' %}
   </body>
