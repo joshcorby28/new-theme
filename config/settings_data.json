@@ -11,6 +11,8 @@
   "current": {
     "grunge-effect": false,
     "type_primary_font": "work_sans_n4",
+    "background_color": "#ffffff",
+    "foreground_color": "#363636",
     "max_page_width": "110rem",
     "min_page_margin": 10,
     "content_for_index": []
