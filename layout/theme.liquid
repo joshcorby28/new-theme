@@ -10,53 +10,57 @@
     {% # Social, title, etc. %}
     {% render 'meta-tags' %}
 
-
     {{ content_for_header }}
   </head>
 
   <body id="hidden-theme">
-<style>
-  #grain-canvas {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100vw;
-    height: 100vh;
-    pointer-events: none; 
-    opacity: 0.15; 
-    z-index: 9999;
-  }
-</style>
 
-<canvas id="grain-canvas"></canvas>
+   {% # Grunge Overlay Effect %}
+    <canvas id="grain-canvas"></canvas>
+    {% if settings['grunge-effect'] %}
+      <script>
+        const canvas = document.getElementById('grain-canvas');
+        const ctx = canvas.getContext('2d');
 
-    <script>
-      const canvas = document.getElementById('grain-canvas');
-      const ctx = canvas.getContext('2d');
-    
-      function resize() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-      }
-    
-      function drawNoise() {
-        const imageData = ctx.createImageData(canvas.width, canvas.height);
-        const buffer32 = new Uint32Array(imageData.data.buffer);
-        for(let i = 0; i < buffer32.length; i++) {
-          buffer32[i] = (Math.floor(Math.random() * 255) << 24); 
+        function resize() {
+          canvas.width = window.innerWidth;
+          canvas.height = window.innerHeight;
         }
-        ctx.putImageData(imageData, 0, 0);
-      }
-    
-      function loop() {
-        drawNoise();
-        requestAnimationFrame(loop);
-      }
-    
-      window.addEventListener('resize', resize);
-      resize();
-      loop();
-    </script>
 
+        function drawNoise() {
+          const imageData = ctx.createImageData(canvas.width, canvas.height);
+          const buffer32 = new Uint32Array(imageData.data.buffer);
+          for (let i = 0; i < buffer32.length; i++) {
+            buffer32[i] = Math.floor(Math.random() * 255) << 24;
+          }
+          ctx.putImageData(imageData, 0, 0);
+        }
+
+        function loop() {
+          drawNoise();
+          requestAnimationFrame(loop);
+        }
+
+        window.addEventListener('resize', resize);
+        resize();
+        loop();
+      </script>
+
+      <style>
+        #grain-canvas {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100vw;
+          height: 100vh;
+          pointer-events: none;
+          opacity: 0.15;
+          z-index: 9999;
+        }
+      </style>
+    {% endif %}
+   {% # Grunge Overlay Effect %}
+   
     {% sections 'header-group' %}
 
     {{ content_for_layout }}
