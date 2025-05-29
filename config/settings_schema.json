@@ -56,6 +56,11 @@
   "name": "t:general.layout",
   "settings": [
     {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo Image"
+    },
+    {
       "type": "range",
       "id": "page_width",
       "label": "t:labels.page_width",

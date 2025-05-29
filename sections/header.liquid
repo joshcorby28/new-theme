@@ -1,7 +1,13 @@
 <header class="page-width">
-  <h2 class="header__title">
+<h2 class="header__title">
+  {% if settings.logo %}
+    <a href="{{ routes.root_url }}" class="header__logo-link">
+      <img src="{{ settings.logo | img_url: '200x' }}" alt="{{ shop.name }}" class="header__logo" />
+    </a>
+  {% else %}
     {{ shop.name | link_to: routes.root_url }}
-  </h2>
+  {% endif %}
+</h2>
 
   <div class="header__menu">
     {% for link in section.settings.menu.links %}
