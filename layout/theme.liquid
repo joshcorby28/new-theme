@@ -10,13 +10,41 @@
     {% # Social, title, etc. %}
     {% render 'meta-tags' %}
 
+    <script src="https://cdn.jsdelivr.net/npm/grained"></script>
+
     {{ content_for_header }}
   </head>
 
-  <body>
+  <body id="hidden-theme">
     {% sections 'header-group' %}
 
     {{ content_for_layout }}
+
+    {% # Grunge Overlay Effect %}
+
+    <script>
+      var options = {
+        animate: true,
+        patternWidth: 100,
+        patternHeight: 100,
+        grainOpacity: 0.3,
+        grainDensity: 1,
+        grainWidth: 1,
+        grainHeight: 1,
+      };
+      grained('#hidden-theme', options);
+
+      /*
+        background-color :rgb(204, 204, 204)
+        */
+    </script>
+
+    <style>
+      #hidden-theme::before {
+        z-index: 999999;
+        pointer-events: none;
+      }
+    </style>
 
     {% sections 'footer-group' %}
   </body>
