@@ -9,60 +9,51 @@
  */
 {
   "sections": {
-    "custom_section_bkhCxQ": {
-      "type": "custom-section",
-      "blocks": {
-        "ai_gen_block_e479f57_9QBBYF": {
-          "type": "video-hero",
-          "settings": {
-            "width_mode": "full_width",
-            "container_width": 1200,
-            "media_type": "image",
-            "background_video": "",
-            "placeholder_color": "#f4f4f4",
-            "use_overlay": true,
-            "overlay_color": "#000000",
-            "overlay_opacity": 40,
-            "content_position": "middle",
-            "text_alignment": "center",
-            "content_width": 800,
-            "heading": "Your heading here",
-            "heading_color": "#ffffff",
-            "heading_size": 48,
-            "heading_size_mobile": 32,
-            "text": "Add your text here. You can adjust the position, colors, and more in the settings.",
-            "text_color": "#ffffff",
-            "text_size": 18,
-            "text_size_mobile": 16,
-            "show_buttons": true,
-            "primary_button_text": "Shop Now",
-            "primary_button_link": "",
-            "primary_button_bg_color": "#ffffff",
-            "primary_button_text_color": "#000000",
-            "primary_button_bg_hover_color": "#f0f0f0",
-            "primary_button_text_hover_color": "#000000",
-            "secondary_button_text": "Learn More",
-            "secondary_button_link": "",
-            "secondary_button_bg_color": "rgba(255, 255, 255, 0.1)",
-            "secondary_button_text_color": "#ffffff",
-            "secondary_button_bg_hover_color": "rgba(255, 255, 255, 0.2)",
-            "secondary_button_text_hover_color": "#ffffff",
-            "button_border_radius": 4,
-            "button_text_size": 16,
-            "section_height": 500,
-            "section_height_mobile": 400
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "ai_gen_block_e479f57_9QBBYF"
-      ],
-      "name": "t:general.custom_section",
-      "settings": {}
+    "video_hero_fQNxfR": {
+      "type": "video-hero",
+      "name": "Video Hero",
+      "settings": {
+        "width_mode": "full_width",
+        "container_width": 1200,
+        "section_height": 600,
+        "section_height_mobile": 400,
+        "media_type": "image",
+        "background_image": "shopify://shop_images/IMG_0766.JPG_1726590419266.jpg",
+        "background_video": "",
+        "placeholder_color": "#f4f4f4",
+        "use_overlay": true,
+        "overlay_color": "#000000",
+        "overlay_opacity": 40,
+        "heading": "",
+        "text": "",
+        "content_position": "middle",
+        "text_alignment": "center",
+        "content_width": 800,
+        "heading_color": "#ffffff",
+        "heading_size": 48,
+        "heading_size_mobile": 28,
+        "text_color": "#ffffff",
+        "text_size": 20,
+        "text_size_mobile": 16,
+        "show_buttons": true,
+        "primary_button_text": "",
+        "primary_button_link": "",
+        "secondary_button_text": "",
+        "secondary_button_link": "",
+        "primary_button_bg_color": "#ffffff",
+        "primary_button_text_color": "#000000",
+        "primary_button_bg_hover_color": "#dddddd",
+        "primary_button_text_hover_color": "#000000",
+        "secondary_button_bg_color": "#000000",
+        "secondary_button_text_color": "#ffffff",
+        "secondary_button_bg_hover_color": "#222222",
+        "secondary_button_text_hover_color": "#ffffff",
+        "button_border_radius": 4,
+        "button_text_size": 16
+      }
     }
   },
   "order": [
-    "custom_section_bkhCxQ"
+    "video_hero_fQNxfR"
   ]
 }
