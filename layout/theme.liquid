@@ -21,9 +21,9 @@
     top: 0; left: 0;
     width: 100vw;
     height: 100vh;
-    pointer-events: none; /* so clicks go through */
-    opacity: 0.15; /* adjust for subtlety */
-    z-index: 9999; /* over everything */
+    pointer-events: none; 
+    opacity: 0.15; 
+    z-index: 9999;
   }
 </style>
 
@@ -60,36 +60,6 @@
     {% sections 'header-group' %}
 
     {{ content_for_layout }}
-
-<script>
-  const canvas = document.getElementById('grain');
-  const ctx = canvas.getContext('2d');
-  let width, height;
-
-  function resize() {
-    width = canvas.width = window.innerWidth;
-    height = canvas.height = window.innerHeight;
-  }
-
-  function noise() {
-    const imageData = ctx.createImageData(width, height);
-    const buffer32 = new Uint32Array(imageData.data.buffer);
-    for(let i = 0; i < buffer32.length; i++) {
-      buffer32[i] = ((255 * Math.random())|0) << 24;
-    }
-    ctx.putImageData(imageData, 0, 0);
-  }
-
-  function loop() {
-    noise();
-    requestAnimationFrame(loop);
-  }
-
-  window.addEventListener('resize', resize);
-  resize();
-  loop();
-</script>
-
 
     <style>
       .shopify-section-group-header-group {
