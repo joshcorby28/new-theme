@@ -38,6 +38,12 @@
         "type": "header",
         "content": "t:general.fonts"
       },
+          {
+      "type": "checkbox",
+      "id": "text-uppercase",
+      "default": true,
+      "label": "Global Uppercase Headings"
+    },
       {
         "type": "font_picker",
         "id": "type_primary_font",

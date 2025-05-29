@@ -211,7 +211,7 @@
       {% endif %}
 
       {% if section.settings.text != blank %}
-        <div class="hidden-theme-media-text-{{ hidden_theme_id }}">{{ section.settings.text }}</div>
+        <div style="{% if section.settings.text-uppercase %}text-transform:uppercase;{% endif %}" class="hidden-theme-media-text-{{ hidden_theme_id }}">{{ section.settings.text }}</div>
       {% endif %}
 
       {% if section.settings.show_buttons %}
@@ -425,6 +425,12 @@
       "unit": "px",
       "label": "Text size (mobile)",
       "default": 16
+    },
+    {
+      "type": "checkbox",
+      "id": "text-uppercase",
+      "label": "Uppercase",
+      "default": true
     },
     {
       "type": "checkbox",
