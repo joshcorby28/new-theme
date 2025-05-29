@@ -30,11 +30,11 @@
         "text_alignment": "left",
         "content_width": 1400,
         "heading_color": "#ffffff",
-        "heading_size": 48,
-        "heading_size_mobile": 28,
+        "heading_size": 32,
+        "heading_size_mobile": 20,
         "text_color": "#ffffff",
-        "text_size": 20,
-        "text_size_mobile": 16,
+        "text_size": 16,
+        "text_size_mobile": 14,
         "show_buttons": true,
         "primary_button_text": "shop now",
         "primary_button_link": "#",
@@ -49,7 +49,7 @@
         "secondary_button_bg_hover_color": "#222222",
         "secondary_button_text_hover_color": "#ffffff",
         "button_border_radius": 4,
-        "button_text_size": 16
+        "button_text_size": 12
       }
     }
   },
