@@ -56,7 +56,22 @@
       }
     ]
   },
-  {
+    {
+    "name": "Audio Player",
+    "settings": [
+      {
+        "type": "url",
+        "id": "player_audio",
+        "label": "Audio MP3 File"
+      },
+      {
+        "type": "image_picker",
+        "id": "player_image",
+        "label": "Record Image"
+      }
+    ]
+  },
+    {
     "name": "t:general.typography",
     "settings": [
       {

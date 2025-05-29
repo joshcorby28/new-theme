@@ -1,87 +1,93 @@
-  <div class="player-overlay">
+<div class="player-overlay">
   <div class="player">
-  <button id="playPauseBtn" aria-label="Play">
-    <!-- Play Icon (SVG) -->
-    <svg id="playIcon" viewBox="0 0 64 64" width="48" height="48" fill="white">
-      <polygon style="fill:red;" points="16,12 52,32 16,52" />
-    </svg>
-    <!-- Pause Icon (SVG) -->
-    <svg id="pauseIcon" viewBox="0 0 64 64" width="48" height="48" fill="white" style="display: none;">
-      <rect style="fill:red;" x="16" y="12" width="10" height="40"/>
-      <rect style="fill:red;" x="38" y="12" width="10" height="40"/>
-    </svg>
-  </button>
-  <img id="record" src="https://ox-ny-dev.myshopify.com/cdn/shop/files/9fcf87557207acd6e6c3732de75aa20ecf0db375_1.jpg?v=1747933345&width=2000" alt="Record" />
-  <audio id="audio" src=""></audio>
+    <button id="playPauseBtn" aria-label="Play">
+      <!-- Play Icon (SVG) -->
+      <svg id="playIcon" viewBox="0 0 64 64" width="28" height="28" fill="white">
+        <polygon style="fill:white;" points="16,12 52,32 16,52" />
+      </svg>
+      <!-- Pause Icon (SVG) -->
+      <svg id="pauseIcon" viewBox="0 0 64 64" width="28" height="28" fill="white" style="display: none;">
+        <rect style="fill:white;" x="16" y="12" width="10" height="40"/>
+        <rect style="fill:white;" x="38" y="12" width="10" height="40"/>
+      </svg>
+    </button>
+    {% if settings.player_image %}
+      <img id="record" src="{{ settings.player_image | img_url: '100x' }}" alt="Record">
+    {% endif %}
+    {% if settings.player_audio %}
+      <audio id="audio" src="{{ settings.player_audio }}"></audio>
+    {% endif %}
+  </div>
 </div>
-</div>
 
-    <script>
-    const playPauseBtn = document.getElementById('playPauseBtn');
-const playIcon = document.getElementById('playIcon');
-const pauseIcon = document.getElementById('pauseIcon');
-const record = document.getElementById('record');
-const audio = document.getElementById('audio');
-const player = document.querySelector('.player');
 
-let isPlaying = false;
+<script>
+  const playPauseBtn = document.getElementById('playPauseBtn');
+  const playIcon = document.getElementById('playIcon');
+  const pauseIcon = document.getElementById('pauseIcon');
+  const record = document.getElementById('record');
+  const audio = document.getElementById('audio');
+  const player = document.querySelector('.player');
 
-playPauseBtn.addEventListener('click', () => {
-  if (isPlaying) {
-    audio.pause();
-    playIcon.style.display = 'block';
-    pauseIcon.style.display = 'none';
-    player.classList.remove('playing');
-  } else {
-    audio.play();
-    playIcon.style.display = 'none';
-    pauseIcon.style.display = 'block';
-    player.classList.add('playing');
-  }
-  isPlaying = !isPlaying;
-});
+  let isPlaying = false;
 
-    </script>
+  playPauseBtn.addEventListener('click', () => {
+    if (isPlaying) {
+      audio.pause();
+      playIcon.style.display = 'block';
+      pauseIcon.style.display = 'none';
+      player.classList.remove('playing');
+    } else {
+      audio.play();
+      playIcon.style.display = 'none';
+      pauseIcon.style.display = 'block';
+      player.classList.add('playing');
+    }
+    isPlaying = !isPlaying;
+  });
+</script>
 
 <style>
-.player {
-  position: absolute;
-  bottom: 20px;
-  right: 20px;
-  text-align: center;
-  pointer-events: auto;
-}
+  .player {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    text-align: center;
+    pointer-events: auto;
+  }
 
-#playPauseBtn {
-  background: none;
-  border: none;
-  cursor: pointer;
-  position: relative;
-  z-index: 2;
-}
+  #playPauseBtn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    z-index: 2;
+  }
 
-#record {
-  position: absolute;
-  top: -30px;
-  left: -30px;
-  width: 40px;
-  height: 40px;
-  border-radius: 100%;
-  opacity: 0;
-  transition: opacity 0.5s ease;
-  pointer-events: none;
-  z-index: 1;
-}
+  #record {
+    position: absolute;
+    top: -30px;
+    left: -30px;
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+    z-index: 1;
+  }
 
-.playing #record {
-  opacity: 1;
-  animation: spin 3s linear infinite;
-}
+  .playing #record {
+    opacity: 1;
+    animation: spin 3s linear infinite;
+  }
 
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
 </style>
