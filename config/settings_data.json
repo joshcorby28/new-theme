@@ -9,6 +9,7 @@
  */
 {
   "current": {
+    "grunge-effect": false,
     "type_primary_font": "work_sans_n4",
     "max_page_width": "110rem",
     "min_page_margin": 10,
