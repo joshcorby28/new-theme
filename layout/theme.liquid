@@ -10,7 +10,6 @@
     {% # Social, title, etc. %}
     {% render 'meta-tags' %}
 
-    <script src="https://cdn.jsdelivr.net/npm/grained"></script>
 
     {{ content_for_header }}
   </head>
@@ -23,41 +22,41 @@
     width: 100vw;
     height: 100vh;
     pointer-events: none; /* so clicks go through */
-    opacity: 1; /* adjust for subtlety */
+    opacity: 0.20; /* adjust for subtlety */
     z-index: 9999; /* over everything */
   }
 </style>
 
 <canvas id="grain-canvas"></canvas>
 
-<script>
-  const canvas = document.getElementById('grain-canvas');
-  const ctx = canvas.getContext('2d');
-
-  function resize() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-  }
-
-  function drawNoise() {
-    const imageData = ctx.createImageData(canvas.width, canvas.height);
-    const buffer32 = new Uint32Array(imageData.data.buffer);
-    for(let i = 0; i < buffer32.length; i++) {
-      // ARGB format: 0xAARRGGBB, here only alpha channel randomized for white noise with transparency
-      buffer32[i] = (Math.floor(Math.random() * 255) << 24); 
-    }
-    ctx.putImageData(imageData, 0, 0);
-  }
-
-  function loop() {
-    drawNoise();
-    requestAnimationFrame(loop);
-  }
-
-  window.addEventListener('resize', resize);
-  resize();
-  loop();
-</script>
+    <script>
+      const canvas = document.getElementById('grain-canvas');
+      const ctx = canvas.getContext('2d');
+    
+      function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+    
+      function drawNoise() {
+        const imageData = ctx.createImageData(canvas.width, canvas.height);
+        const buffer32 = new Uint32Array(imageData.data.buffer);
+        for(let i = 0; i < buffer32.length; i++) {
+          // ARGB format: 0xAARRGGBB, here only alpha channel randomized for white noise with transparency
+          buffer32[i] = (Math.floor(Math.random() * 255) << 24); 
+        }
+        ctx.putImageData(imageData, 0, 0);
+      }
+    
+      function loop() {
+        drawNoise();
+        requestAnimationFrame(loop);
+      }
+    
+      window.addEventListener('resize', resize);
+      resize();
+      loop();
+    </script>
 
     {% sections 'header-group' %}
 
