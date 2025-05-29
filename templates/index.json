@@ -11,11 +11,11 @@
   "sections": {
     "video_hero_fQNxfR": {
       "type": "video-hero",
-      "name": "Video Hero",
       "settings": {
         "width_mode": "full_width",
         "container_width": 1200,
         "section_height": 600,
+        "full_screen": true,
         "section_height_mobile": 400,
         "media_type": "image",
         "background_image": "shopify://shop_images/IMG_0766.JPG_1726590419266.jpg",
