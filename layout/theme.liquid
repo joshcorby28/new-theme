@@ -54,13 +54,13 @@
           width: 100vw;
           height: 100vh;
           pointer-events: none;
-          opacity: 0.15;
+          opacity: {{settings.grain-opacity}};
           z-index: 9999;
         }
       </style>
     {% endif %}
    {% # Grunge Overlay Effect %}
-   
+
     {% sections 'header-group' %}
 
     {{ content_for_layout }}
