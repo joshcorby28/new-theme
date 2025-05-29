@@ -32,6 +32,25 @@
   ]
 },
   {
+    "name": "Header",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Logo Image"
+      },
+      {
+        "type": "range",
+        "id": "logo_width",
+        "label": "Logo Width (px)",
+        "default": 200,
+        "min": 50,
+        "max": 500,
+        "step": 10
+      }
+    ]
+  },
+  {
     "name": "t:general.typography",
     "settings": [
       {
@@ -55,23 +74,6 @@
 {
   "name": "t:general.layout",
   "settings": [
- {
-  "name": "Header",
-  "settings": [
-    {
-      "type": "image_picker",
-      "id": "logo",
-      "label": "Logo Image"
-    },
-    {
-      "type": "range",
-      "id": "logo_width",
-      "label": "Logo Width (px)",
-      "default": 200,
-      "min": 50,
-      "max": 500,
-      "step": 10
-    },
     {
       "type": "range",
       "id": "page_width",
