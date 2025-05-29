@@ -35,6 +35,12 @@
     "name": "Header",
     "settings": [
       {
+      "type": "checkbox",
+      "id": "spin-logo",
+      "default": true,
+      "label": "Logo 3d spin"
+    },
+      {
         "type": "image_picker",
         "id": "logo",
         "label": "Logo Image"
