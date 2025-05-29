@@ -20,32 +20,36 @@
 
     {{ content_for_layout }}
 
-    {% # Grunge Overlay Effect %}
-    {% if settings['grunge-effect'] %}
-      <script>
-        var options = {
-          animate: true,
-          patternWidth: 100,
-          patternHeight: 100,
-          grainOpacity: 0.1,
-          grainDensity: 1,
-          grainWidth: 1,
-          grainHeight: 1,
-        };
-        grained('#hidden-theme', options);
+<canvas id="grain"></canvas>
+<script>
+  const canvas = document.getElementById('grain');
+  const ctx = canvas.getContext('2d');
+  let width, height;
 
-        /*
-        background-color :rgb(204, 204, 204)
-        */
-      </script>
+  function resize() {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+  }
 
-      <style>
-        #hidden-theme::before {
-          z-index: 999999;
-          pointer-events: none;
-        }
-      </style>
-    {% endif %}
+  function noise() {
+    const imageData = ctx.createImageData(width, height);
+    const buffer32 = new Uint32Array(imageData.data.buffer);
+    for(let i = 0; i < buffer32.length; i++) {
+      buffer32[i] = ((255 * Math.random())|0) << 24;
+    }
+    ctx.putImageData(imageData, 0, 0);
+  }
+
+  function loop() {
+    noise();
+    requestAnimationFrame(loop);
+  }
+
+  window.addEventListener('resize', resize);
+  resize();
+  loop();
+</script>
+
 
     <style>
       .shopify-section-group-header-group {
