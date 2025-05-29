@@ -5,7 +5,7 @@
       <img 
         src="{{ settings.logo | img_url: '300x' }}" 
         alt="{{ shop.name }}" 
-        class="header__logo {% if settings.spin-logo%} spin {% endif %}" 
+        class="header__logo {% if settings.spin-logo %} spin {% endif %}" 
         style="width: {{ settings.logo_width }}px;" 
       />
     </a>
@@ -44,9 +44,16 @@
   }
   header a {
     position: relative;
+    transition: transform 0.4s ease-in-out;
     text-decoration: none;
     color: {{ section.settings.color-text }};
   }
+
+  header a:hover {
+  transform: skew(10deg, 10deg);
+  transition: transform 0.4s ease-in-out;
+}
+
   header a sup {
     position: absolute;
     left: 100%;
