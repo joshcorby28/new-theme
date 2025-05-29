@@ -21,40 +21,44 @@
     {{ content_for_layout }}
 
     {% # Grunge Overlay Effect %}
-   {% if settings.grunge-effect %}
-    <script>
-      var options = {
-        animate: true,
-        patternWidth: 100,
-        patternHeight: 100,
-        grainOpacity: 0.1,
-        grainDensity: 1,
-        grainWidth: 1,
-        grainHeight: 1,
-      };
-      grained('#hidden-theme', options);
+    {% if settings['grunge-effect'] %}
+      <script>
+        var options = {
+          animate: true,
+          patternWidth: 100,
+          patternHeight: 100,
+          grainOpacity: 0.1,
+          grainDensity: 1,
+          grainWidth: 1,
+          grainHeight: 1,
+        };
+        grained('#hidden-theme', options);
 
-      /*
+        /*
         background-color :rgb(204, 204, 204)
         */
-    </script>
+      </script>
+
+      <style>
+        #hidden-theme::before {
+          z-index: 999999;
+          pointer-events: none;
+        }
+      </style>
+    {% endif %}
 
     <style>
-      #hidden-theme::before {
-        z-index: 999999;
-        pointer-events: none;
+      .shopify-section-group-header-group {
+      position: absolute;
+      z-index: 9;
+      width: 100%;
+      }
+
+      :root {
+        --page-width: {{ settings.max_page_width | divided_by: 10 }}rem;
       }
     </style>
-  {% endif %}
 
-  <style>
-    .shopify-section-group-header-group {
-    position: absolute;
-    z-index: 9;
-    width: 100%;
-    }
-  </style>
-  
     {% sections 'footer-group' %}
   </body>
 </html>
