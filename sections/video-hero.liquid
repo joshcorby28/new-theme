@@ -5,7 +5,7 @@
     position: relative;
     overflow: hidden;
     width: 100%;
-    height: {% if section.settings.section_height == 'full_screen' %}100vh{% else %}{{ section.settings.section_height }}px{% endif %};
+    height: {% if section.settings.full_screen %}100vh{% else %}{{ section.settings.section_height }}px{% endif %};
     {% if section.settings.width_mode == 'container' %}
       max-width: {{ section.settings.container_width }}px;
       margin: 0 auto;
