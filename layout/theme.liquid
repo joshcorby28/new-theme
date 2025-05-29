@@ -64,6 +64,15 @@
 
     {% sections 'header-group' %}
 
+   {% # Index Page %}
+    {% if template == 'index' %}
+    <style>
+      footer {
+      display:none;
+    }
+    </style>
+  {% endif %}
+
     {{ content_for_layout }}
 
     <style>
