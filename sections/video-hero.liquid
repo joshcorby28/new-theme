@@ -17,7 +17,7 @@
 
   @media screen and (max-width: 749px) {
     .hidden-theme-media-text-block-{{ hidden_theme_id }} {
-      height: {{ section.settings.section_height_mobile }}px;
+      height: {% if section.settings.full_screen %}100vh{% else %}{{ section.settings.section_height_mobile }}px{% endif %};
     }
   }
 
