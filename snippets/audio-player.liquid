@@ -44,44 +44,44 @@ playPauseBtn.addEventListener('click', () => {
     </script>
 
 <style>
-.player-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  pointer-events: none; /* So it doesn't block clicks unless needed */
-  z-index: 9999;
-}
-
 .player {
   position: absolute;
   bottom: 20px;
   right: 20px;
   text-align: center;
-  pointer-events: auto; /* Enables interaction with player */
+  pointer-events: auto;
 }
 
 #playPauseBtn {
   background: none;
   border: none;
   cursor: pointer;
+  position: relative;
+  z-index: 2;
 }
 
 #record {
-  margin-top: 20px;
-  width: 200px;
-  height: 200px;
-  display: none;
-  animation: spin 3s linear infinite;
+  position: absolute;
+  top: -40px;
+  left: -40px;
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  display: block;
+  transition: transform 1s ease, top 1s ease, opacity 1s ease;
+  z-index: 1;
+  opacity: 1;
 }
 
 .playing #record {
-  display: block;
+  animation: spin 3s linear infinite;
+  top: 100vh; /* Move off-screen downward */
+  opacity: 0;
 }
 
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
 </style>
