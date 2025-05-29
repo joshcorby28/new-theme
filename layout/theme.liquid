@@ -22,7 +22,7 @@
     width: 100vw;
     height: 100vh;
     pointer-events: none; /* so clicks go through */
-    opacity: 0.20; /* adjust for subtlety */
+    opacity: 0.15; /* adjust for subtlety */
     z-index: 9999; /* over everything */
   }
 </style>
@@ -42,7 +42,6 @@
         const imageData = ctx.createImageData(canvas.width, canvas.height);
         const buffer32 = new Uint32Array(imageData.data.buffer);
         for(let i = 0; i < buffer32.length; i++) {
-          // ARGB format: 0xAARRGGBB, here only alpha channel randomized for white noise with transparency
           buffer32[i] = (Math.floor(Math.random() * 255) << 24); 
         }
         ctx.putImageData(imageData, 0, 0);
