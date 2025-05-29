@@ -3,7 +3,7 @@
     {{ shop.name | link_to: routes.root_url }}
   </h2>
 
-  <div class="header__menu">
+  <div style="color:#fff !important" class="header__menu">
     {% for link in section.settings.menu.links %}
       {{ link.title | link_to: link.url }}
     {% endfor %}
@@ -34,7 +34,7 @@
   header a {
     position: relative;
     text-decoration: none;
-    color: var(--color-foreground);
+    color: {{section.settings.color-text}};
   }
   header a sup {
     position: absolute;
