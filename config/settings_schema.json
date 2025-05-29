@@ -37,37 +37,21 @@
       },
     ]
   },
-  {
-    "name": "t:general.layout",
-    "settings": [
-      {
-        "type": "select",
-        "id": "max_page_width",
-        "label": "t:labels.page_width",
-        "options": [
-          {
-            "value": "90rem",
-            "label": "t:options.page_width.narrow"
-          },
-          {
-            "value": "110rem",
-            "label": "t:options.page_width.wide"
-          }
-        ],
-        "default": "90rem"
-      },
-      {
-        "type": "range",
-        "id": "min_page_margin",
-        "min": 10,
-        "max": 100,
-        "step": 1,
-        "unit": "px",
-        "label": "t:labels.page_margin",
-        "default": 20
-      }
-    ]
-  },
+{
+  "name": "t:general.layout",
+  "settings": [
+    {
+      "type": "range",
+      "id": "page_width",
+      "label": "t:labels.page_width",
+      "min": 1400,
+      "max": 2000,
+      "step": 10,
+      "unit": "px",
+      "default": 1600
+    }
+  ]
+},
   {
     "name": "t:general.colors",
     "settings": [
