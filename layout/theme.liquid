@@ -71,14 +71,14 @@
       display:none;
     }
 
-      .player {
+.player {
   text-align: center;
-        margin-top:100px;
+  margin-top:100px;
 }
 
 #playPauseBtn {
-  font-size: 40px;
-  padding: 10px 20px;
+  background: none;
+  border: none;
   cursor: pointer;
 }
 
@@ -111,23 +111,25 @@
   {% endif %}
 
     <div class="player">
-  <button id="playPauseBtn"><?xml version='1.0' encoding='utf-8'?>
-<!DOCTYPE svg PUBLIC '-//W3C//DTD SVG 1.1//EN' 'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd'>
-<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
-<svg height="800px" width="800px" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" xmlns:xlink="http://www.w3.org/1999/xlink" enable-background="new 0 0 512 512">
-  <g>
-    <g fill="#231F20">
-      <path d="m354.2,247.4l-135.1-92.4c-4.2-3.1-15.4-3.1-16.3,8.6v184.8c1,11.7 12.4,11.9 16.3,8.6l135.1-92.4c3.5-2.1 8.3-10.7 0-17.2zm-130.5,81.3v-145.4l106.1,72.7-106.1,72.7z"/>
-      <path d="M256,11C120.9,11,11,120.9,11,256s109.9,245,245,245s245-109.9,245-245S391.1,11,256,11z M256,480.1    C132.4,480.1,31.9,379.6,31.9,256S132.4,31.9,256,31.9S480.1,132.4,480.1,256S379.6,480.1,256,480.1z"/>
-    </g>
-  </g>
-</svg></button>
+  <button id="playPauseBtn" aria-label="Play">
+    <!-- Play Icon (SVG) -->
+    <svg id="playIcon" viewBox="0 0 64 64" width="48" height="48" fill="white">
+      <polygon points="16,12 52,32 16,52" />
+    </svg>
+    <!-- Pause Icon (SVG) -->
+    <svg id="pauseIcon" viewBox="0 0 64 64" width="48" height="48" fill="white" style="display: none;">
+      <rect x="16" y="12" width="10" height="40"/>
+      <rect x="38" y="12" width="10" height="40"/>
+    </svg>
+  </button>
   <img id="record" src="https://ox-ny-dev.myshopify.com/cdn/shop/files/9fcf87557207acd6e6c3732de75aa20ecf0db375_1.jpg?v=1747933345&width=2000" alt="Record" />
   <audio id="audio" src="https://singhimalaya.github.io/Codepen/assets/music/1.mp3"></audio>
 </div>
 
     <script>
-      const playPauseBtn = document.getElementById('playPauseBtn');
+    const playPauseBtn = document.getElementById('playPauseBtn');
+const playIcon = document.getElementById('playIcon');
+const pauseIcon = document.getElementById('pauseIcon');
 const record = document.getElementById('record');
 const audio = document.getElementById('audio');
 const player = document.querySelector('.player');
@@ -137,11 +139,13 @@ let isPlaying = false;
 playPauseBtn.addEventListener('click', () => {
   if (isPlaying) {
     audio.pause();
-    playPauseBtn.textContent = '▶️';
+    playIcon.style.display = 'block';
+    pauseIcon.style.display = 'none';
     player.classList.remove('playing');
   } else {
     audio.play();
-    playPauseBtn.textContent = '⏸️';
+    playIcon.style.display = 'none';
+    pauseIcon.style.display = 'block';
     player.classList.add('playing');
   }
   isPlaying = !isPlaying;
