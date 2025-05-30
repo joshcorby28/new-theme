@@ -14,11 +14,10 @@
   </head>
 
   <body id="hidden-theme">
-
-   {% # Grunge Overlay Effect %}
+    {% # Grunge Overlay Effect %}
     <canvas id="grain-canvas"></canvas>
     {% if settings['grunge-effect'] %}
-        <script>
+      <script>
         const canvas = document.getElementById('grain-canvas');
         const ctx = canvas.getContext('2d');
 
@@ -31,7 +30,7 @@
           const imageData = ctx.createImageData(canvas.width, canvas.height);
           const buffer32 = new Uint32Array(imageData.data.buffer);
           for (let i = 0; i < buffer32.length; i++) {
-            buffer32[i] = (Math.floor(Math.random() * 255) << 24) | 0xFFFFFF; 
+            buffer32[i] = (Math.floor(Math.random() * 255) << 24) | 0xffffff;
           }
           ctx.putImageData(imageData, 0, 0);
         }
@@ -46,7 +45,6 @@
         loop();
       </script>
 
-
       <style>
         #grain-canvas {
           position: fixed;
@@ -60,27 +58,71 @@
         }
       </style>
     {% endif %}
-   {% # Grunge Overlay Effect %}
+    {% # Grunge Overlay Effect %}
+
+    <div
+      id="preloader"
+      style="position:fixed;top:0;left:0;width:100%;height:100%;background:white;z-index:9999;display:flex;align-items:center;justify-content:center;"
+    >
+      <div class="loader">Loading...</div>
+    </div>
+
+    <style>
+      #preloader .loader {
+        font-size: 1.5rem;
+        font-weight: bold;
+        animation: pulse 1s infinite;
+      }
+
+      @keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.5; }
+      }
+    </style>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        setTimeout(function () {
+          var preloader = document.getElementById("preloader");
+          if (preloader) {
+            preloader.style.transition = "opacity 0.5s ease";
+            preloader.style.opacity = 0;
+            setTimeout(function () {
+              preloader.style.display = "none";
+            }, 500);
+          }
+        }, 5000); // 5 seconds
+      });
+    </script>
+
+
 
     {% sections 'header-group' %}
 
-   {% # Index Page %}
+    {% # Index Page %}
     {% if template == 'index' %}
-    <style>
-      footer {
-      display:none;
-    }
-    </style>
-  {% endif %}
+      <style>
+        footer {
+          display: none;
+        }
+      </style>
+    {% endif %}
 
-  {% # Global %}
-  {% if settings.text-uppercase %}
-    <style>
-    h1,h2,h3,h4,h5,h6,a,span {
-    text-transform:uppercase;
-    }
-  </style>
-  {% endif %}
+    {% # Global %}
+    {% if settings['text-uppercase'] %}
+      <style>
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        a,
+        span {
+          text-transform: uppercase;
+        }
+      </style>
+    {% endif %}
 
     {{ content_for_layout }}
 
