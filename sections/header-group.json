@@ -20,7 +20,7 @@
             "custom_svg": "",
             "icon_size": "medium",
             "text": "grain overlay effect",
-            "text_size": 20,
+            "text_size": 16,
             "text_link": ""
           }
         },
@@ -30,7 +30,7 @@
             "custom_svg": "",
             "icon_size": "medium",
             "text": "hover animations",
-            "text_size": 20,
+            "text_size": 16,
             "text_link": ""
           }
         },
@@ -40,7 +40,7 @@
             "custom_svg": "",
             "icon_size": "medium",
             "text": "easy to customise",
-            "text_size": 20,
+            "text_size": 16,
             "text_link": ""
           }
         },
@@ -50,7 +50,7 @@
             "custom_svg": "",
             "icon_size": "medium",
             "text": "global sections",
-            "text_size": 20,
+            "text_size": 16,
             "text_link": ""
           }
         }
@@ -68,9 +68,10 @@
         "speed": 30,
         "item_gap": 50,
         "item_gap_mobile": 30,
-        "color_scheme": "",
-        "padding_top": 0,
-        "padding_bottom": 0,
+        "bg-color": "#000000",
+        "text-color": "#ffffff",
+        "padding_top": 10,
+        "padding_bottom": 10,
         "custom_class": ""
       }
     },
