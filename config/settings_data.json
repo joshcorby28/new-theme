@@ -10,6 +10,7 @@
 {
   "current": {
     "grunge-effect": true,
+    "spin-logo": false,
     "logo": "shopify://shop_images/New_Project_75.png",
     "logo-solid": "shopify://shop_images/FRACT-logo-dark.png",
     "logo_width": 120,
