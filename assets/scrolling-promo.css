@@ -2,6 +2,7 @@
   display: flex;
   align-items: center;
   z-index: 9;
+  border-radius:9px;
   overflow: hidden;
 }
 .fract-scrolling-promotion--left .m-promotion--animated {
