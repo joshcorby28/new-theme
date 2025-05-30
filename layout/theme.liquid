@@ -89,6 +89,7 @@
 
     {{ content_for_layout }}
 
+  {% if template == 'index' %}
     <style>
       .shopify-section-group-header-group {
       position: absolute;
@@ -100,6 +101,7 @@
         --page-width: {{ settings.page_width | divided_by: 10 }}rem;
       }
     </style>
+  {% endif %}
 
     {% render 'audio-player' %}
 
