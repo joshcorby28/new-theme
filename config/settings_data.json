@@ -10,14 +10,14 @@
 {
   "current": {
     "grunge-effect": true,
-    "logo": "shopify://shop_images/HL-white.png",
-    "logo-solid": "shopify://shop_images/HL_black.png",
+    "logo": "shopify://shop_images/New_Project_75.png",
+    "logo-solid": "shopify://shop_images/FRACT-logo-dark.png",
     "logo_width": 120,
     "player_audio": "https://cdn.shopify.com/s/files/1/0842/1084/3976/files/Restless.mp3?v=1748543180",
     "player_image": "shopify://shop_images/a75c6806-adad-4034-966a-d362989d2426.webp",
     "preloader_bg": "#222222",
     "preloader_mode": "image",
-    "preloader_image": "shopify://shop_images/HL-white.png",
+    "preloader_image": "shopify://shop_images/New_Project_75.png",
     "type_primary_font": "work_sans_n4",
     "background_color": "#f2f1ef",
     "foreground_color": "#363636",
