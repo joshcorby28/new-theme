@@ -12,9 +12,17 @@
     "main": {
       "type": "collection",
       "settings": {}
+    },
+    "collection_grid_ehjM94": {
+      "type": "collection-grid",
+      "name": "Collection Grid",
+      "settings": {
+        "per_row": 4
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "collection_grid_ehjM94"
   ]
 }
