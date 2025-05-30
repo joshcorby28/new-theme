@@ -15,7 +15,8 @@
       "type": "header",
       "settings": {
         "menu": "main-menu",
-        "color-text": "#ffffff"
+        "color-text": "#ffffff",
+        "color-text-solid": "#222222"
       }
     }
   },
