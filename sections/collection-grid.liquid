@@ -20,35 +20,49 @@
 }
 {% endschema %}
 
-<div class="collection-grid" style="--columns: {{ section.settings.per_row }};">
-  {% if collection.products.size > 0 %}
-    {% for product in collection.products %}
-      <div class="collection-grid__item">
-        {% render 'product-card', product: product %}
-      </div>
-    {% endfor %}
-  {% else %}
-    <p>No products found in this collection.</p>
-  {% endif %}
+{% style %}
+  :root {
+    --grid-columns: {{ section.settings.per_row }};
+  }
+{% endstyle %}
+
+<div class="custom-collection-grid">
+  {% for product in collection.products %}
+    <div class="grid-item">
+      {% render 'product-card', product: product %}
+    </div>
+  {% endfor %}
 </div>
 
 <style>
-    .collection-grid {
+  .custom-collection-grid {
   display: grid;
-  grid-template-columns: repeat(var(--columns, 4), 1fr);
-  gap: 1.5rem;
-  margin-top: 2rem;
+  grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+  gap: 2rem;
+  margin: 2rem 0;
 }
 
-@media screen and (max-width: 768px) {
-  .collection-grid {
-    grid-template-columns: repeat(2, 1fr);
+.grid-item {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 1024px) {
+  :root {
+    --grid-columns: 3;
   }
 }
 
-@media screen and (max-width: 480px) {
-  .collection-grid {
-    grid-template-columns: 1fr;
+@media (max-width: 768px) {
+  :root {
+    --grid-columns: 2;
   }
 }
+
+@media (max-width: 480px) {
+  :root {
+    --grid-columns: 1;
+  }
+}
+
 </style>
