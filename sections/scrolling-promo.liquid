@@ -10,7 +10,8 @@
 </style>
 <section
   id="fract-scrolling-promotion-section--{{ section.id }}"
-  class="color-{{ section.settings.color_scheme }}"
+  class="bar-promo"
+  style="background:{{section.settings.bg-color }}; color:{{ section.settings.text-color }}!important; font-variant:small-caps"
   data-section-type="fract-scrolling-promotion"
   data-section-id="{{ section.id }}"
 >
@@ -159,11 +160,17 @@
       "type": "header",
       "content": "Colors"
     },
+     {
+      "type": "color",
+      "id": "bg-color",
+      "label": "BG color",
+      "default": "#000000"
+    },
     {
-      "type": "color_scheme",
-      "id": "color_scheme",
-      "label": "Color Scheme",
-      "default": "scheme-1"
+      "type": "color",
+      "id": "text-color",
+      "label": "Text color",
+      "default": "#ffffff"
     },
     {
       "type": "header",
