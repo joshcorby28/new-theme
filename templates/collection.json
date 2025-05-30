@@ -11,6 +11,7 @@
   "sections": {
     "main": {
       "type": "collection",
+      "disabled": true,
       "settings": {}
     },
     "collection_grid_ehjM94": {
