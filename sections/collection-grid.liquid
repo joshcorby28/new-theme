@@ -1,0 +1,54 @@
+{% schema %}
+{
+  "name": "Collection Grid",
+  "settings": [
+    {
+      "type": "range",
+      "id": "per_row",
+      "label": "Products per row",
+      "min": 2,
+      "max": 5,
+      "step": 1,
+      "default": 4
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collection Grid"
+    }
+  ]
+}
+{% endschema %}
+
+<div class="collection-grid" style="--columns: {{ section.settings.per_row }};">
+  {% if collection.products.size > 0 %}
+    {% for product in collection.products %}
+      <div class="collection-grid__item">
+        {% render 'product-card', product: product %}
+      </div>
+    {% endfor %}
+  {% else %}
+    <p>No products found in this collection.</p>
+  {% endif %}
+</div>
+
+<style>
+    .collection-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--columns, 4), 1fr);
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+@media screen and (max-width: 768px) {
+  .collection-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .collection-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
