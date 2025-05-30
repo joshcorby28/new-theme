@@ -1,6 +1,6 @@
 <header class="page-width">
 <h2 class="header__title">
-  {% if template == 'index' and settings.logo %}
+  {% if template == 'index' and settings.logo or template == 'collection' and settings.logo  %}
     <a href="{{ routes.root_url }}" class="header__logo-link">
       <img 
         src="{{ settings.logo | img_url: '300x' }}" 
