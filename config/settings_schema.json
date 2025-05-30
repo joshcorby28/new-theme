@@ -100,6 +100,12 @@
       "type": "image_picker",
       "id": "preloader_image",
       "label": "Preloader Image"
+    },
+          {
+      "type": "checkbox",
+      "id": "spin-logo-preloader",
+      "default": true,
+      "label": "Image 3d spin"
     }
     ]
   },

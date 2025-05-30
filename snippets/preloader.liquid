@@ -11,7 +11,7 @@
     style="position:fixed;top:0;left:0;width:100%;height:100%;background:{{ preloader_bg }};z-index:9999;display:flex;align-items:center;justify-content:center;"
   >
     {% if preloader_mode == 'image' and settings.preloader_image != blank %}
-      <img src="{{ preloader_image }}" alt="Loading..." style="max-width: 200px;" />
+      <img class="preloader-img {% if settings.spin-logo-preloader %} spin {% endif %}" src="{{ preloader_image }}" alt="Loading..." style="max-width: 200px;" />
     {% else %}
       <div class="loader-text" style="font-size: 1.5rem;">{{ preloader_text }}</div>
     {% endif %}
@@ -28,6 +28,11 @@
         0%, 100% { opacity: 1; }
         50% { opacity: 0.5; }
       }
+
+      .preloader-img .spin {
+        animation: side-spin 5s linear infinite;
+        transform-style: preserve-3d;
+        }
     </style>
 
     <script>
