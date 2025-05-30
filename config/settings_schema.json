@@ -71,6 +71,38 @@
       }
     ]
   },
+  {
+  "name": "Preloader Settings",
+  "settings": [
+    {
+      "type": "color",
+      "id": "preloader_bg",
+      "label": "Preloader Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "radio",
+      "id": "preloader_mode",
+      "label": "Preloader Mode",
+      "default": "text",
+      "options": [
+        { "label": "Text", "value": "text" },
+        { "label": "Image", "value": "image" }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "preloader_text",
+      "label": "Preloader Text",
+      "default": "Loading..."
+    },
+    {
+      "type": "image_picker",
+      "id": "preloader_image",
+      "label": "Preloader Image"
+    }
+    ]
+  },
     {
     "name": "t:general.typography",
     "settings": [
