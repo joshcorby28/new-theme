@@ -1,28 +1,36 @@
 <header class="page-width">
-<h2 class="header__title">
-  {% if template == 'index' and settings.logo or template == 'collection' and settings.logo  %}
-    <a href="{{ routes.root_url }}" class="header__logo-link">
-      <img 
-        src="{{ settings.logo | img_url: '300x' }}" 
-        alt="{{ shop.name }}" 
-        class="header__logo {% if settings.spin-logo %} spin {% endif %}" 
-        style="width: {{ settings.logo_width }}px;" 
-      />
-    </a>
-  {% elsif settings.logo-solid %}
-    <a href="{{ routes.root_url }}" class="header__logo-link">
-      <img 
-        src="{{ settings.logo-solid | img_url: '300x' }}" 
-        alt="{{ shop.name }}" 
-        class="header__logo {% if settings.spin-logo %} spin {% endif %}" 
-        style="width: {{ settings.logo_width }}px;" 
-      />
-    </a>
-  {% else %}
-    {{ shop.name | link_to: routes.root_url }}
-  {% endif %}
-</h2>
-
+  <h2 class="header__title">
+    {% if settings.logo and template == 'index' %}
+      <a href="{{ routes.root_url }}" class="header__logo-link">
+        <img 
+          src="{{ settings.logo | img_url: '300x' }}" 
+          alt="{{ shop.name }}" 
+          class="header__logo {% if settings.spin-logo %} spin {% endif %}" 
+          style="width: {{ settings.logo_width }}px;" 
+        />
+      </a>
+    {% elsif settings.logo and template == 'collection' %}
+      <a href="{{ routes.root_url }}" class="header__logo-link">
+        <img 
+          src="{{ settings.logo | img_url: '300x' }}" 
+          alt="{{ shop.name }}" 
+          class="header__logo {% if settings.spin-logo %} spin {% endif %}" 
+          style="width: {{ settings.logo_width }}px;" 
+        />
+      </a>
+    {% elsif settings.logo-solid %}
+      <a href="{{ routes.root_url }}" class="header__logo-link">
+        <img 
+          src="{{ settings.logo-solid | img_url: '300x' }}" 
+          alt="{{ shop.name }}" 
+          class="header__logo {% if settings.spin-logo %} spin {% endif %}" 
+          style="width: {{ settings.logo_width }}px;" 
+        />
+      </a>
+    {% else %}
+      {{ shop.name | link_to: routes.root_url }}
+    {% endif %}
+  </h2>
 
   <div class="header__menu">
     {% for link in section.settings.menu.links %}
