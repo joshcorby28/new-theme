@@ -1,6 +1,7 @@
 .fract-scrolling-promotion {
   display: flex;
   align-items: center;
+  z-index: 9;
   overflow: hidden;
 }
 .fract-scrolling-promotion--left .m-promotion--animated {
@@ -9,7 +10,8 @@
 .fract-scrolling-promotion--right .m-promotion--animated {
   animation-name: scrolling-right;
 }
-.fract-scrolling-promotion:hover .m-promotion--animated, .fract-scrolling-promotion--paused .m-promotion--animated {
+.fract-scrolling-promotion:hover .m-promotion--animated,
+.fract-scrolling-promotion--paused .m-promotion--animated {
   animation-play-state: paused;
 }
 

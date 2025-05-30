@@ -1,21 +1,27 @@
 {{ 'scrolling-promo.css' | asset_url | stylesheet_tag }}
 <style>
   #fract-scrolling-promotion-section--{{ section.id }} {
-    padding-top: {{ section.settings.padding_top }}px;
-    padding-bottom: {{ section.settings.padding_bottom }}px;
     --item-gap: {{ section.settings.item_gap }}px;
     --item-gap-mobile: {{ section.settings.item_gap_mobile }}px;
     --duration: {{ section.settings.speed }}s;
+    position: absolute;
+    top: 20px;
+    width:100%;
+    z-index:9;
   }
+    .fract-scrolling-promotion-section {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
 </style>
 <section
   id="fract-scrolling-promotion-section--{{ section.id }}"
-  class="bar-promo"
-  style="background:{{section.settings.bg-color }}; color:{{ section.settings.text-color }}!important; font-variant:small-caps"
+  class="bar-promo page-width"
+  style="color:{{ section.settings.text-color }}; !important; font-variant:small-caps"
   data-section-type="fract-scrolling-promotion"
   data-section-id="{{ section.id }}"
 >
-  <div class="fract-scrolling-promotion-section">
+  <div style="background:{{ section.settings.bg-color }};" class="fract-scrolling-promotion-section">
     <fract-scrolling-promotion
       class="fract-scrolling-promotion fract-scrolling-promotion--{{ section.settings.direction }}"
     >
@@ -160,7 +166,7 @@
       "type": "header",
       "content": "Colors"
     },
-     {
+    {
       "type": "color",
       "id": "bg-color",
       "label": "BG color",
