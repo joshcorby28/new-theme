@@ -1,9 +1,18 @@
 <header class="page-width">
 <h2 class="header__title">
-  {% if settings.logo %}
+  {% if template == 'index' and settings.logo %}
     <a href="{{ routes.root_url }}" class="header__logo-link">
       <img 
         src="{{ settings.logo | img_url: '300x' }}" 
+        alt="{{ shop.name }}" 
+        class="header__logo {% if settings.spin-logo %} spin {% endif %}" 
+        style="width: {{ settings.logo_width }}px;" 
+      />
+    </a>
+  {% elsif settings.logo-solid %}
+    <a href="{{ routes.root_url }}" class="header__logo-link">
+      <img 
+        src="{{ settings.logo-solid | img_url: '300x' }}" 
         alt="{{ shop.name }}" 
         class="header__logo {% if settings.spin-logo %} spin {% endif %}" 
         style="width: {{ settings.logo_width }}px;" 
@@ -13,6 +22,7 @@
     {{ shop.name | link_to: routes.root_url }}
   {% endif %}
 </h2>
+
 
   <div class="header__menu">
     {% for link in section.settings.menu.links %}
@@ -42,12 +52,21 @@
     align-items: center;
     justify-content: space-between;
   }
+  {% if template == 'index' %}
   header a {
     position: relative;
     transition: transform 0.4s ease-in-out;
     text-decoration: none;
     color: {{ section.settings.color-text }};
   }
+{% else %}
+    header a {
+    position: relative;
+    transition: transform 0.4s ease-in-out;
+    text-decoration: none;
+    color: {{ section.settings.color-text-solid }};
+  }
+{% endif %}
 
   header a:hover {
   transform: skew(10deg, 10deg);
@@ -95,6 +114,12 @@
       "type": "color",
       "id": "color-text",
       "label": "Link text color",
+      "default": "#000000"
+    },
+       {
+      "type": "color",
+      "id": "color-text-solid",
+      "label": "Link text color (Solid BG)",
       "default": "#000000"
     }
   ]

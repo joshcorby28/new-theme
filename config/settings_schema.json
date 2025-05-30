@@ -45,6 +45,11 @@
         "id": "logo",
         "label": "Logo Image"
       },
+            {
+        "type": "image_picker",
+        "id": "logo-solid",
+        "label": "Logo Image (Solid BG)"
+      },
       {
         "type": "range",
         "id": "logo_width",
