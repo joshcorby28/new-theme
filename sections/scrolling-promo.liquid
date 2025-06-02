@@ -1,4 +1,12 @@
 {{ 'scrolling-promo.css' | asset_url | stylesheet_tag }}
+
+{% unless template == 'index' or template == 'collection' %}
+      <style>
+      #fract-scrolling-promotion-section--{{ section.id }} {
+      position:relative;
+    }
+  </style>
+{% endunless %}
 <style>
   #fract-scrolling-promotion-section--{{ section.id }} {
     --item-gap: {{ section.settings.item_gap }}px;
@@ -16,7 +24,7 @@
 </style>
 <section
   id="fract-scrolling-promotion-section--{{ section.id }}"
-  class="bar-promo page-width"
+  class="bar-promo {% if template == 'index' or template == 'collection' %} page-width {% endif %}"
   style="color:{{ section.settings.text-color }}; !important; font-variant:small-caps"
   data-section-type="fract-scrolling-promotion"
   data-section-id="{{ section.id }}"
