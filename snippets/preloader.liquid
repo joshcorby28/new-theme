@@ -34,18 +34,19 @@
         transform-style: preserve-3d;
         }
     </style>
-
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
+    
+{% assign preloader_delay = settings.preloader_delay_seconds | default: 5 %}
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    setTimeout(function () {
+      var preloader = document.getElementById("preloader");
+      if (preloader) {
+        preloader.style.transition = "opacity 0.5s ease";
+        preloader.style.opacity = 0;
         setTimeout(function () {
-          var preloader = document.getElementById("preloader");
-          if (preloader) {
-            preloader.style.transition = "opacity 0.5s ease";
-            preloader.style.opacity = 0;
-            setTimeout(function () {
-              preloader.style.display = "none";
-            }, 500);
-          }
-        }, 5000);
-      });
-    </script>
+          preloader.style.display = "none";
+        }, 500);
+      }
+    }, {{ preloader_delay | times: 1000 }});
+  });
+</script>

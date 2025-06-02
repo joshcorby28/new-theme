@@ -79,6 +79,15 @@
   {
   "name": "Preloader Settings",
   "settings": [
+
+  {
+    "type": "number",
+    "id": "preloader_delay_seconds",
+    "label": "Preloader delay (seconds)",
+    "default": 5,
+    "info": "Time (in seconds) before the preloader disappears"
+  },
+
     {
       "type": "color",
       "id": "preloader_bg",
