@@ -59,8 +59,10 @@
       </style>
     {% endif %}
     {% # Grunge Overlay Effect %}
-
+    
+    {% if template == 'index' %}
     {% render 'preloader' %}
+    {% endif %}
 
     {% sections 'header-group' %}
 
