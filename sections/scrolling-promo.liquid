@@ -26,7 +26,7 @@
 <section
   id="fract-scrolling-promotion-section--{{ section.id }}"
   class="bar-promo {% if template == 'index' or template == 'collection' %} page-width {% endif %}"
-  style="{% unless template == 'index' or template == 'collection' %}background:{{ section.settings.bg-color-sub }}; {%endunless%}{% if template == 'index' or template == 'collection' %} color:{{ section.settings.text-color }}; {% else %} color:{{ section.settings.text-color-sub }}; {% endif %}  font-variant:small-caps"
+  style="{% unless template == 'index' or template == 'collection' %}background:{{ section.settings.bg-color-sub }}; {% endunless %} {% if template == 'index' or template == 'collection' %} color:{{ section.settings.text-color }}; {% else %} color:{{ section.settings.text-color-sub }}; {% endif %}  font-variant:small-caps"
   data-section-type="fract-scrolling-promotion"
   data-section-id="{{ section.id }}"
 >
@@ -193,13 +193,13 @@
     },
     {
       "type": "color",
-      "id": "bg-color",
+      "id": "bg-color-sub",
       "label": "BG color",
       "default": "#000000"
     },
     {
       "type": "color",
-      "id": "text-color",
+      "id": "text-color-sub",
       "label": "Text color",
       "default": "#ffffff"
     },
