@@ -7,6 +7,7 @@
 
 {{ 'fract-product.css' | asset_url | stylesheet_tag: preload: true }}
 
+<div class="fract-main-product">
 <div class="product-images">
   {% assign first_image = product.images.first %}
   <img src="{{ first_image | image_url: width: 600 }}" class="product-image-main" />
@@ -25,7 +26,7 @@
   {% endif %}
 </div>
 
-
+<div class="fract-info-and-form">
 <div class="product-info">
   <h1>{{ product.title }}</h1>
   <p>{{ product.price | money }}</p>
@@ -55,6 +56,8 @@
     {{ form | payment_button }}
   {% endform %}
 </div>
+</div>
+  </div>
 
 {% schema %}
 {
