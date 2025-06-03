@@ -6,12 +6,25 @@
 {% endcomment %}
 
 <div class="product-images">
-  {% for image in product.images %}
-    {% render 'image', class: 'product-image', image: image %}
-  {% endfor %}
+  {% assign first_image = product.images.first %}
+  <img src="{{ first_image | image_url: width: 600 }}" class="product-image-main" />
+
+  {% if product.images.size > 1 %}
+    <button id="view-more-images">View More Images</button>
+
+    <div id="image-popup" class="image-popup hidden">
+      <div class="popup-inner">
+        {% for image in product.images offset:1 %}
+          <img src="{{ image | image_url: width: 600 }}" class="popup-image" />
+        {% endfor %}
+        <button id="close-popup">Close</button>
+      </div>
+    </div>
+  {% endif %}
 </div>
 
-<div class="product-info">
+
+<div class="fract-product-info">
   <h1>{{ product.title }}</h1>
   <p>{{ product.price | money }}</p>
   <p>{{ product.description }}</p>
@@ -50,3 +63,26 @@
   }
 }
 {% endschema %}
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const viewBtn = document.getElementById('view-more-images');
+    const popup = document.getElementById('image-popup');
+    const closeBtn = document.getElementById('close-popup');
+
+    viewBtn?.addEventListener('click', function () {
+      popup.classList.remove('hidden');
+      requestAnimationFrame(() => {
+        popup.classList.add('active');
+      });
+    });
+
+    closeBtn?.addEventListener('click', function () {
+      popup.classList.remove('active');
+      setTimeout(() => {
+        popup.classList.add('hidden');
+      }, 500); // matches CSS transition duration
+    });
+  });
+</script>
+
