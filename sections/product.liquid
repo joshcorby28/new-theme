@@ -20,7 +20,7 @@
         {% for image in product.images offset:1 %}
           <img src="{{ image | image_url: width: 600 }}" class="popup-image" />
         {% endfor %}
-        <button id="close-popup">X</button>
+        <button id="close-popup">Close</button>
       </div>
     </div>
   {% endif %}
