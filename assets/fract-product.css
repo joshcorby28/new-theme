@@ -46,4 +46,13 @@
   display: none;
 }
 
+#view-more-images {
+  position: absolute;
+  bottom: 20px;
+  background: white;
+  left: 20px;
+}
 
+.product-images {
+  position: relative;
+}
