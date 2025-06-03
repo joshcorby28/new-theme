@@ -62,3 +62,12 @@
 .product-images {
   position: relative;
 }
+
+  .button-skew:hover {
+    transition: transform 0.4s ease-in-out;
+    transform: skew(3deg, 3deg);
+  }
+
+  .button-skew:hover {
+    transition: transform 0.4s ease-in-out;
+  }
