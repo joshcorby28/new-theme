@@ -50,6 +50,8 @@
   position: absolute;
   bottom: 20px;
   background: white;
+  text-transform: uppercase;
+  letter-spacing: -1px;
   left: 20px;
   padding: 12px 24px;
   text-decoration: none;
