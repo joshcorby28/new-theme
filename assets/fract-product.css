@@ -65,6 +65,8 @@
 #close-popup {
   position: absolute;
   top: 20px;
+  background: #1b1b1b;
+  color:white;
   background: white;
   text-transform: uppercase;
   letter-spacing: -1px;
