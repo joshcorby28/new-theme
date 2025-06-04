@@ -131,7 +131,7 @@
   flex-wrap: wrap;
 }
 
-.fract-main-product .fract-info-and-form .variant-buttons .variant-button
+.fract-main-product .fract-info-and-form .variant-buttons button.variant-button
     height: 40px;
     width: fit-content;
     background: #121212;
