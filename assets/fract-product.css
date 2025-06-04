@@ -78,15 +78,29 @@
   }
 
 
-.product-images {
-  position: relative;
+/* Main Product */
+
+.fract-main-product {
+  display:flex;
+  align-items: center;
+  gap:60px;
 }
 
-  .button-skew:hover {
-    transition: transform 0.4s ease-in-out;
-    transform: skew(3deg, 3deg);
-  }
+.fract-main-product .product-images {
+  position: relative;
+  width:60%;
+}
 
-  .button-skew:hover {
-    transition: transform 0.4s ease-in-out;
-  }
+.fract-main-product .button-skew:hover {
+  transition: transform 0.4s ease-in-out;
+  transform: skew(3deg, 3deg);
+}
+
+.fract-main-product .button-skew:hover {
+  transition: transform 0.4s ease-in-out;
+}
+
+
+.fract-main-product .fract-info-and-form {
+  width:40%;
+}
