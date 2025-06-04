@@ -48,7 +48,7 @@
         class="variant-button{% if variant == current_variant %} active{% endif %}"
         {% unless variant.available %}disabled{% endunless %}
       >
-        {{ variant.title }} - {{ variant.price | money }}
+        {{ variant.title }}
       </button>
     {% endfor %}
   </form>
