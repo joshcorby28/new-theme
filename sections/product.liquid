@@ -36,8 +36,8 @@
   {% form 'product', product %}
     {% assign current_variant = product.selected_or_first_available_variant %}
     {% for option in product.options_with_values %}
-<div class="variant-group-label">{{ option.name }}</div>
 <div class="variant-buttons">
+  <div class="variant-group-label">{{ option.name }}</div>
   <form method="post" action="/cart/add">
     <input type="hidden" name="form_type" value="product">
     <input type="hidden" name="utf8" value="✓">
