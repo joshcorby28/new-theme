@@ -123,4 +123,21 @@
   margin-bottom:10px;
 }
 
+.fract-main-product .fract-info-and-form .variant-buttons {
+  display:flex;
+  gap:10px;
+  align-items: center;
+  width:100%;
+  flex-wrap: wrap
+}
 
+.fract-main-product .fract-info-and-form .variant-buttons button
+    height: 40px;
+    width: fit-content;
+    background: #121212;
+    min-width: 50px;
+    padding: 5px 10px;
+    color: white;
+    border-radius: 8px;
+    border: none;
+}
