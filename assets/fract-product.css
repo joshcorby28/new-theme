@@ -103,4 +103,7 @@
 
 .fract-main-product .fract-info-and-form {
   width:40%;
+  border-radius:8px;
+  background:white;
+  padding:2rem
 }
