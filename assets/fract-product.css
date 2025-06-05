@@ -116,7 +116,6 @@
 
 
 .fract-main-product .fract-info-and-form {
- position: fixed;
   top: 50%;
   right: 7.5%; /* aligns it within the 85% max width container on right side */
   width: 40%;
