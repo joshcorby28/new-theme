@@ -57,7 +57,8 @@
   </form>
 </div>
 {% endfor %}
-<div class="quantity-selector">
+    <div class="qty-and-form">
+      <div class="quantity-selector">
   <button type="button" class="qty-btn minus">-</button>
   <input
     type="number"
@@ -73,6 +74,7 @@
     <input type="submit" value="Add to cart">
     {{ form | payment_button }}
   {% endform %}
+</div>
 </div>
 </div>
   </div>
@@ -120,6 +122,25 @@
       spaceBetween: 10
     });
   });
+
+  document.querySelectorAll('.quantity-selector').forEach(container => {
+  const input = container.querySelector('.qty-input');
+  const btnPlus = container.querySelector('.plus');
+  const btnMinus = container.querySelector('.minus');
+
+  btnPlus.addEventListener('click', () => {
+    input.value = Number(input.value) + 1;
+    input.dispatchEvent(new Event('change'));
+  });
+
+  btnMinus.addEventListener('click', () => {
+    if (Number(input.value) > Number(input.min || 1)) {
+      input.value = Number(input.value) - 1;
+      input.dispatchEvent(new Event('change'));
+    }
+  });
+});
+
 </script>
 
 {% endif %}
