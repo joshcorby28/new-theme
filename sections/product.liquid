@@ -126,9 +126,9 @@
 </script>
 
 <script>
-  // Wait until DOM is loaded
   document.addEventListener('DOMContentLoaded', function() {
     const container = document.querySelector('.quantity-selector');
+    if (!container) return;
     const input = container.querySelector('.qty-input');
     const btnPlus = container.querySelector('.plus');
     const btnMinus = container.querySelector('.minus');
