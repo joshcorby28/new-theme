@@ -57,7 +57,18 @@
   </form>
 </div>
 {% endfor %}
-    <input type="text" name="quantity" min="1" value="1">
+<div class="quantity-selector">
+  <button type="button" class="qty-btn minus">-</button>
+  <input
+    type="number"
+    name="quantity"
+    min="1"
+    value="1"
+    class="qty-input"
+  />
+  <button type="button" class="qty-btn plus">+</button>
+</div>
+
 
     <input type="submit" value="Add to cart">
     {{ form | payment_button }}
