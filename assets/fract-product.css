@@ -137,6 +137,7 @@
     height: 60px;
     width: fit-content;
     background: #fff;
+    text-transform: uppercase;
     min-width: 60px;
     padding: 5px 10px;
     color: #121212;
