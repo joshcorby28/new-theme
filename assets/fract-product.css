@@ -161,21 +161,28 @@ top: 50%;
     border-radius: 4px;
 }
 
+.fract-main-product .fract-info-and-form .qty-and-form {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem; /* optional spacing */
+}
+
 .fract-main-product .fract-info-and-form .quantity-selector {
+  width: 100px; /* smaller width */
   display: inline-flex;
   align-items: center;
   border: 1px solid #ccc;
   border-radius: 4px;
   overflow: hidden;
-  width: 110px; 
 }
 
 .fract-main-product .fract-info-and-form .quantity-selector .qty-btn {
-  flex: 0 0 35px;
-  height: 35px;
+  flex: 0 0 30px;
+  height: 30px;
   background: #f0f0f0;
   border: none;
-  font-size: 20px;
+  font-size: 18px;
   cursor: pointer;
   user-select: none;
 }
@@ -189,9 +196,19 @@ top: 50%;
   border: none;
   text-align: center;
   font-size: 14px;
-  height: 35px;
+  height: 30px;
   outline: none;
   padding: 0 4px;
 }
+
+/* Style add to cart button to not stretch and align right */
+.fract-main-product .fract-info-and-form input[type="submit"] {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
 
 
