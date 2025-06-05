@@ -12,7 +12,7 @@
     "main": {
       "type": "product",
       "settings": {
-        "image_layout": "stacked"
+        "image_layout": "slider"
       }
     }
   },
