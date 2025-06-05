@@ -116,12 +116,16 @@
 
 
 .fract-main-product .fract-info-and-form {
-  width:40%;
-  border-radius:8px;
-  background:white;
-  position: relative;
+ position: fixed;
   top: 50%;
+  right: 7.5%; /* aligns it within the 85% max width container on right side */
+  width: 40%;
+  max-width: 400px; /* optional max width */
   transform: translateY(-50%);
+  border-radius: 8px;
+  background: white;
+  padding: 2rem;
+  z-index: 10;
   transition: all 0.3s ease;
 }
 
