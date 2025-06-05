@@ -9,7 +9,7 @@
 
 <div class="fract-main-product page-width">
 <div class="product-images">
-  {% if section.settings.product_image_layout == 'slider' %}
+  {% if section.settings.image_layout == 'slider' %}
     <div class="swiper-container">
       <div class="swiper-wrapper">
         {% for image in product.images %}
@@ -26,6 +26,7 @@
     {% endfor %}
   {% endif %}
 </div>
+
 
 <div class="fract-info-and-form">
 <div class="product-info">
@@ -93,7 +94,7 @@
 {% endschema %}
 
 
-{% if section.settings.product_image_layout == 'slider' %}
+{% if section.settings.image_layout == 'slider' %}
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script>
