@@ -87,7 +87,7 @@
 
 .fract-main-product {
   display:flex;
-  align-items: center;
+  align-items: flex-start;
   gap:60px;
 }
 
@@ -118,6 +118,10 @@
   width:40%;
   border-radius:8px;
   background:white;
+    position: sticky;
+  top: 2rem; /* You can adjust this to your header height */
+  align-self: flex-start; /* ensures it doesn't stretch or center vertically */
+  height: fit-content;
   padding:2rem
 }
 
