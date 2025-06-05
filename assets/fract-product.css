@@ -161,3 +161,36 @@ top: 50%;
     border-radius: 4px;
 }
 
+.fract-main-product .fract-info-and-form .quantity-selector {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  overflow: hidden;
+  width: 120px;
+}
+
+.fract-main-product .fract-info-and-form .quantity-selector .qty-btn {
+  flex: 0 0 40px;
+  height: 40px;
+  background: #f0f0f0;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.fract-main-product .fract-info-and-form .quantity-selector  .qty-btn:hover {
+  background: #ddd;
+}
+
+.fract-main-product .fract-info-and-form .quantity-selector  .qty-input {
+  flex: 1;
+  border: none;
+  text-align: center;
+  font-size: 16px;
+  height: 40px;
+  outline: none;
+}
+
+
