@@ -94,6 +94,9 @@
 .fract-main-product .product-images {
   position: relative;
   width:60%;
+  gap: 30px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   border-radius:8px;
 }
 
