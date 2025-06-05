@@ -18,7 +18,8 @@
         </div>
       {% endfor %}
     </div>
-    <div class="swiper-pagination"></div>
+     <div class="swiper-button-prev-smarte">{% render 'icon-arrow-new' %}</div>
+     <div class="swiper-button-next-smarte">{% render 'icon-arrow-new' %}</div>
   </div>
   {% else %}
     {% for image in product.images %}
@@ -112,12 +113,15 @@
 <script>
   document.addEventListener('DOMContentLoaded', function () {
     new Swiper('.swiper', {
-      loop: true,
+  loop: true,
+  slidesPerView: 2,
+  spaceBetween: 10,
+  navigation: {
+    nextEl: '.swiper-button-next-smarte',
+    prevEl: '.swiper-button-prev-smarte',
+  },
+});
 
-      slidesPerView: 2,
-      spaceBetween: 10
-    });
-  });
 </script>
 
 <style>
