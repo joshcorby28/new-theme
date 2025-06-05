@@ -123,25 +123,29 @@
       spaceBetween: 10
     });
   });
+</script>
 
-  document.querySelectorAll('.quantity-selector').forEach(container => {
-  const input = container.querySelector('.qty-input');
-  const btnPlus = container.querySelector('.plus');
-  const btnMinus = container.querySelector('.minus');
+<script>
+  // Wait until DOM is loaded
+  document.addEventListener('DOMContentLoaded', function() {
+    const container = document.querySelector('.quantity-selector');
+    const input = container.querySelector('.qty-input');
+    const btnPlus = container.querySelector('.plus');
+    const btnMinus = container.querySelector('.minus');
 
-  btnPlus.addEventListener('click', () => {
-    input.value = Number(input.value) + 1;
-    input.dispatchEvent(new Event('change'));
-  });
-
-  btnMinus.addEventListener('click', () => {
-    if (Number(input.value) > Number(input.min || 1)) {
-      input.value = Number(input.value) - 1;
+    btnPlus.addEventListener('click', () => {
+      input.value = Number(input.value) + 1;
       input.dispatchEvent(new Event('change'));
-    }
-  });
-});
+    });
 
+    btnMinus.addEventListener('click', () => {
+      const min = Number(input.min) || 1;
+      if (Number(input.value) > min) {
+        input.value = Number(input.value) - 1;
+        input.dispatchEvent(new Event('change'));
+      }
+    });
+  });
 </script>
 
 {% endif %}
