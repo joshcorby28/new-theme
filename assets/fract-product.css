@@ -118,7 +118,8 @@
   width:40%;
   border-radius:8px;
   position: sticky;
-  top: 10%;
+  top: 50%;
+  transform: translateY(-50%);
   background:white;
   padding:2rem
 }
