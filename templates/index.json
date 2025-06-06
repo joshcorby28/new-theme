@@ -51,9 +51,17 @@
         "button_border_radius": 4,
         "button_text_size": 12
       }
+    },
+    "fract_product_swiper_HtXeWr": {
+      "type": "fract-product-swiper",
+      "name": "Product Slider",
+      "settings": {
+        "collection": "frontpage"
+      }
     }
   },
   "order": [
-    "video_hero_fQNxfR"
+    "video_hero_fQNxfR",
+    "fract_product_swiper_HtXeWr"
   ]
 }
