@@ -90,13 +90,39 @@
 {% endschema %}
 
 <script>
-  document.addEventListener('DOMContentLoaded', function () {
-  document.querySelectorAll('.quantity-selector').forEach((container) => {
-    const input = container.querySelector('.qty-input');
-    const btnPlus = container.querySelector('.plus');
-    const btnMinus = container.querySelector('.minus');
+document.addEventListener('DOMContentLoaded', function () {
+  const fractCart = document.querySelector('.fract-cart');
+  if (!fractCart) return;
 
-    const submitForm = () => {
+  fractCart.addEventListener('click', (e) => {
+    if (e.target.matches('.qty-btn.plus') || e.target.matches('.qty-btn.minus')) {
+      const container = e.target.closest('.quantity-selector');
+      if (!container) return;
+
+      const input = container.querySelector('.qty-input');
+      if (!input) return;
+
+      const min = Number(input.min) || 1;
+      let currentVal = Number(input.value);
+
+      if (e.target.classList.contains('plus')) {
+        input.value = currentVal + 1;
+      } else if (e.target.classList.contains('minus')) {
+        if (currentVal > min) input.value = currentVal - 1;
+      }
+
+      // Trigger change event to update cart
+      input.dispatchEvent(new Event('change'));
+    }
+  });
+
+  fractCart.addEventListener('change', (e) => {
+    if (e.target.matches('.qty-input')) {
+      // Submit form via AJAX on qty input change
+      const input = e.target;
+      const container = input.closest('.quantity-selector');
+      if (!container) return;
+
       const form = container.closest('form');
       if (!form) return;
 
@@ -114,37 +140,16 @@
           const parser = new DOMParser();
           const doc = parser.parseFromString(html, 'text/html');
 
-          // Replace .fract-cart content
           const newCart = doc.querySelector('.fract-cart');
           const currentCart = document.querySelector('.fract-cart');
           if (newCart && currentCart) {
             currentCart.innerHTML = newCart.innerHTML;
           }
-
-          // Re-init fract.js qty buttons
-          if (typeof window.initFractCart === 'function') {
-            window.initFractCart();
-          }
         })
         .catch((err) => {
           console.error('Cart update failed', err);
         });
-    };
-
-    btnPlus.addEventListener('click', () => {
-      input.value = Number(input.value) + 1;
-      input.dispatchEvent(new Event('change'));
-    });
-
-    btnMinus.addEventListener('click', () => {
-      const min = Number(input.min) || 1;
-      if (Number(input.value) > min) {
-        input.value = Number(input.value) - 1;
-        input.dispatchEvent(new Event('change'));
-      }
-    });
-
-    input.addEventListener('change', submitForm);
+    }
   });
 });
 
