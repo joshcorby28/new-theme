@@ -1,8 +1,11 @@
 .main-cart-title {
   max-width:90%;
   margin:0 auto 30px auto;
-  font-size:22px;
   color:#121212;
+}
+
+.main-cart-title .cart-title {
+  font-size: 32px;
 }
 
 .fract-cart {
