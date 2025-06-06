@@ -232,13 +232,15 @@
     cursor: pointer;
     border: none;
     white-space: nowrap;
-    font-size: 12px;
+    font-size: 14px;
     height: 50px;
     border-radius: 4px;
     width: 80%;
     background: #121212;
     color: white;
     letter-spacing: 0;
+    text-transform: uppercase;
+    font-weight: bold;
 
 }
 
@@ -254,8 +256,7 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font-weight: 600;
-  font-size: 16px;
+  font-size: 12px;
 }
 
 .stock-indicator .circle {
