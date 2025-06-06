@@ -42,23 +42,20 @@
     {% assign current_variant = product.selected_or_first_available_variant %}
     {% for option in product.options_with_values %}
 <div class="variant-buttons">
-  <div class="variant-group-label">{{ option.name }}</div>
-  <form method="post" action="/cart/add">
-    <input type="hidden" name="form_type" value="product">
-    <input type="hidden" name="utf8" value="✓">
-    {% for variant in product.variants %}
-      <button
-        type="submit"
-        name="id"
-        value="{{ variant.id }}"
-        class="variant-button{% if variant == current_variant %} active{% endif %}"
-        {% unless variant.available %}disabled{% endunless %}
-      >
-        {{ variant.title }}
-      </button>
-    {% endfor %}
-  </form>
+  {% for variant in product.variants %}
+    <button
+      type="button"
+      class="variant-button{% if variant == current_variant %} active{% endif %}"
+      data-variant-id="{{ variant.id }}"
+      {% unless variant.available %}disabled{% endunless %}
+    >
+      {{ variant.title }}
+    </button>
+  {% endfor %}
 </div>
+
+<!-- Hidden input to hold selected variant id -->
+<input type="hidden" name="id" id="selected-variant-id" value="{{ current_variant.id }}">
 {% endfor %}
     <div class="qty-and-form">
       <div class="quantity-selector">
