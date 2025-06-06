@@ -116,8 +116,7 @@
 .fract-main-product .right-side-product {
   width:40%;
   position: sticky;
-  top: 50%;
-  transform: translateY(-50%);
+  top: 120px;
 }
 
 .fract-main-product .fract-info-and-form {
