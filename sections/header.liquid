@@ -1,4 +1,5 @@
-<header class="page-width">
+<header class="main-header">
+  <div class="header-inner page-width">
   <h2 class="header__title">
     {% if settings.logo and template == 'index' %}
       <a href="{{ routes.root_url }}" class="header__logo-link">
@@ -50,6 +51,7 @@
 
       {{ 'icon-cart.svg' | inline_asset_content }}
     </a>
+  </div>
   </div>
 </header>
 
