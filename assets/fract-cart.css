@@ -66,7 +66,7 @@
     margin-bottom:20px;
     padding: 2rem;
     height:300px;
-    display: block;
     display: flex;
+    justify-content:center;
     align-items: center;
 }
