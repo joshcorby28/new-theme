@@ -43,6 +43,14 @@
     justify-content: space-between;
 }
 
+.fract-cart .main-cart-items .cart-item .product-option {
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    text-transform: uppercase;
+    color: #121212;
+}
+
 .fract-cart .main-cart-items .cart-item td .image{
     height: auto;
     width: 110px;
