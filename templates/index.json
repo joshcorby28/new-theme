@@ -56,7 +56,7 @@
       "type": "fract-product-swiper",
       "name": "Product Slider",
       "settings": {
-        "collection": "frontpage"
+        "collection": "test"
       }
     }
   },
