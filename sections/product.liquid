@@ -121,7 +121,7 @@
   {% endif %}
           </div>
             <div class="custom-accordion">
-  {% if settings.show_product_info %}
+  {% if section.settings.show_product_info %}
     <details class="accordion-item">
       <summary>Product Info</summary>
       <div class="accordion-content">
@@ -130,7 +130,7 @@
     </details>
   {% endif %}
 
-  {% if settings.show_size_guide %}
+  {% if section.settings.show_size_guide %}
     <details class="accordion-item">
       <summary>Size Guide</summary>
       <div class="accordion-content">
@@ -147,7 +147,7 @@
     </details>
   {% endif %}
 
-  {% if settings.show_custom_content %}
+  {% if section.settings.show_custom_content %}
     <details class="accordion-item">
       <summary>Custom Content</summary>
       <div class="accordion-content">
