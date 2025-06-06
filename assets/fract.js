@@ -6,6 +6,11 @@
       const btnPlus = container.querySelector('.plus');
       const btnMinus = container.querySelector('.minus');
 
+      const submitForm = () => {
+        const form = container.closest('form');
+        if (form) form.submit();
+      };
+
       btnPlus.addEventListener('click', () => {
         input.value = Number(input.value) + 1;
         input.dispatchEvent(new Event('change'));
@@ -18,6 +23,7 @@
           input.dispatchEvent(new Event('change'));
         }
       });
+
+      input.addEventListener('change', submitForm);
     });
   });
-
