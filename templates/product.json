@@ -12,7 +12,11 @@
     "main": {
       "type": "product",
       "settings": {
-        "image_layout": "slider"
+        "image_layout": "stacked",
+        "show-stock-indicator": true,
+        "show_product_info": true,
+        "show_size_guide": true,
+        "show_custom_content": true
       }
     }
   },
