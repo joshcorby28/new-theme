@@ -48,7 +48,7 @@
       </span>
       </td>
         <td>
-          {% render 'qty-selector' %} 
+          <input type="text" name="updates[]" value="{{ item.quantity }}">
           <input type="submit" value="{{ 'cart.update' | t }}">
         </td>
       </tr>

@@ -58,7 +58,18 @@
 <input type="hidden" name="id" id="selected-variant-id" value="{{ current_variant.id }}">
 {% endfor %}
     <div class="qty-and-form">
-      {% render 'qty-selector' %} 
+      <div class="quantity-selector">
+  <button type="button" class="qty-btn minus">-</button>
+  <input
+    type="number"
+    name="quantity"
+    min="1"
+    value="1"
+    class="qty-input"
+  />
+  <button type="button" class="qty-btn plus">+</button>
+</div>
+
     <button class="add-to-cart fract-primary" type="submit" value="Add to cart">Add to cart</button>
     </div>
   {% endform %}
