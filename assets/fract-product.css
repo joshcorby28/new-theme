@@ -1,6 +1,6 @@
 .fract-main-product {
   max-width:90%;
-  margin: 0 auto;
+  margin: 60px auto 30px auto;
 }
 
 /* images and pop up */
@@ -88,7 +88,7 @@
 .fract-main-product {
   display:flex;
   align-items: flex-start;
-  gap:60px;
+  gap:30px;
 }
 
 .fract-main-product .product-images {
