@@ -87,7 +87,7 @@
 
 .fract-main-product {
   display:flex;
-  align-items: center;
+  align-items: flex-start;
   gap:60px;
 }
 
@@ -116,7 +116,7 @@
 .fract-main-product .right-side-product {
   width:40%;
   position: sticky;
-  top: 120px;
+  top: 30%;
 }
 
 .fract-main-product .fract-info-and-form {
