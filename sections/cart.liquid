@@ -48,7 +48,17 @@
       </span>
       </td>
         <td>
-          <input type="text" name="updates[]" value="{{ item.quantity }}">
+          <div class="quantity-selector">
+            <button type="button" class="qty-btn minus">-</button>
+            <input
+              type="number"
+              name="updates[]"
+              min="1"
+              value="{{ item.quantity }}"
+              class="qty-input"
+            />
+            <button type="button" class="qty-btn plus">+</button>
+          </div>
           <input type="submit" value="{{ 'cart.update' | t }}">
         </td>
       </tr>
