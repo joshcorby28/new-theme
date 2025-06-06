@@ -16,11 +16,9 @@
   <table class="main-cart-items">
     {% for item in cart.items %}
       <tr class="cart-item">
-        <td>
+        <td class="image-and-text">
           {% render 'image', image: item.image, url: item.url %}
-        </td>
-        <td>
-          <h3 class="cart-product-title">{{ item.product.title }}</h3>
+                <h3 class="cart-product-title">{{ item.product.title }}</h3>
           {{ 'cart.remove' | t | link_to: item.url_to_remove }}
         </td>
         <td>
