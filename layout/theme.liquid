@@ -78,7 +78,7 @@
     {% # Global %}
     {% if settings['text-uppercase'] %}
       <style>
-        {% if section.settings.uppercase_headings_links %}
+        {% if settings.uppercase_headings_links %}
           h1,
           h2,
           h3,
@@ -91,7 +91,7 @@
           }
         {% endif %}
       
-        {% if section.settings.capitalize_spans %}
+        {% if settings.capitalize_spans %}
           span {
             text-transform: capitalize;
             letter-spacing: -1px;
