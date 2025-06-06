@@ -1,4 +1,5 @@
-<footer class="page-width">
+<footer class="main-footer">
+  <div class="footer-inner">
   <div class="footer__copyright">
     &copy;
     {{ 'now' | date: '%Y' }}
@@ -18,13 +19,16 @@
       {% endfor %}
     {% endif %}
   </div>
+  </div>
 </footer>
 
 {% stylesheet %}
   footer {
-    display: flex;
-    justify-content: space-between;
     margin-top: 4rem;
+  }
+  .footer-inner {
+        display: flex;
+    justify-content: space-between;
   }
   footer a {
     text-decoration: none;
