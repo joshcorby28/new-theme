@@ -1,11 +1,11 @@
 .fract-cart {
 }
 
-.fract-cart table {
+.fract-cart .main-cart-items {
   width:70%;
 }
 
-.fract-cart table tr{
+.fract-cart .main-cart-items .cart-item{
     border-radius: 8px;
     background: white;
     padding: 2rem;
@@ -15,7 +15,7 @@
     justify-content: space-between;
 }
 
-.fract-cart table tr td .image{
+.fract-cart .main-cart-items .cart-item td .image{
 height: auto;
     width: 140px;
     border-radius: 8px;
