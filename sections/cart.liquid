@@ -8,8 +8,6 @@
 
 {{ 'fract-cart.css' | asset_url | stylesheet_tag: preload: true }}
 
-<h1>{{ 'cart.title' | t }}</h1>
-
 <form class="fract-cart" action="{{ routes.cart_url }}" method="post">
   <table class="main-cart-items">
     {% for item in cart.items %}
