@@ -13,7 +13,7 @@
   margin:0 auto;
   display: grid;
   gap: 100px;
-  align-items: center;
+  align-items: flex-start;
   grid-template-columns: 7fr 3fr;
 }
 
@@ -58,4 +58,15 @@
 
 .cart-item-price {
   font-weight: bold;
+}
+
+.fract-cart .fract-footer-cart{
+    border-radius: 8px;
+    background: white;
+    margin-bottom:20px;
+    padding: 2rem;
+    height:300px;
+    display: block;
+    display: flex;
+    align-items: center;
 }
