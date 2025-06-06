@@ -11,9 +11,9 @@
 <h1>{{ 'cart.title' | t }}</h1>
 
 <form action="{{ routes.cart_url }}" method="post">
-  <table>
+  <table class="main-cart-items">
     {% for item in cart.items %}
-      <tr>
+      <tr class="cart-item">
         <td>
           {% render 'image', image: item.image, url: item.url %}
         </td>
