@@ -115,7 +115,7 @@
     background: white;
     margin-bottom:20px;
     padding: 2rem;
-    flex-direction: columnn;
+    flex-direction: column;
     gap:10px;
     display: flex;
     align-items: flex-start;
