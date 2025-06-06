@@ -1,333 +1,342 @@
 .fract-main-product {
-  max-width:90%;
-  margin: 60px auto 30px auto;
+	max-width: 90%;
+	margin: 60px auto 30px auto;
 }
 
 /* images and pop up */
 
 .image-popup {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.8);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-  opacity: 0;
-  transition: opacity 0.5s ease, /* Separated the opacity and transform transition for better control */
-  pointer-events: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.8);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 9999;
+	opacity: 0;
+	transition: opacity 0.5s ease,
+		/* Separated the opacity and transform transition for better control */
+		pointer-events: none;
 }
 
 .image-popup.active {
-  opacity: 1;
-  pointer-events: auto;
+	opacity: 1;
+	pointer-events: auto;
 }
 
 .popup-inner {
-  background: white;
-  padding: 20px;
-  border-radius: 8px;
-  max-width: 90%;
-  max-height: 80%;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  transform: skewY(0deg); /* Keep inner content normal */
-  transition: transform 0.3s ease; /* Smoothen transition for content */
+	background: white;
+	padding: 20px;
+	border-radius: 8px;
+	max-width: 90%;
+	max-height: 80%;
+	overflow-y: auto;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	transform: skewY(0deg);
+	/* Keep inner content normal */
+	transition: transform 0.3s ease;
+	/* Smoothen transition for content */
 }
 
 .popup-image {
-  max-width: 100%;
-  height: auto;
-  border-radius: 4px;
+	max-width: 100%;
+	height: auto;
+	border-radius: 4px;
 }
 
 .hidden {
-  display: none;
+	display: none;
 }
 
 #view-more-images {
-  position: absolute;
-  bottom: 20px;
-  background: white;
-  text-transform: uppercase;
-  letter-spacing: -1px;
-  left: 20px;
-  border:none;
-  padding: 12px 24px;
-  text-decoration: none;
-  border-radius: 4px;
-  font-size: 10px;
-  transition: background-color 0.3s, color 0.3s;
-  }
+	position: absolute;
+	bottom: 20px;
+	background: white;
+	text-transform: uppercase;
+	letter-spacing: -1px;
+	left: 20px;
+	border: none;
+	padding: 12px 24px;
+	text-decoration: none;
+	border-radius: 4px;
+	font-size: 10px;
+	transition: background-color 0.3s, color 0.3s;
+}
 
 #close-popup {
-  position: absolute;
-  top: 50px;
-  background: #1b1b1b;
-  color:white;
-  background: white;
-  text-transform: uppercase;
-  letter-spacing: -1px;
-  left: 50px;
-  border:none;
-  padding: 12px 24px;
-  text-decoration: none;
-  border-radius: 4px;
-  font-size: 10px;
-  transition: background-color 0.3s, color 0.3s;
-  }
+	position: absolute;
+	top: 50px;
+	background: #1b1b1b;
+	color: white;
+	background: white;
+	text-transform: uppercase;
+	letter-spacing: -1px;
+	left: 50px;
+	border: none;
+	padding: 12px 24px;
+	text-decoration: none;
+	border-radius: 4px;
+	font-size: 10px;
+	transition: background-color 0.3s, color 0.3s;
+}
 
 
 /* Main Product */
 
 .fract-main-product {
-  display:flex;
-  align-items: flex-start;
-  gap:30px;
+	display: flex;
+	align-items: flex-start;
+	gap: 30px;
 }
 
 .fract-main-product .product-images {
-  position: relative;
-  width:60%;
-  gap: 30px;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  border-radius:8px;
+	position: relative;
+	width: 60%;
+	gap: 30px;
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	border-radius: 8px;
 }
 
-.fract-main-product .product-images img{
-  border-radius:8px;
-}
-
-.fract-main-product .button-skew:hover {
-  transition: transform 0.4s ease-in-out;
-  transform: skew(3deg, 3deg);
+.fract-main-product .product-images img {
+	border-radius: 8px;
 }
 
 .fract-main-product .button-skew:hover {
-  transition: transform 0.4s ease-in-out;
+	transition: transform 0.4s ease-in-out;
+	transform: skew(3deg, 3deg);
+}
+
+.fract-main-product .button-skew:hover {
+	transition: transform 0.4s ease-in-out;
 }
 
 .fract-main-product .right-side-product {
-  width:40%;
-  position: sticky;
-  top: 30%;
+	width: 40%;
+	position: sticky;
+	top: 30%;
 }
 
 .fract-main-product .fract-info-and-form {
-  border-radius:8px;
-  background:white;
-  margin-bottom:20px;
-  padding:2rem
+	border-radius: 8px;
+	background: white;
+	margin-bottom: 20px;
+	padding: 2rem
 }
 
 .fract-main-product .fract-info-and-form h1 {
-  font-size:22px;
-  margin-bottom:10px;
+	font-size: 22px;
+	margin-bottom: 10px;
 }
 
 .fract-main-product .fract-info-and-form .variant-buttons {
-  display:flex;
-  gap:5px;
-  align-items: center;
-  margin-top:20px;
-  margin-bottom:30px;
-  width:100%;
-  flex-wrap: wrap;
+	display: flex;
+	gap: 5px;
+	align-items: center;
+	margin-top: 20px;
+	margin-bottom: 30px;
+	width: 100%;
+	flex-wrap: wrap;
 }
 
 .fract-main-product .fract-info-and-form .variant-buttons button.variant-button {
-    height: 50px;
-    width: fit-content;
-    background: #fff;
-    text-transform: uppercase;
-    min-width: 50px;
-    padding: 5px 10px;
-    color: #121212;
-    border: 1px solid #a5a5a5;
-    border-radius: 4px;
+	height: 50px;
+	width: fit-content;
+	background: #fff;
+	text-transform: uppercase;
+	min-width: 50px;
+	padding: 5px 10px;
+	color: #121212;
+	border: 1px solid #a5a5a5;
+	border-radius: 4px;
 }
 
 .fract-main-product .fract-info-and-form .variant-buttons button.variant-button.active {
-    height: 50px;
-    width: fit-content;
-    background: #121212 !important;
-    min-width: 50px;
-    padding: 5px 10px;
-    color: white !important;
-    border-radius: 4px;
+	height: 50px;
+	width: fit-content;
+	background: #121212 !important;
+	min-width: 50px;
+	padding: 5px 10px;
+	color: white !important;
+	border-radius: 4px;
 }
 
 .fract-main-product .fract-info-and-form .qty-and-form {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1rem; /* optional spacing */
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 1rem;
+	/* optional spacing */
 }
 
 .fract-main-product .fract-info-and-form .quantity-selector {
-    width: 140px;
-    display: inline-flex;
-    align-items: center;
-    color: #121212;
-    border: 1px solid #a5a5a5;
-    height: 50px;
-    border-radius: 4px;
-    overflow: hidden;
+	width: 140px;
+	display: inline-flex;
+	align-items: center;
+	color: #121212;
+	border: 1px solid #a5a5a5;
+	height: 50px;
+	border-radius: 4px;
+	overflow: hidden;
 }
 
 .fract-main-product .fract-info-and-form .quantity-selector .qty-btn.minus {
-    flex: 0 0 30px;
-    height: 50px;
-    background:white;
-    color: #121212;
-    border-right:1px solid #a5a5a5 !important;
-    width: 15%;
-    font-size: 18px;
-    cursor: pointer;
-    -webkit-user-select: none;
-    border:0;
-    user-select: none;
+	flex: 0 0 30px;
+	height: 50px;
+	background: white;
+	color: #121212;
+	border-right: 1px solid #a5a5a5 !important;
+	width: 15%;
+	font-size: 18px;
+	cursor: pointer;
+	-webkit-user-select: none;
+	border: 0;
+	user-select: none;
 }
 
 .fract-main-product .fract-info-and-form .quantity-selector .qty-btn.plus {
-    flex: 0 0 30px;
-    height: 50px;
-    background:white;
-    color: #121212;
-    border-left:1px solid #a5a5a5 !important;
-    width: 15%;
-    font-size: 18px;
-    border:0;
-    cursor: pointer;
-    -webkit-user-select: none;
-    user-select: none;
+	flex: 0 0 30px;
+	height: 50px;
+	background: white;
+	color: #121212;
+	border-left: 1px solid #a5a5a5 !important;
+	width: 15%;
+	font-size: 18px;
+	border: 0;
+	cursor: pointer;
+	-webkit-user-select: none;
+	user-select: none;
 }
 
 .fract-main-product .fract-info-and-form .quantity-selector .qty-btn:hover {
-  background: #ddd;
+	background: #ddd;
 }
 
 .fract-main-product .fract-info-and-form .quantity-selector .qty-input {
-  flex: 1;
-  border: none;
-  text-align: center;
-  font-size: 14px;
-  height: 50px;
-  width:70%;
-  outline: none;
-  padding: 0 4px;
+	flex: 1;
+	border: none;
+	text-align: center;
+	font-size: 14px;
+	height: 50px;
+	width: 70%;
+	outline: none;
+	padding: 0 4px;
 }
 
 /* Style add to cart button to not stretch and align right */
 .fract-main-product .fract-info-and-form .add-to-cart {
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    border: none;
-    white-space: nowrap;
-    font-size: 14px;
-    height: 50px;
-    border-radius: 4px;
-    width: 80%;
-    background: #121212;
-    color: white;
-    letter-spacing: 0;
-    text-transform: uppercase;
-    font-weight: bold;
+	padding: 10px 20px;
+	font-size: 16px;
+	cursor: pointer;
+	border: none;
+	white-space: nowrap;
+	font-size: 14px;
+	height: 50px;
+	border-radius: 4px;
+	width: 80%;
+	background: #121212;
+	color: white;
+	letter-spacing: 0;
+	text-transform: uppercase;
+	font-weight: bold;
 
 }
 
 /* Product Extras */
 .product-extras {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 }
 
 .usp-point {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 12px;
-  color: #333;
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	font-size: 12px;
+	color: #333;
 }
 
 .usp-point .icon {
-  width: 14px;
-  height: 14px;
-  display: inline-block;
+	width: 14px;
+	height: 14px;
+	display: inline-block;
 }
 
 .custom-accordion {
-  border-top: 1px solid #ccc;
-  margin-top: 2rem;
+	border-top: 1px solid #ccc;
+	margin-top: 2rem;
 }
 
 .accordion-item {
-  border-bottom: 1px solid #ccc;
-  padding: 1rem 0;
+	border-bottom: 1px solid #ccc;
+	padding: 1rem 0;
 }
 
 .accordion-item summary {
-  font-weight: 600;
-  font-size:14px;
-  cursor: pointer;
-  list-style: none;
-  position: relative;
-  padding-right: 1.5rem;
+	font-weight: 600;
+	font-size: 14px;
+	cursor: pointer;
+	list-style: none;
+	position: relative;
+	padding-right: 1.5rem;
 }
 
 .accordion-item summary::marker {
-  display: none;
+	display: none;
 }
 
 .accordion-item summary::after {
-  content: "+";
-  position: absolute;
-  right: 0;
-  font-size: 1.2rem;
-  transition: transform 0.2s ease;
+	content: "+";
+	position: absolute;
+	right: 0;
+	font-size: 1.2rem;
+	transition: transform 0.2s ease;
 }
 
 .accordion-item[open] summary::after {
-  content: "−";
+	content: "−";
 }
 
 .accordion-content {
-  margin-top: 0.5rem;
-  font-size:12px;
-  animation: fadeIn 0.2s ease-in-out;
+	margin-top: 0.5rem;
+	font-size: 12px;
+	animation: fadeIn 0.2s ease-in-out;
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-5px); }
-  to { opacity: 1; transform: translateY(0); }
+	from {
+		opacity: 0;
+		transform: translateY(-5px);
+	}
+
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
 }
 
 
 /* Mobile Layout */
 @media screen and (max-width: 1025px) {
-.fract-main-product {
- flex-direction: column;
+	.fract-main-product {
+		flex-direction: column;
+	}
+
+	.fract-main-product .product-images {
+		width: 100%;
+	}
+
+
+	.fract-main-product .right-side-product {
+		width: 100%;
+		position: relative;
+		top: 0;
+		transform: translateY(0%);
+	}
 }
-
-.fract-main-product .product-images {
-  width:100%;
-}
-
-
-.fract-main-product .right-side-product {
-  width:100%;
-  position: relative;
-  top: 0;
-  transform: translateY(0%);
-}
-}
-
-
