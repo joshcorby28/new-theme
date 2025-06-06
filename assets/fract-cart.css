@@ -1,4 +1,6 @@
 .fract-cart {
+  max-width:90%;
+  margin:0 auto;
 }
 
 .fract-cart .main-cart-items {
