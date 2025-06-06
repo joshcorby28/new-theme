@@ -18,26 +18,13 @@
       <tr class="cart-item">
         <td class="cart-image-and-title">
           {% render 'image', image: item.image, url: item.url %}
-            <div class="title-and-remove">
-              <h3 class="cart-product-title">{{ item.product.title }}</h3>
-            
-              <div class="cart-product-variant">
-                {% for option_index in (0..item.options.size) %}
-                  {% assign option_name = item.product.options[option_index] %}
-                  {% assign option_value = item.options[option_index] %}
-            
-                  {% if option_value and option_value != 'Default Title' %}
-                    <span class="variant-option">
-                      <strong>{{ option_name }}:</strong> {{ option_value }}
-                    </span>
-                    {% unless forloop.last %} | {% endunless %}
-                  {% endif %}
-                {% endfor %}
-              </div>
-            
-              {{ 'cart.remove' | t | link_to: item.url_to_remove }}
-            </div>
-
+        <div class="title-and-remove">
+          <h3 class="cart-product-title">{{ item.product.title }}</h3>
+          <div class="cart-product-variant">
+           {{ item.option_name }} {{ item.variant.title }}
+          </div>
+          {{ 'cart.remove' | t | link_to: item.url_to_remove }}
+        </div>
         </td>
       <td>
       <span class="cart-item-price">
