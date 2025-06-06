@@ -46,5 +46,7 @@
 .cart-image-and-title .title-and-remove a  {
     color:#121212;
   text-decoration: none;
-  opacity:0.5
+  opacity:0.5;
+  font-size:9px;
+  letter-spacing: 1px;
 }
