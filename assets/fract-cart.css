@@ -121,4 +121,7 @@
     align-items: flex-start;
     justify-content: space-between;
 }
+  .fract-cart .fract-footer-cart{ 
+    width:100%;
+}
 }
