@@ -80,7 +80,8 @@
 
 </div>
   <div class="product-extras">
-    {% assign inventory = product.selected_or_first_available_variant.inventory_quantity %}
+{% if section.settings.show-stock-indicator %}
+{% assign inventory = product.selected_or_first_available_variant.inventory_quantity %}
 {% assign in_stock = product.selected_or_first_available_variant.available %}
 
 <div class="stock-indicator-wrapper">
@@ -93,7 +94,7 @@
     {% else %}
       <div class="stock-indicator low-stock">
         <span class="circle"></span>
-        <span>Low Stock</span>
+        <span>Limited Stock</span>
       </div>
     {% endif %}
   {% else %}
@@ -102,6 +103,8 @@
       <span>Out of Stock</span>
     </div>
   {% endif %}
+</div>
+    {% endif %}
 </div>
   </div>
 </div>
@@ -125,7 +128,13 @@
         }
       ],
       "default": "stacked"
-    }
+    },
+          {
+        "type": "checkbox",
+        "id": "show-stock-indicator",
+        "default": true,
+        "label": "Show Stock Indicator"
+      },
   ],
   "disabled_on": {
     "groups": ["header", "footer"]
