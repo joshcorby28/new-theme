@@ -225,7 +225,7 @@
 }
 
 /* Style add to cart button to not stretch and align right */
-.fract-main-product .fract-info-and-form input[type="submit"] {
+.fract-main-product .fract-info-and-form .add-to-cart {
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
