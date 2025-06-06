@@ -8,6 +8,17 @@
   font-size: 32px;
 }
 
+.main-cart-title {
+  display:flex;
+  align-items: center;
+  gap:10px;
+}
+
+.main-cart-title .item-count {
+  font-size:12px;
+  color:#888;
+}
+
 .fract-cart {
   max-width:90%;
   margin:0 auto;
@@ -55,6 +66,7 @@
   font-size:9px;
   letter-spacing: 1px;
 }
+
 
 .cart-item-price {
   font-weight: bold;
