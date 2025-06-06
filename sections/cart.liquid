@@ -23,6 +23,16 @@
           {{ 'cart.remove' | t | link_to: item.url_to_remove }}
       </div>
         </td>
+      <td>
+      <span class="cart-item-price">
+        {{ item.original_line_price | money }}
+        {% if item.variant.compare_at_price > item.variant.price %}
+          <span class="compare-at-price" style="text-decoration: line-through; color: #888;">
+            {{ item.variant.compare_at_price | money }}
+          </span>
+        {% endif %}
+      </span>
+      </td>
         <td>
           <input type="text" name="updates[]" value="{{ item.quantity }}">
           <input type="submit" value="{{ 'cart.update' | t }}">
