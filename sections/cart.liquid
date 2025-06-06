@@ -16,10 +16,12 @@
   <table class="main-cart-items">
     {% for item in cart.items %}
       <tr class="cart-item">
-        <td class="image-and-text">
+        <td class="cart-image-and-title">
           {% render 'image', image: item.image, url: item.url %}
-                <h3 class="cart-product-title">{{ item.product.title }}</h3>
+      <div class="title-and-remove">
+          <h3 class="cart-product-title">{{ item.product.title }}</h3>
           {{ 'cart.remove' | t | link_to: item.url_to_remove }}
+      </div>
         </td>
         <td>
           <input type="text" name="updates[]" value="{{ item.quantity }}">
