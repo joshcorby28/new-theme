@@ -113,14 +113,17 @@
   transition: transform 0.4s ease-in-out;
 }
 
-
-.fract-main-product .fract-info-and-form {
+.fract-main-product .right-side-product {
   width:40%;
-  border-radius:8px;
   position: sticky;
   top: 50%;
   transform: translateY(-50%);
+}
+
+.fract-main-product .fract-info-and-form {
+  border-radius:8px;
   background:white;
+  margin-bottom:20px;
   padding:2rem
 }
 
