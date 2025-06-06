@@ -20,6 +20,8 @@
     "preloader_bg": "#222222",
     "preloader_mode": "image",
     "preloader_image": "shopify://shop_images/New_Project_75.png",
+    "uppercase_headings_links": true,
+    "capitalize_spans": true,
     "type_primary_font": "work_sans_n4",
     "background_color": "#f2f1ef",
     "foreground_color": "#363636",
