@@ -34,29 +34,30 @@
               </div>
             {% endif %}
             {% if section.settings.show-stock-indicator %}
-            {% assign inventory = item.inventory_quantity %}
-            {% assign in_stock = item.available %}
-            <div class="stock-indicator-wrapper">
-              {% if in_stock %}
-                {% if inventory > 5 %}
-                  <div class="stock-indicator in-stock">
-                    <span class="circle"></span>
-                    <span>In Stock</span>
-                  </div>
+              {% assign inventory = item.variant.inventory_quantity %}
+              {% assign in_stock = item.variant.available %}
+              <div class="stock-indicator-wrapper">
+                {% if in_stock %}
+                  {% if inventory > 5 %}
+                    <div class="stock-indicator in-stock">
+                      <span class="circle"></span>
+                      <span>In Stock</span>
+                    </div>
+                  {% else %}
+                    <div class="stock-indicator low-stock">
+                      <span class="circle"></span>
+                      <span>Limited Stock</span>
+                    </div>
+                  {% endif %}
                 {% else %}
-                  <div class="stock-indicator low-stock">
+                  <div class="stock-indicator out-of-stock">
                     <span class="circle"></span>
-                    <span>Limited Stock</span>
+                    <span>Out of Stock</span>
                   </div>
                 {% endif %}
-              {% else %}
-                <div class="stock-indicator out-of-stock">
-                  <span class="circle"></span>
-                  <span>Out of Stock</span>
-                </div>
-              {% endif %}
-            </div>
-          {% endif %}
+              </div>
+            {% endif %}
+
       
             {{ 'cart.remove' | t | link_to: item.url_to_remove }}
           </div>
