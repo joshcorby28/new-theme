@@ -1,61 +1,38 @@
-//* QTY 
+window.initFractCart = function () {
+  document.querySelectorAll('.quantity-selector').forEach((container) => {
+    const input = container.querySelector('.qty-input');
+    const btnPlus = container.querySelector('.plus');
+    const btnMinus = container.querySelector('.minus');
 
-  document.addEventListener('DOMContentLoaded', function () {
-    document.querySelectorAll('.quantity-selector').forEach((container) => {
-      const input = container.querySelector('.qty-input');
-      const btnPlus = container.querySelector('.plus');
-      const btnMinus = container.querySelector('.minus');
+    // Remove old listeners to avoid duplicates (optional, but safer)
+    btnPlus?.replaceWith(btnPlus.cloneNode(true));
+    btnMinus?.replaceWith(btnMinus.cloneNode(true));
+    input?.replaceWith(input.cloneNode(true));
 
-const submitForm = () => {
-  const form = container.closest('form');
-  if (!form) return;
+    // Re-query after cloning
+    const newInput = container.querySelector('.qty-input');
+    const newBtnPlus = container.querySelector('.plus');
+    const newBtnMinus = container.querySelector('.minus');
 
-  const formData = new FormData(form);
-
-  fetch(form.action, {
-    method: 'POST',
-    body: formData,
-    headers: {
-      'Accept': 'text/html',
-    },
-  })
-    .then((res) => res.text())
-    .then((html) => {
-      const parser = new DOMParser();
-      const doc = parser.parseFromString(html, 'text/html');
-
-      // Replace .fract-cart
-      const newCart = doc.querySelector('.fract-cart');
-      const currentCart = document.querySelector('.fract-cart');
-      if (newCart && currentCart) {
-        currentCart.innerHTML = newCart.innerHTML;
-      }
-
-      // Reload and re-run fract.js
-      const existingScript = document.querySelector('script[src*="fract.js"]');
-      if (existingScript) existingScript.remove();
-
-      const script = document.createElement('script');
-      script.src = '{{ "fract.js" | asset_url }}?v=' + Date.now(); // bust cache
-      script.defer = true;
-      document.body.appendChild(script);
+    newBtnPlus?.addEventListener('click', () => {
+      newInput.value = Number(newInput.value) + 1;
+      newInput.dispatchEvent(new Event('change'));
     });
+
+    newBtnMinus?.addEventListener('click', () => {
+      const min = Number(newInput.min) || 1;
+      if (Number(newInput.value) > min) {
+        newInput.value = Number(newInput.value) - 1;
+        newInput.dispatchEvent(new Event('change'));
+      }
+    });
+
+    // Optional: add change event if needed, e.g. auto-submit handled elsewhere
+    // newInput?.addEventListener('change', () => {
+    //   // handle manual input change
+    // });
+  });
 };
 
-
-      btnPlus.addEventListener('click', () => {
-        input.value = Number(input.value) + 1;
-        input.dispatchEvent(new Event('change'));
-      });
-
-      btnMinus.addEventListener('click', () => {
-        const min = Number(input.min) || 1;
-        if (Number(input.value) > min) {
-          input.value = Number(input.value) - 1;
-          input.dispatchEvent(new Event('change'));
-        }
-      });
-
-      input.addEventListener('change', submitForm);
-    });
-  });
+// Run on first load
+window.initFractCart();
