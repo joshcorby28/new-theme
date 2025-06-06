@@ -1,3 +1,6 @@
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
 {% schema %}
 {
   "name": "Product Slider",
@@ -12,7 +15,7 @@
 }
 {% endschema %}
 
-<div class="swiper-container" id="product-slider-{{ section.id }}">
+<div class="swiper" id="product-slider-{{ section.id }}">
   <div class="swiper-wrapper">
     {% assign my_collection = collections[section.settings.collection] %}
     {% if my_collection and my_collection.products_count > 0 %}
@@ -36,7 +39,7 @@
     if (typeof Swiper !== 'undefined') {
       new Swiper('#product-slider-{{ section.id }}', {
         slidesPerView: 4,
-        spaceBetween: 20,
+        spaceBetween: 0,
         navigation: {
           nextEl: '#product-slider-{{ section.id }} .swiper-button-next',
           prevEl: '#product-slider-{{ section.id }} .swiper-button-prev',
@@ -48,7 +51,7 @@
         breakpoints: {
           320: { slidesPerView: 1, spaceBetween: 10 },
           640: { slidesPerView: 2, spaceBetween: 15 },
-          1024: { slidesPerView: 4, spaceBetween: 20 },
+          1024: { slidesPerView: 5, spaceBetween: 0 },
         }
       });
     } else {
