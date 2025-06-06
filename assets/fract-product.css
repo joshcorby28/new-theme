@@ -296,6 +296,26 @@
   }
 }
 
+.product-usp-point {
+  margin-top: 1rem;
+}
+
+.usp-point {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+.usp-point .icon {
+  width: 10px;
+  height: 10px;
+  background-color: #1fa365; /* in-stock green */
+  border-radius: 50%;
+  display: inline-block;
+}
+
 
 @keyframes pulse-yellow {
   0% { box-shadow: 0 0 0 0 rgba(255, 193, 7, 0.7); }

@@ -105,7 +105,21 @@
   {% endif %}
 </div>
     {% endif %}
-</div>
+
+  {% assign usp_point = product.metafields.custom.usp_point %}
+  {% if usp_point %}
+    <div class="product-usp-point">      
+      <div class="usp-point">
+      <span class="icon" aria-hidden="true">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path d="M5 13l4 4L19 7" />
+        </svg>
+      </span>
+       <span>{{ usp_point.value }}</span>
+      </div>
+    </div>
+  {% endif %}
+
   </div>
 </div>
 
