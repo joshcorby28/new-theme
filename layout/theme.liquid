@@ -78,19 +78,25 @@
     {% # Global %}
     {% if settings['text-uppercase'] %}
       <style>
-        h1,
-        h2,
-        h3,
-        h4,
-        h5,
-        h6,
-        a {
-          text-transform: uppercase;
-          letter-spacing: -1px;
-        }
-        span {
-          text-transform: capitalize;
-        }
+        {% if section.settings.uppercase_headings_links %}
+          h1,
+          h2,
+          h3,
+          h4,
+          h5,
+          h6,
+          a {
+            text-transform: uppercase;
+            letter-spacing: -1px;
+          }
+        {% endif %}
+      
+        {% if section.settings.capitalize_spans %}
+          span {
+            text-transform: capitalize;
+            letter-spacing: -1px;
+          }
+        {% endif %}
       </style>
     {% endif %}
 
