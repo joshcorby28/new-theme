@@ -10,7 +10,7 @@
 
 <h1>{{ 'cart.title' | t }}</h1>
 
-<form action="{{ routes.cart_url }}" method="post">
+<form class="fract-cart" action="{{ routes.cart_url }}" method="post">
   <table class="main-cart-items">
     {% for item in cart.items %}
       <tr class="cart-item">
