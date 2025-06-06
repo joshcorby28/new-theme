@@ -9,7 +9,7 @@
 {{ 'fract-cart.css' | asset_url | stylesheet_tag: preload: true }}
 
 <div class="main-cart-title">
-<h1 class="cart-title">{{ 'cart.title' | t }}</h1>
+<h1 class="cart-title">{{ 'cart.title' | t }}</h1> <span class="item-count">({{ cart.item_count }} item{% if cart.item_count != 1 %}s{% endif %})</span>
 </div>
 
 <form class="fract-cart" action="{{ routes.cart_url }}" method="post">
