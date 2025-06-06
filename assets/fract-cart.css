@@ -1,10 +1,14 @@
 .fract-cart {
   max-width:90%;
   margin:0 auto;
+  display: grid;
+  gap: 100px;
+  align-items: center;
+  grid-template-columns: 7fr 3fr;
 }
 
 .fract-cart .main-cart-items {
-  width:70%;
+  width:100%;
 }
 
 .fract-cart .main-cart-items .cart-item{
