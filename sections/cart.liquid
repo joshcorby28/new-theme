@@ -34,8 +34,8 @@
               </div>
             {% endif %}
             {% if section.settings.show-stock-indicator %}
-            {% assign inventory = item.selected_or_first_available_variant.inventory_quantity %}
-            {% assign in_stock = item.selected_or_first_available_variant.available %}
+            {% assign inventory = item.inventory_quantity %}
+            {% assign in_stock = item.available %}
             <div class="stock-indicator-wrapper">
               {% if in_stock %}
                 {% if inventory > 5 %}
