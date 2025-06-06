@@ -244,6 +244,11 @@
 }
 
 /* Product Extras */
+.product-extras {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
 
 .usp-point {
   display: flex;
