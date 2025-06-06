@@ -158,7 +158,7 @@
   background: #ddd;
 }
 
-.fract-cart .main-cart-items .cart-item.quantity-selector .qty-input {
+.fract-cart .main-cart-items .cart-item .quantity-selector .qty-input {
   flex: 1;
   border: none;
   text-align: center;
