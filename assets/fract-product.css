@@ -285,20 +285,27 @@
 }
 
 @keyframes pulse-green {
-  0% { box-shadow: 0 0 0 0 rgba(40, 167, 69, 0.7); }
-  70% { box-shadow: 0 0 0 10px rgba(40, 167, 69, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(40, 167, 69, 0); }
+  0% {
+    box-shadow: 0 0 0 0 rgba(40, 167, 69, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 5px rgba(40, 167, 69, 0); /* was 10px, now 5px */
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(40, 167, 69, 0);
+  }
 }
+
 
 @keyframes pulse-yellow {
   0% { box-shadow: 0 0 0 0 rgba(255, 193, 7, 0.7); }
-  70% { box-shadow: 0 0 0 10px rgba(255, 193, 7, 0); }
+  70% { box-shadow: 0 0 0 5px rgba(255, 193, 7, 0); }
   100% { box-shadow: 0 0 0 0 rgba(255, 193, 7, 0); }
 }
 
 @keyframes pulse-red {
   0% { box-shadow: 0 0 0 0 rgba(220, 53, 69, 0.7); }
-  70% { box-shadow: 0 0 0 10px rgba(220, 53, 69, 0); }
+  70% { box-shadow: 0 0 0 5px rgba(220, 53, 69, 0); }
   100% { box-shadow: 0 0 0 0 rgba(220, 53, 69, 0); }
 }
 
