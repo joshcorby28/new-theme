@@ -119,6 +119,44 @@
       </div>
     </div>
   {% endif %}
+          </div>
+            <div class="custom-accordion">
+  {% if settings.show_product_info %}
+    <details class="accordion-item">
+      <summary>Product Info</summary>
+      <div class="accordion-content">
+        {{ product.description }}
+      </div>
+    </details>
+  {% endif %}
+
+  {% if settings.show_size_guide %}
+    <details class="accordion-item">
+      <summary>Size Guide</summary>
+      <div class="accordion-content">
+        {% if product.metafields.custom.size_guide_image %}
+          <img 
+            src="{{ product.metafields.custom.size_guide_image | image_url: width: 800 }}" 
+            alt="Size Guide for {{ product.title }}" 
+            style="max-width: 100%; height: auto; margin-top: 1rem;"
+          >
+        {% else %}
+          <p>No size guide available for this product.</p>
+        {% endif %}
+      </div>
+    </details>
+  {% endif %}
+
+  {% if settings.show_custom_content %}
+    <details class="accordion-item">
+      <summary>Custom Content</summary>
+      <div class="accordion-content">
+        <p>This is your custom content block. Add text, HTML, or metafields here.</p>
+      </div>
+    </details>
+  {% endif %}
+</div>
+
 
   </div>
 </div>
@@ -149,6 +187,24 @@
         "default": true,
         "label": "Show Stock Indicator"
       },
+     {
+      "type": "checkbox",
+      "id": "show_product_info",
+      "label": "Show Product Info",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_size_guide",
+      "label": "Show Size Guide",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_custom_content",
+      "label": "Show Custom Content",
+      "default": true
+    },
   ],
   "disabled_on": {
     "groups": ["header", "footer"]
