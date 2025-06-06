@@ -309,10 +309,8 @@
 }
 
 .usp-point .icon {
-  width: 10px;
-  height: 10px;
-  background-color: #1fa365; /* in-stock green */
-  border-radius: 50%;
+  width: 14px;
+  height: 14px;
   display: inline-block;
 }
 
