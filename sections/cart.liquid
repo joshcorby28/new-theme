@@ -27,7 +27,7 @@
       <span class="cart-item-price">
         {{ item.original_line_price | money }}
         {% if item.variant.compare_at_price > item.variant.price %}
-          <span class="compare-at-price" style="text-decoration: line-through; color: #888;">
+          <span class="compare-at-price" style="text-decoration: line-through; color: #888; font-size:12px; font-weight:normal">
             {{ item.variant.compare_at_price | money }}
           </span>
         {% endif %}
