@@ -66,6 +66,8 @@
     margin-bottom:20px;
     padding: 2rem;
     height:300px;
+  flex-direction: column;
+  gap:20px;
     display: flex;
     justify-content:center;
     align-items: center;
