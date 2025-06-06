@@ -80,6 +80,31 @@
 
 </div>
   </div>
+  <div class="product-extras">
+    {% assign inventory = product.selected_or_first_available_variant.inventory_quantity %}
+{% assign in_stock = product.selected_or_first_available_variant.available %}
+
+<div class="stock-indicator-wrapper">
+  {% if in_stock %}
+    {% if inventory > 5 %}
+      <div class="stock-indicator in-stock">
+        <span class="circle"></span>
+        <span>In Stock</span>
+      </div>
+    {% else %}
+      <div class="stock-indicator low-stock">
+        <span class="circle"></span>
+        <span>Low Stock</span>
+      </div>
+    {% endif %}
+  {% else %}
+    <div class="stock-indicator out-of-stock">
+      <span class="circle"></span>
+      <span>Out of Stock</span>
+    </div>
+  {% endif %}
+</div>
+  </div>
 
 {% schema %}
 {
