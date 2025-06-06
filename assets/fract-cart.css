@@ -94,3 +94,31 @@
 .fract-cart .fract-footer-cart .cart-summary-row .label {
   font-weight:bold;
 }
+
+/* Mobile Layout */
+@media screen and (max-width: 1025px) {
+.fract-cart {
+  max-width:90%;
+  margin:0 auto;
+  display:flex;
+  flex-direction: column;
+  gap:30px;
+  align-items: flex-start;
+}
+
+.fract-cart .main-cart-items {
+  width:100%;
+}
+
+.fract-cart .main-cart-items .cart-item{
+    border-radius: 8px;
+    background: white;
+    margin-bottom:20px;
+    padding: 2rem;
+    flex-direction: columnn;
+    gap:10px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+}
