@@ -21,6 +21,7 @@
         <div class="title-and-remove">
           <h3 class="cart-product-title">{{ item.product.title }}</h3>
           <div class="cart-product-variant">
+      {{ item.name }}
            {{ item.variant.title }}
           </div>
           {{ 'cart.remove' | t | link_to: item.url_to_remove }}
