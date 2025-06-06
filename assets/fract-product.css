@@ -309,6 +309,23 @@
   100% { box-shadow: 0 0 0 0 rgba(220, 53, 69, 0); }
 }
 
+/* Mobile Layout */
+@media screen and (max-width: 1025px) {
+.fract-main-product {
+ flex-direction: column;
+}
 
+.fract-main-product .product-images {
+  width:100%;
+}
+
+
+.fract-main-product .right-side-product {
+  width:100%;
+  position: relative;
+  top: 0;
+  transform: translateY(0%);
+}
+}
 
 
