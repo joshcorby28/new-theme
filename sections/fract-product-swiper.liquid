@@ -1,6 +1,72 @@
 {% schema %}
-  {
-    "name": "Section name",
-    "settings": []
-  }
+{
+  "name": "Product Slider",
+  "settings": [
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection to display"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Slider"
+    }
+  ]
+}
 {% endschema %}
+
+{% stylesheet %}
+/* Add any swiper custom styles here or in theme stylesheet */
+.swiper-container {
+  width: 100%;
+  padding: 20px 0;
+}
+.swiper-slide {
+  width: auto;
+}
+{% endstylesheet %}
+
+<div class="swiper-container" id="product-slider-{{ section.id }}">
+  <div class="swiper-wrapper">
+    {% assign products = collections[section.settings.collection].products %}
+    {% for product in products %}
+      <div class="swiper-slide">
+        {% render 'product-card', product: product %}
+      </div>
+    {% endfor %}
+  </div>
+
+  <!-- Add pagination/navigation if you want -->
+  <div class="swiper-button-prev"></div>
+  <div class="swiper-button-next"></div>
+</div>
+
+{% javascript %}
+  var swiper_{{ section.id }} = new Swiper('#product-slider-{{ section.id }}', {
+    slidesPerView: 4,
+    spaceBetween: 20,
+    navigation: {
+      nextEl: '#product-slider-{{ section.id }} .swiper-button-next',
+      prevEl: '#product-slider-{{ section.id }} .swiper-button-prev',
+    },
+    pagination: {
+      el: '#product-slider-{{ section.id }} .swiper-pagination',
+      clickable: true,
+    },
+    breakpoints: {
+      320: {
+        slidesPerView: 1,
+        spaceBetween: 10,
+      },
+      640: {
+        slidesPerView: 2,
+        spaceBetween: 15,
+      },
+      1024: {
+        slidesPerView: 4,
+        spaceBetween: 20,
+      }
+    }
+  });
+{% endjavascript %}
