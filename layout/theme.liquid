@@ -7,6 +7,11 @@
     {% # Load and preload the critical CSS %}
     {{ 'critical.css' | asset_url | stylesheet_tag: preload: true }}
 
+    {% # Preload and load fract.js %}
+    <link rel="preload" as="script" href="{{ 'fract.js' | asset_url }}">
+    <script src="{{ 'fract.js' | asset_url }}" defer></script>
+
+
     {% # Social, title, etc. %}
     {% render 'meta-tags' %}
 
