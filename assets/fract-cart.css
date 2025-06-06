@@ -32,8 +32,19 @@
 }
 
 .fract-cart .main-cart-items .cart-item td .image{
-height: auto;
+    height: auto;
     width: 110px;
     border-radius: 8px;
 }
 
+.cart-image-and-title {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.cart-image-and-title .title-and-remove a  {
+    color:#121212;
+  text-decoration: none;
+  opacity:0.5
+}
