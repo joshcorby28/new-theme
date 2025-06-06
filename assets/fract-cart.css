@@ -1,0 +1,23 @@
+.fract-cart {
+}
+
+.fract-cart table {
+  width:70%;
+}
+
+.fract-cart table tr{
+    border-radius: 8px;
+    background: white;
+    padding: 2rem;
+    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.fract-cart table tr td .image{
+height: auto;
+    width: 140px;
+    border-radius: 8px;
+}
+
