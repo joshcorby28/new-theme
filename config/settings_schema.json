@@ -139,7 +139,7 @@
         {
           "type": "checkbox",
           "id": "capitalize_spans",
-          "label": "Capitalize Span Text",
+          "label": "Uppercase Span Text",
           "default": false
         },
 
