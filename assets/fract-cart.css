@@ -43,6 +43,10 @@
     gap: 20px;
 }
 
+.cart-image-and-title .cart-product-title {
+     font-size:16px;
+}
+
 .cart-image-and-title .title-and-remove a  {
     color:#121212;
   text-decoration: none;
