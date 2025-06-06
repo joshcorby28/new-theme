@@ -24,6 +24,7 @@
 .fract-cart .main-cart-items .cart-item{
     border-radius: 8px;
     background: white;
+    margin-bottom:20px;
     padding: 2rem;
     display: block;
     display: flex;
