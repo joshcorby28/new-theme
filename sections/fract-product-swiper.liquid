@@ -5,58 +5,55 @@
     {
       "type": "collection",
       "id": "collection",
-      "label": "Collection to display"
+      "label": "Choose collection"
     }
   ],
-  "presets": [
-    {
-      "name": "Product Slider"
-    }
-  ]
+  "presets": [{"name": "Product Slider"}]
 }
 {% endschema %}
 
-
 <div class="swiper-container" id="product-slider-{{ section.id }}">
   <div class="swiper-wrapper">
-    {% assign products = collections[section.settings.collection].products %}
-    {% for product in products %}
-      <div class="swiper-slide">
-        {% render 'product-card', product: product %}
-      </div>
-    {% endfor %}
+    {% assign my_collection = collections[section.settings.collection] %}
+    {% if my_collection and my_collection.products_count > 0 %}
+      {% for product in my_collection.products %}
+        <div class="swiper-slide">
+          {% render 'product-card', product: product %}
+        </div>
+      {% endfor %}
+    {% else %}
+      <p>No products found in this collection.</p>
+    {% endif %}
   </div>
 
-  <!-- Add pagination/navigation if you want -->
+  <div class="swiper-pagination"></div>
   <div class="swiper-button-prev"></div>
   <div class="swiper-button-next"></div>
 </div>
 
-{% javascript %}
-  var swiper_{{ section.id }} = new Swiper('#product-slider-{{ section.id }}', {
-    slidesPerView: 4,
-    spaceBetween: 20,
-    navigation: {
-      nextEl: '#product-slider-{{ section.id }} .swiper-button-next',
-      prevEl: '#product-slider-{{ section.id }} .swiper-button-prev',
-    },
-    pagination: {
-      el: '#product-slider-{{ section.id }} .swiper-pagination',
-      clickable: true,
-    },
-    breakpoints: {
-      320: {
-        slidesPerView: 1,
-        spaceBetween: 10,
-      },
-      640: {
-        slidesPerView: 2,
-        spaceBetween: 15,
-      },
-      1024: {
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    if (typeof Swiper !== 'undefined') {
+      new Swiper('#product-slider-{{ section.id }}', {
         slidesPerView: 4,
         spaceBetween: 20,
-      }
+        navigation: {
+          nextEl: '#product-slider-{{ section.id }} .swiper-button-next',
+          prevEl: '#product-slider-{{ section.id }} .swiper-button-prev',
+        },
+        pagination: {
+          el: '#product-slider-{{ section.id }} .swiper-pagination',
+          clickable: true,
+        },
+        breakpoints: {
+          320: { slidesPerView: 1, spaceBetween: 10 },
+          640: { slidesPerView: 2, spaceBetween: 15 },
+          1024: { slidesPerView: 4, spaceBetween: 20 },
+        }
+      });
+    } else {
+      console.error('Swiper JS not loaded.');
     }
   });
-{% endjavascript %}
+</script>
+
