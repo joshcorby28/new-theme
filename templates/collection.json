@@ -24,7 +24,7 @@
         "full_screen": false,
         "section_height_mobile": 400,
         "media_type": "image",
-        "background_image": "shopify://shop_images/Desktop_Hero_Banner_Image_02_3c393338-1eb9-4087-a251-342f6f3eaf47.jpg",
+        "background_image": "shopify://shop_images/pexels-brett-sayles-3759249-min_1.jpg",
         "background_video": "",
         "placeholder_color": "#f4f4f4",
         "use_overlay": true,
@@ -44,18 +44,10 @@
         "show_buttons": true,
         "primary_button_text": "",
         "primary_button_link": "",
+        "primary_button_style": "fract-primary",
         "secondary_button_text": "",
         "secondary_button_link": "",
-        "primary_button_bg_color": "#ffffff",
-        "primary_button_text_color": "#000000",
-        "primary_button_bg_hover_color": "#dddddd",
-        "primary_button_text_hover_color": "#000000",
-        "secondary_button_bg_color": "#000000",
-        "secondary_button_text_color": "#ffffff",
-        "secondary_button_bg_hover_color": "#222222",
-        "secondary_button_text_hover_color": "#ffffff",
-        "button_border_radius": 4,
-        "button_text_size": 16
+        "secondary_button_style": "fract-secondary"
       }
     },
     "collection_grid_ehjM94": {
