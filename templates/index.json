@@ -18,7 +18,6 @@
         "full_screen": true,
         "section_height_mobile": 400,
         "media_type": "video",
-        "background_image": "shopify://shop_images/IMG_0766.JPG_1726590419266.jpg",
         "background_video": "https://sfycdn.speedsize.com/fbaf6506-81e1-43a2-bcc1-80e18c7b0146/uk.representclo.com/cdn/shop/videos/c/vp/f4187592c5144c4393c29a8dd8f3362d/f4187592c5144c4393c29a8dd8f3362d.HD-1080p-7.2Mbps-47320906.mp4?v=0",
         "placeholder_color": "#f4f4f4",
         "use_overlay": true,
@@ -38,25 +37,18 @@
         "show_buttons": true,
         "primary_button_text": "buy now",
         "primary_button_link": "#",
+        "primary_button_style": "fract-secondary",
         "secondary_button_text": "",
         "secondary_button_link": "",
-        "primary_button_bg_color": "#ffffff",
-        "primary_button_text_color": "#000000",
-        "primary_button_bg_hover_color": "#dddddd",
-        "primary_button_text_hover_color": "#000000",
-        "secondary_button_bg_color": "#000000",
-        "secondary_button_text_color": "#ffffff",
-        "secondary_button_bg_hover_color": "#222222",
-        "secondary_button_text_hover_color": "#ffffff",
-        "button_border_radius": 4,
-        "button_text_size": 12
+        "secondary_button_style": "fract-secondary"
       }
     },
     "fract_product_swiper_HtXeWr": {
       "type": "fract-product-swiper",
       "name": "Product Slider",
       "settings": {
-        "collection": "test"
+        "collection": "test",
+        "primary_button_text": "Shop the Collection"
       }
     }
   },
