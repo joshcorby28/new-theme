@@ -28,10 +28,6 @@
       <p>No products found in this collection.</p>
     {% endif %}
   </div>
-
-  <div class="swiper-pagination"></div>
-  <div class="swiper-button-prev"></div>
-  <div class="swiper-button-next"></div>
 </div>
 
 <script>
@@ -40,18 +36,10 @@
       new Swiper('#product-slider-{{ section.id }}', {
         slidesPerView: 4,
         spaceBetween: 0,
-        navigation: {
-          nextEl: '#product-slider-{{ section.id }} .swiper-button-next',
-          prevEl: '#product-slider-{{ section.id }} .swiper-button-prev',
-        },
-        pagination: {
-          el: '#product-slider-{{ section.id }} .swiper-pagination',
-          clickable: true,
-        },
         breakpoints: {
           320: { slidesPerView: 1, spaceBetween: 10 },
           640: { slidesPerView: 2, spaceBetween: 15 },
-          1024: { slidesPerView: 5, spaceBetween: 0 },
+          1024: { slidesPerView: 5.4, spaceBetween: 0 },
         }
       });
     } else {
