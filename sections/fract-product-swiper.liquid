@@ -1,23 +1,10 @@
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
-{% schema %}
-{
-  "name": "Product Slider",
-  "settings": [
-    {
-      "type": "collection",
-      "id": "collection",
-      "label": "Choose collection"
-    }
-  ],
-  "presets": [{"name": "Product Slider"}]
-}
-{% endschema %}
+{% assign my_collection = collections[section.settings.collection] %}
 
 <div class="swiper fract-product-swiper" id="product-slider-{{ section.id }}">
   <div class="swiper-wrapper">
-    {% assign my_collection = collections[section.settings.collection] %}
     {% if my_collection and my_collection.products_count > 0 %}
       {% for product in my_collection.products %}
         <div class="swiper-slide">
@@ -28,6 +15,12 @@
       <p>No products found in this collection.</p>
     {% endif %}
   </div>
+
+  {% if my_collection %}
+    <a href="{{ my_collection.url }}" class="button-skew fract-primary">
+      {{ section.settings.primary_button_text }}
+    </a>
+  {% endif %}
 </div>
 
 <script>
@@ -51,7 +44,30 @@
 
 {% stylesheet %}
   .fract-product-swiper .product-card__info {
-    padding:1.2rem;
+    padding: 1.2rem;
   }
 {% endstylesheet %}
 
+{% schema %}
+{
+  "name": "Product Slider",
+  "settings": [
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Choose collection"
+    },
+    {
+      "type": "text",
+      "id": "primary_button_text",
+      "label": "Button text",
+      "default": "Shop the Collection"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Slider"
+    }
+  ]
+}
+{% endschema %}
