@@ -15,7 +15,7 @@
 }
 {% endschema %}
 
-<div class="swiper" id="product-slider-{{ section.id }}">
+<div class="swiper fract-product-swiper" id="product-slider-{{ section.id }}">
   <div class="swiper-wrapper">
     {% assign my_collection = collections[section.settings.collection] %}
     {% if my_collection and my_collection.products_count > 0 %}
@@ -59,4 +59,10 @@
     }
   });
 </script>
+
+{% stylesheet %}
+  .fract-product-swiper .product-card__info {
+    padding:1.2rem;
+  }
+{% endstylesheet %}
 
