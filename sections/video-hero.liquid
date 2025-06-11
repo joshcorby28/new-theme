@@ -225,14 +225,14 @@
 
       {% if section.settings.show_buttons %}
         <div class="hidden-theme-media-buttons-{{ hidden_theme_id }}">
-          {% if section.settings.primary_button_text != blank and section.settings.primary_button_link != blank %}
-            <a href="{{ section.settings.primary_button_link }}" class="button-skew hidden-theme-media-button-{{ hidden_theme_id }} hidden-theme-media-button-primary-{{ hidden_theme_id }}">
+         {% if section.settings.primary_button_text != blank and section.settings.primary_button_link != blank %}
+            <a href="{{ section.settings.primary_button_link }}" class="button-skew {{ section.settings.primary_button_style }}">
               {{ section.settings.primary_button_text }}
             </a>
           {% endif %}
-
+          
           {% if section.settings.secondary_button_text != blank and section.settings.secondary_button_link != blank %}
-            <a href="{{ section.settings.secondary_button_link }}" class="button-skew hidden-theme-media-button-{{ hidden_theme_id }} hidden-theme-media-button-secondary-{{ hidden_theme_id }}">
+            <a href="{{ section.settings.secondary_button_link }}" class="button-skew {{ section.settings.secondary_button_style }}">
               {{ section.settings.secondary_button_text }}
             </a>
           {% endif %}
@@ -447,94 +447,27 @@
       "label": "Show buttons",
       "default": true
     },
-    {
-      "type": "text",
-      "id": "primary_button_text",
-      "label": "Primary button text"
-    },
-    {
-      "type": "url",
-      "id": "primary_button_link",
-      "label": "Primary button link"
-    },
-    {
-      "type": "text",
-      "id": "secondary_button_text",
-      "label": "Secondary button text"
-    },
-    {
-      "type": "url",
-      "id": "secondary_button_link",
-      "label": "Secondary button link"
-    },
-    {
-      "type": "color",
-      "id": "primary_button_bg_color",
-      "label": "Primary button background color",
-      "default": "#ffffff"
-    },
-    {
-      "type": "color",
-      "id": "primary_button_text_color",
-      "label": "Primary button text color",
-      "default": "#000000"
-    },
-    {
-      "type": "color",
-      "id": "primary_button_bg_hover_color",
-      "label": "Primary button background hover color",
-      "default": "#dddddd"
-    },
-    {
-      "type": "color",
-      "id": "primary_button_text_hover_color",
-      "label": "Primary button text hover color",
-      "default": "#000000"
-    },
-    {
-      "type": "color",
-      "id": "secondary_button_bg_color",
-      "label": "Secondary button background color",
-      "default": "#000000"
-    },
-    {
-      "type": "color",
-      "id": "secondary_button_text_color",
-      "label": "Secondary button text color",
-      "default": "#ffffff"
-    },
-    {
-      "type": "color",
-      "id": "secondary_button_bg_hover_color",
-      "label": "Secondary button background hover color",
-      "default": "#222222"
-    },
-    {
-      "type": "color",
-      "id": "secondary_button_text_hover_color",
-      "label": "Secondary button text hover color",
-      "default": "#ffffff"
-    },
-    {
-      "type": "range",
-      "id": "button_border_radius",
-      "min": 0,
-      "max": 40,
-      "step": 1,
-      "unit": "px",
-      "label": "Button border radius",
-      "default": 4
-    },
-    {
-      "type": "range",
-      "id": "button_text_size",
-      "min": 10,
-      "max": 24,
-      "step": 1,
-      "unit": "px",
-      "label": "Button text size",
-      "default": 16
-    }
+  {
+  "type": "select",
+  "id": "primary_button_style",
+  "label": "Primary button style",
+  "options": [
+    { "value": "fract-primary", "label": "Primary" },
+    { "value": "fract-secondary", "label": "Secondary" }
+  ],
+  "default": "fract-primary"
+},
+{
+  "type": "select",
+  "id": "secondary_button_style",
+  "label": "Secondary button style",
+  "options": [
+    { "value": "fract-primary", "label": "Primary" },
+    { "value": "fract-secondary", "label": "Secondary" }
+  ],
+  "default": "fract-secondary"
+}
+
   ],
   "presets": [
     {
