@@ -17,7 +17,7 @@
 .fract-expandable-collections .expand-inner .collection-block .content-block {
   height: 100%;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-end;
   display: flex;
   padding-top: 40px;
   align-items: center;
