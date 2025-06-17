@@ -67,7 +67,7 @@
       {
         "type": "url",
         "id": "player_audio",
-        "label": "MP3 or Spotify URL"
+        "label": "Audio MP3 File"
       },
       {
         "type": "image_picker",
