@@ -1,6 +1,136 @@
-{% schema %}
-  {
-    "name": "Section name",
-    "settings": []
+{{ 'smarte-expandable-collections.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  #shopify-section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
   }
+
+  @media screen and (min-width: 750px) {
+    #shopify-section-{{ section.id }} {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="fract-expandable-collections">
+  <div class="title-and-button page-width">
+    <h2 class="title inline-richtext h2">
+      {{ section.settings['main-title'] }}
+    </h2>
+    <div class="collection__view-all desktop">
+      <a
+        href="{{ section.settings.collection.url }}"
+        class="link underlined-link"
+      >
+        All Collections
+        {{- 'icon-arrow-left.svg' | inline_asset_content -}}
+      </a>
+    </div>
+  </div>
+  <div class="expand-inner page-width">
+    {% for block in section.blocks %}
+      {% assign collection = block.settings.collection %}
+      {% assign background_image = block.settings.background_image %}
+      {% assign icon_image = block.settings.block_icon %}
+      {% if collection %}
+        <div
+          class="collection-block{% if forloop.first %} card-expand{% endif %}"
+          style="background: linear-gradient(180deg, rgba(0, 0, 0, 0.00) 0%, rgba(0, 0, 0, 0.50) 100%), url('{{ background_image | image_url: width: 840 }}') lightgray 50% / cover no-repeat;"
+        >
+          <div class="content-block">
+            <div class="bottom-content">
+              <h3 class="col-title">{{ collection.title }}</h3>
+            </div>
+          </div>
+        </div>
+      {% endif %}
+    {% endfor %}
+    <div style="margin-top:32px;" class="collection__view-all mobile">
+      <a
+        href="{{ section.settings.collection.url }}"
+        class="link underlined-link"
+      >
+        All Collections
+        {{- 'icon-arrow-left.svg' | inline_asset_content -}}
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const collectionBlocks = document.querySelectorAll('.collection-block');
+
+    collectionBlocks.forEach((block) => {
+      block.addEventListener('click', function () {
+        collectionBlocks.forEach((b) => b.classList.remove('card-expand'));
+
+        this.classList.add('card-expand');
+      });
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Expandable Collections",
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "main-title",
+      "label": "Main title"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection_block",
+      "name": "Collection Block",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Select Collection"
+        },
+        {
+          "type": "image_picker",
+          "id": "background_image",
+          "label": "Custom Background Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "block_icon",
+          "label": "Collection Icon"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 5,
+  "presets": [
+    {
+      "name": "Expandable Collections"
+    }
+  ]
+}
 {% endschema %}
