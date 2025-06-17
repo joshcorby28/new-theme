@@ -1,145 +1,128 @@
-{% doc %}
-  @prompt
-    Using fract- as the class, no ai create me a contact form with name, email, number, subject and message. , Remove button styling, text style etc. add option to choose primary or secondary class for button. Make color global var -- main color 
-    
-
-{% enddoc %}
-{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
-
 {% style %}
-  .fract-contact-form-{{ ai_gen_id }} {
-    --main-color: {{ block.settings.main_color }};
+  .fract-contact-form {
+    --main-color: {{ section.settings.main_color }};
     max-width: 600px;
     margin: 0 auto;
     padding: 40px;
-    background-color: {{ block.settings.background_color }};
-    border-radius: {{ block.settings.border_radius }}px;
+    background-color: {{ section.settings.background_color }};
+    border-radius: {{ section.settings.border_radius }}px;
   }
 
-  .fract-contact-form__heading-{{ ai_gen_id }} {
-    color: {{ block.settings.text_color }};
+  .fract-contact-form__heading {
+    color: {{ section.settings.text_color }};
     margin: 0 0 32px 0;
     text-align: center;
   }
 
-  .fract-contact-form__content-{{ ai_gen_id }} {
+  .fract-contact-form__content {
     display: flex;
     flex-direction: column;
     gap: 24px;
   }
 
-  .fract-contact-form__row-{{ ai_gen_id }} {
+  .fract-contact-form__row {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 16px;
   }
 
-  .fract-contact-form__field-{{ ai_gen_id }} {
+  .fract-contact-form__field {
     display: flex;
     flex-direction: column;
     gap: 8px;
   }
 
-  .fract-contact-form__label-{{ ai_gen_id }} {
-    color: {{ block.settings.text_color }};
+  .fract-contact-form__label {
+    color: {{ section.settings.text_color }};
     font-weight: 600;
   }
 
-  .fract-contact-form__input-{{ ai_gen_id }},
-  .fract-contact-form__textarea-{{ ai_gen_id }} {
+  .fract-contact-form__input,
+  .fract-contact-form__textarea {
     padding: 16px;
-    border: 2px solid {{ block.settings.input_border_color }};
-    border-radius: {{ block.settings.input_border_radius }}px;
-    background-color: {{ block.settings.input_background_color }};
-    color: {{ block.settings.input_text_color }};
+    border: 2px solid {{ section.settings.input_border_color }};
+    border-radius: {{ section.settings.input_border_radius }}px;
+    background-color: {{ section.settings.input_background_color }};
+    color: {{ section.settings.input_text_color }};
     transition: border-color 0.3s ease;
   }
 
-  .fract-contact-form__input-{{ ai_gen_id }}:focus,
-  .fract-contact-form__textarea-{{ ai_gen_id }}:focus {
+  .fract-contact-form__input:focus,
+  .fract-contact-form__textarea:focus {
     outline: none;
     border-color: var(--main-color);
   }
 
-  .fract-contact-form__textarea-{{ ai_gen_id }} {
+  .fract-contact-form__textarea {
     min-height: 120px;
     resize: vertical;
     font-family: inherit;
   }
 
-  .fract-contact-form__success-{{ ai_gen_id }} {
-    color: {{ block.settings.success_color }};
+  .fract-contact-form__success {
+    color: {{ section.settings.success_color }};
     padding: 16px;
-    background-color: {{ block.settings.success_bg_color }};
-    border-radius: {{ block.settings.input_border_radius }}px;
+    background-color: {{ section.settings.success_bg_color }};
+    border-radius: {{ section.settings.input_border_radius }}px;
     text-align: center;
   }
 
-  .fract-contact-form__error-{{ ai_gen_id }} {
-    color: {{ block.settings.error_color }};
+  .fract-contact-form__error {
+    color: {{ section.settings.error_color }};
     font-size: 14px;
     margin-top: 4px;
   }
 
   @media screen and (max-width: 749px) {
-    .fract-contact-form-{{ ai_gen_id }} {
+    .fract-contact-form {
       padding: 24px;
     }
 
-    .fract-contact-form__row-{{ ai_gen_id }} {
+    .fract-contact-form__row {
       grid-template-columns: 1fr;
     }
   }
 {% endstyle %}
 
-<div
-  class="fract-contact-form-{{ ai_gen_id }}"
-  {{ block.shopify_attributes }}
->
-  {%- if block.settings.heading != blank -%}
-    <h2 class="fract-contact-form__heading-{{ ai_gen_id }}">{{ block.settings.heading }}</h2>
-  {%- endif -%}
+<div class="fract-contact-form">
+  {% if section.settings.heading != blank %}
+    <h2 class="fract-contact-form__heading">{{ section.settings.heading }}</h2>
+  {% endif %}
 
-  {%- form 'contact' -%}
-    <div class="fract-contact-form__content-{{ ai_gen_id }}">
-      {%- if form.posted_successfully? -%}
-        <div class="fract-contact-form__success-{{ ai_gen_id }}">
-          {{ block.settings.success_message }}
+  {% form 'contact' %}
+    <div class="fract-contact-form__content">
+      {% if form.posted_successfully? %}
+        <div class="fract-contact-form__success">
+          {{ section.settings.success_message }}
         </div>
-      {%- else -%}
-        <div class="fract-contact-form__row-{{ ai_gen_id }}">
-          <div class="fract-contact-form__field-{{ ai_gen_id }}">
-            <label for="contact-name-{{ ai_gen_id }}" class="fract-contact-form__label-{{ ai_gen_id }}">
-              Name *
-            </label>
+      {% else %}
+        <div class="fract-contact-form__row">
+          <div class="fract-contact-form__field">
+            <label for="contact-name" class="fract-contact-form__label">Name *</label>
             <input
               type="text"
-              id="contact-name-{{ ai_gen_id }}"
+              id="contact-name"
               name="contact[name]"
-              class="fract-contact-form__input-{{ ai_gen_id }}"
+              class="fract-contact-form__input"
               value="{{ form.name }}"
               required
               {% if form.errors contains 'name' %}
                 aria-invalid="true"
-                aria-describedby="contact-name-error-{{ ai_gen_id }}"
+                aria-describedby="contact-name-error"
               {% endif %}
             >
-            {%- if form.errors contains 'name' -%}
-              <div id="contact-name-error-{{ ai_gen_id }}" class="fract-contact-form__error-{{ ai_gen_id }}">
-                {{ form.errors.messages.name }}
-              </div>
-            {%- endif -%}
+            {% if form.errors contains 'name' %}
+              <div id="contact-name-error" class="fract-contact-form__error">{{ form.errors.messages.name }}</div>
+            {% endif %}
           </div>
 
-          <div class="fract-contact-form__field-{{ ai_gen_id }}">
-            <label for="contact-email-{{ ai_gen_id }}" class="fract-contact-form__label-{{ ai_gen_id }}">
-              Email *
-            </label>
+          <div class="fract-contact-form__field">
+            <label for="contact-email" class="fract-contact-form__label">Email *</label>
             <input
               type="email"
-              id="contact-email-{{ ai_gen_id }}"
+              id="contact-email"
               name="contact[email]"
-              class="fract-contact-form__input-{{ ai_gen_id }}"
+              class="fract-contact-form__input"
               value="{{ form.email }}"
               autocorrect="off"
               autocapitalize="off"
@@ -147,74 +130,64 @@
               required
               {% if form.errors contains 'email' %}
                 aria-invalid="true"
-                aria-describedby="contact-email-error-{{ ai_gen_id }}"
+                aria-describedby="contact-email-error"
               {% endif %}
             >
-            {%- if form.errors contains 'email' -%}
-              <div id="contact-email-error-{{ ai_gen_id }}" class="fract-contact-form__error-{{ ai_gen_id }}">
-                {{ form.errors.messages.email }}
-              </div>
-            {%- endif -%}
+            {% if form.errors contains 'email' %}
+              <div id="contact-email-error" class="fract-contact-form__error">{{ form.errors.messages.email }}</div>
+            {% endif %}
           </div>
         </div>
 
-        <div class="fract-contact-form__row-{{ ai_gen_id }}">
-          <div class="fract-contact-form__field-{{ ai_gen_id }}">
-            <label for="contact-phone-{{ ai_gen_id }}" class="fract-contact-form__label-{{ ai_gen_id }}">
-              Phone Number
-            </label>
+        <div class="fract-contact-form__row">
+          <div class="fract-contact-form__field">
+            <label for="contact-phone" class="fract-contact-form__label">Phone Number</label>
             <input
               type="tel"
-              id="contact-phone-{{ ai_gen_id }}"
+              id="contact-phone"
               name="contact[phone]"
-              class="fract-contact-form__input-{{ ai_gen_id }}"
+              class="fract-contact-form__input"
               value="{{ form.phone }}"
               autocomplete="tel"
             >
           </div>
 
-          <div class="fract-contact-form__field-{{ ai_gen_id }}">
-            <label for="contact-subject-{{ ai_gen_id }}" class="fract-contact-form__label-{{ ai_gen_id }}">
-              Subject *
-            </label>
+          <div class="fract-contact-form__field">
+            <label for="contact-subject" class="fract-contact-form__label">Subject *</label>
             <input
               type="text"
-              id="contact-subject-{{ ai_gen_id }}"
+              id="contact-subject"
               name="contact[subject]"
-              class="fract-contact-form__input-{{ ai_gen_id }}"
+              class="fract-contact-form__input"
               value="{{ form.subject }}"
               required
             >
           </div>
         </div>
 
-        <div class="fract-contact-form__field-{{ ai_gen_id }}">
-          <label for="contact-message-{{ ai_gen_id }}" class="fract-contact-form__label-{{ ai_gen_id }}">
-            Message *
-          </label>
+        <div class="fract-contact-form__field">
+          <label for="contact-message" class="fract-contact-form__label">Message *</label>
           <textarea
-            id="contact-message-{{ ai_gen_id }}"
+            id="contact-message"
             name="contact[body]"
-            class="fract-contact-form__textarea-{{ ai_gen_id }}"
+            class="fract-contact-form__textarea"
             required
             {% if form.errors contains 'body' %}
               aria-invalid="true"
-              aria-describedby="contact-message-error-{{ ai_gen_id }}"
+              aria-describedby="contact-message-error"
             {% endif %}
           >{{ form.body }}</textarea>
-          {%- if form.errors contains 'body' -%}
-            <div id="contact-message-error-{{ ai_gen_id }}" class="fract-contact-form__error-{{ ai_gen_id }}">
-              {{ form.errors.messages.body }}
-            </div>
-          {%- endif -%}
+          {% if form.errors contains 'body' %}
+            <div id="contact-message-error" class="fract-contact-form__error">{{ form.errors.messages.body }}</div>
+          {% endif %}
         </div>
 
-        <button type="submit" class="{{ block.settings.button_style }}">
-          {{ block.settings.button_text }}
+        <button type="submit" class="{{ section.settings.button_style }}">
+          {{ section.settings.button_text }}
         </button>
-      {%- endif -%}
+      {% endif %}
     </div>
-  {%- endform -%}
+  {% endform %}
 </div>
 
 {% schema %}
