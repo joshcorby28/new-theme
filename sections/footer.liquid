@@ -1,4 +1,14 @@
 <footer class="main-footer">
+  <form method="post" action="/contact#contact_form" accept-charset="UTF-8" class="signup-box" id="contact_form" novalidate style="background-color: {{ section.settings.bg_color }}; padding: 16px; border-radius: 6px; max-width: 350px;">
+  <label for="email" class="signup-text" style="display:block; margin-bottom: 8px; font-weight: 600; color: {{ section.settings.text_color }};">
+    {{ section.settings.signup_text }}
+  </label>
+  <input type="email" name="contact[email]" id="email" placeholder="{{ section.settings.placeholder_text }}" required
+    style="padding: 8px; width: 100%; max-width: 100%; box-sizing: border-box; margin-bottom: 8px; border: 1px solid #ccc; border-radius: 4px; background-color: {{ section.settings.input_bg_color }}; color: {{ section.settings.input_text_color }};" />
+  <button type="submit" class="{{ section.settings.button_class }}">
+    {{ section.settings.button_text }}
+  </button>
+</form>
   <div class="footer-inner">
   <div class="footer__copyright">
     &copy;
