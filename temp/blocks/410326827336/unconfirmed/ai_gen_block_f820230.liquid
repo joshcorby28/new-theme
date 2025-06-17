@@ -1,6 +1,356 @@
+{% doc %}
+  @prompt
+    Using fract- as the class, no ai create me a contact form with name, email, number, subject and message. , Remove button styling, text style etc. add option to choose primary or secondary class for button. Make color global var -- main color 
+    
+
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .fract-contact-form-{{ ai_gen_id }} {
+    --main-color: {{ block.settings.main_color }};
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 40px;
+    background-color: {{ block.settings.background_color }};
+    border-radius: {{ block.settings.border_radius }}px;
+  }
+
+  .fract-contact-form__heading-{{ ai_gen_id }} {
+    color: {{ block.settings.text_color }};
+    margin: 0 0 32px 0;
+    text-align: center;
+  }
+
+  .fract-contact-form__content-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .fract-contact-form__row-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .fract-contact-form__field-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .fract-contact-form__label-{{ ai_gen_id }} {
+    color: {{ block.settings.text_color }};
+    font-weight: 600;
+  }
+
+  .fract-contact-form__input-{{ ai_gen_id }},
+  .fract-contact-form__textarea-{{ ai_gen_id }} {
+    padding: 16px;
+    border: 2px solid {{ block.settings.input_border_color }};
+    border-radius: {{ block.settings.input_border_radius }}px;
+    background-color: {{ block.settings.input_background_color }};
+    color: {{ block.settings.input_text_color }};
+    transition: border-color 0.3s ease;
+  }
+
+  .fract-contact-form__input-{{ ai_gen_id }}:focus,
+  .fract-contact-form__textarea-{{ ai_gen_id }}:focus {
+    outline: none;
+    border-color: var(--main-color);
+  }
+
+  .fract-contact-form__textarea-{{ ai_gen_id }} {
+    min-height: 120px;
+    resize: vertical;
+    font-family: inherit;
+  }
+
+  .fract-contact-form__success-{{ ai_gen_id }} {
+    color: {{ block.settings.success_color }};
+    padding: 16px;
+    background-color: {{ block.settings.success_bg_color }};
+    border-radius: {{ block.settings.input_border_radius }}px;
+    text-align: center;
+  }
+
+  .fract-contact-form__error-{{ ai_gen_id }} {
+    color: {{ block.settings.error_color }};
+    font-size: 14px;
+    margin-top: 4px;
+  }
+
+  @media screen and (max-width: 749px) {
+    .fract-contact-form-{{ ai_gen_id }} {
+      padding: 24px;
+    }
+
+    .fract-contact-form__row-{{ ai_gen_id }} {
+      grid-template-columns: 1fr;
+    }
+  }
+{% endstyle %}
+
+<div
+  class="fract-contact-form-{{ ai_gen_id }}"
+  {{ block.shopify_attributes }}
+>
+  {%- if block.settings.heading != blank -%}
+    <h2 class="fract-contact-form__heading-{{ ai_gen_id }}">{{ block.settings.heading }}</h2>
+  {%- endif -%}
+
+  {%- form 'contact' -%}
+    <div class="fract-contact-form__content-{{ ai_gen_id }}">
+      {%- if form.posted_successfully? -%}
+        <div class="fract-contact-form__success-{{ ai_gen_id }}">
+          {{ block.settings.success_message }}
+        </div>
+      {%- else -%}
+        <div class="fract-contact-form__row-{{ ai_gen_id }}">
+          <div class="fract-contact-form__field-{{ ai_gen_id }}">
+            <label for="contact-name-{{ ai_gen_id }}" class="fract-contact-form__label-{{ ai_gen_id }}">
+              Name *
+            </label>
+            <input
+              type="text"
+              id="contact-name-{{ ai_gen_id }}"
+              name="contact[name]"
+              class="fract-contact-form__input-{{ ai_gen_id }}"
+              value="{{ form.name }}"
+              required
+              {% if form.errors contains 'name' %}
+                aria-invalid="true"
+                aria-describedby="contact-name-error-{{ ai_gen_id }}"
+              {% endif %}
+            >
+            {%- if form.errors contains 'name' -%}
+              <div id="contact-name-error-{{ ai_gen_id }}" class="fract-contact-form__error-{{ ai_gen_id }}">
+                {{ form.errors.messages.name }}
+              </div>
+            {%- endif -%}
+          </div>
+
+          <div class="fract-contact-form__field-{{ ai_gen_id }}">
+            <label for="contact-email-{{ ai_gen_id }}" class="fract-contact-form__label-{{ ai_gen_id }}">
+              Email *
+            </label>
+            <input
+              type="email"
+              id="contact-email-{{ ai_gen_id }}"
+              name="contact[email]"
+              class="fract-contact-form__input-{{ ai_gen_id }}"
+              value="{{ form.email }}"
+              autocorrect="off"
+              autocapitalize="off"
+              autocomplete="email"
+              required
+              {% if form.errors contains 'email' %}
+                aria-invalid="true"
+                aria-describedby="contact-email-error-{{ ai_gen_id }}"
+              {% endif %}
+            >
+            {%- if form.errors contains 'email' -%}
+              <div id="contact-email-error-{{ ai_gen_id }}" class="fract-contact-form__error-{{ ai_gen_id }}">
+                {{ form.errors.messages.email }}
+              </div>
+            {%- endif -%}
+          </div>
+        </div>
+
+        <div class="fract-contact-form__row-{{ ai_gen_id }}">
+          <div class="fract-contact-form__field-{{ ai_gen_id }}">
+            <label for="contact-phone-{{ ai_gen_id }}" class="fract-contact-form__label-{{ ai_gen_id }}">
+              Phone Number
+            </label>
+            <input
+              type="tel"
+              id="contact-phone-{{ ai_gen_id }}"
+              name="contact[phone]"
+              class="fract-contact-form__input-{{ ai_gen_id }}"
+              value="{{ form.phone }}"
+              autocomplete="tel"
+            >
+          </div>
+
+          <div class="fract-contact-form__field-{{ ai_gen_id }}">
+            <label for="contact-subject-{{ ai_gen_id }}" class="fract-contact-form__label-{{ ai_gen_id }}">
+              Subject *
+            </label>
+            <input
+              type="text"
+              id="contact-subject-{{ ai_gen_id }}"
+              name="contact[subject]"
+              class="fract-contact-form__input-{{ ai_gen_id }}"
+              value="{{ form.subject }}"
+              required
+            >
+          </div>
+        </div>
+
+        <div class="fract-contact-form__field-{{ ai_gen_id }}">
+          <label for="contact-message-{{ ai_gen_id }}" class="fract-contact-form__label-{{ ai_gen_id }}">
+            Message *
+          </label>
+          <textarea
+            id="contact-message-{{ ai_gen_id }}"
+            name="contact[body]"
+            class="fract-contact-form__textarea-{{ ai_gen_id }}"
+            required
+            {% if form.errors contains 'body' %}
+              aria-invalid="true"
+              aria-describedby="contact-message-error-{{ ai_gen_id }}"
+            {% endif %}
+          >{{ form.body }}</textarea>
+          {%- if form.errors contains 'body' -%}
+            <div id="contact-message-error-{{ ai_gen_id }}" class="fract-contact-form__error-{{ ai_gen_id }}">
+              {{ form.errors.messages.body }}
+            </div>
+          {%- endif -%}
+        </div>
+
+        <button type="submit" class="{{ block.settings.button_style }}">
+          {{ block.settings.button_text }}
+        </button>
+      {%- endif -%}
+    </div>
+  {%- endform -%}
+</div>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Contact Form",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Get in Touch"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Send Message"
+    },
+    {
+      "type": "text",
+      "id": "success_message",
+      "label": "Success message",
+      "default": "Thank you for your message! We'll get back to you soon."
+    },
+    {
+      "type": "header",
+      "content": "Button Style"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Button style",
+      "options": [
+        {
+          "value": "primary",
+          "label": "Primary"
+        },
+        {
+          "value": "secondary",
+          "label": "Secondary"
+        }
+      ],
+      "default": "primary"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "main_color",
+      "label": "Main color",
+      "default": "#000f9f"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "input_background_color",
+      "label": "Input background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "input_text_color",
+      "label": "Input text color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "input_border_color",
+      "label": "Input border color",
+      "default": "#e0e0e0"
+    },
+    {
+      "type": "color",
+      "id": "success_color",
+      "label": "Success text color",
+      "default": "#008060"
+    },
+    {
+      "type": "color",
+      "id": "success_bg_color",
+      "label": "Success background color",
+      "default": "#f0f9f6"
+    },
+    {
+      "type": "color",
+      "id": "error_color",
+      "label": "Error color",
+      "default": "#d82c0d"
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Form border radius",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "input_border_radius",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Input border radius",
+      "default": 8
+    }
+  ],
+  "presets": [
+    {
+      "name": "Contact Form"
+    }
+  ]
+}
 {% endschema %}
