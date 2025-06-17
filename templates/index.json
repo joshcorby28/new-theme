@@ -64,7 +64,8 @@
         "collection_block_NKemYF": {
           "type": "collection_block",
           "settings": {
-            "collection": ""
+            "collection": "test",
+            "background_image": "shopify://shop_images/pexels-brett-sayles-3759249-min_1.jpg"
           }
         },
         "collection_block_GTHJG7": {
