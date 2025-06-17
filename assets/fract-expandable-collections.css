@@ -1,0 +1,98 @@
+.fract-expandable-collections .expand-inner {
+  display: flex;
+  gap: 5px;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+.fract-expandable-collections .expand-inner .collection-block {
+  width: 5%;
+  position: relative;
+  transition: width 0.3s ease;
+  border-radius: 8px;
+  color: white;
+  height: 680px;
+}
+.fract-expandable-collections .expand-inner .collection-block .content-block {
+  height: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+  display: flex;
+  padding-top: 40px;
+  align-items: center;
+}
+.fract-expandable-collections .expand-inner .collection-block .content-block .bottom-content {
+  flex-direction: column;
+  transform: rotate(-90deg);
+  transform-origin: center center;
+  width: 100%;
+  margin-bottom: 40px;
+}
+.fract-expandable-collections .expand-inner .collection-block .content-block .bottom-content .col-title {
+  width: max-content;
+  display: block;
+  color: #fff;
+}
+.fract-expandable-collections .expand-inner .collection-block .sub-collections-list {
+  display: none;
+}
+.fract-expandable-collections .expand-inner .collection-block.card-expand {
+  width: 80%;
+}
+.fract-expandable-collections  .expand-inner .collection-block.card-expand .content-block {
+  padding: 40px;
+  align-items: flex-start;
+}
+.fract-expandable-collections .expand-inner .collection-block.card-expand .content-block .bottom-content {
+  transform: rotate(0deg);
+  transform-origin: center center;
+  width: 100%;
+  flex: 1;
+  justify-content: flex-end;
+  display: flex;
+  margin-bottom: 0px;
+}
+.fract-expandable-collections .expand-inner .collection-block.card-expand .content-block .col-title {
+  margin-bottom: 8px;
+}
+
+@media only screen and (max-width: 850px) {
+  .fract-expandable-collections.expand-inner {
+    flex-direction: column;
+  }
+  .fract-expandable-collections .expand-inner .collection-block {
+    width: 100%;
+    height: 80px;
+  }
+  .fract-expandable-collections .expand-inner .collection-block .content-block {
+    flex-direction: row-reverse;
+    padding: 24px;
+  }
+  .fract-expandable-collections .expand-inner .collection-block .col-title {
+    transform: rotate(0deg) !important;
+  }
+  .fract-expandable-collections .expand-inner .collection-block.card-expand {
+    height: 440px;
+    width: 100%;
+  }
+  .fract-expandable-collections .expand-inner .collection-block.card-expand .content-block {
+    flex-direction: column;
+    padding: 24px;
+  }
+  .fract-expandable-collections .expand-inner .collection-block.card-expand .content-block .block-icon {
+    position: absolute;
+    right: 24px;
+  }
+  .fract-expandable-collections.expand-inner .collection-block.card-expand .content-block .col-title {
+    position: absolute;
+    top: 10px;
+    margin-top: 0px;
+  }
+  .fract-expandable-collections .expand-inner .collection-block:not(.card-expand) .bottom-content {
+    display: block;
+    position: absolute;
+    transform: rotate(0deg) !important;
+    left: 24px;
+    top: 10px;
+  }
+}
+
