@@ -142,6 +142,12 @@
           "label": "Uppercase Span Text",
           "default": false
         },
+          {
+      "type": "color",
+      "id": "text_color",
+      "label": "Main text color",
+      "default": "#121212"
+    },
 
       {
         "type": "font_picker",
@@ -163,6 +169,35 @@
       "step": 10,
       "unit": "px",
       "default": 1600
+    }
+  ]
+},
+{
+  "name": "Buttons",
+  "settings": [
+    {
+      "type": "color",
+      "id": "primary_button-text",
+      "label": "Primary Button Text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "primary_button-bg",
+      "label": "Primary Button Background",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "second_button-border",
+      "label": "Secondary Button Border",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "second_button-text",
+      "label": "Secondary Button Text",
+      "default": "#121212"
     }
   ]
 },
