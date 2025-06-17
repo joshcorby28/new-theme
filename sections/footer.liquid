@@ -1,18 +1,63 @@
 <footer class="main-footer">
-  <div class="newsletter">
-  <form method="post" action="/contact#contact_form" accept-charset="UTF-8" class="signup-box" id="contact_form" novalidate style="background-color: {{ section.settings.bg_color }}; padding: 16px; border-radius: 6px; max-width: 350px; ">
-  <label for="email" class="signup-text" style="color:{{ settings.text_color }};">
-    <h4>{{ section.settings.signup_text }}</h4>
-  </label>
+<div class="newsletter">
+  <form method="post" action="/contact#contact_form" accept-charset="UTF-8" class="signup-box" id="contact_form" novalidate>
+    <label for="email" class="signup-text">
+      <h4>{{ section.settings.signup_text }}</h4>
+    </label>
     <div class="main-form">
-  <input type="email" name="contact[email]" id="email" placeholder="{{ section.settings.placeholder_text }}" required
-    style="padding: 8px; width: 100%; max-width: 100%; box-sizing: border-box; border: 1px solid #121212; border-radius: 2px; background-color: {{ section.settings.input_bg_color }}; color: {{ section.settings.input_text_color }};" />
-  <button type="submit" class="{{ section.settings.button_class }}">
-    {{ section.settings.button_text }}
-  </button>
+      <input
+        type="email"
+        name="contact[email]"
+        id="email"
+        placeholder="{{ section.settings.placeholder_text }}"
+        required
+      />
+      <button type="submit" class="{{ section.settings.button_class }}">
+        {{ section.settings.button_text }}
+      </button>
     </div>
-</form>
-  </div>
+  </form>
+</div>
+
+<style>
+  .newsletter {
+    --bg-color: {{ section.settings.bg_color }};
+    --text-color: {{ section.settings.text_color }};
+    --input-bg-color: {{ section.settings.input_bg_color }};
+  }
+
+  .newsletter .signup-box {
+    background-color: var(--bg-color);
+    padding: 16px;
+    border-radius: 6px;
+    max-width: 350px;
+  }
+
+  .newsletter .signup-text {
+    color: var(--text-color);
+    margin-bottom: 12px;
+  }
+
+  .newsletter .main-form {
+    display: flex;
+    gap: 8px;
+  }
+
+  .newsletter input[type="email"] {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid var(--text-color);
+    border-radius: 2px;
+    background-color: var(--input-bg-color);
+    color: var(--text-color);
+    box-sizing: border-box;
+  }
+
+  .newsletter input::placeholder {
+    color: #121212;
+  }
+</style>
+
   <div class="footer-inner">
   <div class="footer__copyright">
     &copy;
@@ -156,12 +201,6 @@
       "id": "input_bg_color",
       "label": "Input Background Color",
       "default": "#f8f8f8"
-    },
-    {
-      "type": "color",
-      "id": "input_text_color",
-      "label": "Input Text Color",
-      "default": "#000000"
     },
     {
       "type": "text",
