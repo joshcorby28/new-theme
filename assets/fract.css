@@ -99,6 +99,9 @@ input[type=number] {
 .desktop-show {
 display:block;
 }
+.mobile-show {
+  display:none;
+}
 @media screen and (max-width: 825px) {
 .mobile-show {
   display:block;
