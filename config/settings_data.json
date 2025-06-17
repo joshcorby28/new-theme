@@ -10,6 +10,7 @@
 {
   "current": {
     "grunge-effect": true,
+    "grain-opacity": 0.2,
     "spin-logo": false,
     "logo": "shopify://shop_images/New_Project_75.png",
     "logo-solid": "shopify://shop_images/FRACT-logo-dark.png",
@@ -23,6 +24,7 @@
     "uppercase_headings_links": true,
     "capitalize_spans": true,
     "type_primary_font": "work_sans_n4",
+    "primary_button-bg": "#121212",
     "background_color": "#f2f1ef",
     "foreground_color": "#363636",
     "max_page_width": "110rem",
