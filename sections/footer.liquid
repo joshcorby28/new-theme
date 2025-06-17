@@ -12,6 +12,27 @@
     {% endfor %}
   </div>
 
+      {% if section.settings.show_social %}
+    <div class="footer__social">
+      {% if section.settings.instagram_url != blank %}
+        <a href="{{ section.settings.instagram_url }}" target="_blank" rel="noopener">Instagram</a>
+      {% endif %}
+      {% if section.settings.facebook_url != blank %}
+        <a href="{{ section.settings.facebook_url }}" target="_blank" rel="noopener">Facebook</a>
+      {% endif %}
+      {% if section.settings.youtube_url != blank %}
+        <a href="{{ section.settings.youtube_url }}" target="_blank" rel="noopener">YouTube</a>
+      {% endif %}
+      {% if section.settings.tiktok_url != blank %}
+        <a href="{{ section.settings.tiktok_url }}" target="_blank" rel="noopener">TikTok</a>
+      {% endif %}
+      {% if section.settings.pinterest_url != blank %}
+        <a href="{{ section.settings.pinterest_url }}" target="_blank" rel="noopener">Pinterest</a>
+      {% endif %}
+    </div>
+  {% endif %}
+
+
   </div>
 </footer>
 
@@ -43,6 +64,13 @@
     font-size:12px;
     color:#121212;
   }
+    .footer__social {
+    display: flex;
+    gap: 1rem;
+    font-size: 12px;
+    color: #121212;
+  }
+
 {% endstylesheet %}
 
 {% schema %}
@@ -59,7 +87,39 @@
       "id": "show_payment_icons",
       "label": "t:labels.show_payment_icons",
       "default": true
+    },
+    {
+  "type": "checkbox",
+  "id": "show_social",
+  "label": "Show social links",
+  "default": false
+    },
+    {
+      "type": "url",
+      "id": "instagram_url",
+      "label": "Instagram URL"
+    },
+    {
+      "type": "url",
+      "id": "facebook_url",
+      "label": "Facebook URL"
+    },
+    {
+      "type": "url",
+      "id": "youtube_url",
+      "label": "YouTube URL"
+    },
+    {
+      "type": "url",
+      "id": "tiktok_url",
+      "label": "TikTok URL"
+    },
+    {
+      "type": "url",
+      "id": "pinterest_url",
+      "label": "Pinterest URL"
     }
+
   ]
 }
 {% endschema %}
