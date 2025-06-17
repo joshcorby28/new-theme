@@ -19,7 +19,7 @@
     <h2 class="title inline-richtext h2">
       {{ section.settings['main-title'] }}
     </h2>
-    <div class="collection__view-all desktop">
+    <div class="collection__view-all desktop-show">
       <a
         href="{{ section.settings.collection.url }}"
         class="link underlined-link"
@@ -47,7 +47,7 @@
         </div>
       {% endif %}
     {% endfor %}
-    <div style="margin-top:32px;" class="collection__view-all mobile">
+    <div style="margin-top:32px;" class="collection__view-all mobile-show">
       <a
         href="{{ section.settings.collection.url }}"
         class="link underlined-link"
