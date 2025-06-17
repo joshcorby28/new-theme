@@ -71,19 +71,22 @@
         "collection_block_GTHJG7": {
           "type": "collection_block",
           "settings": {
-            "collection": ""
+            "collection": "frontpage",
+            "background_image": "shopify://shop_images/pexels-lucasmonteiro-1868563_1.jpg"
           }
         },
         "collection_block_8BRDkj": {
           "type": "collection_block",
           "settings": {
-            "collection": ""
+            "collection": "test",
+            "background_image": "shopify://shop_images/pexels-brett-sayles-3759249-min_1.jpg"
           }
         },
         "collection_block_x7miei": {
           "type": "collection_block",
           "settings": {
-            "collection": ""
+            "collection": "frontpage",
+            "background_image": "shopify://shop_images/pexels-lucasmonteiro-1868563_1.jpg"
           }
         }
       },
