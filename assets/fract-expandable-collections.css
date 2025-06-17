@@ -58,7 +58,7 @@
 }
 
 @media only screen and (max-width: 850px) {
-  .fract-expandable-collections.expand-inner {
+  .fract-expandable-collections .expand-inner {
     flex-direction: column;
   }
   .fract-expandable-collections .expand-inner .collection-block {
