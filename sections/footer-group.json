@@ -15,7 +15,13 @@
       "type": "footer",
       "settings": {
         "menu": "footer",
-        "show_payment_icons": true
+        "show_payment_icons": true,
+        "show_social": true,
+        "instagram_url": "#",
+        "facebook_url": "#",
+        "youtube_url": "#",
+        "tiktok_url": "#",
+        "pinterest_url": ""
       }
     }
   },
