@@ -57,7 +57,8 @@
         "collection_block_AmD6jJ": {
           "type": "collection_block",
           "settings": {
-            "collection": ""
+            "collection": "test",
+            "background_image": "shopify://shop_images/pexels-lucasmonteiro-1868563_1.jpg"
           }
         },
         "collection_block_NKemYF": {
