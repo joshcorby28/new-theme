@@ -1,11 +1,11 @@
 [
   {
     "name": "theme_info",
-    "theme_name": "Skeleton",
-    "theme_version": "0.1.0",
-    "theme_author": "Shopify",
-    "theme_documentation_url": "https://help.shopify.com/manual/online-store/themes",
-    "theme_support_url": "https://support.shopify.com/"
+    "theme_name": "Fract",
+    "theme_version": "1.0",
+    "theme_author": "Lab13",
+    "theme_documentation_url": "https://lab13.co.uk/fract",
+    "theme_support_url": "https://lab13.co.uk/fract"
   },
 {
   "name": "Grain Effect",
