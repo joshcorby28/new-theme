@@ -12,9 +12,41 @@
     "main": {
       "type": "page",
       "settings": {}
+    },
+    "custom_section_tRhUhY": {
+      "type": "custom-section",
+      "blocks": {
+        "ai_gen_block_f820230_PQwPJq": {
+          "type": "ai_gen_block_f820230",
+          "settings": {
+            "heading": "Get in Touch",
+            "button_text": "Send Message",
+            "success_message": "Thank you for your message! We'll get back to you soon.",
+            "button_style": "primary",
+            "main_color": "#000f9f",
+            "background_color": "#ffffff",
+            "text_color": "#333333",
+            "input_background_color": "#ffffff",
+            "input_text_color": "#333333",
+            "input_border_color": "#e0e0e0",
+            "success_color": "#008060",
+            "success_bg_color": "#f0f9f6",
+            "error_color": "#d82c0d",
+            "border_radius": 12,
+            "input_border_radius": 8
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_f820230_PQwPJq"
+      ],
+      "name": "t:general.custom_section",
+      "settings": {}
     }
   },
   "order": [
-    "main"
+    "main",
+    "custom_section_tRhUhY"
   ]
 }
