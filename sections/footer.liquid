@@ -39,7 +39,7 @@
 {% stylesheet %}
   footer {
     margin-top: 2rem;
-    border-top:1px solid #121212;
+    border-top:1px solid  var(--text-color);
   }
   .footer-inner {
     display: flex;
@@ -51,24 +51,24 @@
   }
   footer a {
     text-decoration: none;
-    color: var(--color-foreground);
+    color: var(--text-color);
   }
   .footer__copyright {
     font-size:12px;
-    color:#121212;
+    color: var(--text-color);
   }
   footer .footer__links,
   footer .footer__payment {
     display: flex;
     gap: 1rem;
     font-size:12px;
-    color:#121212;
+    color: var(--text-color);
   }
     .footer__social {
     display: flex;
     gap: 1rem;
     font-size: 12px;
-    color: #121212;
+    color: var(--text-color);
   }
 
 {% endstylesheet %}
