@@ -1,7 +1,7 @@
 .main-cart-title {
   max-width:90%;
   margin:30px auto 30px auto;
-  color:#121212;
+  color:{{ settings.text_color }};
 }
 
 .main-cart-title .cart-title {
@@ -48,7 +48,7 @@
     align-items: center;
     font-size: 12px;
     text-transform: uppercase;
-    color: #121212;
+    color: {{ settings.text_color }};
 }
 
 .fract-cart .main-cart-items .cart-item td .image{
@@ -68,7 +68,7 @@
 }
 
 .cart-image-and-title .title-and-remove a  {
-    color:#121212;
+    color:{{ settings.text_color }};
   text-decoration: none;
   opacity:0.5;
   font-size:9px;
@@ -119,8 +119,8 @@
     width: 140px;
     display: inline-flex;
     align-items: center;
-    color: #121212;
-    border: 1px solid #a5a5a5;
+    color: {{ settings.text_color }};
+    border: 1px solid {{ settings.text_color }};
     height: 50px;
     border-radius: 4px;
     overflow: hidden;
@@ -130,8 +130,8 @@
     flex: 0 0 30px;
     height: 50px;
     background:white;
-    color: #121212;
-    border-right:1px solid #a5a5a5 !important;
+    color: {{ settings.text_color }};
+    border-right:1px solid {{ settings.text_color }} !important;
     width: 15%;
     font-size: 18px;
     cursor: pointer;
@@ -144,8 +144,8 @@
     flex: 0 0 30px;
     height: 50px;
     background:white;
-    color: #121212;
-    border-left:1px solid #a5a5a5 !important;
+    color: {{ settings.text_color }};
+    border-left:1px solid {{ settings.text_color }} !important;
     width: 15%;
     font-size: 18px;
     border:0;
