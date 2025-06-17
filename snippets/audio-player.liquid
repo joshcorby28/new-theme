@@ -14,31 +14,9 @@
     {% if settings.player_image %}
       <img id="record" src="{{ settings.player_image | img_url: '100x' }}" alt="Record">
     {% endif %}
-{% if settings.player_audio contains 'spotify.com' %}
-  <iframe
-    id="spotifyPlayer"
-    style="border-radius:12px"
-    src="{{ settings.player_audio }}"
-    width="100%" height="80"
-    frameborder="0"
-    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-    loading="lazy">
-  </iframe>
-
-{% elsif settings.player_audio contains 'youtube.com' or settings.player_audio contains 'youtu.be' %}
-  <iframe
-    id="youtubePlayer"
-    width="100%" height="200"
-    src="{{ settings.player_audio }}"
-    frameborder="0"
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-    allowfullscreen>
-  </iframe>
-
-{% elsif settings.player_audio %}
-  <audio id="audio" src="{{ settings.player_audio }}"></audio>
-{% endif %}
-
+    {% if settings.player_audio %}
+      <audio id="audio" src="{{ settings.player_audio }}"></audio>
+    {% endif %}
   </div>
 </div>
 
@@ -54,23 +32,20 @@
   let isPlaying = false;
 
   playPauseBtn.addEventListener('click', () => {
-    // If there's an <audio> element, control it
-    if (audio) {
-      if (isPlaying) {
-        audio.pause();
-      } else {
-        audio.play();
-      }
+    if (isPlaying) {
+      audio.pause();
+      playIcon.style.display = 'block';
+      pauseIcon.style.display = 'none';
+      player.classList.remove('playing');
+    } else {
+      audio.play();
+      playIcon.style.display = 'none';
+      pauseIcon.style.display = 'block';
+      player.classList.add('playing');
     }
-
-    // Always toggle styling (for iframe embeds like YouTube/Spotify)
     isPlaying = !isPlaying;
-    playIcon.style.display = isPlaying ? 'none' : 'block';
-    pauseIcon.style.display = isPlaying ? 'block' : 'none';
-    player.classList.toggle('playing', isPlaying);
   });
 </script>
-
 
 <style>
   .player {
