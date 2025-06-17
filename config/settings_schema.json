@@ -142,13 +142,6 @@
           "label": "Uppercase Span Text",
           "default": false
         },
-          {
-      "type": "color",
-      "id": "text_color",
-      "label": "Main text color",
-      "default": "#121212"
-    },
-
       {
         "type": "font_picker",
         "id": "type_primary_font",
@@ -215,6 +208,13 @@
         "id": "foreground_color",
         "default": "#333333",
         "label": "t:labels.foreground"
+      },
+      {
+      "type": "color",
+      "id": "text_color",
+      "label": "Accent color",
+      "default": "#121212",
+      "info": "Used for Text, Selectors and more"
       },
       {
         "type": "range",
