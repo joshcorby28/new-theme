@@ -159,7 +159,7 @@
 .fract-main-product .fract-info-and-form .variant-buttons button.variant-button.active {
 	height: 50px;
 	width: fit-content;
-	background: {{ settings.text_color }} !important;
+	background-color: {{ settings.text_color }} !important;
 	min-width: 50px;
 	padding: 5px 10px;
 	color: white !important;
