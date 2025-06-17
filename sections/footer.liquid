@@ -1,5 +1,5 @@
 <footer class="main-footer">
-<div class="newsletter">
+<div class="newsletter" style="--align: {{ section.settings.alignment }};">
   <form method="post" action="/contact#contact_form" accept-charset="UTF-8" class="signup-box" id="contact_form" novalidate>
     <label for="email" class="signup-text">
       <h4>{{ section.settings.signup_text }}</h4>
@@ -25,6 +25,9 @@
     --text-color: {{ section.settings.text_color }};
     max-width:95%;
     margin:30px auto 0 auto;
+    display: flex;
+    justify-content: var(--align);
+    padding: 16px;
     --input-bg-color: {{ section.settings.input_bg_color }};
   }
 
