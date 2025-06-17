@@ -9,16 +9,6 @@
  */
 {
   "sections": {
-    "main": {
-      "type": "page",
-      "disabled": true,
-      "settings": {}
-    },
-    "custom_section_tRhUhY": {
-      "type": "custom-section",
-      "name": "t:general.custom_section",
-      "settings": {}
-    },
     "contact_form_CqFjWW": {
       "type": "contact-form",
       "name": "Contact Form",
@@ -42,8 +32,6 @@
     }
   },
   "order": [
-    "main",
-    "custom_section_tRhUhY",
     "contact_form_CqFjWW"
   ]
 }
