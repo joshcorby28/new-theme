@@ -204,12 +204,6 @@
         "label": "t:labels.background"
       },
       {
-        "type": "color",
-        "id": "foreground_color",
-        "default": "#333333",
-        "label": "t:labels.foreground"
-      },
-      {
       "type": "color",
       "id": "text_color",
       "label": "Accent color",
