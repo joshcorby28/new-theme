@@ -1,22 +1,24 @@
 <header class="main-header">
   <div class="header-inner page-width">
+    
+    <!-- Logo -->
     <h2 class="header__title">
       {% if settings.logo and template == 'index' %}
         <a href="{{ routes.root_url }}" class="header__logo-link">
-          <img src="{{ settings.logo | img_url: '300x' }}" alt="{{ shop.name }}" 
-            class="header__logo {% if settings.spin-logo %} spin {% endif %}" 
+          <img src="{{ settings.logo | img_url: '300x' }}" alt="{{ shop.name }}"
+            class="header__logo {% if settings.spin-logo %} spin {% endif %}"
             style="width: {{ settings.logo_width }}px;" />
         </a>
       {% elsif settings.logo and template == 'collection' %}
         <a href="{{ routes.root_url }}" class="header__logo-link">
-          <img src="{{ settings.logo | img_url: '300x' }}" alt="{{ shop.name }}" 
-            class="header__logo {% if settings.spin-logo %} spin {% endif %}" 
+          <img src="{{ settings.logo | img_url: '300x' }}" alt="{{ shop.name }}"
+            class="header__logo {% if settings.spin-logo %} spin {% endif %}"
             style="width: {{ settings.logo_width }}px;" />
         </a>
       {% elsif settings.logo-solid %}
         <a href="{{ routes.root_url }}" class="header__logo-link">
-          <img src="{{ settings.logo-solid | img_url: '300x' }}" alt="{{ shop.name }}" 
-            class="header__logo {% if settings.spin-logo %} spin {% endif %}" 
+          <img src="{{ settings.logo-solid | img_url: '300x' }}" alt="{{ shop.name }}"
+            class="header__logo {% if settings.spin-logo %} spin {% endif %}"
             style="width: {{ settings.logo_width }}px;" />
         </a>
       {% else %}
@@ -24,7 +26,19 @@
       {% endif %}
     </h2>
 
-    <!-- Mobile drawer menu -->
+    <!-- 🟢 Menu Toggle (visible on mobile) -->
+    <button id="mobile-menu-toggle" class="mobile-menu-toggle" aria-expanded="false" aria-controls="mobile-menu-drawer">
+      Menu
+    </button>
+
+    <!-- 🖥 Desktop Menu -->
+    <nav class="header__menu desktop-menu">
+      {% for link in section.settings.menu.links %}
+        {{ link.title | link_to: link.url }}
+      {% endfor %}
+    </nav>
+
+    <!-- 📱 Mobile Drawer Menu -->
     <nav id="mobile-menu-drawer" class="mobile-menu-drawer" aria-hidden="true">
       <button id="mobile-menu-close" class="mobile-menu-close" aria-label="Close menu">×</button>
       {% for link in section.settings.menu.links %}
@@ -32,26 +46,11 @@
       {% endfor %}
     </nav>
 
-
-    <!-- Desktop menu (hidden on mobile) -->
-    <nav class="header__menu desktop-menu">
-      {% for link in section.settings.menu.links %}
-        {{ link.title | link_to: link.url }}
-      {% endfor %}
-    </nav>
-
-    <!-- Mobile drawer menu -->
-    <nav id="mobile-menu-drawer" class="mobile-menu-drawer" aria-hidden="true">
-      {% for link in section.settings.menu.links %}
-        <a href="{{ link.url }}" class="mobile-menu-link">{{ link.title }}</a>
-      {% endfor %}
-    </nav>
-
+    <!-- Icons (Account, Cart, etc.) -->
     <div class="header__icons">
       {% if shop.customer_accounts_enabled %}
         {{ 'icon-account.svg' | inline_asset_content | link_to: routes.account_url }}
       {% endif %}
-
       <a href="{{ routes.cart_url }}">
         {% if cart.item_count > 0 %}
           <sup>{{ cart.item_count }}</sup>
@@ -59,6 +58,7 @@
         {{ 'icon-cart.svg' | inline_asset_content }}
       </a>
     </div>
+
   </div>
 </header>
 
