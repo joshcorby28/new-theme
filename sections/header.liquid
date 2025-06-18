@@ -48,7 +48,7 @@
 
     <!-- Icons (Account, Cart, etc.) -->
     <div class="header__icons">
-      {% if section.settings.search_true %}
+      {% if section.settings.search-true %}
         {{ 'icon-search.svg' | inline_asset_content | link_to: routes.search_url }}
       {% endif %}
       {% if shop.customer_accounts_enabled %}
