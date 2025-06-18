@@ -9,7 +9,7 @@
         </div>
 
       {% when 'text_block' %}
-        <div class="fract-image-text-block text-block">
+        <div style="background: {{ block.settings.bg-color-text}};" class="fract-image-text-block text-block">
           {% if block.settings.heading %}
             <h3>{{ block.settings.heading }}</h3>
           {% endif %}
@@ -46,6 +46,11 @@
       "type": "text_block",
       "name": "Text Block",
       "settings": [
+        {
+          "type": "color",
+          "id": "bg-color-text",
+          "label": "Background"
+        },
         {
           "type": "text",
           "id": "heading",
@@ -118,7 +123,6 @@
 
 .text-block {
   align-self: stretch;
-  background: {{ section.settings.bg-color-text}};
   border-radius:8px;
   padding:3rem;
   justify-content:center;
