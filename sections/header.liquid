@@ -1,3 +1,20 @@
+<!-- 🔍 Search Modal -->
+<div id="search-modal" class="search-modal hidden" aria-hidden="true">
+  <div class="search-modal__inner">
+    <button id="close-search-modal" class="search-modal__close" aria-label="Close">×</button>
+    <form action="{{ routes.search_url }}" method="get" role="search">
+      <input
+        type="search"
+        name="q"
+        value="{{ search.terms | escape }}"
+        placeholder="{{ 'search.placeholder' | t }}"
+        style="border: 1px solid #121212; width: 100%; padding: 1rem; font-size: 1rem;"
+      >
+      <button class="fract-primary" type="submit">{{ 'search.submit' | t }}</button>
+    </form>
+  </div>
+</div>
+
 <header class="main-header">
   <div class="header-inner page-width">
     
@@ -48,9 +65,11 @@
 
     <!-- Icons (Account, Cart, etc.) -->
     <div class="header__icons">
+      <button id="open-search-modal" aria-label="Open Search">
       {% if section.settings.search-true %}
-        {{ 'icon-search.svg' | inline_asset_content | link_to: routes.search_url }}
+        {{ 'icon-search.svg' | inline_asset_content }}
       {% endif %}
+      </button>
       {% if shop.customer_accounts_enabled %}
         {{ 'icon-account.svg' | inline_asset_content | link_to: routes.account_url }}
       {% endif %}
