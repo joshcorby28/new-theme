@@ -103,7 +103,7 @@
   }
   .fract-expandable-collections.expand-inner .collection-block.card-expand .content-block .col-title {
     position: absolute;
-    top: 10px;
+    top: 30px;
     margin-top: 0px;
   }
   .fract-expandable-collections .expand-inner .collection-block:not(.card-expand) .bottom-content {
