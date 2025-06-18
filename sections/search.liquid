@@ -5,6 +5,8 @@
   https://shopify.dev/docs/storefronts/themes/architecture/templates/search
 {% endcomment %}
 
+<div class="search fract-basic-page">
+
 <h1>{{ 'search.title' | t }}</h1>
 
 <form action="{{ routes.search_url }}" method="get" role="search">
@@ -48,7 +50,8 @@
       {% endpaginate %}
     </div>
   {% endif %}
-{% endif %}
+
+</div>div{% endif %}
 
 {% stylesheet %}
   .search-results {
