@@ -1,59 +1,63 @@
 <header class="main-header">
   <div class="header-inner page-width">
-  <h2 class="header__title">
-    {% if settings.logo and template == 'index' %}
-      <a href="{{ routes.root_url }}" class="header__logo-link">
-        <img 
-          src="{{ settings.logo | img_url: '300x' }}" 
-          alt="{{ shop.name }}" 
-          class="header__logo {% if settings.spin-logo %} spin {% endif %}" 
-          style="width: {{ settings.logo_width }}px;" 
-        />
-      </a>
-    {% elsif settings.logo and template == 'collection' %}
-      <a href="{{ routes.root_url }}" class="header__logo-link">
-        <img 
-          src="{{ settings.logo | img_url: '300x' }}" 
-          alt="{{ shop.name }}" 
-          class="header__logo {% if settings.spin-logo %} spin {% endif %}" 
-          style="width: {{ settings.logo_width }}px;" 
-        />
-      </a>
-    {% elsif settings.logo-solid %}
-      <a href="{{ routes.root_url }}" class="header__logo-link">
-        <img 
-          src="{{ settings.logo-solid | img_url: '300x' }}" 
-          alt="{{ shop.name }}" 
-          class="header__logo {% if settings.spin-logo %} spin {% endif %}" 
-          style="width: {{ settings.logo_width }}px;" 
-        />
-      </a>
-    {% else %}
-      {{ shop.name | link_to: routes.root_url }}
-    {% endif %}
-  </h2>
+    <h2 class="header__title">
+      {% if settings.logo and template == 'index' %}
+        <a href="{{ routes.root_url }}" class="header__logo-link">
+          <img src="{{ settings.logo | img_url: '300x' }}" alt="{{ shop.name }}" 
+            class="header__logo {% if settings.spin-logo %} spin {% endif %}" 
+            style="width: {{ settings.logo_width }}px;" />
+        </a>
+      {% elsif settings.logo and template == 'collection' %}
+        <a href="{{ routes.root_url }}" class="header__logo-link">
+          <img src="{{ settings.logo | img_url: '300x' }}" alt="{{ shop.name }}" 
+            class="header__logo {% if settings.spin-logo %} spin {% endif %}" 
+            style="width: {{ settings.logo_width }}px;" />
+        </a>
+      {% elsif settings.logo-solid %}
+        <a href="{{ routes.root_url }}" class="header__logo-link">
+          <img src="{{ settings.logo-solid | img_url: '300x' }}" alt="{{ shop.name }}" 
+            class="header__logo {% if settings.spin-logo %} spin {% endif %}" 
+            style="width: {{ settings.logo_width }}px;" />
+        </a>
+      {% else %}
+        {{ shop.name | link_to: routes.root_url }}
+      {% endif %}
+    </h2>
 
-  <div class="header__menu">
-    {% for link in section.settings.menu.links %}
-      {{ link.title | link_to: link.url }}
-    {% endfor %}
-  </div>
+    <!-- Mobile menu button -->
+    <button id="mobile-menu-toggle" class="mobile-menu-toggle" aria-expanded="false" aria-controls="mobile-menu-drawer">
+      Menu
+    </button>
 
-  <div class="header__icons">
-    {% if shop.customer_accounts_enabled %}
-      {{ 'icon-account.svg' | inline_asset_content | link_to: routes.account_url }}
-    {% endif %}
+    <!-- Desktop menu (hidden on mobile) -->
+    <nav class="header__menu desktop-menu">
+      {% for link in section.settings.menu.links %}
+        {{ link.title | link_to: link.url }}
+      {% endfor %}
+    </nav>
 
-    <a href="{{ routes.cart_url }}">
-      {% if cart.item_count > 0 %}
-        <sup>{{ cart.item_count }}</sup>
+    <!-- Mobile drawer menu -->
+    <nav id="mobile-menu-drawer" class="mobile-menu-drawer" aria-hidden="true">
+      {% for link in section.settings.menu.links %}
+        <a href="{{ link.url }}" class="mobile-menu-link">{{ link.title }}</a>
+      {% endfor %}
+    </nav>
+
+    <div class="header__icons">
+      {% if shop.customer_accounts_enabled %}
+        {{ 'icon-account.svg' | inline_asset_content | link_to: routes.account_url }}
       {% endif %}
 
-      {{ 'icon-cart.svg' | inline_asset_content }}
-    </a>
-  </div>
+      <a href="{{ routes.cart_url }}">
+        {% if cart.item_count > 0 %}
+          <sup>{{ cart.item_count }}</sup>
+        {% endif %}
+        {{ 'icon-cart.svg' | inline_asset_content }}
+      </a>
+    </div>
   </div>
 </header>
+
 
 <style>
   header {
@@ -118,7 +122,68 @@
   animation: side-spin 5s linear infinite;
   transform-style: preserve-3d;
 }
+
+  /* Hide mobile drawer by default */
+.mobile-menu-drawer {
+  position: fixed;
+  top: 0; left: 0; bottom: 0;
+  width: 250px;
+  background: white;
+  box-shadow: 2px 0 8px rgba(0,0,0,0.2);
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+  padding: 2rem 1.5rem;
+  overflow-y: auto;
+  z-index: 1000;
+}
+
+/* Show drawer when active */
+.mobile-menu-drawer.open {
+  transform: translateX(0);
+}
+
+/* Style links stacked */
+.mobile-menu-link {
+  display: block;
+  padding: 1rem 0;
+  border-bottom: 1px solid #eee;
+  color: #000;
+  text-decoration: none;
+}
+
+/* Mobile toggle button */
+.mobile-menu-toggle {
+  background: none;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  display: none; /* hide on desktop */
+}
+
+/* Show toggle only on mobile */
+@media (max-width: 767px) {
+  .desktop-menu {
+    display: none;
+  }
+  .mobile-menu-toggle {
+    display: inline-block;
+  }
+}
 </style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+  const toggle = document.getElementById('mobile-menu-toggle');
+  const drawer = document.getElementById('mobile-menu-drawer');
+
+  toggle.addEventListener('click', function() {
+    const expanded = toggle.getAttribute('aria-expanded') === 'true' || false;
+    toggle.setAttribute('aria-expanded', !expanded);
+    drawer.classList.toggle('open');
+    drawer.setAttribute('aria-hidden', expanded);
+  });
+});
+</script>
 {% schema %}
 {
   "name": "t:general.header",
