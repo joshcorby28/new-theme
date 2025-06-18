@@ -77,7 +77,7 @@
     height:100%;
   }
   {% if template == 'index' or template == 'collection' %}
-  header a {
+  header a, header .mobile-menu-toggle {
     position: relative;
     transition: transform 0.4s ease-in-out;
     text-decoration: none;
@@ -85,7 +85,7 @@
     color: {{ section.settings.color-text }};
   }
 {% else %}
-    header a {
+    header a, header .mobile-menu-toggle {
     position: relative;
     transition: transform 0.4s ease-in-out;
     font-size:13px;
