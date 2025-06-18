@@ -23,9 +23,13 @@
 
 {% if search.performed %}
   {% if search.results_count == 0 %}
-    <p>{{ 'search.no_results_html' | t: terms: search.terms }}</p>
+    <p style="margin-top: 30px;
+    text-transform: uppercase;
+    font-size: 12px;">{{ 'search.no_results_html' | t: terms: search.terms }}</p>
   {% else %}
-    <p>{{ 'search.results_for_html' | t: terms: search.terms, count: search.results_count }}</p>
+    <p style="margin-top: 30px;
+    text-transform: uppercase;
+    font-size: 12px;">{{ 'search.results_for_html' | t: terms: search.terms, count: search.results_count }}</p>
 
     <div class="search-results">
       {% paginate search.results by 20 %}
