@@ -110,3 +110,10 @@ display:block;
   display: none;
 }
 }
+
+/* Layout */
+
+.fract-basic-page {
+  margin:30px auto;
+  max-width:95%;
+}
