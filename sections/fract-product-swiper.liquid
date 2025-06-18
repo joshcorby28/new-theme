@@ -5,17 +5,18 @@
 
 <div class="swiper fract-product-swiper" id="product-slider-{{ section.id }}">
   <div class="swiper-wrapper">
-    {% if my_collection and my_collection.products_count > 0 %}
+   {% if my_collection and my_collection.products_count != blank and my_collection.products_count > 0 %}
       {% for product in my_collection.products %}
         <div class="swiper-slide">
           {% render 'product-card', product: product %}
         </div>
       {% endfor %}
     {% else %}
-      <p>No products found in this collection.</p>
+      <p style="width:95%; margin: 30px auto; text-align:center; text-transform:uppercase; letter-spacing:0.5px;">Please choose a collection</p>
     {% endif %}
   </div>
 </div>
+{% if section.settings.primary_button_text != blank %}
 <div class="swiper-button-main">
   {% if my_collection %}
     <a href="{{ my_collection.url }}" class="button-skew fract-primary">
@@ -23,6 +24,7 @@
     </a>
   {% endif %}
 </div>
+    {% endif %}
 
 <script>
   document.addEventListener('DOMContentLoaded', function () {
@@ -69,7 +71,8 @@
       "type": "text",
       "id": "primary_button_text",
       "label": "Button text",
-      "default": "Shop the Collection"
+      "default": "Shop the Collection",
+      "info": "To hide button leave empty"
     }
   ],
   "presets": [
