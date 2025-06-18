@@ -24,10 +24,14 @@
       {% endif %}
     </h2>
 
-    <!-- Mobile menu button -->
-    <button id="mobile-menu-toggle" class="mobile-menu-toggle" aria-expanded="false" aria-controls="mobile-menu-drawer">
-      Menu
-    </button>
+    <!-- Mobile drawer menu -->
+    <nav id="mobile-menu-drawer" class="mobile-menu-drawer" aria-hidden="true">
+      <button id="mobile-menu-close" class="mobile-menu-close" aria-label="Close menu">×</button>
+      {% for link in section.settings.menu.links %}
+        <a href="{{ link.url }}" class="mobile-menu-link">{{ link.title }}</a>
+      {% endfor %}
+    </nav>
+
 
     <!-- Desktop menu (hidden on mobile) -->
     <nav class="header__menu desktop-menu">
@@ -137,6 +141,19 @@
   z-index: 1000;
 }
 
+  .mobile-menu-close {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #000;
+  cursor: pointer;
+  display: block;
+  margin-left: auto;
+  margin-bottom: 1.5rem;
+}
+
+
 /* Show drawer when active */
 .mobile-menu-drawer.open {
   transform: translateX(0);
@@ -172,17 +189,27 @@
 </style>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function() {
   const toggle = document.getElementById('mobile-menu-toggle');
   const drawer = document.getElementById('mobile-menu-drawer');
+  const closeBtn = document.getElementById('mobile-menu-close');
 
-  toggle.addEventListener('click', function() {
-    const expanded = toggle.getAttribute('aria-expanded') === 'true' || false;
-    toggle.setAttribute('aria-expanded', !expanded);
-    drawer.classList.toggle('open');
-    drawer.setAttribute('aria-hidden', expanded);
-  });
+  function openDrawer() {
+    toggle.setAttribute('aria-expanded', 'true');
+    drawer.classList.add('open');
+    drawer.setAttribute('aria-hidden', 'false');
+  }
+
+  function closeDrawer() {
+    toggle.setAttribute('aria-expanded', 'false');
+    drawer.classList.remove('open');
+    drawer.setAttribute('aria-hidden', 'true');
+  }
+
+  toggle.addEventListener('click', openDrawer);
+  closeBtn.addEventListener('click', closeDrawer);
 });
+
 </script>
 {% schema %}
 {
