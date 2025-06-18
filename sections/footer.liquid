@@ -162,6 +162,10 @@
   "name": "t:general.footer",
   "settings": [
     {
+      "type": "header",
+      "content": "Navigation"
+    },
+    {
       "type": "link_list",
       "id": "menu",
       "label": "t:labels.menu"
@@ -172,11 +176,16 @@
       "label": "t:labels.show_payment_icons",
       "default": true
     },
+
     {
-  "type": "checkbox",
-  "id": "show_social",
-  "label": "Show social links",
-  "default": false
+      "type": "header",
+      "content": "Social Media"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_social",
+      "label": "Show social links",
+      "default": false
     },
     {
       "type": "url",
@@ -202,6 +211,11 @@
       "type": "url",
       "id": "pinterest_url",
       "label": "Pinterest URL"
+    },
+
+    {
+      "type": "header",
+      "content": "Newsletter Text & Styling"
     },
     {
       "type": "text",
@@ -233,6 +247,11 @@
       "label": "Input Placeholder Text",
       "default": "Enter your email"
     },
+
+    {
+      "type": "header",
+      "content": "Newsletter Settings"
+    },
     {
       "type": "select",
       "id": "button_class",
@@ -256,25 +275,26 @@
       "default": "Submit"
     },
     {
-  "type": "select",
-  "id": "alignment",
-  "label": "Form Alignment",
-  "default": "center",
-  "options": [
-    {
-      "value": "flex-start",
-      "label": "Left"
-    },
-    {
-      "value": "center",
-      "label": "Center"
-    },
-    {
-      "value": "flex-end",
-      "label": "Right"
+      "type": "select",
+      "id": "alignment",
+      "label": "Form Alignment",
+      "default": "center",
+      "options": [
+        {
+          "value": "flex-start",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "flex-end",
+          "label": "Right"
+        }
+      ]
     }
   ]
 }
-  ]
-}
 {% endschema %}
+
