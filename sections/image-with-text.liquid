@@ -1,25 +1,29 @@
 <div class="fract-image-text-section">
   {% for block in section.blocks %}
-    <div class="fract-image-text-block">
-      {% if block.settings.image %}
-        <div class="fract-image-text-image">
-          <img src="{{ block.settings.image | img_url: '800x' }}" alt="{{ block.settings.heading | escape }}" loading="lazy" />
+    {% case block.type %}
+      {% when 'image_block' %}
+        <div class="fract-image-text-block image-block">
+          {% if block.settings.image %}
+            <img src="{{ block.settings.image | img_url: '800x' }}" alt="Block image" loading="lazy" />
+          {% endif %}
         </div>
-      {% endif %}
-      <div class="fract-image-text-content">
-        {% if block.settings.heading %}
-          <h3>{{ block.settings.heading }}</h3>
-        {% endif %}
-        {% if block.settings.body %}
-          <span>{{ block.settings.body }}</span>
-        {% endif %}
-        {% if block.settings.button_link and block.settings.button_label %}
-          <a href="{{ block.settings.button_link }}" class="{{ block.settings.button_style }}">{{ block.settings.button_label }}</a>
-        {% endif %}
-      </div>
-    </div>
+
+      {% when 'text_block' %}
+        <div class="fract-image-text-block text-block">
+          {% if block.settings.heading %}
+            <h3>{{ block.settings.heading }}</h3>
+          {% endif %}
+          {% if block.settings.body %}
+            <span>{{ block.settings.body }}</span>
+          {% endif %}
+          {% if block.settings.button_link and block.settings.button_label %}
+            <a href="{{ block.settings.button_link }}" class="{{ block.settings.button_style }}">{{ block.settings.button_label }}</a>
+          {% endif %}
+        </div>
+    {% endcase %}
   {% endfor %}
 </div>
+
 
 
 {% schema %}
@@ -28,14 +32,20 @@
   "settings": [],
   "blocks": [
     {
-      "type": "image_text",
-      "name": "Image + Text Block",
+      "type": "image_block",
+      "name": "Image Block",
       "settings": [
         {
           "type": "image_picker",
           "id": "image",
           "label": "Image"
-        },
+        }
+      ]
+    },
+    {
+      "type": "text_block",
+      "name": "Text Block",
+      "settings": [
         {
           "type": "text",
           "id": "heading",
@@ -79,7 +89,7 @@
 {% endschema %}
 
 <style>
-  .fract-image-text-section {
+.fract-image-text-section {
   display: flex;
   flex-direction: column;
   gap: 40px;
@@ -88,42 +98,40 @@
 .fract-image-text-block {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 15px;
 }
 
-.fract-image-text-image img {
+.fract-image-text-block img {
   width: 100%;
   height: auto;
   display: block;
 }
 
-.fract-image-text-content h3 {
+.fract-image-text-block h3 {
   font-size: 1.5rem;
-  margin-bottom: 10px;
+  margin: 0;
 }
 
-.fract-image-text-content span {
-  display: block;
-  margin-bottom: 15px;
+.fract-image-text-block span {
   font-size: 1rem;
   color: #333;
 }
 
-.fract-image-text-content a {
+.fract-image-text-block a {
   text-decoration: none;
 }
 
 @media screen and (min-width: 768px) {
-  .fract-image-text-block {
+  .fract-image-text-section {
     flex-direction: row;
-    align-items: center;
+    flex-wrap: wrap;
     gap: 40px;
   }
 
-  .fract-image-text-image,
-  .fract-image-text-content {
-    flex: 1;
+  .fract-image-text-block {
+    flex: 1 1 45%;
   }
 }
+
 
 </style>
