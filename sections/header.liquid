@@ -65,11 +65,11 @@
 
     <!-- Icons (Account, Cart, etc.) -->
     <div class="header__icons">
-      <button id="open-search-modal" aria-label="Open Search">
+      <a href="#" id="open-search-modal" aria-label="Open Search">
       {% if section.settings.search-true %}
         {{ 'icon-search.svg' | inline_asset_content }}
       {% endif %}
-      </button>
+      </a>
       {% if shop.customer_accounts_enabled %}
         {{ 'icon-account.svg' | inline_asset_content | link_to: routes.account_url }}
       {% endif %}
@@ -291,7 +291,8 @@ document.addEventListener('DOMContentLoaded', function() {
   const closeBtn = document.getElementById('close-search-modal');
   const modal = document.getElementById('search-modal');
 
-  openBtn.addEventListener('click', () => {
+  openBtn.addEventListener('click', (e) => {
+    e.preventDefault(); // ⛔️ prevent <a> from navigating
     modal.classList.remove('hidden');
     modal.setAttribute('aria-hidden', 'false');
   });
@@ -301,7 +302,6 @@ document.addEventListener('DOMContentLoaded', function() {
     modal.setAttribute('aria-hidden', 'true');
   });
 
-  // Optional: Close when clicking outside modal
   modal.addEventListener('click', (e) => {
     if (e.target === modal) {
       modal.classList.add('hidden');
