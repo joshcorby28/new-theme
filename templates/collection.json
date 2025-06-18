@@ -50,8 +50,8 @@
         "secondary_button_style": "fract-secondary"
       }
     },
-    "collection_grid_ehjM94": {
-      "type": "collection-grid",
+    "main_collection_grid_BPrgfP": {
+      "type": "main-collection-grid",
       "name": "Collection Grid",
       "settings": {
         "per_row": 5
@@ -61,6 +61,6 @@
   "order": [
     "main",
     "video_hero_Nx9Hwg",
-    "collection_grid_ehjM94"
+    "main_collection_grid_BPrgfP"
   ]
 }
