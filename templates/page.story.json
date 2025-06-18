@@ -25,6 +25,7 @@
         "text_block_wgrRBx": {
           "type": "text_block",
           "settings": {
+            "bg-color-text": "#ffffff",
             "heading": "our story",
             "body": "Fract Theme — A unique, sleek Shopify theme designed specifically for small fashion brands. Crafted with care by Lab13 to deliver style and simplicity in one powerful package.",
             "button_link": "#",
