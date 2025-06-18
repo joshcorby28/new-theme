@@ -217,6 +217,43 @@
     display: inline-block;
   }
 }
+
+  .search-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  transition: opacity 0.3s ease;
+}
+
+.search-modal.hidden {
+  display: none;
+}
+
+.search-modal__inner {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.search-modal__close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
 </style>
 
 <script>
@@ -242,6 +279,31 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 </script>
+
+<script>
+  const openBtn = document.getElementById('open-search-modal');
+  const closeBtn = document.getElementById('close-search-modal');
+  const modal = document.getElementById('search-modal');
+
+  openBtn.addEventListener('click', () => {
+    modal.classList.remove('hidden');
+    modal.setAttribute('aria-hidden', 'false');
+  });
+
+  closeBtn.addEventListener('click', () => {
+    modal.classList.add('hidden');
+    modal.setAttribute('aria-hidden', 'true');
+  });
+
+  // Optional: Close when clicking outside modal
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      modal.classList.add('hidden');
+      modal.setAttribute('aria-hidden', 'true');
+    }
+  });
+</script>
+
 {% schema %}
 {
   "name": "t:general.header",
