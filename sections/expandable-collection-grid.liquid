@@ -15,12 +15,13 @@
       </a>
     </div>
   </div>
-  <div class="expand-inner page-width">
-    {% for block in section.blocks %}
-      {% assign collection = block.settings.collection %}
-      {% assign background_image = block.settings.background_image %}
-      {% assign icon_image = block.settings.block_icon %}
-      {% if collection %}
+<div class="expand-inner page-width">
+  {% for block in section.blocks %}
+    {% assign collection = block.settings.collection %}
+    {% assign background_image = block.settings.background_image %}
+    {% assign icon_image = block.settings.block_icon %}
+    {% if collection %}
+      <a href="{{ collection.url }}" class="collection-link">
         <div
           class="collection-block{% if forloop.first %} card-expand{% endif %}"
           style="background: linear-gradient(180deg, rgba(0, 0, 0, 0.00) 0%, rgba(0, 0, 0, 0.50) 100%), url('{{ background_image | image_url: width: 840 }}') lightgray 50% / cover no-repeat;"
@@ -31,9 +32,10 @@
             </div>
           </div>
         </div>
-      {% endif %}
-    {% endfor %}
-  </div>
+      </a>
+    {% endif %}
+  {% endfor %}
+</div>
 </div>
 
 <script>
