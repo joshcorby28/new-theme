@@ -36,7 +36,7 @@
         "text-uppercase": true,
         "show_buttons": true,
         "primary_button_text": "buy now",
-        "primary_button_link": "#",
+        "primary_button_link": "https://www.etsy.com/uk/listing/4322096329/frct-shopify-theme-for-small-fashion",
         "primary_button_style": "fract-secondary",
         "secondary_button_text": "",
         "secondary_button_link": "",
@@ -100,8 +100,7 @@
       "name": "Expandable Collections",
       "settings": {
         "main-title": "shop by style",
-        "padding_top": 36,
-        "padding_bottom": 36
+        "button-text": "Shop All"
       }
     }
   },
