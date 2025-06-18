@@ -12,9 +12,37 @@
     "main": {
       "type": "page",
       "settings": {}
+    },
+    "image_with_text_bjpxAh": {
+      "type": "image-with-text",
+      "blocks": {
+        "image_block_m6BQpa": {
+          "type": "image_block",
+          "settings": {
+            "image": "shopify://shop_images/pexels-brett-sayles-3759249-min_1.jpg"
+          }
+        },
+        "text_block_wgrRBx": {
+          "type": "text_block",
+          "settings": {
+            "heading": "our story",
+            "body": "Fract Theme — A unique, sleek Shopify theme designed specifically for small fashion brands. Crafted with care by Lab13 to deliver style and simplicity in one powerful package.",
+            "button_link": "#",
+            "button_label": "buy now",
+            "button_style": "fract-primary"
+          }
+        }
+      },
+      "block_order": [
+        "image_block_m6BQpa",
+        "text_block_wgrRBx"
+      ],
+      "name": "Image and Text Blocks",
+      "settings": {}
     }
   },
   "order": [
-    "main"
+    "main",
+    "image_with_text_bjpxAh"
   ]
 }
