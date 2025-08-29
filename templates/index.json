@@ -23,8 +23,8 @@
         "use_overlay": true,
         "overlay_color": "#000000",
         "overlay_opacity": 15,
-        "heading": "fract theme",
-        "text": "make your brand stand out",
+        "heading": "discover the unknown",
+        "text": "coming november",
         "content_position": "bottom",
         "text_alignment": "left",
         "heading_color": "#ffffff",
@@ -34,7 +34,7 @@
         "text_size": 16,
         "text_size_mobile": 14,
         "text-uppercase": true,
-        "show_buttons": true,
+        "show_buttons": false,
         "primary_button_text": "buy now",
         "primary_button_link": "https://www.etsy.com/uk/listing/4322096329/frct-shopify-theme-for-small-fashion",
         "primary_button_style": "fract-secondary",
@@ -45,6 +45,7 @@
     },
     "fract_product_swiper_HtXeWr": {
       "type": "fract-product-swiper",
+      "disabled": true,
       "name": "Product Slider",
       "settings": {
         "collection": "test",
@@ -97,6 +98,7 @@
         "collection_block_8BRDkj",
         "collection_block_x7miei"
       ],
+      "disabled": true,
       "name": "Expandable Collections",
       "settings": {
         "main-title": "shop by style",
