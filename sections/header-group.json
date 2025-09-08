@@ -84,7 +84,7 @@
         "menu": "main-menu",
         "color-text": "#ffffff",
         "color-text-solid": "#222222",
-        "search-true": true
+        "search-true": false
       }
     }
   },
