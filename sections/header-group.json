@@ -19,7 +19,7 @@
           "settings": {
             "custom_svg": "",
             "icon_size": "medium",
-            "text": "drop one",
+            "text": "next day shipping",
             "text_size": 16,
             "text_link": ""
           }
@@ -34,23 +34,12 @@
             "text_link": ""
           }
         },
-        "announcement_hhXfpU": {
+        "announcement_8TjAGd": {
           "type": "announcement",
           "settings": {
             "custom_svg": "",
             "icon_size": "medium",
-            "text": "coming november",
-            "text_size": 16,
-            "text_link": ""
-          }
-        },
-        "announcement_9FAmgP": {
-          "type": "announcement",
-          "disabled": true,
-          "settings": {
-            "custom_svg": "",
-            "icon_size": "medium",
-            "text": "global sections",
+            "text": "first drop",
             "text_size": 16,
             "text_link": ""
           }
@@ -59,8 +48,7 @@
       "block_order": [
         "announcement_qLNfzT",
         "announcement_my7EWY",
-        "announcement_hhXfpU",
-        "announcement_9FAmgP"
+        "announcement_8TjAGd"
       ],
       "name": "Scrolling promo",
       "settings": {
