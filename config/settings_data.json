@@ -17,7 +17,7 @@
     "logo_width": 120,
     "player_audio": "https://cdn.shopify.com/s/files/1/0842/1084/3976/files/Restless.mp3?v=1748543180",
     "player_image": "shopify://shop_images/a75c6806-adad-4034-966a-d362989d2426.webp",
-    "preloader_delay_seconds": 4,
+    "preloader_delay_seconds": 2,
     "preloader_bg": "#222222",
     "preloader_mode": "image",
     "preloader_image": "shopify://shop_images/New_Project_6_1.png",
