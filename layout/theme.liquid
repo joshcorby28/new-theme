@@ -162,7 +162,7 @@
       </style>
 
     {{ content_for_layout }}
-
+{% comment %}
   {% if template == 'index' or template == 'collection'  %}
     <style>
       header {
@@ -178,6 +178,7 @@
       }
     </style>
   {% endif %}
+   {% endcomment %}
 
     {% sections 'footer-group' %}
   </body>
