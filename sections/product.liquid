@@ -48,7 +48,7 @@
   {% for variant in product.variants %}
     <button
       type="button"
-      class="variant-button{% if variant == current_variant %} active{% endif %}"
+      class="variant-button{% if variant == current_variant %} active{% endif %} "
       data-variant-id="{{ variant.id }}"
       {% unless variant.available %}disabled{% endunless %}
     >
