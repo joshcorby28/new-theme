@@ -355,7 +355,7 @@
 
 /* Option 1: strikethrough text */
 .variant-button[disabled] {
-  text-decoration: line-through;
+  color:#D3D3D3;
 }
 
 /* Option 2: diagonal cross overlay */
@@ -366,6 +366,6 @@
   left: 0;
   width: 100%;
   height: 2px;
-  background: red;           /* or grey */
+  background: #1b1b1b; 
   transform: rotate(-20deg); /* diagonal line */
 }
