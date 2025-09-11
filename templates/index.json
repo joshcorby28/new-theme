@@ -46,7 +46,6 @@
     },
     "fract_product_swiper_HtXeWr": {
       "type": "fract-product-swiper",
-      "disabled": true,
       "name": "Product Slider",
       "settings": {
         "collection": "test",
