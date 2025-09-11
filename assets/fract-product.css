@@ -342,4 +342,7 @@
     text-align: center;
     color: white;
     margin-top: 10px;
+	text-transform:uppercase;
+	font-weight:bold;
+	width:fit-content;
 }
