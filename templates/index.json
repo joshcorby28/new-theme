@@ -46,6 +46,7 @@
     },
     "fract_product_swiper_HtXeWr": {
       "type": "fract-product-swiper",
+      "disabled": true,
       "name": "Product Slider",
       "settings": {
         "collection": "test",
@@ -101,7 +102,7 @@
       "disabled": true,
       "name": "Expandable Collections",
       "settings": {
-        "main-title": "shop by style",
+        "main-title": "shop by type",
         "button-text": "Shop All"
       }
     }
