@@ -21,7 +21,7 @@
 
   <body id="hidden-theme">
     {% # Grunge Overlay Effect %}
-    <canvas id="grain-canvas"></canvas>
+       {% if settings['grunge-effect'] %} <canvas id="grain-canvas"></canvas>{% endif %}
     {% if settings['grunge-effect'] %}
       <script>
         const canvas = document.getElementById('grain-canvas');
