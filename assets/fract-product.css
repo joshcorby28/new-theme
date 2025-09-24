@@ -362,5 +362,7 @@
     background: #1b1b1b;
     padding: 5px;
     text-align: center;
+	text-transform:uppercase; 
+    font-weight:bold;
     color: white;
 }
