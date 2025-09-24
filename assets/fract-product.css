@@ -334,17 +334,6 @@
 	}
 }
 
-.drop-badge {
-      font-size: 13px;
-    background: #1b1b1b;
-    border-radius: 6px;
-    padding: 5px 10px;
-    text-align: center;
-    color: white;
-	text-transform:uppercase;
-	font-weight:bold;
-}
-
 .variant-button[disabled] {
   opacity: 0.5;               /* greyed out look */
   cursor: not-allowed;        /* show not allowed cursor */
