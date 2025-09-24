@@ -77,13 +77,10 @@
       font-size: 13px;
     background: #1b1b1b;
     border-radius: 6px;
-    padding: 5px 10px;
+    padding: 5px;
     text-align: center;
     color: white;
-	width:80%;
-	margin:0 auto 15px auto;
-    margin-bottom: 15px;
-	text-transform:uppercase;
-	font-weight:bold;
-	width:fit-content;
+    margin-top: 10px;
+    	width:80%;
+	margin:15px auto 15px auto;
 }
