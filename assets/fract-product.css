@@ -359,6 +359,8 @@
 
 .fract-main-product .drop-badge {
       font-size: 13px;
+	  margin-bottom:15px;
+	  border-radius: 4px;
     background: #1b1b1b;
     padding: 5px;
     text-align: center;
