@@ -11,6 +11,11 @@
           {% render 'product-card', product: product %}
         </div>
       {% endfor %}
+            {% for product in my_collection.products %}
+        <div class="swiper-slide">
+          {% render 'product-card', product: product %}
+        </div>
+      {% endfor %}
     {% else %}
       <p style="width:95%; margin: 30px auto; text-align:center; text-transform:uppercase; letter-spacing:0.5px;">Please choose a collection</p>
     {% endif %}
