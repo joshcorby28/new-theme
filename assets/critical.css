@@ -84,8 +84,8 @@ body {
   padding: 0 1rem;
 }
 .shopify-policy__container {
-    max-width: 1200px;
-    margin: 72px auto;
+    max-width: 1200px !important;
+    margin: 72px auto !important;
     padding-left: 20px;
     padding-right: 20px;
 }
