@@ -18,9 +18,18 @@
         "show_size_guide": true,
         "show_custom_content": false
       }
+    },
+    "fract_product_swiper_ryXikk": {
+      "type": "fract-product-swiper",
+      "name": "Product Slider",
+      "settings": {
+        "collection": "test",
+        "primary_button_text": "Shop the Collection"
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "fract_product_swiper_ryXikk"
   ]
 }
