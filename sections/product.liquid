@@ -10,7 +10,7 @@
 <div class="fract-main-product">
 <div class="product-images">
   {% if section.settings.image_layout == 'slider' %}
-    <div class="swiper">
+    <div class="swiper product-gallery-swiper">
     <div class="swiper-wrapper">
       {% for image in product.images %}
         <div class="swiper-slide">
@@ -218,7 +218,7 @@
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script>
   document.addEventListener('DOMContentLoaded', function () {
-    new Swiper('.swiper', {
+    new Swiper('.product-gallery-swiper', {
       loop: true,
   navigation: {
     nextEl: '.swiper-button-next-smarte',
