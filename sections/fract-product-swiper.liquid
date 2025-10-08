@@ -4,6 +4,11 @@
 {% assign my_collection = collections[section.settings.collection] %}
 
 <div class="swiper fract-product-swiper" id="product-slider-{{ section.id }}">
+    <div style="max-width:95%; margin: 0 auto 30px auto;" class="title-and-button page-width">
+    <h2 class="title inline-richtext h2">
+      {{ section.settings['main-title'] }}
+    </h2>
+  </div>
   <div class="swiper-wrapper">
    {% if my_collection and my_collection.products_count != blank and my_collection.products_count > 0 %}
       {% for product in my_collection.products %}
@@ -67,6 +72,11 @@
 {
   "name": "Product Slider",
   "settings": [
+        {
+      "type": "inline_richtext",
+      "id": "main-title",
+      "label": "Main title"
+    },
     {
       "type": "collection",
       "id": "collection",
