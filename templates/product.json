@@ -24,7 +24,7 @@
       "name": "Product Slider",
       "settings": {
         "collection": "test",
-        "primary_button_text": "Shop the Collection"
+        "primary_button_text": ""
       }
     }
   },
