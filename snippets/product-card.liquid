@@ -25,6 +25,8 @@
         <div class="drop-badge">
           {% if product.tags contains 'blanks' %}
             Heavyweight Blank
+          {% elsif product.tags contains 'soon'  %}
+            Coming Soon
           {% else %}
             Discover The Unknown
           {% endif %}
