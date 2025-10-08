@@ -277,10 +277,14 @@
     });
   });
 </script>
-
-            <script>
+<script>
   document.addEventListener('DOMContentLoaded', function() {
     const detailsElements = document.querySelectorAll('.custom-accordion details');
+
+    // ✅ Open the first one by default
+    if (detailsElements.length > 0) {
+      detailsElements[0].setAttribute('open', '');
+    }
 
     detailsElements.forEach((detail) => {
       detail.addEventListener('toggle', function() {
@@ -295,6 +299,7 @@
     });
   });
 </script>
+
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
