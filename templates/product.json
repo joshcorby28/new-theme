@@ -23,6 +23,7 @@
       "type": "fract-product-swiper",
       "name": "Product Slider",
       "settings": {
+        "main-title": "shop the rest",
         "collection": "test",
         "primary_button_text": ""
       }
