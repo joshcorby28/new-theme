@@ -81,30 +81,36 @@
 </div>
   <div class="product-extras">
 {% if section.settings.show-stock-indicator %}
-{% assign inventory = product.selected_or_first_available_variant.inventory_quantity %}
-{% assign in_stock = product.selected_or_first_available_variant.available %}
+  {% assign total_inventory = 0 %}
 
-<div class="stock-indicator-wrapper">
-  {% if in_stock %}
-    {% if inventory > 5 %}
-      <div class="stock-indicator in-stock">
-        <span class="circle"></span>
-        <span>In Stock</span>
-      </div>
+  {% for variant in product.variants %}
+    {% assign total_inventory = total_inventory | plus: variant.inventory_quantity %}
+  {% endfor %}
+
+  {% assign in_stock = product.available %}
+
+  <div class="stock-indicator-wrapper">
+    {% if in_stock %}
+      {% if total_inventory < 7 %}
+        <div class="stock-indicator low-stock">
+          <span class="circle"></span>
+          <span>Limited Stock</span>
+        </div>
+      {% else %}
+        <div class="stock-indicator in-stock">
+          <span class="circle"></span>
+          <span>In Stock</span>
+        </div>
+      {% endif %}
     {% else %}
-      <div class="stock-indicator low-stock">
+      <div class="stock-indicator out-of-stock">
         <span class="circle"></span>
-        <span>Limited Stock</span>
+        <span>Out of Stock</span>
       </div>
     {% endif %}
-  {% else %}
-    <div class="stock-indicator out-of-stock">
-      <span class="circle"></span>
-      <span>Out of Stock</span>
-    </div>
-  {% endif %}
-</div>
-    {% endif %}
+  </div>
+{% endif %}
+
 
   {% assign usp_point = product.metafields.custom.usp_point %}
   {% if usp_point %}
