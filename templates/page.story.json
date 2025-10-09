@@ -19,7 +19,7 @@
         "image_block_m6BQpa": {
           "type": "image_block",
           "settings": {
-            "image": "shopify://shop_images/IMG_3416.jpg"
+            "image": "shopify://shop_images/IMG_4266.jpg"
           }
         },
         "text_block_wgrRBx": {
@@ -27,10 +27,10 @@
           "settings": {
             "bg-color-text": "#ffffff",
             "heading": "our story",
-            "body": "I started this brand out of a genuine love for fashion and design. Vintage has always inspired me — the textures, the cuts, the way every piece feels like it has a story. I wanted to take that timeless vibe and give it my own spin, mixing old-school charm with a fresh, modern feel.",
-            "button_link": "#",
-            "button_label": "buy now",
-            "button_style": "fract-primary"
+            "body": "I started this brand out of a genuine love for fashion and design. Vintage has always inspired me — the textures, the cuts, the way every piece feels like it has a story. <br><br>Over the years, I’ve spent so much on clothing that never quite fit the way I wanted — too long, too wide, or just not right. That frustration pushed me to start creating my own pieces, designed to fit perfectly and feel just right. <br><br>My goal is to take that timeless vintage vibe and give it my own spin, blending old-school charm with a fresh, modern feel — and to offer those same well-fitting, thoughtfully made pieces to you guys too.",
+            "button_link": "shopify://collections/test",
+            "button_label": "Shop first drop",
+            "button_style": "fract-secondary"
           }
         }
       },
