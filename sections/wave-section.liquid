@@ -1,0 +1,503 @@
+<style>
+  .shopdev .wave-background-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: {{ section.settings.z_index }};
+    overflow: hidden;
+  }
+
+  .shopdev .wave-canvas {
+    width: 100%;
+    height: 100%;
+    opacity: {{ section.settings.wave_opacity }};
+    mix-blend-mode: {{ section.settings.blend_mode }};
+  }
+
+  .shopdev .wave-background-container.interactive {
+    pointer-events: auto;
+  }
+
+  @media (max-width: 768px) {
+    .shopdev .wave-background-container {
+      {% if section.settings.disable_on_mobile %}
+      display: none;
+      {% endif %}
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .shopdev .wave-background-container {
+      display: none;
+    }
+  }
+</style>
+
+<div class="wave-background-container {% if section.settings.enable_interaction %}interactive{% endif %}" 
+     data-wave-section
+     data-wave-color="{{ section.settings.wave_color }}"
+     data-wave-secondary-color="{{ section.settings.wave_secondary_color }}"
+     data-wave-size="{{ section.settings.wave_size }}"
+     data-wave-speed="{{ section.settings.wave_speed }}"
+     data-wave-intensity="{{ section.settings.wave_intensity }}"
+     data-wave-style="{{ section.settings.wave_style }}"
+     data-max-waves="{{ section.settings.max_waves }}"
+     data-wave-decay="{{ section.settings.wave_decay }}"
+     data-enable-gradient="{{ section.settings.enable_gradient }}"
+     data-enable-touch="{{ section.settings.enable_touch }}"
+     data-particle-count="{{ section.settings.particle_count }}">
+  <canvas class="wave-canvas"></canvas>
+</div>
+
+<script>
+  class WaveBackground {
+    constructor(container) {
+      this.container = container;
+      this.canvas = container.querySelector('.wave-canvas');
+      this.ctx = this.canvas.getContext('2d');
+      this.waves = [];
+      this.particles = [];
+      this.animationId = null;
+      this.lastTime = 0;
+      this.fps = 60;
+      this.fpsInterval = 1000 / this.fps;
+      
+      // Get settings from data attributes
+      this.settings = {
+        waveColor: this.container.dataset.waveColor,
+        waveSecondaryColor: this.container.dataset.waveSecondaryColor,
+        waveSize: parseInt(this.container.dataset.waveSize),
+        waveSpeed: parseFloat(this.container.dataset.waveSpeed),
+        waveIntensity: parseFloat(this.container.dataset.waveIntensity),
+        waveStyle: this.container.dataset.waveStyle,
+        maxWaves: parseInt(this.container.dataset.maxWaves),
+        waveDecay: parseFloat(this.container.dataset.waveDecay),
+        enableGradient: this.container.dataset.enableGradient === 'true',
+        enableTouch: this.container.dataset.enableTouch === 'true',
+        particleCount: parseInt(this.container.dataset.particleCount)
+      };
+
+      this.init();
+    }
+
+    init() {
+      this.resizeCanvas();
+      this.bindEvents();
+      this.animate(0);
+    }
+
+    resizeCanvas() {
+      this.canvas.width = window.innerWidth;
+      this.canvas.height = window.innerHeight;
+    }
+
+    bindEvents() {
+      window.addEventListener('resize', () => this.resizeCanvas());
+      
+      this.container.addEventListener('mousemove', (e) => {
+        this.createWave(e.clientX, e.clientY);
+      });
+
+      if (this.settings.enableTouch) {
+        this.container.addEventListener('touchmove', (e) => {
+          e.preventDefault();
+          const touch = e.touches[0];
+          this.createWave(touch.clientX, touch.clientY);
+        }, { passive: false });
+
+        this.container.addEventListener('touchstart', (e) => {
+          const touch = e.touches[0];
+          this.createWave(touch.clientX, touch.clientY);
+        });
+      }
+    }
+
+    createWave(x, y) {
+      if (this.waves.length >= this.settings.maxWaves) {
+        this.waves.shift();
+      }
+
+      const wave = {
+        x: x,
+        y: y,
+        radius: 0,
+        maxRadius: this.settings.waveSize,
+        speed: this.settings.waveSpeed,
+        opacity: this.settings.waveIntensity,
+        decay: this.settings.waveDecay
+      };
+
+      this.waves.push(wave);
+
+      // Create particles for particle effect style
+      if (this.settings.waveStyle === 'particles') {
+        for (let i = 0; i < this.settings.particleCount; i++) {
+          const angle = (Math.PI * 2 * i) / this.settings.particleCount;
+          this.particles.push({
+            x: x,
+            y: y,
+            vx: Math.cos(angle) * this.settings.waveSpeed * 0.5,
+            vy: Math.sin(angle) * this.settings.waveSpeed * 0.5,
+            radius: Math.random() * 3 + 1,
+            opacity: this.settings.waveIntensity,
+            decay: this.settings.waveDecay * 1.5
+          });
+        }
+      }
+    }
+
+    hexToRgb(hex) {
+      const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+      return result ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16)
+      } : { r: 0, g: 0, b: 0 };
+    }
+
+    drawCircularWave(wave) {
+      const rgb = this.hexToRgb(this.settings.waveColor);
+      
+      this.ctx.beginPath();
+      this.ctx.arc(wave.x, wave.y, wave.radius, 0, Math.PI * 2);
+      
+      if (this.settings.enableGradient) {
+        const gradient = this.ctx.createRadialGradient(
+          wave.x, wave.y, 0,
+          wave.x, wave.y, wave.radius
+        );
+        const rgb2 = this.hexToRgb(this.settings.waveSecondaryColor);
+        gradient.addColorStop(0, `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${wave.opacity})`);
+        gradient.addColorStop(1, `rgba(${rgb2.r}, ${rgb2.g}, ${rgb2.b}, 0)`);
+        this.ctx.strokeStyle = gradient;
+      } else {
+        this.ctx.strokeStyle = `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${wave.opacity})`;
+      }
+      
+      this.ctx.lineWidth = 2;
+      this.ctx.stroke();
+    }
+
+    drawLinearWave(wave) {
+      const rgb = this.hexToRgb(this.settings.waveColor);
+      const amplitude = 20;
+      const frequency = 0.02;
+      
+      this.ctx.beginPath();
+      this.ctx.strokeStyle = `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${wave.opacity})`;
+      this.ctx.lineWidth = 2;
+      
+      for (let x = 0; x < this.canvas.width; x++) {
+        const y = wave.y + Math.sin((x + wave.radius) * frequency) * amplitude;
+        if (x === 0) {
+          this.ctx.moveTo(x, y);
+        } else {
+          this.ctx.lineTo(x, y);
+        }
+      }
+      
+      this.ctx.stroke();
+    }
+
+    drawParticles() {
+      this.particles.forEach((particle, index) => {
+        const rgb = this.hexToRgb(this.settings.waveColor);
+        
+        this.ctx.beginPath();
+        this.ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
+        this.ctx.fillStyle = `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${particle.opacity})`;
+        this.ctx.fill();
+        
+        particle.x += particle.vx;
+        particle.y += particle.vy;
+        particle.opacity -= particle.decay;
+        
+        if (particle.opacity <= 0) {
+          this.particles.splice(index, 1);
+        }
+      });
+    }
+
+    animate(currentTime) {
+      this.animationId = requestAnimationFrame((time) => this.animate(time));
+      
+      const elapsed = currentTime - this.lastTime;
+      
+      if (elapsed < this.fpsInterval) {
+        return;
+      }
+      
+      this.lastTime = currentTime - (elapsed % this.fpsInterval);
+      
+      this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+      
+      // Update and draw waves
+      this.waves.forEach((wave, index) => {
+        wave.radius += wave.speed;
+        wave.opacity -= wave.decay;
+        
+        if (wave.opacity <= 0 || wave.radius > wave.maxRadius) {
+          this.waves.splice(index, 1);
+          return;
+        }
+        
+        switch (this.settings.waveStyle) {
+          case 'circular':
+            this.drawCircularWave(wave);
+            break;
+          case 'linear':
+            this.drawLinearWave(wave);
+            break;
+          case 'particles':
+            // Particles are drawn separately
+            break;
+        }
+      });
+      
+      // Draw particles
+      if (this.settings.waveStyle === 'particles') {
+        this.drawParticles();
+      }
+    }
+
+    destroy() {
+      if (this.animationId) {
+        cancelAnimationFrame(this.animationId);
+      }
+      window.removeEventListener('resize', () => this.resizeCanvas());
+    }
+  }
+
+  // Initialize wave background
+  document.addEventListener('DOMContentLoaded', () => {
+    const waveContainer = document.querySelector('[data-wave-section]');
+    if (waveContainer) {
+      new WaveBackground(waveContainer);
+    }
+  });
+
+  // Reinitialize on section load (Shopify theme editor)
+  if (window.Shopify && window.Shopify.designMode) {
+    document.addEventListener('shopify:section:load', (event) => {
+      const waveContainer = event.target.querySelector('[data-wave-section]');
+      if (waveContainer) {
+        new WaveBackground(waveContainer);
+      }
+    });
+  }
+</script>
+
+{% schema %}
+{
+  "name": "Interactive Wave Backgrou",
+  "class": "shopdev",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Wave Appearance"
+    },
+    {
+      "type": "color",
+      "id": "wave_color",
+      "label": "Primary Wave Color",
+      "default": "#4F46E5"
+    },
+    {
+      "type": "color",
+      "id": "wave_secondary_color",
+      "label": "Secondary Wave Color",
+      "default": "#7C3AED",
+      "info": "Used for gradient effects"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_gradient",
+      "label": "Enable Gradient",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "wave_opacity",
+      "min": 0.1,
+      "max": 1,
+      "step": 0.1,
+      "label": "Wave Opacity",
+      "default": 0.6
+    },
+    {
+      "type": "select",
+      "id": "blend_mode",
+      "label": "Blend Mode",
+      "options": [
+        {
+          "value": "normal",
+          "label": "Normal"
+        },
+        {
+          "value": "multiply",
+          "label": "Multiply"
+        },
+        {
+          "value": "screen",
+          "label": "Screen"
+        },
+        {
+          "value": "overlay",
+          "label": "Overlay"
+        },
+        {
+          "value": "soft-light",
+          "label": "Soft Light"
+        }
+      ],
+      "default": "normal"
+    },
+    {
+      "type": "header",
+      "content": "Wave Behavior"
+    },
+    {
+      "type": "select",
+      "id": "wave_style",
+      "label": "Wave Style",
+      "options": [
+        {
+          "value": "circular",
+          "label": "Circular Ripples"
+        },
+        {
+          "value": "linear",
+          "label": "Linear Waves"
+        },
+        {
+          "value": "particles",
+          "label": "Particle Effects"
+        }
+      ],
+      "default": "circular"
+    },
+    {
+      "type": "range",
+      "id": "wave_size",
+      "min": 50,
+      "max": 500,
+      "step": 10,
+      "unit": "px",
+      "label": "Wave Size",
+      "default": 200
+    },
+    {
+      "type": "range",
+      "id": "wave_speed",
+      "min": 0.5,
+      "max": 5,
+      "step": 0.5,
+      "label": "Wave Speed",
+      "default": 2
+    },
+    {
+      "type": "range",
+      "id": "wave_intensity",
+      "min": 0.1,
+      "max": 1,
+      "step": 0.1,
+      "label": "Wave Intensity",
+      "default": 0.8
+    },
+    {
+      "type": "range",
+      "id": "wave_decay",
+      "min": 0.1,
+      "max": 0.5,
+      "step": 0.1,
+      "label": "Wave Decay Speed",
+      "default": 0.1,
+      "info": "How quickly waves fade out"
+    },
+    {
+      "type": "range",
+      "id": "max_waves",
+      "min": 5,
+      "max": 50,
+      "step": 5,
+      "label": "Maximum Concurrent Waves",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "particle_count",
+      "min": 5,
+      "max": 30,
+      "step": 5,
+      "label": "Particle Count",
+      "default": 15,
+      "info": "Only applies to particle effect style"
+    },
+    {
+      "type": "header",
+      "content": "Interaction Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_interaction",
+      "label": "Enable Mouse Interaction",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_touch",
+      "label": "Enable Touch Interaction",
+      "default": true,
+      "info": "Allow touch gestures on mobile devices"
+    },
+    {
+      "type": "checkbox",
+      "id": "disable_on_mobile",
+      "label": "Disable on Mobile",
+      "default": false,
+      "info": "Improve performance on mobile devices"
+    },
+    {
+      "type": "header",
+      "content": "Layout Settings"
+    },
+    {
+      "type": "range",
+      "id": "z_index",
+      "min": -1,
+      "max": 50,
+      "step": 1,
+      "label": "Z-Index",
+      "default": 1,
+      "info": "Control layering with other content"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Interactive Wave Background",
+      "settings": {
+        "wave_color": "#4F46E5",
+        "wave_secondary_color": "#7C3AED",
+        "enable_gradient": true,
+        "wave_opacity": 0.6,
+        "blend_mode": "normal",
+        "wave_style": "circular",
+        "wave_size": 200,
+        "wave_speed": 2,
+        "wave_intensity": 0.8,
+        "wave_decay": 0.1,
+        "max_waves": 20,
+        "particle_count": 15,
+        "enable_interaction": true,
+        "enable_touch": true,
+        "disable_on_mobile": false,
+        "z_index": 1
+      }
+    }
+  ]
+}
+{% endschema %}
