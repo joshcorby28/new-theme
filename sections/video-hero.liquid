@@ -262,25 +262,35 @@
       <p class="early-access-text">{{ section.settings.early_access_text }}</p>
     {% endif %}
 
-    <div class="early-access-form">
-      {% form 'customer', id: 'EarlyAccessSignup' %}
-        <input
-          type="email"
-          name="contact[email]"
-          placeholder="Enter your email"
-          required
-          class="early-access-input"
-        >
-        <input type="hidden" name="contact[tags]" value="early access">
-        <button
-          type="submit"
-          class="fract-primary early-access-button "
-          style="background-color: {{ section.settings.early_access_button_color }}; color: {{ section.settings.early_access_button_text_color }};"
-        >
-          Sign Up
-        </button>
-      {% endform %}
-    </div>
+<div class="early-access-form">
+  {% form 'customer', id: 'EarlyAccessSignup' %}
+    {% if form.posted_successfully? %}
+      <p class="early-access-success">Thank you, you've been signed up for early access!</p>
+    {% else %}
+      {% if form.errors %}
+        <p class="early-access-error">{{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}</p>
+      {% endif %}
+
+      <input
+        type="email"
+        name="contact[email]"
+        placeholder="Enter your email"
+        required
+        class="early-access-input"
+      >
+      <input type="hidden" name="contact[tags]" value="early access">
+      <input type="hidden" name="contact[country]" value="United Kingdom">
+      <button
+        type="submit"
+        class="fract-primary early-access-button"
+        style="background-color: {{ section.settings.early_access_button_color }}; color: {{ section.settings.early_access_button_text_color }};"
+      >
+        Sign Up
+      </button>
+    {% endif %}
+  {% endform %}
+</div>
+
   </div>
 {% endif %}
 
