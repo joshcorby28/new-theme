@@ -262,6 +262,21 @@
       <p class="early-access-text">{{ section.settings.early_access_text }}</p>
     {% endif %}
 
+<div class="early-access-form">
+  <form id="EarlyAccessSignup" class="early-access-signup-form" method="post" action="/contact#EarlyAccessSignup" accept-charset="UTF-8">
+    <input type="hidden" name="form_type" value="customer">
+    <input type="email" name="contact[email]" placeholder="Enter your email" required class="early-access-input">
+    <input type="hidden" name="contact[tags]" value="early access">
+    <input type="hidden" name="contact[country]" value="United Kingdom">
+    <button type="submit" class="fract-primary early-access-button" style="background-color: {{ section.settings.early_access_button_color }}; color: {{ section.settings.early_access_button_text_color }};">
+      Sign Up
+    </button>
+  </form>
+
+  <p class="early-access-success" style="display:none;">Thank you, you've been signed up for early access!</p>
+
+</div>
+
 <script>
 document.addEventListener('DOMContentLoaded', function() {
   const form = document.querySelector('#EarlyAccessSignup');
