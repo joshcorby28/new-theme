@@ -263,33 +263,51 @@
     {% endif %}
 
 <div class="early-access-form">
-  {% form 'customer', id: 'EarlyAccessSignup' %}
-    {% if form.posted_successfully? %}
-      <p class="early-access-success">Thank you, you've been signed up for early access!</p>
-    {% else %}
-      {% if form.errors %}
-        <p class="early-access-error">{{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}</p>
-      {% endif %}
+  <form id="EarlyAccessSignup" class="early-access-signup-form" method="post" action="/contact#EarlyAccessSignup" accept-charset="UTF-8">
+    <input type="hidden" name="form_type" value="customer">
+    <input type="email" name="contact[email]" placeholder="Enter your email" required class="early-access-input">
+    <input type="hidden" name="contact[tags]" value="early access">
+    <input type="hidden" name="contact[country]" value="United Kingdom">
+    <button type="submit" class="fract-primary early-access-button" style="background-color: {{ section.settings.early_access_button_color }}; color: {{ section.settings.early_access_button_text_color }};">
+      Sign Up
+    </button>
+  </form>
 
-      <input
-        type="email"
-        name="contact[email]"
-        placeholder="Enter your email"
-        required
-        class="early-access-input"
-      >
-      <input type="hidden" name="contact[tags]" value="early access">
-      <input type="hidden" name="contact[country]" value="United Kingdom">
-      <button
-        type="submit"
-        class="fract-primary early-access-button"
-        style="background-color: {{ section.settings.early_access_button_color }}; color: {{ section.settings.early_access_button_text_color }};"
-      >
-        Sign Up
-      </button>
-    {% endif %}
-  {% endform %}
+  <p class="early-access-success" style="display:none;">Thank you, you've been signed up for early access!</p>
+  <p class="early-access-error" style="display:none;">Something went wrong. Please try again.</p>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const form = document.querySelector('#EarlyAccessSignup');
+  const success = document.querySelector('.early-access-success');
+  const error = document.querySelector('.early-access-error');
+
+  if (form) {
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const formData = new FormData(form);
+
+      fetch('/contact', {
+        method: 'POST',
+        body: formData,
+      })
+      .then(res => {
+        if (res.ok) {
+          form.reset();
+          form.style.display = 'none';
+          success.style.display = 'block';
+        } else {
+          throw new Error();
+        }
+      })
+      .catch(() => {
+        error.style.display = 'block';
+      });
+    });
+  }
+});
+</script>
 
   </div>
 {% endif %}
