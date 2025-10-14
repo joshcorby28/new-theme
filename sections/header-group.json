@@ -74,10 +74,33 @@
         "color-text-solid": "#222222",
         "search-true": false
       }
+    },
+    "wave_section_NYafPe": {
+      "type": "wave-section",
+      "name": "Interactive Wave Background",
+      "settings": {
+        "wave_color": "#4f46e5",
+        "wave_secondary_color": "#7c3aed",
+        "enable_gradient": true,
+        "wave_opacity": 0.6,
+        "blend_mode": "normal",
+        "wave_style": "circular",
+        "wave_size": 200,
+        "wave_speed": 2,
+        "wave_intensity": 0.8,
+        "wave_decay": 0.1,
+        "max_waves": 20,
+        "particle_count": 15,
+        "enable_interaction": true,
+        "enable_touch": true,
+        "disable_on_mobile": false,
+        "z_index": 1
+      }
     }
   },
   "order": [
     "scrolling_promo_tbQgGD",
-    "header"
+    "header",
+    "wave_section_NYafPe"
   ]
 }
