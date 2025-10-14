@@ -274,7 +274,6 @@
   </form>
 
   <p class="early-access-success" style="display:none;">Thank you, you've been signed up for early access!</p>
-  <p class="early-access-error" style="display:none;">Something went wrong. Please try again.</p>
 </div>
 
 <script>
@@ -291,23 +290,23 @@ document.addEventListener('DOMContentLoaded', function() {
       fetch('/contact', {
         method: 'POST',
         body: formData,
-        mode: 'no-cors' // prevents CORS redirect blocking
       })
-      .then(() => {
-        // Treat as success (Shopify always accepts /contact submissions)
-        form.reset();
-        form.style.display = 'none';
-        success.style.display = 'block';
+      .then(res => {
+        if (res.ok) {
+          form.reset();
+          form.style.display = 'none';
+          success.style.display = 'block';
+        } else {
+          throw new Error();
+        }
       })
       .catch(() => {
-        // Only shown if network totally fails
         error.style.display = 'block';
       });
     });
   }
 });
 </script>
-
 
   </div>
 {% endif %}
