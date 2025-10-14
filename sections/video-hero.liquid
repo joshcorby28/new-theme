@@ -262,26 +262,24 @@
       <p class="early-access-text">{{ section.settings.early_access_text }}</p>
     {% endif %}
 
-<div class="early-access-form">
-  <form id="EarlyAccessSignup" class="early-access-signup-form" method="post" action="/contact#EarlyAccessSignup" accept-charset="UTF-8">
-    <input type="hidden" name="form_type" value="customer">
-    <input type="email" name="contact[email]" placeholder="Enter your email" required class="early-access-input">
-    <input type="hidden" name="contact[tags]" value="early access">
-    <input type="hidden" name="contact[country]" value="United Kingdom">
-    <button type="submit" class="fract-primary early-access-button" style="background-color: {{ section.settings.early_access_button_color }}; color: {{ section.settings.early_access_button_text_color }};">
-      Sign Up
-    </button>
-  </form>
-
-  <p class="early-access-success" style="display:none;">Thank you, you've been signed up for early access!</p>
-</div>
-
 <script>
 document.addEventListener('DOMContentLoaded', function() {
   const form = document.querySelector('#EarlyAccessSignup');
   const success = document.querySelector('.early-access-success');
   const error = document.querySelector('.early-access-error');
 
+  // ✅ Check if the URL has ?customer_posted=true#EarlyAccessSignup
+  const urlParams = new URLSearchParams(window.location.search);
+  const hash = window.location.hash;
+
+  if (urlParams.get('customer_posted') === 'true' && hash === '#EarlyAccessSignup') {
+    if (form && success) {
+      form.style.display = 'none';
+      success.style.display = 'block';
+    }
+  }
+
+  // ✅ Handle form submission normally
   if (form) {
     form.addEventListener('submit', function(e) {
       e.preventDefault();
@@ -301,12 +299,13 @@ document.addEventListener('DOMContentLoaded', function() {
         }
       })
       .catch(() => {
-        error.style.display = 'block';
+        if (error) error.style.display = 'block';
       });
     });
   }
 });
 </script>
+
 
   </div>
 {% endif %}
