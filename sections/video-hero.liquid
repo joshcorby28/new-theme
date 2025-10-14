@@ -203,6 +203,38 @@
         <div style="{% if section.settings.text-uppercase %}text-transform:uppercase;{% endif %}" class="fract-theme-media-text-{{ fract_theme_id }}">{{ section.settings.text }}</div>
       {% endif %}
 
+      {% if section.settings.show_early_access %}
+  <div class="early-access-signup text-{{ section.settings.text_alignment }}" style="color: {{ section.settings.early_access_text_color }};">
+    {% if section.settings.early_access_heading != blank %}
+      <h3 class="early-access-heading">{{ section.settings.early_access_heading }}</h3>
+    {% endif %}
+    {% if section.settings.early_access_text != blank %}
+      <p class="early-access-text">{{ section.settings.early_access_text }}</p>
+    {% endif %}
+
+    <div class="early-access-form">
+      {% form 'customer', id: 'EarlyAccessSignup' %}
+        <input
+          type="email"
+          name="contact[email]"
+          placeholder="Enter your email"
+          required
+          class="early-access-input"
+        >
+        <input type="hidden" name="contact[tags]" value="early access">
+        <button
+          type="submit"
+          class="early-access-button"
+          style="background-color: {{ section.settings.early_access_button_color }}; color: {{ section.settings.early_access_button_text_color }};"
+        >
+          Sign Up
+        </button>
+      {% endform %}
+    </div>
+  </div>
+{% endif %}
+
+
       {% if section.settings.show_buttons %}
         <div class="flex gap-4 flex-wrap {% if section.settings.text_alignment == 'center' %}justify-center{% elsif section.settings.text_alignment == 'right' %}justify-end{% else %}justify-start{% endif %}">
           {% if section.settings.primary_button_text != blank and section.settings.primary_button_link != blank %}
@@ -283,6 +315,47 @@
       "label": "Section height (mobile)",
       "default": 400
     },
+    {
+  "type": "header",
+  "content": "Early Access Signup"
+},
+{
+  "type": "checkbox",
+  "id": "show_early_access",
+  "label": "Show Early Access form",
+  "default": false
+},
+{
+  "type": "text",
+  "id": "early_access_heading",
+  "label": "Heading",
+  "default": "Get Early Access"
+},
+{
+  "type": "textarea",
+  "id": "early_access_text",
+  "label": "Subtext",
+  "default": "Sign up to get exclusive early access to our latest drops and offers."
+},
+{
+  "type": "color",
+  "id": "early_access_text_color",
+  "label": "Text color",
+  "default": "#ffffff"
+},
+{
+  "type": "color",
+  "id": "early_access_button_color",
+  "label": "Button background color",
+  "default": "#ffffff"
+},
+{
+  "type": "color",
+  "id": "early_access_button_text_color",
+  "label": "Button text color",
+  "default": "#000000"
+},
+
 
     {
       "type": "header",
