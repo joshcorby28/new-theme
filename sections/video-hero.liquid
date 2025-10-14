@@ -291,25 +291,16 @@ document.addEventListener('DOMContentLoaded', function() {
       fetch('/contact', {
         method: 'POST',
         body: formData,
-        redirect: 'follow'
+        mode: 'no-cors' // prevents CORS redirect blocking
       })
-      .then(res => {
-        // Shopify returns 302 (redirect) on success — treat as success
-        if (res.status === 200 || res.status === 302) {
-          form.reset();
-          form.style.display = 'none';
-          success.style.display = 'block';
-
-          // optional: refresh after 3 seconds so Shopify clears the form state
-          setTimeout(() => {
-            window.location.reload();
-          }, 3000);
-
-        } else {
-          throw new Error();
-        }
+      .then(() => {
+        // Treat as success (Shopify always accepts /contact submissions)
+        form.reset();
+        form.style.display = 'none';
+        success.style.display = 'block';
       })
       .catch(() => {
+        // Only shown if network totally fails
         error.style.display = 'block';
       });
     });
