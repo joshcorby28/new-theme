@@ -26,25 +26,27 @@
 <style>
   .we-are-banner {
   width: 100vw;
-  margin-left: calc(50% - 50vw); /* ensures true full-width, ignoring container constraints */
-  background: var(--text-color);
+  margin-left: calc(50% - 50vw); /* full edge-to-edge */
+  background: #000; /* black background, change if needed */
   color: #fff;
   text-align: center;
-  padding: 3rem 1rem;
+  padding: 2rem 1rem;
   overflow: hidden;
 }
 
 .we-are-banner h2 {
-  font-size: clamp(2rem, 8vw, 7rem); /* scales smoothly with screen size */
-  letter-spacing: 0.1em;
-  font-weight: 700;
+  font-size: 12vw; /* scales with viewport width */
+  font-weight: 900;
+  letter-spacing: -1vw; /* negative spacing to tighten letters like in your image */
   text-transform: uppercase;
+  margin: 0;
   white-space: nowrap;
 }
 
 @media (max-width: 768px) {
   .we-are-banner h2 {
-    letter-spacing: 0.05em;
+    font-size: 18vw; /* increase relative size on small screens */
+    letter-spacing: -0.5vw;
   }
 }
 
