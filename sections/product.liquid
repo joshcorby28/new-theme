@@ -188,7 +188,7 @@
       <div class="accordion-content">
         {% if product.metafields.custom.size_guide_image %}
           <img 
-            src="{{ product.metafields.custom.size_guide | image_url: width: 800 }}" 
+            src="{{ product.metafields.custom.size_guide.value | image_url: width: 800 }}" 
             alt="Size Guide for {{ product.title }}" 
             style="max-width: 100%; height: auto; margin-top: 1rem;"
           >
