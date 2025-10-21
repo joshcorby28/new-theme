@@ -38,6 +38,34 @@
 <div class="product-info">
   <h1>{{ product.title }}</h1>
   <h4>{{ product.price | money }}</h4>
+  {% if product.metafields.custom.related_products %}
+  {% assign related_products = product.metafields.custom.related_products.value %}
+
+  <div class="related-products">
+    <h3 class="related-products__title">You might also like</h3>
+    <div class="related-products__grid">
+      {% for related_product in related_products %}
+        <a 
+          href="{{ related_product.url }}" 
+          class="related-products__item" 
+          title="{{ related_product.title }}"
+        >
+          {% if related_product.featured_image %}
+            <img 
+              src="{{ related_product.featured_image | img_url: '300x300' }}" 
+              alt="{{ related_product.title }}" 
+              class="related-products__image"
+              loading="lazy"
+            >
+          {% else %}
+            <div class="related-products__placeholder"></div>
+          {% endif %}
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+{% endif %}
+
 </div>
 
 <div class="product-form">
