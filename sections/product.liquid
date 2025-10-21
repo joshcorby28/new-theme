@@ -186,7 +186,7 @@
     <details class="accordion-item">
       <summary>Size Guide</summary>
       <div class="accordion-content">
-        {% if product.metafields.custom.size_guide_image %}
+        {% if product.metafields.custom.size_guide %}
           <img 
             src="{{ product.metafields.custom.size_guide.value | image_url: width: 800 }}" 
             alt="Size Guide for {{ product.title }}" 
