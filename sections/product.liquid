@@ -38,10 +38,31 @@
 <div class="product-info">
   <h1>{{ product.title }}</h1>
   <h4>{{ product.price | money }}</h4>
-  {% if product.metafields.custom.related_products %}
-  {% assign related_products = product.metafields.custom.related_products.value %}
+  {% assign current_product = product %}
+{% assign related_products = product.metafields.custom.related_products.value %}
 
+{% if related_products %}
   <div class="related-products">
+
+    <!-- Current (active) product -->
+    <a 
+      href="{{ current_product.url }}" 
+      class="related-products__item related-products__item--active"
+      title="{{ current_product.title }}"
+    >
+      {% if current_product.featured_image %}
+        <img 
+          src="{{ current_product.featured_image | img_url: '200x200' }}" 
+          alt="{{ current_product.title }}" 
+          class="related-products__image"
+          loading="lazy"
+        >
+      {% else %}
+        <div class="related-products__placeholder"></div>
+      {% endif %}
+    </a>
+
+    <!-- Related products -->
     {% for related_product in related_products %}
       <a 
         href="{{ related_product.url }}" 
