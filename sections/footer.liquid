@@ -1,3 +1,7 @@
+<div class="we-are-banner">
+  <h2>WE ARE HIDDEN FUTURE</h2>
+</div>
+
 <footer class="main-footer">
 <div class="newsletter" style="--align: {{ section.settings.alignment }};">
   <form method="post" action="/contact#contact_form" accept-charset="UTF-8" class="signup-box" id="contact_form" novalidate>
@@ -20,6 +24,30 @@
 </div>
 
 <style>
+  .we-are-banner {
+  width: 100vw;
+  margin-left: calc(50% - 50vw); /* ensures true full-width, ignoring container constraints */
+  background: var(--text-color);
+  color: #fff;
+  text-align: center;
+  padding: 3rem 1rem;
+  overflow: hidden;
+}
+
+.we-are-banner h2 {
+  font-size: clamp(2rem, 8vw, 7rem); /* scales smoothly with screen size */
+  letter-spacing: 0.1em;
+  font-weight: 700;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .we-are-banner h2 {
+    letter-spacing: 0.05em;
+  }
+}
+
   .newsletter {
     --bg-color: {{ section.settings.bg_color }};
     --text-color: {{ section.settings.text_color }};
