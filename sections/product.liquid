@@ -14,7 +14,7 @@
     <div class="swiper-wrapper">
       {% for image in product.images %}
         <div class="swiper-slide">
-          <img src="{{ image | image_url: width: 600 }}" class="product-image" />
+          <img src="{{ image | image_url: width: 900 }}" class="product-image" />
         </div>
       {% endfor %}
     </div>
@@ -25,7 +25,7 @@
   </div>
   {% else %}
     {% for image in product.images %}
-      <img src="{{ image | image_url: width: 600 }}" class="product-image" />
+      <img src="{{ image | image_url: width: 900 }}" class="product-image" />
     {% endfor %}
   {% endif %}
 </div>
