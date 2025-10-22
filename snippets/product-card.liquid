@@ -38,12 +38,12 @@
         {{ product.price | money }}
       </p>
 
-      {% if product.variants.size > 1 %}
-        <p class="product-card__more-styles">More styles +</p>
-{% elsif product.variants.size > 1 and product.tags contains 'comingsoon' %}
+{% if product.variants.size > 1 and product.tags contains 'comingsoon' %}
+  <p class="product-card__more-styles">Coming Soon</p>
+{% elsif product.variants.size > 1 %}
+  <p class="product-card__more-styles">More styles +</p>
+{% endif %}
 
-       <p class="product-card__more-styles">Coming Soon</p>
-      {% endif %}
     </div>
   </a>
 </div>
