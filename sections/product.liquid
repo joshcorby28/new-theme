@@ -32,9 +32,16 @@
 
 <div class="right-side-product">
 <div class="fract-info-and-form">
-       <div class="drop-badge">
-        Drop One - Discover the Unknown
-      </div>
+{% if product.tags contains 'comingsoon' %}
+  <div class="drop-badge">
+    Coming Soon
+  </div>
+{% elsif product.variants.size > 1 %}
+  <div class="drop-badge">
+   Drop One - Discover the Unknown
+  </div>
+{% endif %}
+
 <div class="product-info">
   <h1>{{ product.title }}</h1>
   <h4>{{ product.price | money }}</h4>
