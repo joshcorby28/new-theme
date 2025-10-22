@@ -3,6 +3,11 @@
 <div class="product-card">
   <a href="{{ product.url }}" class="product-card__link">
 <div class="product-card__image-wrapper">
+    {% if product.tags contains 'comingsoon' %}
+    <div class="product-card__overlay">
+      Coming Soon
+    </div>
+  {% endif %}
   {% assign first_image = product.featured_image %}
   {% assign second_image = product.images[1] %}
 
@@ -22,11 +27,6 @@
     >
   {% endif %}
 
-  {% if product.tags contains 'comingsoon' %}
-    <div class="product-card__overlay">
-      Coming Soon
-    </div>
-  {% endif %}
 </div>
 
 <style>
