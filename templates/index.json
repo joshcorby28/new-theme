@@ -17,8 +17,14 @@
         "section_height": 600,
         "full_screen": true,
         "section_height_mobile": 400,
+        "show_early_access": false,
+        "early_access_heading": "Get Early Access",
+        "early_access_text": "Sign up to get exclusive early access to our latest drops and offers.",
+        "early_access_text_color": "#ffffff",
+        "early_access_button_color": "#ffffff",
+        "early_access_button_text_color": "#000000",
         "media_type": "image",
-        "background_image": "shopify://shop_images/New_Project_3_-Picsart-AiImageEnhancer.jpg",
+        "background_image": "shopify://shop_images/IMG_4634.jpg",
         "background_video": "https://cdn.shopify.com/videos/c/o/v/bb42d0dc3f694467b63d9579d1bc65fb.mp4",
         "placeholder_color": "#f4f4f4",
         "use_overlay": true,
@@ -48,6 +54,7 @@
       "type": "fract-product-swiper",
       "name": "Product Slider",
       "settings": {
+        "main-title": "",
         "collection": "test",
         "primary_button_text": "Shop the Collection"
       }
