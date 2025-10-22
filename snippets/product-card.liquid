@@ -40,6 +40,8 @@
 
       {% if product.variants.size > 1 %}
         <p class="product-card__more-styles">More styles +</p>
+                  {% elsif product.tags contains 'comingsoon'  %}
+                            <p class="product-card__more-styles">Coming Soon</p>
       {% endif %}
     </div>
   </a>
