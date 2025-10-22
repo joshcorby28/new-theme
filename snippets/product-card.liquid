@@ -3,11 +3,6 @@
 <div class="product-card">
   <a href="{{ product.url }}" class="product-card__link">
 <div class="product-card__image-wrapper">
-    {% if product.tags contains 'comingsoon' %}
-    <div class="product-card__overlay">
-      Coming Soon
-    </div>
-  {% endif %}
   {% assign first_image = product.featured_image %}
   {% assign second_image = product.images[1] %}
 
@@ -27,16 +22,30 @@
     >
   {% endif %}
 
+  {% if product.tags contains 'comingsoon' %}
+    <div class="product-card__overlay">
+      Coming Soon
+    </div>
+  {% endif %}
 </div>
 
 <style>
+.product-card__image-wrapper {
+  position: relative;
+}
+
+.product-card__image {
+  display: block;
+  width: 100%;
+}
+
 .product-card__overlay {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.5); /* semi-transparent black overlay */
+  background: rgba(0,0,0,0.5);
   color: white;
   display: flex;
   align-items: center;
@@ -44,10 +53,10 @@
   font-weight: bold;
   font-size: 1.2rem;
   text-transform: uppercase;
+  z-index: 10; /* ensures overlay is on top of hover image */
+  pointer-events: none; /* so hover still works */
 }
-.product-card__image-wrapper {
-  position: relative;
-}
+
 </style>
 <div class="drop-badge">
           {% if product.tags contains 'blanks' %}
