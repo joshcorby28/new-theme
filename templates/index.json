@@ -55,7 +55,7 @@
       "name": "Product Slider",
       "settings": {
         "main-title": "",
-        "collection": "test",
+        "collection": "all-products",
         "primary_button_text": "Shop the Collection"
       }
     },
@@ -65,14 +65,14 @@
         "collection_block_AmD6jJ": {
           "type": "collection_block",
           "settings": {
-            "collection": "test",
+            "collection": "all-products",
             "background_image": "shopify://shop_images/pexels-lucasmonteiro-1868563_1.jpg"
           }
         },
         "collection_block_NKemYF": {
           "type": "collection_block",
           "settings": {
-            "collection": "test",
+            "collection": "all-products",
             "background_image": "shopify://shop_images/pexels-brett-sayles-3759249-min_1.jpg"
           }
         },
@@ -86,7 +86,7 @@
         "collection_block_8BRDkj": {
           "type": "collection_block",
           "settings": {
-            "collection": "test",
+            "collection": "all-products",
             "background_image": "shopify://shop_images/pexels-brett-sayles-3759249-min_1.jpg"
           }
         },

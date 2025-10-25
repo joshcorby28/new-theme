@@ -24,7 +24,7 @@
       "name": "Product Slider",
       "settings": {
         "main-title": "shop the rest",
-        "collection": "test",
+        "collection": "all-products",
         "primary_button_text": ""
       }
     }
