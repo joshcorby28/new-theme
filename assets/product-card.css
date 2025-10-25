@@ -12,28 +12,32 @@
 .product-card__image-wrapper {
   position: relative;
   width: 100%;
-  aspect-ratio: 1 / 1;
+  /* Removed aspect-ratio so the image height is natural */
 }
 
 .product-card__image {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto; /* Allow natural image height */
+  object-fit: cover; /* Or use "contain" if you prefer full image visible */
   display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
   transition: opacity 0.3s ease;
 }
 
 .product-card__image.primary-image {
+  position: relative;
   z-index: 1;
   opacity: 1;
 }
 
 .product-card__image.hover-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
   z-index: 2;
   opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 .product-card__image-wrapper:hover .hover-image {
@@ -74,9 +78,9 @@
 }
 
 .drop-badge {
-      font-size: 13px;
-    background: #1b1b1b;
-    padding: 5px;
-    text-align: center;
-    color: white;
+  font-size: 13px;
+  background: #1b1b1b;
+  padding: 5px;
+  text-align: center;
+  color: white;
 }
