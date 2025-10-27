@@ -369,7 +369,7 @@
 
 .related-products__item {
   width: 70px;
-  height: 70px;
+    height: 100%;
   overflow: hidden;
   flex-shrink: 0;
   transition: transform 0.3s ease, box-shadow 0.3s ease, border 0.3s ease;
