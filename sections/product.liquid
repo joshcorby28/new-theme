@@ -92,44 +92,97 @@
 {% endif %}
 
 </div>
-
 <div class="product-form">
-  {% form 'product', product %}
+  {% form 'product', product, id: 'product-form-{{ product.id }}' %}
     {% assign current_variant = product.selected_or_first_available_variant %}
     {% for option in product.options_with_values %}
-<div class="variant-buttons">
-  {% for variant in product.variants %}
-    <button
-      type="button"
-      class="variant-button{% if variant == current_variant %} active{% endif %} "
-      data-variant-id="{{ variant.id }}"
-      {% unless variant.available %}disabled{% endunless %}
-    >
-      {{ variant.title }}
-    </button>
-  {% endfor %}
-</div>
+      <div class="variant-buttons">
+        {% for variant in product.variants %}
+          <button
+            type="button"
+            class="variant-button{% if variant == current_variant %} active{% endif %}"
+            data-variant-id="{{ variant.id }}"
+            {% unless variant.available %}disabled{% endunless %}
+          >
+            {{ variant.title }}
+          </button>
+        {% endfor %}
+      </div>
 
-<!-- Hidden input to hold selected variant id -->
-<input type="hidden" name="id" id="selected-variant-id" value="{{ current_variant.id }}">
-{% endfor %}
+      <!-- Hidden input to hold selected variant id -->
+      <input type="hidden" name="id" id="selected-variant-id-{{ product.id }}" value="{{ current_variant.id }}">
+    {% endfor %}
+
     <div class="qty-and-form">
       <div class="quantity-selector">
-  <button type="button" class="qty-btn minus">-</button>
-  <input
-    type="number"
-    name="quantity"
-    min="1"
-    value="1"
-    class="qty-input"
-  />
-  <button type="button" class="qty-btn plus">+</button>
-</div>
+        <button type="button" class="qty-btn minus">-</button>
+        <input
+          type="number"
+          name="quantity"
+          min="1"
+          value="1"
+          class="qty-input"
+        />
+        <button type="button" class="qty-btn plus">+</button>
+      </div>
 
-    <button class="add-to-cart fract-primary" type="submit" value="Add to cart">Add to cart</button>
+      <button class="add-to-cart fract-primary" type="submit">Add to cart</button>
     </div>
   {% endform %}
 </div>
+
+<!-- Popup notification -->
+<div id="cart-notification-{{ product.id }}" style="display:none; position:fixed; bottom:20px; right:20px; background:#fff; color:#000; padding:16px; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.15); z-index:9999; width:300px; max-height:400px; overflow-y:auto;">
+  <strong>Added to cart</strong>
+  <div id="cart-items-{{ product.id }}" style="margin-top:12px;"></div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const form = document.getElementById('product-form-{{ product.id }}');
+  const notification = document.getElementById('cart-notification-{{ product.id }}');
+  const cartItemsContainer = document.getElementById('cart-items-{{ product.id }}');
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const formData = new FormData(form);
+
+    fetch('/cart/add.js', {
+      method: 'POST',
+      body: formData,
+      headers: { 'Accept': 'application/json' }
+    })
+    .then(response => response.json())
+    .then(product => {
+      // Show popup
+      notification.style.display = 'block';
+
+      // Add product to popup
+      const itemHTML = `
+        <div style="display:flex; margin-bottom:8px; align-items:center;">
+          <img src="${product.image}" style="width:50px; height:50px; object-fit:cover; margin-right:10px; border-radius:6px;">
+          <div>
+            <div>${product.title}</div>
+            <div style="font-size:0.9em; color:#555;">Qty: ${formData.get('quantity')}</div>
+          </div>
+        </div>
+      `;
+      cartItemsContainer.insertAdjacentHTML('beforeend', itemHTML);
+
+      // Hide popup after 3 seconds
+      setTimeout(() => {
+        notification.style.display = 'none';
+      }, 3000);
+
+      // Optional: trigger mini-cart update
+      // window.dispatchEvent(new Event('cart:updated'));
+    })
+    .catch(err => console.error('Add to cart error', err));
+  });
+});
+</script>
+
 
 </div>
   <div class="product-extras">
