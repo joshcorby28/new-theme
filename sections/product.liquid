@@ -92,35 +92,32 @@
 {% endif %}
 
 </div>
-<div class="product-form">
-  {% form 'product', product, id: 'product-form-{{ product.id }}' %}
-    {% assign current_variant = product.selected_or_first_available_variant %}
-    <div class="variant-buttons">
-      {% for variant in product.variants %}
-        <button
-          type="button"
-          class="variant-button{% if variant == current_variant %} active{% endif %}"
-          data-variant-id="{{ variant.id }}"
-          {% unless variant.available %}disabled{% endunless %}
-        >
-          {{ variant.title }}
-        </button>
-      {% endfor %}
+<div class="product-form" id="product-form-{{ product.id }}">
+  {% assign current_variant = product.selected_or_first_available_variant %}
+  <div class="variant-buttons">
+    {% for variant in product.variants %}
+      <button
+        type="button"
+        class="variant-button{% if variant == current_variant %} active{% endif %}"
+        data-variant-id="{{ variant.id }}"
+        {% unless variant.available %}disabled{% endunless %}
+      >
+        {{ variant.title }}
+      </button>
+    {% endfor %}
+  </div>
+
+  <input type="hidden" id="selected-variant-id-{{ product.id }}" value="{{ current_variant.id }}">
+
+  <div class="qty-and-form">
+    <div class="quantity-selector">
+      <button type="button" class="qty-btn minus">-</button>
+      <input type="number" id="qty-{{ product.id }}" min="1" value="1" class="qty-input"/>
+      <button type="button" class="qty-btn plus">+</button>
     </div>
 
-    <!-- Hidden input to hold selected variant id -->
-    <input type="hidden" name="id" id="selected-variant-id-{{ product.id }}" value="{{ current_variant.id }}">
-
-    <div class="qty-and-form">
-      <div class="quantity-selector">
-        <button type="button" class="qty-btn minus">-</button>
-        <input type="number" name="quantity" min="1" value="1" class="qty-input"/>
-        <button type="button" class="qty-btn plus">+</button>
-      </div>
-
-      <button class="add-to-cart fract-primary" type="submit">Add to cart</button>
-    </div>
-  {% endform %}
+    <button type="button" class="add-to-cart fract-primary">Add to cart</button>
+  </div>
 </div>
 
 <!-- Popup notification -->
@@ -134,18 +131,19 @@ document.addEventListener('DOMContentLoaded', function() {
   const form = document.getElementById('product-form-{{ product.id }}');
   const notification = document.getElementById('cart-notification-{{ product.id }}');
   const cartItemsContainer = document.getElementById('cart-items-{{ product.id }}');
+  const addButton = form.querySelector('.add-to-cart');
 
-  if (!form) return;
-
-  form.addEventListener('submit', function(e) {
-    e.preventDefault(); // stop normal submission
-    e.stopPropagation(); // stop bubbling
-    const formData = new FormData(form);
+  addButton.addEventListener('click', function() {
+    const variantId = form.querySelector(`#selected-variant-id-{{ product.id }}`).value;
+    const quantity = form.querySelector(`#qty-{{ product.id }}`).value;
 
     fetch('/cart/add.js', {
       method: 'POST',
-      body: formData,
-      headers: { 'Accept': 'application/json' }
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        id: variantId,
+        quantity: parseInt(quantity)
+      })
     })
     .then(response => response.json())
     .then(product => {
@@ -158,20 +156,19 @@ document.addEventListener('DOMContentLoaded', function() {
           <img src="${product.image}" style="width:50px; height:50px; object-fit:cover; margin-right:10px; border-radius:6px;">
           <div>
             <div>${product.title}</div>
-            <div style="font-size:0.9em; color:#555;">Qty: ${formData.get('quantity')}</div>
+            <div style="font-size:0.9em; color:#555;">Qty: ${quantity}</div>
           </div>
         </div>
       `;
       cartItemsContainer.insertAdjacentHTML('beforeend', itemHTML);
 
-      // Hide popup after 3s
+      // Hide popup after 3 seconds
       setTimeout(() => { notification.style.display = 'none'; }, 3000);
 
-      return false; // extra safety
+      // Optional: trigger mini-cart update
+      window.dispatchEvent(new Event('cart:updated'));
     })
     .catch(err => console.error('Add to cart error', err));
-
-    return false; // prevent default form submission
   });
 });
 </script>
