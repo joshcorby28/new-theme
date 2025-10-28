@@ -128,29 +128,30 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  const form = document.getElementById('product-form-{{ product.id }}');
-  const notification = document.getElementById('cart-notification-{{ product.id }}');
-  const cartItemsContainer = document.getElementById('cart-items-{{ product.id }}');
+  const productId = '{{ product.id }}';
+  const form = document.getElementById(`product-form-${productId}`);
   const addButton = form.querySelector('.add-to-cart');
-
+  const variantIdInput = document.getElementById(`selected-variant-id-${productId}`);
+  const quantityInput = form.querySelector(`#qty-${productId}`);
+  const notification = document.getElementById(`cart-notification-${productId}`);
+  const cartItemsContainer = document.getElementById(`cart-items-${productId}`);
+  
+  // Cart icon element
+  const cartLink = document.querySelector('a[href="{{ routes.cart_url }}"]');
+  
   addButton.addEventListener('click', function() {
-    const variantId = form.querySelector(`#selected-variant-id-{{ product.id }}`).value;
-    const quantity = form.querySelector(`#qty-{{ product.id }}`).value;
+    const variantId = variantIdInput.value;
+    const quantity = parseInt(quantityInput.value);
 
     fetch('/cart/add.js', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify({
-        id: variantId,
-        quantity: parseInt(quantity)
-      })
+      body: JSON.stringify({ id: variantId, quantity: quantity })
     })
     .then(response => response.json())
     .then(product => {
       // Show popup
       notification.style.display = 'block';
-
-      // Add product info to popup
       const itemHTML = `
         <div style="display:flex; margin-bottom:8px; align-items:center;">
           <img src="${product.image}" style="width:50px; height:50px; object-fit:cover; margin-right:10px; border-radius:6px;">
@@ -162,8 +163,21 @@ document.addEventListener('DOMContentLoaded', function() {
       `;
       cartItemsContainer.insertAdjacentHTML('beforeend', itemHTML);
 
-      // Hide popup after 3 seconds
       setTimeout(() => { notification.style.display = 'none'; }, 3000);
+
+      // Fetch updated cart and update icon
+      fetch('/cart.js', { headers: { 'Accept': 'application/json' } })
+        .then(res => res.json())
+        .then(cart => {
+          if (cart.item_count > 0) {
+            cartLink.querySelector('sup')?.remove(); // remove old count
+            const sup = document.createElement('sup');
+            sup.textContent = cart.item_count;
+            cartLink.prepend(sup);
+          } else {
+            cartLink.querySelector('sup')?.remove();
+          }
+        });
 
       // Optional: trigger mini-cart update
       window.dispatchEvent(new Event('cart:updated'));
@@ -172,6 +186,7 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 </script>
+
 
 
 </div>
