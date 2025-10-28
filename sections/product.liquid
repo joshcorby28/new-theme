@@ -404,9 +404,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-  const variantButtons = document.querySelectorAll('.variant-button');
-  const variantIdInput = document.getElementById('selected-variant-id');
+document.addEventListener('DOMContentLoaded', function() {
+  const productId = '{{ product.id }}';
+  const variantButtons = document.querySelectorAll(`#product-form-${productId} .variant-button`);
+  const variantIdInput = document.getElementById(`selected-variant-id-${productId}`);
 
   variantButtons.forEach(button => {
     button.addEventListener('click', () => {
@@ -422,7 +423,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 });
-
 </script>
 
 
