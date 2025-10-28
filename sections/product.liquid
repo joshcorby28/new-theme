@@ -95,34 +95,26 @@
 <div class="product-form">
   {% form 'product', product, id: 'product-form-{{ product.id }}' %}
     {% assign current_variant = product.selected_or_first_available_variant %}
-    {% for option in product.options_with_values %}
-      <div class="variant-buttons">
-        {% for variant in product.variants %}
-          <button
-            type="button"
-            class="variant-button{% if variant == current_variant %} active{% endif %}"
-            data-variant-id="{{ variant.id }}"
-            {% unless variant.available %}disabled{% endunless %}
-          >
-            {{ variant.title }}
-          </button>
-        {% endfor %}
-      </div>
+    <div class="variant-buttons">
+      {% for variant in product.variants %}
+        <button
+          type="button"
+          class="variant-button{% if variant == current_variant %} active{% endif %}"
+          data-variant-id="{{ variant.id }}"
+          {% unless variant.available %}disabled{% endunless %}
+        >
+          {{ variant.title }}
+        </button>
+      {% endfor %}
+    </div>
 
-      <!-- Hidden input to hold selected variant id -->
-      <input type="hidden" name="id" id="selected-variant-id-{{ product.id }}" value="{{ current_variant.id }}">
-    {% endfor %}
+    <!-- Hidden input to hold selected variant id -->
+    <input type="hidden" name="id" id="selected-variant-id-{{ product.id }}" value="{{ current_variant.id }}">
 
     <div class="qty-and-form">
       <div class="quantity-selector">
         <button type="button" class="qty-btn minus">-</button>
-        <input
-          type="number"
-          name="quantity"
-          min="1"
-          value="1"
-          class="qty-input"
-        />
+        <input type="number" name="quantity" min="1" value="1" class="qty-input"/>
         <button type="button" class="qty-btn plus">+</button>
       </div>
 
@@ -143,9 +135,11 @@ document.addEventListener('DOMContentLoaded', function() {
   const notification = document.getElementById('cart-notification-{{ product.id }}');
   const cartItemsContainer = document.getElementById('cart-items-{{ product.id }}');
 
-  form.addEventListener('submit', function(e) {
-    e.preventDefault();
+  if (!form) return;
 
+  form.addEventListener('submit', function(e) {
+    e.preventDefault(); // stop normal submission
+    e.stopPropagation(); // stop bubbling
     const formData = new FormData(form);
 
     fetch('/cart/add.js', {
@@ -158,7 +152,7 @@ document.addEventListener('DOMContentLoaded', function() {
       // Show popup
       notification.style.display = 'block';
 
-      // Add product to popup
+      // Add product info to popup
       const itemHTML = `
         <div style="display:flex; margin-bottom:8px; align-items:center;">
           <img src="${product.image}" style="width:50px; height:50px; object-fit:cover; margin-right:10px; border-radius:6px;">
@@ -170,15 +164,14 @@ document.addEventListener('DOMContentLoaded', function() {
       `;
       cartItemsContainer.insertAdjacentHTML('beforeend', itemHTML);
 
-      // Hide popup after 3 seconds
-      setTimeout(() => {
-        notification.style.display = 'none';
-      }, 3000);
+      // Hide popup after 3s
+      setTimeout(() => { notification.style.display = 'none'; }, 3000);
 
-      // Optional: trigger mini-cart update
-      // window.dispatchEvent(new Event('cart:updated'));
+      return false; // extra safety
     })
     .catch(err => console.error('Add to cart error', err));
+
+    return false; // prevent default form submission
   });
 });
 </script>
