@@ -1,5 +1,21 @@
-<!-- Add this at the top of your page, or right after <body> -->
-<div id="cart-notification-{{ product.id }}" style="display:none; position:fixed; top:80px; right:20px; background:#fff; color:#000; padding:16px; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.15); z-index:9999; width:300px;">
+<!-- Frosted popup below header -->
+<div id="cart-notification-{{ product.id }}" style="
+    display:none;
+    position:fixed;
+    top:80px;
+    right:50%;
+    transform: translateX(50%);
+    width:95%;
+    max-width:400px;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    padding: 30px 20px;
+    color:#000;
+    z-index:9999;
+">
   <strong>Added to cart</strong>
   <div id="cart-items-{{ product.id }}" style="margin-top:12px;"></div>
 </div>
