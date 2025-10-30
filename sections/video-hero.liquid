@@ -327,7 +327,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
       {% if section.settings.show_buttons %}
-        <div class="flex gap-4 flex-wrap {% if section.settings.text_alignment == 'center' %}justify-center{% elsif section.settings.text_alignment == 'right' %}justify-end{% else %}justify-start{% endif %}">
+        <div class="fract-theme-media-buttons-{{ fract_theme_id }} flex gap-4 flex-wrap {% if section.settings.text_alignment == 'center' %}justify-center{% elsif section.settings.text_alignment == 'right' %}justify-end{% else %}justify-start{% endif %}">
           {% if section.settings.primary_button_text != blank and section.settings.primary_button_link != blank %}
             <a href="{{ section.settings.primary_button_link }}" class="button-skew {{ section.settings.primary_button_style }}">
               {{ section.settings.primary_button_text }}
