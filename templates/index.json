@@ -29,7 +29,7 @@
         "placeholder_color": "#f4f4f4",
         "use_overlay": true,
         "overlay_color": "#000000",
-        "overlay_opacity": 40,
+        "overlay_opacity": 60,
         "heading": "discover the unknown",
         "text": "now live",
         "content_position": "bottom",
