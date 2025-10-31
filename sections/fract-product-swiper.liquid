@@ -4,7 +4,7 @@
 {% assign my_collection = collections[section.settings.collection] %}
 
 <div class="swiper fract-product-swiper" id="product-slider-{{ section.id }}">
-{% if section.settings.main-title %}
+{% if section.settings.main-title != blank  %}
   <div style="max-width:95%; text-align:center; margin: 0 auto 30px auto;" class="title-and-button page-width">
     <h2 class="title inline-richtext h2">
       {{ section.settings['main-title'] }}
