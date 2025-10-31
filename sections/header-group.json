@@ -16,11 +16,10 @@
       "blocks": {
         "announcement_qLNfzT": {
           "type": "announcement",
-          "disabled": true,
           "settings": {
             "custom_svg": "",
             "icon_size": "medium",
-            "text": "next day shipping",
+            "text": "free shipping over <span style=\"font-size:12px;\"> £80 </span>",
             "text_size": 16,
             "text_link": ""
           }
