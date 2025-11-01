@@ -2,11 +2,11 @@
 
               {% if product.tags contains 'comingsoon'  %}
                 <style>
-                  .product-card__image-wrapper:hover .hover-image {
+                  .coming-soon:hover .hover-image {
   opacity: 0 !important;
 }
 
-.product-card__image-wrapper:hover .primary-image {
+.coming-soon:hover  .primary-image {
   opacity: 1 !important;
 }
 </style>
@@ -14,7 +14,7 @@
 
 <div class="product-card">
   <a href="{{ product.url }}" class="product-card__link">
-<div class="product-card__image-wrapper">
+<div class="{% if product.tags contains 'comingsoon'  %}coming-soon{%endif%} product-card__image-wrapper">
   {% assign first_image = product.featured_image %}
   {% assign second_image = product.images[1] %}
 
