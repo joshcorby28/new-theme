@@ -361,15 +361,26 @@ document.addEventListener('DOMContentLoaded', function() {
   document.addEventListener('DOMContentLoaded', function () {
     new Swiper('.product-gallery-swiper', {
       loop: true,
-  navigation: {
-    nextEl: '.swiper-button-next-smarte',
-    prevEl: '.swiper-button-prev-smarte',
-  },
-      slidesPerView: 2,
-      spaceBetween: 10
+      navigation: {
+        nextEl: '.swiper-button-next-smarte',
+        prevEl: '.swiper-button-prev-smarte',
+      },
+      slidesPerView: 2, // default for desktop
+      spaceBetween: 10,
+      breakpoints: {
+        0: {          // from 0px width
+          slidesPerView: 1,
+          spaceBetween: 10
+        },
+        768: {        // from 768px width and up
+          slidesPerView: 2,
+          spaceBetween: 10
+        }
+      }
     });
   });
 </script>
+
 
 <style>
   .fract-main-product .product-images {
