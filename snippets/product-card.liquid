@@ -12,8 +12,7 @@
     class="product-card__image primary-image"
     loading="lazy"
   >
-
-              {% unless product.tags contains 'comingsoon'  %}
+    
 
   {% if second_image %}
     <img
@@ -23,7 +22,6 @@
       loading="lazy"
     >
   {% endif %}
-{% endunless %}
 
   {% if product.tags contains 'comingsoon' %}
     <div class="product-card__overlay">
