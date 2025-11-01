@@ -21,27 +21,6 @@
 </div>
 
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-  const el = document.querySelector('shopify-payment-terms');
-
-  // Wait for Shopify to render the shadow DOM content
-  setTimeout(() => {
-    const shadow = el?.shadowRoot;
-    if (!shadow) return;
-
-    const style = document.createElement('style');
-    style.textContent = `
-      #shopify-installments-content {
-        font-size: 12px !important;
-      }
-    `;
-    shadow.appendChild(style);
-  }, 1000);
-});
-
-</script>
-
-<script>
 document.addEventListener('DOMContentLoaded', function() {
   const productId = '{{ product.id }}';
   const form = document.getElementById(`product-form-${productId}`);
@@ -213,12 +192,11 @@ document.addEventListener('DOMContentLoaded', function() {
         {{ variant.title }}
       </button>
     {% endfor %}
+  </div>
     {% form 'product', product %}
 <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}" />
 {{ form | payment_terms }}
 {% endform %}
-  </div>
-
   <input type="hidden" id="selected-variant-id-{{ product.id }}" value="{{ current_variant.id }}">
 
   <div class="qty-and-form">
