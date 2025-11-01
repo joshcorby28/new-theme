@@ -21,6 +21,39 @@
 </div>
 
 <script>
+  document.addEventListener('DOMContentLoaded', () => {
+  const el = document.querySelector('shopify-payment-terms');
+
+  // Wait a moment for Shopify to finish rendering its shadow DOM
+  setTimeout(() => {
+    const shadow = el && el.shadowRoot;
+    if (!shadow) return;
+
+    const style = document.createElement('style');
+    style.textContent = `
+      :host {
+        display: block;
+        margin-top: 10px;
+      }
+
+      /* Example - target text inside */
+      .shopify-installments__text {
+        font-size: 14px !important;
+        color: #222 !important;
+        font-weight: 500 !important;
+      }
+
+      a {
+        color: #000 !important;
+        text-decoration: none !important;
+      }
+    `;
+    shadow.appendChild(style);
+  }, 1000);
+});
+</script>
+
+<script>
 document.addEventListener('DOMContentLoaded', function() {
   const productId = '{{ product.id }}';
   const form = document.getElementById(`product-form-${productId}`);
