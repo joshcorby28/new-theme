@@ -43,7 +43,7 @@
         "text-uppercase": true,
         "show_buttons": true,
         "primary_button_text": "shop drop",
-        "primary_button_link": "shopify://collections",
+        "primary_button_link": "shopify://collections/all-products",
         "primary_button_style": "fract-secondary",
         "secondary_button_text": "",
         "secondary_button_link": "",
