@@ -24,22 +24,12 @@
             "text_link": ""
           }
         },
-        "announcement_my7EWY": {
-          "type": "announcement",
-          "settings": {
-            "custom_svg": "",
-            "icon_size": "medium",
-            "text": "discover the unknown",
-            "text_size": 16,
-            "text_link": ""
-          }
-        },
         "announcement_8TjAGd": {
           "type": "announcement",
           "settings": {
             "custom_svg": "",
             "icon_size": "medium",
-            "text": "first drop",
+            "text": "get <span style=\"font-size:12px;\"> 10% </span> off first order with code <b>firstdrop<span style=\"font-size:12px;\">10</span></b>",
             "text_size": 16,
             "text_link": ""
           }
@@ -47,7 +37,6 @@
       },
       "block_order": [
         "announcement_qLNfzT",
-        "announcement_my7EWY",
         "announcement_8TjAGd"
       ],
       "name": "Scrolling promo",
