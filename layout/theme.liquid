@@ -137,36 +137,6 @@
   }
 </style>
 
-<div id="first-drop-popup-overlay">
-  <div id="first-drop-popup">
-    <span class="close-popup">&times;</span>
-    <h2>Get 10% Off Your Our Drop!</h2>
-    <p>Use code below at checkout to claim your discount.</p>
-    <div class="discount-code">FIRSTDROP10</div>
-    <button onclick="closeFirstDropPopup()">Shop Now</button>
-  </div>
-</div>
-
-<script>
-  // Function to show popup only if not seen before
-  document.addEventListener('DOMContentLoaded', () => {
-    if(!localStorage.getItem('firstDropShown')) {
-      setTimeout(() => {
-        document.getElementById('first-drop-popup-overlay').style.display = 'flex';
-      }, 3000);
-    }
-  });
-
-  function closeFirstDropPopup() {
-    document.getElementById('first-drop-popup-overlay').style.display = 'none';
-    localStorage.setItem('firstDropShown', 'true'); // Mark as shown
-  }
-
-  // Close on clicking overlay
-  document.getElementById('first-drop-popup-overlay').addEventListener('click', function(e) {
-    if(e.target === this) closeFirstDropPopup();
-  });
-</script>
 
     
     {% if template == 'index' %}
