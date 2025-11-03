@@ -36,6 +36,7 @@
         },
         "announcement_DEELTG": {
           "type": "announcement",
+          "disabled": true,
           "settings": {
             "custom_svg": "",
             "icon_size": "medium",
