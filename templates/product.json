@@ -16,7 +16,7 @@
         "show-stock-indicator": true,
         "show_product_info": true,
         "show_size_guide": true,
-        "show_custom_content": false
+        "show_custom_content": true
       }
     },
     "fract_product_swiper_ryXikk": {
