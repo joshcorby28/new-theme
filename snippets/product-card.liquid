@@ -92,6 +92,34 @@
 {% elsif product.variants.size > 1 %}
   <p class="product-card__more-styles">More styles +</p>
 {% endif %}
+ {% assign total_inventory = 0 %}
+
+  {% for variant in product.variants %}
+    {% assign total_inventory = total_inventory | plus: variant.inventory_quantity %}
+  {% endfor %}
+
+  {% assign in_stock = product.available %}
+
+  <div class="stock-indicator-wrapper">
+    {% if in_stock %}
+      {% if total_inventory < 7 %}
+        <div class="stock-indicator low-stock">
+          <span class="circle"></span>
+          <span>Limited Stock</span>
+        </div>
+      {% else %}
+        <div class="stock-indicator in-stock">
+          <span class="circle"></span>
+          <span>In Stock</span>
+        </div>
+      {% endif %}
+    {% else %}
+      <div class="stock-indicator out-of-stock">
+        <span class="circle"></span>
+        <span>Out of Stock</span>
+      </div>
+    {% endif %}
+  </div>
 
     </div>
   </a>
