@@ -139,11 +139,6 @@
 </style>
 
 
-    
-    {% if template == 'index' %}
-    {% render 'preloader' %}
-    {% endif %}
-
     {% sections 'header-group' %}
 
     {% # Global %}
@@ -337,7 +332,7 @@ document.addEventListener("DOMContentLoaded", function() {
   if (!getCookie("firstdrop_shown")) {
     setTimeout(() => {
       popup.style.display = "flex";
-    }, 1500); // show after 1.5s
+    }, 2500); // show after 1.5s
   }
 
   // Close popup
