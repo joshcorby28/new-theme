@@ -1,7 +1,7 @@
 
 <footer class="main-footer">
 <div class="newsletter" style="--align: {{ section.settings.alignment }};">
-  <form method="post" action="/contact#contact_form" accept-charset="UTF-8" class="signup-box" id="contact_form" novalidate>
+  <form method="post" action="/contact" class="signup-box" id="contact_form" novalidate>
     <label for="email" class="signup-text">
       <h4>{{ section.settings.signup_text }}</h4>
     </label>
@@ -13,6 +13,8 @@
         placeholder="{{ section.settings.placeholder_text }}"
         required
       />
+      <input type="hidden" name="form_type" value="customer">
+      <input type="hidden" name="utf8" value="✓">
       <button type="submit" class="{{ section.settings.button_class }}">
         {{ section.settings.button_text }}
       </button>
