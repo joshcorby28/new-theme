@@ -98,13 +98,13 @@
     justify-content: space-between;
     height:100%;
   }
-  {% if template == 'index' or template == 'collection' %}
+  {% if template == 'index' %}
   header a, header .mobile-menu-toggle {
     position: relative;
     transition: transform 0.4s ease-in-out;
     text-decoration: none;
     font-size:13px;
-    color: {{ section.settings.color-text }};
+    color: fff;
   }
 {% else %}
     header a, header .mobile-menu-toggle {
