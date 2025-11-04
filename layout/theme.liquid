@@ -257,6 +257,97 @@
           stroke:white;}
     </style>
   {% endif %}
+<!-- Discount Popup Start -->
+<div id="discount-popup" class="discount-popup">
+  <div class="popup-content">
+    <button class="close-popup" aria-label="Close">&times;</button>
+    <h2>GET 10% OFF FIRST DROP</h2>
+    <p>USE CODE <strong>FIRSTDROP10</strong></p>
+  </div>
+</div>
+
+<style>
+.discount-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.popup-content {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  padding: 2rem;
+  text-align: center;
+  max-width: 320px;
+  position: relative;
+}
+
+.popup-content h2 {
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+}
+
+.popup-content p {
+  font-size: 1rem;
+}
+
+.close-popup {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #000;
+  line-height: 1;
+}
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const popup = document.getElementById("discount-popup");
+  const closeBtn = document.querySelector(".close-popup");
+
+  // Helper to get cookie
+  function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+  }
+
+  // Helper to set cookie
+  function setCookie(name, value, days) {
+    const expires = new Date(Date.now() + days * 864e5).toUTCString();
+    document.cookie = name + '=' + encodeURIComponent(value) + '; expires=' + expires + '; path=/';
+  }
+
+  // Show popup only if cookie not set
+  if (!getCookie("firstdrop_shown")) {
+    setTimeout(() => {
+      popup.style.display = "flex";
+    }, 1500); // show after 1.5s
+  }
+
+  // Close popup
+  closeBtn.addEventListener("click", () => {
+    popup.style.display = "none";
+    setCookie("firstdrop_shown", "true", 30); // don't show again for 30 days
+  });
+});
+</script>
+<!-- Discount Popup End -->
 
     {% sections 'footer-group' %}
   </body>
