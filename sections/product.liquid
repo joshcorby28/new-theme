@@ -258,7 +258,85 @@ document.addEventListener('DOMContentLoaded', function() {
       </div>
     {% endif %}
   </div>
+<div class="stock-quantity" id="StockQuantity-{{ section.id }}">
+  {% assign current_variant = product.selected_or_first_available_variant %}
+  {% if current_variant.inventory_management and current_variant.available %}
+    <span>
+      {{ current_variant.inventory_quantity }}
+      {% if current_variant.inventory_quantity == 1 %}
+        unit
+      {% else %}
+        units
+      {% endif %}
+      in stock
+    </span>
+  {% endif %}
+</div>
+
 {% endif %}
+
+<script>
+(function(){
+  const sectionId = {{ section.id | json }};
+  const wrapper = document.getElementById(`StockIndicatorWrapper-${sectionId}`);
+  if (!wrapper) return;
+
+  let variants = [];
+  try {
+    variants = JSON.parse(wrapper.dataset.variants || '[]');
+  } catch (e) {
+    console.error('Failed to parse variants JSON', e);
+  }
+
+  const qtyEl = document.getElementById(`StockQuantity-${sectionId}`);
+  if (!qtyEl) return;
+
+  function findVariantById(id) {
+    const numericId = Number(id);
+    return variants.find(v => Number(v.id) === numericId);
+  }
+
+  function updateStockQuantity(variant) {
+    if (!variant) return;
+
+    if (variant.inventory_management && variant.available) {
+      const qty = variant.inventory_quantity;
+      const unitText = qty === 1 ? 'unit' : 'units';
+      qtyEl.textContent = `${qty} ${unitText} in stock`;
+    } else {
+      qtyEl.textContent = 'Out of stock';
+    }
+  }
+
+  // Set initial
+  const initialVariantId = wrapper.dataset.initialVariantId;
+  const initialVariant = findVariantById(initialVariantId);
+  updateStockQuantity(initialVariant);
+
+  // Listen for variant change
+  document.addEventListener('variant:change', function(e) {
+    const variant = e?.detail?.variant;
+    if (variant) updateStockQuantity(variant);
+  });
+
+  // Fallback for select or radio variant switchers
+  const select = document.querySelector('select[name="id"]');
+  if (select) {
+    select.addEventListener('change', e => {
+      const variant = findVariantById(e.target.value);
+      if (variant) updateStockQuantity(variant);
+    });
+  }
+  const radios = document.querySelectorAll('input[name="id"]');
+  radios.forEach(radio => {
+    radio.addEventListener('change', e => {
+      const variant = findVariantById(e.target.value);
+      if (variant) updateStockQuantity(variant);
+    });
+  });
+})();
+</script>
+
 
 
   {% assign usp_point = product.metafields.custom.usp_point %}
