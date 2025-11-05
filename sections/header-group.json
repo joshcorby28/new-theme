@@ -36,11 +36,10 @@
         },
         "announcement_DEELTG": {
           "type": "announcement",
-          "disabled": true,
           "settings": {
             "custom_svg": "",
             "icon_size": "medium",
-            "text": "<b>one tree planted</b> with every order",
+            "text": "<b>buy now, pay later</b> with clearpay",
             "text_size": 16,
             "text_link": ""
           }
