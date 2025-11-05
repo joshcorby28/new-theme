@@ -193,17 +193,23 @@ document.addEventListener('DOMContentLoaded', function() {
       </button>
     {% endfor %}
   </div>
-<square-placement
-  data-mpid="7c160a40-92ba-4a97-8713-ca92b97feff1"
-  data-placement-id="ca30fcd4-a142-4e6c-a0d9-419d9ad79e8f"
-  data-page-type="product"
-  data-amount="{{ product.selected_or_first_available_variant.price | money_without_currency }}"
-  data-currency="{{ shop.currency }}"
-  data-consumer-locale="{{ localization.language.iso_code }}-{{ localization.country.iso_code }}"
-  data-item-skus="{{ product.selected_or_first_available_variant.sku }}"
-  data-item-categories="{% if product.collections.size > 0 %}{{ product.collections.first.title | escape }}{% endif %}"
-  data-is-eligible="true">
-</square-placement>
+{% if section.blocks.size > 0 %}
+  <div class="product-app-blocks">
+    {% for block in section.blocks %}
+      {% case block.type %}
+        {% when 'custom_html' %}
+          <div class="custom-html-block" {{ block.shopify_attributes }}>
+            {{ block.settings.html }}
+          </div>
+
+        {% when '@app' %}
+          {% render block %}
+
+      {% endcase %}
+    {% endfor %}
+  </div>
+{% endif %}
+
 
   <input type="hidden" id="selected-variant-id-{{ product.id }}" value="{{ current_variant.id }}">
 
@@ -357,7 +363,31 @@ document.addEventListener('DOMContentLoaded', function() {
   ],
   "disabled_on": {
     "groups": ["header", "footer"]
+  },
+"blocks": [
+  {
+    "type": "custom_html",
+    "name": "Custom HTML Block",
+    "settings": [
+      {
+        "type": "html",
+        "id": "html",
+        "label": "Custom HTML",
+        "default": "<p>Add custom HTML content here</p>"
+      }
+    ]
+  },
+  {
+    "type": "@app"
   }
+],
+"presets": [
+  {
+    "name": "Product Section",
+    "blocks": []
+  }
+]
+
 }
 {% endschema %}
 
