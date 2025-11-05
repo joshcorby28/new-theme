@@ -18,14 +18,16 @@
             "bg-color-text": "",
             "heading": "Have a question?",
             "body": "Please send us an email at <b>hello@hiddenfuture.co.uk</b>, and a member of our team will get back to you as soon as possible. Be sure to include your order number and as many details about your enquiry as you can so we can assist you quickly and efficiently.",
-            "button_link": "",
-            "button_label": "",
+            "button_link": "mailto:hello@hiddenfuture.co.uk",
+            "button_label": "Email Us",
             "button_style": "fract-primary"
           }
         },
         "image_block_8wb3e3": {
           "type": "image_block",
-          "settings": {}
+          "settings": {
+            "image": "shopify://shop_images/New_Project_22_1_1_2_14.jpg"
+          }
         }
       },
       "block_order": [
