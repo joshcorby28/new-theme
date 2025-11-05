@@ -193,10 +193,18 @@ document.addEventListener('DOMContentLoaded', function() {
       </button>
     {% endfor %}
   </div>
-    {% form 'product', product %}
-<input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}" />
-{{ form | payment_terms }}
-{% endform %}
+<square-placement
+  data-mpid="7c160a40-92ba-4a97-8713-ca92b97feff1"
+  data-placement-id="ca30fcd4-a142-4e6c-a0d9-419d9ad79e8f"
+  data-page-type="product"
+  data-amount="{Replace with your own price variable}"
+  data-currency="{Replace with your own currency variable}"
+  data-consumer-locale="{Replace with consumer locale variable}"
+  data-item-skus="{Replace with SKU variable}"
+  data-item-categories="{Replace with category variable}"
+  data-is-eligible="true"
+>
+</square-placement>
   <input type="hidden" id="selected-variant-id-{{ product.id }}" value="{{ current_variant.id }}">
 
   <div style="margin-top:16px;" class="qty-and-form">
@@ -226,7 +234,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   <div class="stock-indicator-wrapper">
     {% if in_stock %}
-      {% if total_inventory < 12 %}
+      {% if total_inventory < 11 %}
         <div class="stock-indicator low-stock">
           <span class="circle"></span>
           <span>Limited Stock</span>
