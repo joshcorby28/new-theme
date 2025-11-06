@@ -9,19 +9,15 @@
 .coming-soon:hover  .primary-image {
   opacity: 1 !important;
 }
-/* Disable hover for coming soon products on mobile */
-@media (hover: none), (pointer: coarse) {
-  .coming-soon:hover .hover-image,
+@media (max-width: 750px) {
   .product-card__image-wrapper:hover .hover-image {
     opacity: 0 !important;
   }
 
-  .coming-soon:hover .primary-image,
   .product-card__image-wrapper:hover .primary-image {
     opacity: 1 !important;
   }
 }
-
 
 </style>
 {% endif %}
