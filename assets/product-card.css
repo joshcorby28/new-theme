@@ -12,13 +12,12 @@
 .product-card__image-wrapper {
   position: relative;
   width: 100%;
-  /* Removed aspect-ratio so the image height is natural */
 }
 
 .product-card__image {
   width: 100%;
-  height: auto; /* Allow natural image height */
-  object-fit: cover; /* Or use "contain" if you prefer full image visible */
+  height: auto;
+  object-fit: cover;
   display: block;
   transition: opacity 0.3s ease;
 }
@@ -40,12 +39,15 @@
   transition: opacity 0.3s ease;
 }
 
-.product-card__image-wrapper:hover .hover-image {
-  opacity: 1;
-}
+/* Desktop hover effect only */
+@media (hover: hover) and (pointer: fine) {
+  .product-card__image-wrapper:hover .hover-image {
+    opacity: 1;
+  }
 
-.product-card__image-wrapper:hover .primary-image {
-  opacity: 0;
+  .product-card__image-wrapper:hover .primary-image {
+    opacity: 0;
+  }
 }
 
 .product-card__info {
