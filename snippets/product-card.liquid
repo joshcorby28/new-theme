@@ -23,7 +23,6 @@
     src="{{ first_image | image_url: width: 600 }}"
     alt="{{ first_image.alt | escape }}"
     class="product-card__image primary-image"
-    loading="lazy"
   >
     
 
@@ -32,7 +31,6 @@
       src="{{ second_image | image_url: width: 600 }}"
       alt="{{ second_image.alt | escape }}"
       class="product-card__image hover-image"
-      loading="lazy"
     >
   {% endif %}
 
