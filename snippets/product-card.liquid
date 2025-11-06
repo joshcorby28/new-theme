@@ -9,13 +9,13 @@
 .coming-soon:hover  .primary-image {
   opacity: 1 !important;
 }
-/* Disable hover on touch devices (mobile/tablet) */
-@media (hover: none), (pointer: coarse) {
-  .coming-soon:hover .hover-image,
-  .product-card__image-wrapper:hover .hover-image,
-  .coming-soon:hover .primary-image,
+@media (max-width: 750px) {
+  .product-card__image-wrapper:hover .hover-image {
+    opacity: 0 !important;
+  }
+
   .product-card__image-wrapper:hover .primary-image {
-    opacity: unset !important; /* remove hover effect */
+    opacity: 1 !important;
   }
 }
 
