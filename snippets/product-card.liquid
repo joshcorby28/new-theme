@@ -1,6 +1,6 @@
 {{ 'product-card.css' | asset_url | stylesheet_tag: preload: true }}
 
-              {% if product.tags contains 'comingsoon'  %}
+  {% if product.tags contains 'comingsoon'  %}
                 <style>
                   .coming-soon:hover .hover-image {
   opacity: 0 !important;
@@ -9,6 +9,16 @@
 .coming-soon:hover  .primary-image {
   opacity: 1 !important;
 }
+@media (max-width: 750px) {
+  .product-card__image-wrapper:hover .hover-image {
+    opacity: 0 !important;
+  }
+
+  .product-card__image-wrapper:hover .primary-image {
+    opacity: 1 !important;
+  }
+}
+
 </style>
 {% endif %}
 
