@@ -40,23 +40,28 @@
     {% endif %}
 
 <script>
-  document.addEventListener('DOMContentLoaded', function () {
-    if (typeof Swiper !== 'undefined') {
-      new Swiper('#product-slider-{{ section.id }}', {
-        slidesPerView: 4,
-        spaceBetween: 0,
-        loop: true,
-        breakpoints: {
-          320: { slidesPerView: 1.2, spaceBetween: 10 },
-          640: { slidesPerView: 2.2, spaceBetween: 15 },
-          1024: { slidesPerView: 5.2, spaceBetween: 15 },
-        }
-      });
-    } else {
-      console.error('Swiper JS not loaded.');
-    }
-  });
+document.addEventListener('DOMContentLoaded', function () {
+  if (typeof Swiper !== 'undefined') {
+    new Swiper('#product-slider-{{ section.id }}', {
+      slidesPerView: 4,
+      spaceBetween: 0,
+      loop: true,
+      preloadImages: true,      // Preload all slides
+      updateOnImagesReady: true, // Wait for images to load before rendering
+      observer: true,           // Recalculate if DOM changes
+      observeParents: true,
+      breakpoints: {
+        320: { slidesPerView: 1.2, spaceBetween: 10 },
+        640: { slidesPerView: 2.2, spaceBetween: 15 },
+        1024: { slidesPerView: 5.2, spaceBetween: 15 },
+      }
+    });
+  } else {
+    console.error('Swiper JS not loaded.');
+  }
+});
 </script>
+
 
 {% stylesheet %}
   .fract-product-swiper .product-card__info {
