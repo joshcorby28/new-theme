@@ -311,27 +311,24 @@
 </style>
 
 <script>
-  // Function to hide the Klaviyo link
+// Polling function to hide Klaviyo link
 function hideKlaviyoLink() {
   const links = document.querySelectorAll('a[target="_blank"][aria-label]');
   links.forEach(link => {
-    if (link.textContent.includes("Created with Klaviyo")) {
+    if (link.textContent.trim().includes("Created with Klaviyo")) {
       link.style.display = "none";
     }
   });
 }
 
-// Observe DOM changes
-const observer = new MutationObserver((mutations, obs) => {
-  const needsclickElements = document.querySelectorAll('.needsclick.kl-private-reset-css-Xuajs1');
-  if (needsclickElements.length > 0) {
-    hideKlaviyoLink(); // Hide link once elements exist
-    obs.disconnect();   // Stop observing after hiding
+// Keep checking until the element exists
+const interval = setInterval(() => {
+  const trigger = document.querySelector('.needsclick.kl-private-reset-css-Xuajs1');
+  if (trigger) {
+    hideKlaviyoLink();
+    clearInterval(interval); // Stop polling once done
   }
-});
-
-// Start observing the document body
-observer.observe(document.body, { childList: true, subtree: true });
+}, 100); // Check every 100ms
 </script>
 
     {% sections 'footer-group' %}
