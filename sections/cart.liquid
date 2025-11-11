@@ -95,10 +95,10 @@
       <span class="value">{{ cart.total_price | money }}</span>
     </div>
     
-    <div class="cart-summary-row">
-      <span class="label">Shipping</span>
-      <span class="value">Added at checkout</span>
-    </div>
+  <div class="cart-summary-row">
+    <span class="label">Shipping</span>
+    <span class="value" id="cart-shipping">£3.99</span>
+  </div>
 
 {% if cart.total_discount > 0 %}
   <div class="cart-summary-row">
@@ -123,6 +123,52 @@
 </div>
 
 </form>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const subtotalEl = document.querySelector('#cart-subtotal');
+    const shippingEl = document.querySelector('#cart-shipping');
+
+    // Function to format currency (Shopify uses cents)
+    function formatMoney(cents) {
+      return new Intl.NumberFormat('en-GB', { style: 'currency', currency: 'GBP' }).format(cents / 100);
+    }
+
+    // Function to update shipping dynamically
+    function updateShipping(cart) {
+      const subtotal = cart.total_price / 100; // convert to pounds
+      if (subtotal >= 80) {
+        shippingEl.textContent = 'Free';
+      } else {
+        shippingEl.textContent = formatMoney(399); // £3.99
+      }
+      subtotalEl.textContent = formatMoney(cart.total_price);
+    }
+
+    // Fetch cart on load
+    fetch('/cart.js')
+      .then(res => res.json())
+      .then(cart => updateShipping(cart));
+
+    // Recalculate when cart updates (Shopify themes dispatch a cart:updated event)
+    document.addEventListener('cart:updated', (e) => {
+      fetch('/cart.js')
+        .then(res => res.json())
+        .then(cart => updateShipping(cart));
+    });
+
+    // Optional: listen for quantity changes if your theme doesn’t emit `cart:updated`
+    document.body.addEventListener('change', function(e) {
+      if (e.target.name && e.target.name.includes('updates')) {
+        setTimeout(() => {
+          fetch('/cart.js')
+            .then(res => res.json())
+            .then(cart => updateShipping(cart));
+        }, 500);
+      }
+    });
+  });
+</script>
 
 {% schema %}
 {
