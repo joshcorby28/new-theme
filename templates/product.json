@@ -56,7 +56,7 @@
         "doran_product_reviews_product_widget_9GPQ7T": {
           "type": "shopify://apps/doran-product-reviews/blocks/product-widget/ca90c3ee-bc39-4c25-90cd-fdf0519c6d11",
           "settings": {
-            "topPadding": 36,
+            "topPadding": 0,
             "bottomPadding": 72,
             "is_hide_if_no_reviews": true,
             "is_use_shopify_font": false,
@@ -68,7 +68,7 @@
         "doran_product_reviews_product_widget_9GPQ7T"
       ],
       "custom_css": [
-        ".shopify-app-block {max-width: 90%; margin: 72px auto;}"
+        ".shopify-app-block {max-width: 90%; margin: 72px auto; padding: 32px; background: white;}"
       ],
       "settings": {}
     },
