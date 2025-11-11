@@ -29,7 +29,7 @@
           "settings": {
             "custom_svg": "",
             "icon_size": "medium",
-            "text": "get <span style=\"font-size:12px;\"> 10% </span> off first order with code <b>firstdrop<span style=\"font-size:12px;\">10</span></b>",
+            "text": "get <span style=\"font-size:12px;\"> 10% </span> off first order - <b> auto applied</b>",
             "text_size": 16,
             "text_link": ""
           }
