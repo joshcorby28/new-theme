@@ -19,7 +19,7 @@
           "settings": {
             "custom_svg": "",
             "icon_size": "medium",
-            "text": "free shipping over <span style=\"font-size:12px;\"> £80 </span>",
+            "text": "free shipping over <span style=\"font-size:12px; font-weight:bold;\"> £80 </span>",
             "text_size": 16,
             "text_link": ""
           }
