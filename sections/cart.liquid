@@ -106,13 +106,23 @@
         <span class="value">-{{ cart.total_discount | money }}</span>
       </div>
     {% endif %}
+
+    <!-- Discount code input directly under discounts -->
+    <div class="cart-summary-row cart-discount-box">
+      <form method="post" action="/cart" class="fract-discount-form">
+        <input type="hidden" name="update" value="true">
+        <input type="text" name="discount" placeholder="Enter another discount code" class="fract-discount-input" />
+        <button type="submit" class="fract-primary button-skew">Apply</button>
+      </form>
+    </div>
   </div>
 
   <button class="fract-primary button-skew" type="submit" name="checkout" value="{{ 'cart.checkout' | t }}">
     {{ 'cart.checkout' | t }}
   </button>
+
   <a href="{{ routes.all_products_collection_url }}" class="fract-secondary button-skew continue-shopping">
-      Continue Shopping
+    Continue Shopping
   </a>
 </div>
 
