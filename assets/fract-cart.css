@@ -108,10 +108,12 @@
   display: flex;
   justify-content: space-between;
   font-size:13px;
+  text-transform:uppercase;
 }
 
 .fract-cart .fract-footer-cart .cart-summary-row .label {
   font-weight:bold;
+    text-transform:uppercase;
 }
 
 .fract-cart .main-cart-items .cart-item .quantity-selector {
