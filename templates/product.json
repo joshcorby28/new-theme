@@ -67,6 +67,9 @@
       "block_order": [
         "doran_product_reviews_product_widget_9GPQ7T"
       ],
+      "custom_css": [
+        ".shopify-app-block {max-width: 90%; margin: 72px auto;}"
+      ],
       "settings": {}
     },
     "fract_product_swiper_ryXikk": {
