@@ -52,6 +52,9 @@
     },
     "fract_product_swiper_ryXikk": {
       "type": "fract-product-swiper",
+      "custom_css": [
+        ".title-and-button {margin: 40px auto 30px auto;}"
+      ],
       "name": "Product Slider",
       "settings": {
         "main-title": "shop the rest",
