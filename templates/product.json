@@ -68,7 +68,7 @@
         "doran_product_reviews_product_widget_9GPQ7T"
       ],
       "custom_css": [
-        ".shopify-app-block {max-width: 90%; margin: 72px auto; padding: 32px; background: white;}"
+        ".shopify-app-block {max-width: 90%; margin: 22px auto 72px auto; padding: 32px; background: white;}"
       ],
       "settings": {}
     },
