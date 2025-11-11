@@ -332,24 +332,6 @@ const interval = setInterval(() => {
 
 </script>
 
-<script>
-  // Add a discount code as a cart attribute (works for some apps/themes)
-fetch('/cart.js')
-  .then(res => res.json())
-  .then(cart => {
-    if (!cart.attributes) cart.attributes = {};
-    if (cart.attributes.discount_code !== 'firstdrop10') {
-      fetch('/cart/update.js', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          attributes: { discount_code: 'firstdrop10' }
-        })
-      }).then(() => console.log('Discount code added to cart attribute'));
-    }
-  });
-</script>
-
     {% sections 'footer-group' %}
   </body>
 </html>
