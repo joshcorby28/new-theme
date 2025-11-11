@@ -16,7 +16,7 @@
           "type": "shopify://apps/clearpay-on-site-messaging/blocks/payments-messaging/5d763983-d3e6-4888-9966-4e1170b26ae9",
           "settings": {
             "text_align": "inherit",
-            "margin_top": 16,
+            "margin_top": 12,
             "margin_bottom": 16,
             "color": "",
             "size": "sm",
@@ -58,10 +58,30 @@
         "collection": "all-products",
         "primary_button_text": ""
       }
+    },
+    "176285393774df6b3f": {
+      "type": "apps",
+      "blocks": {
+        "doran_product_reviews_product_widget_9GPQ7T": {
+          "type": "shopify://apps/doran-product-reviews/blocks/product-widget/ca90c3ee-bc39-4c25-90cd-fdf0519c6d11",
+          "settings": {
+            "topPadding": 36,
+            "bottomPadding": 36,
+            "is_hide_if_no_reviews": true,
+            "is_use_shopify_font": false,
+            "shopify_font": "sans_serif_n4"
+          }
+        }
+      },
+      "block_order": [
+        "doran_product_reviews_product_widget_9GPQ7T"
+      ],
+      "settings": {}
     }
   },
   "order": [
     "main",
+    "176285393774df6b3f",
     "fract_product_swiper_ryXikk"
   ]
 }

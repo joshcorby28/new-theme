@@ -32,10 +32,17 @@
     "min_page_margin": 10,
     "content_for_index": [],
     "blocks": {
-      "8900000435860303019": {
-        "type": "shopify://apps/air-reviews-1/blocks/app-embed/c4e1e9ca-4d46-4e76-bc39-7e42417cb327",
+      "13766566558402285670": {
+        "type": "shopify://apps/doran-product-reviews/blocks/app-embed/ca90c3ee-bc39-4c25-90cd-fdf0519c6d11",
         "disabled": false,
-        "settings": {}
+        "settings": {
+          "isJSONLD": false,
+          "isPopup": false,
+          "isPop": false,
+          "customCSS": "",
+          "is_use_shopify_font": false,
+          "pop_shopify_font": "sans_serif_n4"
+        }
       }
     }
   }
