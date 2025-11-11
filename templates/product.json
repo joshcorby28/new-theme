@@ -53,7 +53,7 @@
     "fract_product_swiper_ryXikk": {
       "type": "fract-product-swiper",
       "custom_css": [
-        ".title-and-button {margin: 40px auto 30px auto;}"
+        ".title-and-button {margin: 40px auto 30px auto !important;}"
       ],
       "name": "Product Slider",
       "settings": {
