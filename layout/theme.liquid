@@ -311,24 +311,25 @@
 </style>
 
 <script>
-// Polling function to hide Klaviyo link
+// Function to hide the Klaviyo link
 function hideKlaviyoLink() {
-  const links = document.querySelectorAll('a[target="_blank"][aria-label]');
-  links.forEach(link => {
-    if (link.textContent.trim().includes("Created with Klaviyo")) {
-      link.style.display = "none";
-    }
-  });
+  const klaviyoLink = document.querySelector('a[aria-label="Created with Klaviyo - opens in a new tab"]');
+  if (klaviyoLink) {
+    klaviyoLink.style.display = 'none';
+    return true;
+  }
+  return false;
 }
 
-// Keep checking until the element exists
+// Poll until the link exists
 const interval = setInterval(() => {
-  const trigger = document.querySelector('.needsclick.kl-private-reset-css-Xuajs1');
-  if (trigger) {
-    hideKlaviyoLink();
-    clearInterval(interval); // Stop polling once done
+  // Only try hiding if the parent container exists
+  const parent = document.querySelector('.needsclick.kl-private-reset-css-Xuajs1');
+  if (parent && hideKlaviyoLink()) {
+    clearInterval(interval); // Stop polling once hidden
   }
-}, 100); // Check every 100ms
+}, 100); // check every 100ms
+
 </script>
 
     {% sections 'footer-group' %}
