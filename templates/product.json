@@ -50,6 +50,15 @@
         "show_custom_content": false
       }
     },
+    "fract_product_swiper_ryXikk": {
+      "type": "fract-product-swiper",
+      "name": "Product Slider",
+      "settings": {
+        "main-title": "shop the rest",
+        "collection": "all-products",
+        "primary_button_text": ""
+      }
+    },
     "176285393774df6b3f": {
       "type": "apps",
       "blocks": {
@@ -68,23 +77,14 @@
         "doran_product_reviews_product_widget_9GPQ7T"
       ],
       "custom_css": [
-        ".shopify-app-block {max-width: 90%; margin: 22px auto 72px auto; padding: 32px; background: white;}"
+        ".shopify-app-block {max-width: 90%; margin: 72px auto; padding: 32px; background: white;}"
       ],
       "settings": {}
-    },
-    "fract_product_swiper_ryXikk": {
-      "type": "fract-product-swiper",
-      "name": "Product Slider",
-      "settings": {
-        "main-title": "shop the rest",
-        "collection": "all-products",
-        "primary_button_text": ""
-      }
     }
   },
   "order": [
     "main",
-    "176285393774df6b3f",
-    "fract_product_swiper_ryXikk"
+    "fract_product_swiper_ryXikk",
+    "176285393774df6b3f"
   ]
 }
