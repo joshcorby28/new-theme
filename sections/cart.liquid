@@ -88,50 +88,23 @@
       </tr>
     {% endfor %}
   </table>
-<div class="fract-footer-cart">
-  <div class="cart-summary">
-    <div class="cart-summary-row">
-      <span class="label">Subtotal</span>
-      <span class="value">{{ cart.total_price | money }}</span>
-    </div>
-    
-    <div class="cart-summary-row">
-      <span class="label">Shipping</span>
-      <span class="value">Calculated at checkout</span>
-    </div>
-
-    {% if cart.total_discount > 0 %}
-      <div class="cart-summary-row">
-        <span class="label">Discounts</span>
-        <span class="value">-{{ cart.total_discount | money }}</span>
-      </div>
-
-      {% for discount in cart.discount_applications %}
-        <div class="cart-summary-row">
-          <span class="label">Applied code:</span>
-          <span class="value">{{ discount.code }}</span>
-        </div>
-      {% endfor %}
-    {% endif %}
+  <div class="fract-footer-cart">
+    <div class="cart-summary" >
+  <div class="cart-summary-row">
+    <span class="label">Subtotal</span>
+    <span class="value">{{ cart.total_price | money }}</span>
   </div>
-
-  <!-- Discount code input -->
-  <div class="cart-discount-box">
-    <form method="post" action="/cart">
-      <input type="hidden" name="update" value="true">
-      <input type="text" name="discount" placeholder="Enter discount code" class="fract-discount-input">
-      <button type="submit" class="fract-primary button-skew">Apply</button>
-    </form>
+  <div class="cart-summary-row">
+    <span class="label">Shipping</span>
+    <span class="value">Calculated at checkout</span>
   </div>
-
-  <button class="fract-primary button-skew" type="submit" name="checkout" value="{{ 'cart.checkout' | t }}">
-    {{ 'cart.checkout' | t }}
-  </button>
-  <a href="{{ routes.all_products_collection_url }}" class="fract-secondary button-skew continue-shopping">
-      Continue Shopping
-  </a>
 </div>
 
+  <button class="fract-primary button-skew" type="submit" name="checkout" value="{{ 'cart.checkout' | t }}">{{ 'cart.checkout' | t }}</button>
+    <a href="{{ routes.all_products_collection_url }}" class="fract-secondary button-skew continue-shopping">
+        Continue Shopping
+    </a>
+  </div>
 </form>
 
 {% schema %}
