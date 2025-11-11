@@ -168,7 +168,7 @@ document.addEventListener('DOMContentLoaded', function() {
   ></div>
 {% endif %}
 
-  <h4>{{ product.price | money }}</h4>
+  <h4 style="margin-top:10px;">{{ product.price | money }}</h4>
   {% assign current_product = product %}
 {% assign related_products = product.metafields.custom.related_products.value %}
 
