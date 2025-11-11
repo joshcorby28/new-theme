@@ -150,6 +150,27 @@
       width:100%;
     }
   }
+  /* Mobile stacked newsletter */
+@media (max-width: 680px) {
+  .newsletter {
+    justify-content: center !important; /* Force center on mobile */
+  }
+
+  .newsletter .signup-box {
+    margin: 0 auto; /* Center the box itself */
+  }
+
+  .newsletter .main-form {
+    flex-direction: column; /* Stack input & button vertically if desired */
+    width: 100%;
+  }
+
+  .newsletter input[type="email"],
+  .newsletter button {
+    width: 100%;
+  }
+}
+
 {% endstylesheet %}
 
 
