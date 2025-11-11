@@ -100,12 +100,17 @@
       <span class="value">Calculated at checkout</span>
     </div>
 
-    {% if cart.total_discount > 0 %}
-      <div class="cart-summary-row">
-        <span class="label">Discounts</span>
-        <span class="value">-{{ cart.total_discount | money }}</span>
-      </div>
-    {% endif %}
+{% if cart.total_discount > 0 %}
+  <div class="cart-summary-row">
+    <span class="label">Discounts</span>
+    <span class="value">-{{ cart.total_discount | money }}</span>
+  </div>
+{% else %}
+  <div class="cart-summary-row">
+    <span class="value">Add Discount Codes at Checkout</span>
+  </div>
+{% endif %}
+
   </div>
 
   <button class="fract-primary button-skew" type="submit" name="checkout" value="{{ 'cart.checkout' | t }}">
