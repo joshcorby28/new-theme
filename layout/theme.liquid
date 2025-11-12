@@ -331,6 +331,39 @@ const interval = setInterval(() => {
 }, 100); // check every 100ms
 
 </script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const DISCOUNT_CODE = 'FIRSTDROP10';
+
+  async function applyDiscount() {
+    try {
+      // Check if already marked as applied
+      const cart = await fetch('/cart.js').then(res => res.json());
+      if (cart.attributes && cart.attributes._discountApplied === DISCOUNT_CODE) return;
+
+      // Mark discount as applied
+      await fetch('/cart/update.js', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          attributes: { _discountApplied: DISCOUNT_CODE }
+        })
+      });
+
+      // Apply discount silently (no redirect)
+      await fetch(`/discount/${DISCOUNT_CODE}?redirect=/cart`, { method: 'GET' });
+    } catch (error) {
+      console.error('Error applying discount:', error);
+    }
+  }
+
+  // Run once on page load
+  applyDiscount();
+
+  // Listen for AJAX cart updates (if your theme fires them)
+  document.addEventListener('cart:updated', applyDiscount);
+});
+</script>
 
     {% sections 'footer-group' %}
   </body>
