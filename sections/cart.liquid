@@ -92,6 +92,7 @@
               min="1"
               value="{{ item.quantity }}"
               class="qty-input"
+              data-max="{{ item.variant.inventory_quantity }}"
             />
             <button type="button" class="qty-btn plus">+</button>
           </div>
@@ -242,20 +243,77 @@ function updateTotals(cart) {
         if (form) form.submit();
       };
 
+      if (!input || !btnPlus || !btnMinus) {
+        console.log('[cart-qty-debug] Missing qty elements in container', container);
+        return;
+      }
+
+      const getMax = () => {
+        const raw = input.getAttribute('data-max');
+        if (raw === null || raw === '') {
+          return null;
+        }
+        const parsed = Number(raw);
+        if (isNaN(parsed) || parsed <= 0) {
+          console.log('[cart-qty-debug] Non-positive or invalid data-max, treating as uncapped', { name: input.name, raw });
+          return null;
+        }
+        return parsed;
+      };
+
       btnPlus.addEventListener('click', () => {
-        input.value = Number(input.value) + 1;
-        input.dispatchEvent(new Event('change'));
+        const min = Number(input.min) || 1;
+        const max = getMax();
+        let current = Number(input.value) || min;
+
+        if (max !== null && current >= max) {
+          console.log('[cart-qty-debug] Plus click at max, ignoring', { name: input.name, current, max });
+          return;
+        }
+
+        let next = current + 1;
+        if (max !== null && next > max) {
+          next = max;
+        }
+
+        console.log('[cart-qty-debug] Plus click', { name: input.name, current, next, max });
+        input.value = next;
+        input.dispatchEvent(new Event('change', { bubbles: true }));
       });
 
       btnMinus.addEventListener('click', () => {
         const min = Number(input.min) || 1;
-        if (Number(input.value) > min) {
-          input.value = Number(input.value) - 1;
-          input.dispatchEvent(new Event('change'));
+        let current = Number(input.value) || min;
+
+        if (current <= min) {
+          console.log('[cart-qty-debug] Minus click at min, ignoring', { name: input.name, current, min });
+          return;
         }
+
+        const next = current - 1;
+        console.log('[cart-qty-debug] Minus click', { name: input.name, current, next });
+        input.value = next;
+        input.dispatchEvent(new Event('change', { bubbles: true }));
       });
 
-      input.addEventListener('change', submitForm);
+      input.addEventListener('change', () => {
+        const min = Number(input.min) || 1;
+        const max = getMax();
+        let value = Number(input.value) || min;
+
+        if (value < min) {
+          console.log('[cart-qty-debug] Manual change below min, clamping', { name: input.name, from: input.value, to: min });
+          value = min;
+        }
+
+        if (max !== null && value > max) {
+          console.log('[cart-qty-debug] Manual change above max, clamping', { name: input.name, from: input.value, to: max });
+          value = max;
+        }
+
+        input.value = value;
+        submitForm();
+      });
     });
   });
 </script>
