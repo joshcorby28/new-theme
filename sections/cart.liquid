@@ -161,22 +161,29 @@ document.addEventListener("DOMContentLoaded", function() {
     }).format(cents / 100);
   }
 
-  function updateTotals(cart) {
-    // Pseudo subtotal includes free items
-    let pseudoSubtotal = 0;
-    cart.items.forEach(item => {
-      pseudoSubtotal += item.original_line_price;
-    });
+function updateTotals(cart) {
+  // Pseudo subtotal includes free items
+  let pseudoSubtotal = 0;
+  cart.items.forEach(item => {
+    pseudoSubtotal += item.original_line_price;
+  });
 
-    let discount = cart.total_discount;
-    let shipping = pseudoSubtotal >= 8000 ? 0 : 399; // in cents
-    let total = cart.total_price; // Shopify total (after discounts)
+  // Discount from Shopify
+  let discount = cart.total_discount;
 
-    subtotalEl.textContent = formatMoney(pseudoSubtotal);
-    shippingEl.textContent = shipping === 0 ? 'Free' : formatMoney(shipping);
-    discountEl.textContent = discount > 0 ? '-' + formatMoney(discount) : 'Add at Checkout';
-    totalEl.textContent = formatMoney(total);
-  }
+  // Shipping in cents
+  let shippingCents = pseudoSubtotal >= 8000 ? 0 : 399;
+
+  // Total = Shopify total + shipping (Shopify total already deducts discounts)
+  let totalCents = cart.total_price + shippingCents;
+
+  // Update DOM
+  subtotalEl.textContent = formatMoney(pseudoSubtotal);
+  shippingEl.textContent = shippingCents === 0 ? 'Free' : formatMoney(shippingCents);
+  discountEl.textContent = discount > 0 ? '-' + formatMoney(discount) : 'Add at Checkout';
+  totalEl.textContent = formatMoney(totalCents);
+}
+
 
   // Fetch cart on load
   fetch('/cart.js')
