@@ -19,7 +19,7 @@
           "settings": {
             "custom_svg": "",
             "icon_size": "medium",
-            "text": "free shipping over <span style=\"font-size:12px; font-weight:bold;\"> £80 </span>",
+            "text": "<b>black</b> friday",
             "text_size": 16,
             "text_link": ""
           }
@@ -29,7 +29,7 @@
           "settings": {
             "custom_svg": "",
             "icon_size": "medium",
-            "text": "get <span style=\"font-size:12px;\"> 10% </span> off first order - <b> auto applied</b>",
+            "text": "buy any hoodie - <b> get a free tee</b>",
             "text_size": 16,
             "text_link": ""
           }
@@ -39,7 +39,7 @@
           "settings": {
             "custom_svg": "",
             "icon_size": "medium",
-            "text": "<b>buy now, pay later</b> with clearpay",
+            "text": "<b>add both</b> to cart",
             "text_size": 16,
             "text_link": ""
           }
