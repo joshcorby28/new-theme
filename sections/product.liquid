@@ -485,24 +485,121 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
-    const container = document.querySelector('.quantity-selector');
-    if (!container) return;
-    const input = container.querySelector('.qty-input');
-    const btnPlus = container.querySelector('.plus');
-    const btnMinus = container.querySelector('.minus');
+    const productId = '{{ product.id }}';
+    const formEl = document.getElementById(`product-form-${productId}`);
+    if (!formEl) return;
 
-    btnPlus.addEventListener('click', () => {
-      input.value = Number(input.value) + 1;
-      input.dispatchEvent(new Event('change'));
+    const quantityContainer = formEl.querySelector('.quantity-selector');
+    const qtyInput = quantityContainer ? quantityContainer.querySelector('.qty-input') : null;
+    const btnPlus = quantityContainer ? quantityContainer.querySelector('.plus') : null;
+    const btnMinus = quantityContainer ? quantityContainer.querySelector('.minus') : null;
+    const variantButtons = formEl.querySelectorAll('.variant-button');
+    const variantIdInput = document.getElementById(`selected-variant-id-${productId}`);
+
+    // Build inventory map from Liquid
+    const variantInventoryData = {{ product.variants | json }};
+    const variantInventoryMap = {};
+    variantInventoryData.forEach(function(v) {
+      variantInventoryMap[String(v.id)] = {
+        quantity: v.inventory_quantity,
+        manage: v.inventory_management !== null,
+        policy: v.inventory_policy
+      };
     });
 
-    btnMinus.addEventListener('click', () => {
-      const min = Number(input.min) || 1;
-      if (Number(input.value) > min) {
-        input.value = Number(input.value) - 1;
-        input.dispatchEvent(new Event('change'));
+    function getMaxForVariant(variantId) {
+      const data = variantInventoryMap[String(variantId)];
+      if (!data) {
+        console.log('[qty-debug] No inventory data for variant', variantId);
+        return null;
       }
+      if (!data.manage || data.policy === 'continue') {
+        console.log('[qty-debug] Variant not stock-limited', variantId, data);
+        return null;
+      }
+      const qty = Number(data.quantity);
+      if (isNaN(qty) || qty <= 0) {
+        console.log('[qty-debug] Variant has no available stock', variantId, data);
+        return 0;
+      }
+      console.log('[qty-debug] Max for variant', variantId, 'is', qty);
+      return qty;
+    }
+
+    function applyMax() {
+      if (!qtyInput || !variantIdInput) return;
+      const currentVariantId = variantIdInput.value;
+      const max = getMaxForVariant(currentVariantId);
+      if (max === null) {
+        qtyInput.removeAttribute('max');
+        return;
+      }
+      qtyInput.max = String(max);
+      if (Number(qtyInput.value) > max) {
+        qtyInput.value = max;
+      }
+    }
+
+    // Initialize max on load
+    applyMax();
+
+    // Wire variant buttons to update active state, hidden input, and max
+    variantButtons.forEach(function(button) {
+      button.addEventListener('click', function() {
+        if (button.disabled) return;
+
+        // Remove active class from all
+        variantButtons.forEach(function(btn) { btn.classList.remove('active'); });
+        // Add active to clicked
+        button.classList.add('active');
+
+        // Update hidden input value
+        if (variantIdInput) {
+          variantIdInput.value = button.dataset.variantId;
+        }
+
+        applyMax();
+      });
     });
+
+    // Wire plus/minus with max enforcement
+    if (qtyInput && btnPlus && btnMinus) {
+      btnPlus.addEventListener('click', function() {
+        const min = Number(qtyInput.min) || 1;
+        const maxAttr = qtyInput.getAttribute('max');
+        const max = maxAttr ? Number(maxAttr) : null;
+        let current = Number(qtyInput.value) || min;
+
+        if (max !== null && !isNaN(max) && current >= max) {
+          console.log('[qty-debug] Product plus click at max, ignoring', { current, max });
+          return;
+        }
+
+        let next = current + 1;
+        if (max !== null && !isNaN(max) && next > max) {
+          next = max;
+        }
+
+        console.log('[qty-debug] Product plus click', { current, next, max });
+        qtyInput.value = next;
+        qtyInput.dispatchEvent(new Event('change', { bubbles: true }));
+      });
+
+      btnMinus.addEventListener('click', function() {
+        const min = Number(qtyInput.min) || 1;
+        let current = Number(qtyInput.value) || min;
+
+        if (current <= min) {
+          console.log('[qty-debug] Product minus click at min, ignoring', { current, min });
+          return;
+        }
+
+        const next = current - 1;
+        console.log('[qty-debug] Product minus click', { current, next });
+        qtyInput.value = next;
+        qtyInput.dispatchEvent(new Event('change', { bubbles: true }));
+      });
+    }
   });
 </script>
 <script>
@@ -529,26 +626,6 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  const productId = '{{ product.id }}';
-  const variantButtons = document.querySelectorAll(`#product-form-${productId} .variant-button`);
-  const variantIdInput = document.getElementById(`selected-variant-id-${productId}`);
-
-  variantButtons.forEach(button => {
-    button.addEventListener('click', () => {
-      if (button.disabled) return;
-
-      // Remove active class from all
-      variantButtons.forEach(btn => btn.classList.remove('active'));
-      // Add active to clicked
-      button.classList.add('active');
-
-      // Update hidden input value
-      variantIdInput.value = button.dataset.variantId;
-    });
-  });
-});
-</script>
+{% comment %} Variant button JS is handled in the main quantity/variant script above {% endcomment %}
 
 
