@@ -72,14 +72,19 @@
 
 </style>
 <div class="drop-badge">
-          {% if product.tags contains 'blanks' %}
-            Heavyweight Blank
-          {% elsif product.tags contains 'comingsoon'  %}
-            Coming Soon
-          {% else %}
-            Discover The Unknown
-          {% endif %}
-        </div>
+  {% if product.collections contains collections['hoodies'] %}
+    Free Tee with any Hoodie
+  {% elsif product.collections contains collections['tees'] %}
+    Free with any Hoodie
+  {% elsif product.tags contains 'blanks' %}
+    Heavyweight Blank
+  {% elsif product.tags contains 'comingsoon' %}
+    Coming Soon
+  {% else %}
+    Discover The Unknown
+  {% endif %}
+</div>
+
 
     <div class="product-card__info">
       <h3 class="product-card__title">{{ product.title }}</h3>
