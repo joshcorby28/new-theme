@@ -64,20 +64,24 @@
           </div>
         </td>
 
-        <td>
-          <span class="cart-item-price">
-            {% if item.line_price == 0 and item.original_line_price > 0 %}
-              {{ item.original_line_price | money }} <span style="color: #28a745; font-weight:bold;">(Free)</span>
-            {% else %}
-              {{ item.original_line_price | money }}
-            {% endif %}
-            {% if item.variant.compare_at_price > item.variant.price %}
-              <span class="compare-at-price" style="text-decoration: line-through; color: #888; font-size:12px; font-weight:normal">
-                {{ item.variant.compare_at_price | money }}
-              </span>
-            {% endif %}
-          </span>
-        </td>
+<td>
+  <span class="cart-item-price">
+    {% if item.line_price == 0 and item.original_line_price > 0 %}
+      <span style="text-decoration: line-through; color: #888; opacity: 0.5;">
+        {{ item.original_line_price | money }}
+      </span>
+      <span style="color: #28a745; font-weight:bold; margin-left:4px;">Free</span>
+    {% else %}
+      {{ item.original_line_price | money }}
+    {% endif %}
+    {% if item.variant.compare_at_price > item.variant.price %}
+      <span class="compare-at-price" style="text-decoration: line-through; color: #888; font-size:12px; font-weight:normal">
+        {{ item.variant.compare_at_price | money }}
+      </span>
+    {% endif %}
+  </span>
+</td>
+
 
         <td>
           <div class="quantity-selector">
