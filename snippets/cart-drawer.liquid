@@ -1,233 +1,608 @@
-{% comment %}
-  Cart Drawer Section for Shopify
-{% endcomment %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web/src/regular/style.css" />
 
-{{ 'fract-cart.css' | asset_url | stylesheet_tag: preload: true }}
+<style>
+  .shopdev .Fract-drawer {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 100%;
+    max-width: 420px;
+    height: 100vh;
+    background-color: #ffffff;
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+    transition: right 0.3s ease-in-out;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+  }
 
-<div id="cart-drawer" class="cart-drawer">
-  <div class="cart-drawer-overlay"></div>
-  <div class="cart-drawer-content">
-    <div class="cart-drawer-header">
-      <h2>Your Cart</h2>
-      <span class="cart-item-count">({{ cart.item_count }} item{% if cart.item_count != 1 %}s{% endif %})</span>
-      <button class="cart-drawer-close">&times;</button>
-    </div>
+  .shopdev .Fract-drawer.is-open {
+    right: 0;
+  }
 
-    <div class="cart-drawer-items">
-      {% for item in cart.items %}
-        <div class="cart-drawer-item">
-          <div class="cart-image">
-            {% render 'image', image: item.image, url: item.url %}
-          </div>
-          <div class="cart-info">
-            <h3>{{ item.product.title }}</h3>
+  .shopdev .Fract-drawer-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+    z-index: 9998;
+  }
 
-            {% if item.product.has_only_default_variant == false or item.properties.size or item.selling_plan_allocation %}
-              <div class="product-options">
-                {% for option in item.options_with_values %}
-                  <div class="product-option">
-                    <span>{{ option.name }}:</span> {{ option.value }}
-                  </div>
-                {% endfor %}
-              </div>
-            {% endif %}
+  .shopdev .Fract-drawer-overlay.is-visible {
+    opacity: 1;
+    visibility: visible;
+  }
 
-            <div class="cart-price">
-              {% if item.line_price == 0 and item.original_line_price > 0 %}
-                <span class="line-through">{{ item.original_line_price | money }}</span>
-                <span class="free-label">Free</span>
-              {% else %}
-                {{ item.original_line_price | money }}
-              {% endif %}
-              {% if item.variant.compare_at_price > item.variant.price %}
-                <span class="compare-at-price">{{ item.variant.compare_at_price | money }}</span>
-              {% endif %}
-            </div>
+  .shopdev .Fract-drawer-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 24px;
+    border-bottom: 1px solid #e5e5e5;
+  }
 
-            <div class="quantity-selector">
-              <button type="button" class="qty-btn minus">-</button>
-              <input type="number" name="updates[]" min="1" value="{{ item.quantity }}" class="qty-input"/>
-              <button type="button" class="qty-btn plus">+</button>
-            </div>
+  .shopdev .Fract-drawer-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #000000;
+    margin: 0;
+  }
 
-            {{ 'cart.remove' | t | link_to: item.url_to_remove }}
-          </div>
-        </div>
-      {% endfor %}
-    </div>
+  .shopdev .Fract-drawer-close {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000000;
+    transition: opacity 0.2s ease;
+  }
 
-    <div class="cart-drawer-footer">
-      {% assign pseudo_subtotal = 0 %}
-      {% for item in cart.items %}
-        {% assign pseudo_subtotal = pseudo_subtotal | plus: item.original_line_price %}
-      {% endfor %}
+  .shopdev .Fract-drawer-close:hover {
+    opacity: 0.6;
+  }
 
-      {% assign shipping_cost = 3.99 %}
-      {% if pseudo_subtotal >= 8000 %}
-        {% assign shipping_cost = 0 %}
-      {% endif %}
+  .shopdev .Fract-drawer-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 24px;
+  }
 
-      <div class="cart-summary">
-        <div class="cart-summary-row">
-          <span>Subtotal</span>
-          <span id="cart-subtotal">{{ pseudo_subtotal | money }}</span>
-        </div>
-        <div class="cart-summary-row">
-          <span>Shipping</span>
-          <span id="cart-shipping">{% if shipping_cost == 0 %}Free{% else %}{{ shipping_cost | money }}{% endif %}</span>
-        </div>
-        <div class="cart-summary-row">
-          <span>Discounts</span>
-          <span id="cart-discount">{% if cart.total_discount > 0 %}-{{ cart.total_discount | money }}{% else %}Add at Checkout{% endif %}</span>
-        </div>
-        <div class="cart-summary-row total">
-          <span>Total</span>
-          <span id="cart-total">{{ cart.total_price | money }}</span>
-        </div>
+  .shopdev .Fract-drawer-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    text-align: center;
+    color: #666666;
+  }
+
+  .shopdev .Fract-drawer-empty-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    opacity: 0.3;
+  }
+
+  .shopdev .Fract-drawer-empty-text {
+    font-size: 16px;
+    margin-bottom: 24px;
+  }
+
+  .shopdev .Fract-drawer-items {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .shopdev .Fract-drawer-item {
+    display: flex;
+    gap: 16px;
+  }
+
+  .shopdev .Fract-drawer-item-image {
+    width: 100px;
+    height: 100px;
+    flex-shrink: 0;
+    border-radius: 4px;
+    overflow: hidden;
+    background-color: #f5f5f5;
+  }
+
+  .shopdev .Fract-drawer-item-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .shopdev .Fract-drawer-item-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .shopdev .Fract-drawer-item-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: #000000;
+    line-height: 1.4;
+    margin: 0;
+  }
+
+  .shopdev .Fract-drawer-item-variant {
+    font-size: 12px;
+    color: #666666;
+  }
+
+  .shopdev .Fract-drawer-item-price {
+    font-size: 14px;
+    color: #000000;
+    font-weight: 500;
+  }
+
+  .shopdev .Fract-drawer-item-quantity {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 8px;
+  }
+
+  .shopdev .Fract-drawer-quantity-btn {
+    width: 28px;
+    height: 28px;
+    border: 1px solid #e5e5e5;
+    background-color: #ffffff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 2px;
+    transition: background-color 0.2s ease;
+  }
+
+  .shopdev .Fract-drawer-quantity-btn:hover {
+    background-color: #f5f5f5;
+  }
+
+  .shopdev .Fract-drawer-quantity-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+
+  .shopdev .Fract-drawer-quantity-value {
+    font-size: 14px;
+    min-width: 24px;
+    text-align: center;
+  }
+
+  .shopdev .Fract-drawer-item-remove {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    color: #666666;
+    transition: color 0.2s ease;
+    align-self: flex-start;
+  }
+
+  .shopdev .Fract-drawer-item-remove:hover {
+    color: #000000;
+  }
+
+  .shopdev .Fract-drawer-footer {
+    padding: 24px;
+    border-top: 1px solid #e5e5e5;
+    background-color: #ffffff;
+  }
+
+  .shopdev .Fract-drawer-subtotal {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+
+  .shopdev .Fract-drawer-subtotal-label {
+    font-size: 16px;
+    font-weight: 500;
+    color: #000000;
+  }
+
+  .shopdev .Fract-drawer-subtotal-value {
+    font-size: 18px;
+    font-weight: 600;
+    color: #000000;
+  }
+
+  .shopdev .Fract-drawer-checkout-btn {
+    width: 100%;
+    padding: 16px;
+    background-color: #000000;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+
+  .shopdev .Fract-drawer-checkout-btn:hover {
+    background-color: #333333;
+  }
+
+  .shopdev .Fract-drawer-note {
+    font-size: 12px;
+    color: #666666;
+    text-align: center;
+    margin-top: 12px;
+  }
+
+  @media (max-width: 480px) {
+    .shopdev .Fract-drawer {
+      max-width: 100%;
+    }
+
+    .shopdev .Fract-drawer-item-image {
+      width: 80px;
+      height: 80px;
+    }
+  }
+</style>
+
+<div class="shopdev">
+  <div class="Fract-drawer-overlay" id="cartDrawerOverlay"></div>
+
+  <div class="Fract-drawer" id="cartDrawer">
+  <div class="Fract-drawer-header">
+    <h2 class="Fract-drawer-title">Your cart</h2>
+    <button class="Fract-drawer-close" id="closeCartDrawer" aria-label="Close cart">
+      <i class="ph ph-x" style="font-size: 24px;"></i>
+    </button>
+  </div>
+
+  <div class="Fract-drawer-body" id="cartDrawerBody">
+    <div class="Fract-drawer-empty" id="emptyCartMessage">
+      <div class="Fract-drawer-empty-icon">
+        <i class="ph ph-shopping-cart"></i>
       </div>
-
-      <a href="/checkout" class="fract-primary button-skew checkout-btn">Checkout</a>
-      <button class="fract-secondary button-skew continue-shopping-btn">Continue Shopping</button>
+      <p class="Fract-drawer-empty-text">Your cart is empty</p>
     </div>
+
+    <div class="Fract-drawer-items" id="cartItemsContainer" style="display: none;">
+      <!-- Cart items will be dynamically inserted here -->
+    </div>
+  </div>
+
+  <div class="Fract-drawer-footer" id="cartDrawerFooter" style="display: none;">
+    <div class="Fract-drawer-subtotal">
+      <span class="Fract-drawer-subtotal-label">Subtotal</span>
+      <span class="Fract-drawer-subtotal-value" id="cartSubtotal">£0.00</span>
+    </div>
+    <button class="Fract-drawer-checkout-btn" id="checkoutButton">
+      Checkout
+    </button>
+    <p class="Fract-drawer-note">Shipping calculated at checkout</p>
+  </div>
   </div>
 </div>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-  const drawer = document.getElementById('cart-drawer');
-  const overlay = drawer.querySelector('.cart-drawer-overlay');
-  const closeBtn = drawer.querySelector('.cart-drawer-close');
-  const continueBtn = drawer.querySelector('.continue-shopping-btn');
+  class CartDrawer {
+    constructor() {
+      this.drawer = document.getElementById('cartDrawer');
+      this.overlay = document.getElementById('cartDrawerOverlay');
+      this.closeBtn = document.getElementById('closeCartDrawer');
+      this.body = document.getElementById('cartDrawerBody');
+      this.itemsContainer = document.getElementById('cartItemsContainer');
+      this.emptyMessage = document.getElementById('emptyCartMessage');
+      this.footer = document.getElementById('cartDrawerFooter');
+      this.subtotalElement = document.getElementById('cartSubtotal');
+      this.checkoutButton = document.getElementById('checkoutButton');
+      
+      this.init();
+    }
 
-  // Open / Close Drawer
-  function openDrawer() {
-    drawer.classList.add('open');
-    overlay.style.visibility = 'visible';
-    overlay.style.opacity = 1;
-  }
+    init() {
+      // Close drawer events
+      this.closeBtn.addEventListener('click', () => this.close());
+      this.overlay.addEventListener('click', () => this.close());
 
-  function closeDrawer() {
-    drawer.classList.remove('open');
-    overlay.style.opacity = 0;
-    setTimeout(() => overlay.style.visibility = 'hidden', 300);
-  }
-
-  overlay.addEventListener('click', closeDrawer);
-  closeBtn.addEventListener('click', closeDrawer);
-  continueBtn.addEventListener('click', closeDrawer);
-
-  // Cart Icon opens drawer
-  const cartIcon = document.getElementById('cart-icon');
-  if (cartIcon) {
-    cartIcon.addEventListener('click', function(e) {
-      e.preventDefault();
-      fetchCart();
-      openDrawer();
-    });
-  }
-
-  // Quantity buttons inside drawer
-  drawer.querySelectorAll('.quantity-selector').forEach(container => {
-    const input = container.querySelector('.qty-input');
-    const btnPlus = container.querySelector('.plus');
-    const btnMinus = container.querySelector('.minus');
-
-    btnPlus.addEventListener('click', () => {
-      input.value = Number(input.value) + 1;
-      input.dispatchEvent(new Event('change'));
-    });
-
-    btnMinus.addEventListener('click', () => {
-      const min = Number(input.min) || 1;
-      if (Number(input.value) > min) {
-        input.value = Number(input.value) - 1;
-        input.dispatchEvent(new Event('change'));
-      }
-    });
-
-    input.addEventListener('change', () => {
-      const lineIndex = Array.from(drawer.querySelectorAll('.qty-input')).indexOf(input);
-      const formData = new FormData();
-      formData.append(`updates[${lineIndex}]`, input.value);
-      fetch('/cart/update.js', { method: 'POST', body: formData })
-        .then(() => fetchCart());
-    });
-  });
-
-  // Fetch cart and update drawer items/totals
-  function fetchCart() {
-    fetch('/cart.js')
-      .then(res => res.json())
-      .then(cart => {
-        const subtotalEl = drawer.querySelector('#cart-subtotal');
-        const shippingEl = drawer.querySelector('#cart-shipping');
-        const discountEl = drawer.querySelector('#cart-discount');
-        const totalEl = drawer.querySelector('#cart-total');
-
-        // Pseudo subtotal includes free items
-        let pseudoSubtotal = 0;
-        cart.items.forEach(item => pseudoSubtotal += item.original_line_price);
-
-        // Shipping: free if subtotal >= £80
-        let shippingCents = pseudoSubtotal >= 8000 ? 0 : 399;
-
-        subtotalEl.textContent = formatMoney(pseudoSubtotal);
-        shippingEl.textContent = shippingCents === 0 ? 'Free' : formatMoney(shippingCents);
-        discountEl.textContent = cart.total_discount > 0 ? '-' + formatMoney(cart.total_discount) : 'Add at Checkout';
-        totalEl.textContent = formatMoney(cart.total_price + shippingCents);
-
-        // Optional: update cart item count in header
-        const cartCountEl = document.querySelector('#cart-icon sup');
-        if(cartCountEl) cartCountEl.textContent = cart.item_count;
+      // Listen for custom cart update events
+      document.addEventListener('cart:update', () => this.fetchCart());
+      
+      // Checkout button
+      this.checkoutButton.addEventListener('click', () => {
+        window.location.href = '/checkout';
       });
-  }
 
-  function formatMoney(cents) {
-    return new Intl.NumberFormat('en-GB', { style: 'currency', currency: 'GBP' }).format(cents / 100);
-  }
+      // Listen for cart drawer open events
+      document.addEventListener('cart:open', () => this.open());
 
-  // Auto open drawer when an AJAX Add to Cart form is submitted
-  document.querySelectorAll('form[action^="/cart/add"]').forEach(form => {
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
-      const formData = new FormData(form);
-      fetch('/cart/add.js', { method: 'POST', body: formData })
-        .then(res => res.json())
-        .then(item => {
-          // Trigger custom cart updated event
-          const event = new Event('cart:updated');
-          document.dispatchEvent(event);
+      // Cart icon click event
+      const cartIcon = document.getElementById('cart-icon');
+      if (cartIcon) {
+        cartIcon.addEventListener('click', () => this.open());
+      }
+
+      // Initial cart fetch
+      this.fetchCart();
+    }
+
+    open() {
+      this.drawer.classList.add('is-open');
+      this.overlay.classList.add('is-visible');
+      document.body.style.overflow = 'hidden';
+      this.fetchCart();
+    }
+
+    close() {
+      this.drawer.classList.remove('is-open');
+      this.overlay.classList.remove('is-visible');
+      document.body.style.overflow = '';
+    }
+
+    async fetchCart() {
+      try {
+        const response = await fetch('/cart.js');
+        const cart = await response.json();
+        this.renderCart(cart);
+      } catch (error) {
+        console.error('Error fetching cart:', error);
+      }
+    }
+
+    renderCart(cart) {
+      if (cart.item_count === 0) {
+        this.showEmptyState();
+        return;
+      }
+
+      this.hideEmptyState();
+      this.renderItems(cart.items);
+      this.updateSubtotal(cart.total_price);
+    }
+
+    showEmptyState() {
+      this.emptyMessage.style.display = 'flex';
+      this.itemsContainer.style.display = 'none';
+      this.footer.style.display = 'none';
+    }
+
+    hideEmptyState() {
+      this.emptyMessage.style.display = 'none';
+      this.itemsContainer.style.display = 'flex';
+      this.footer.style.display = 'block';
+    }
+
+    renderItems(items) {
+      // Build a map of max inventory per cart line (by key) and render HTML
+      this.itemMaxMap = {};
+      this.itemsContainer.innerHTML = items.map(item => {
+        const max = this.getMaxForItem(item);
+        this.itemMaxMap[item.key] = max;
+        return this.createItemHTML(item);
+      }).join('');
+      
+      // Add event listeners to quantity buttons
+      this.itemsContainer.querySelectorAll('.Fract-drawer-quantity-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const key = e.currentTarget.dataset.key;
+          const action = e.currentTarget.dataset.action;
+          const currentQty = parseInt(e.currentTarget.dataset.quantity);
+          const max = this.itemMaxMap ? this.itemMaxMap[key] : null;
+          
+          if (action === 'increase') {
+            if (max !== null && currentQty >= max) {
+              console.log('[drawer-qty-debug] Increase click at max, ignoring', { key, currentQty, max });
+              return;
+            }
+            let next = currentQty + 1;
+            if (max !== null && next > max) {
+              next = max;
+            }
+            console.log('[drawer-qty-debug] Increase click', { key, currentQty, next, max });
+            this.updateQuantity(key, next);
+          } else if (action === 'decrease' && currentQty > 1) {
+            const next = currentQty - 1;
+            console.log('[drawer-qty-debug] Decrease click', { key, currentQty, next });
+            this.updateQuantity(key, next);
+          }
         });
+      });
+
+      // Add event listeners to remove buttons
+      this.itemsContainer.querySelectorAll('.Fract-drawer-item-remove').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const key = e.currentTarget.dataset.key;
+          this.removeItem(key);
+        });
+      });
+    }
+
+    getMaxForItem(item) {
+      const manage = item.variant_inventory_management;
+      const policy = item.variant_inventory_policy;
+      const qty = item.variant_inventory_quantity;
+
+      if (!manage || policy === 'continue') {
+        return null;
+      }
+
+      const parsed = Number(qty);
+      if (isNaN(parsed) || parsed <= 0) {
+        console.log('[drawer-qty-debug] Item has no positive inventory, treating as uncapped', {
+          key: item.key,
+          variant_id: item.variant_id,
+          qty
+        });
+        return null;
+      }
+
+      return parsed;
+    }
+
+    createItemHTML(item) {
+      const image = item.featured_image?.url || '';
+      const title = item.product_title;
+      const variant = item.variant_title !== 'Default Title' ? item.variant_title : '';
+      const price = this.formatMoney(item.final_line_price);
+      const quantity = item.quantity;
+      const key = item.key;
+
+      return `
+        <div class="Fract-drawer-item">
+          <div class="Fract-drawer-item-image">
+            ${image ? `<img src="${image}" alt="${title}" loading="lazy">` : ''}
+          </div>
+          <div class="Fract-drawer-item-details">
+            <h3 class="Fract-drawer-item-title">${title}</h3>
+            ${variant ? `<p class="Fract-drawer-item-variant">${variant}</p>` : ''}
+            <p class="Fract-drawer-item-price">${price}</p>
+            <div class="Fract-drawer-item-quantity">
+              <button class="Fract-drawer-quantity-btn" data-key="${key}" data-action="decrease" data-quantity="${quantity}" ${quantity <= 1 ? 'disabled' : ''}>
+                <i class="ph ph-minus"></i>
+              </button>
+              <span class="Fract-drawer-quantity-value">${quantity}</span>
+              <button class="Fract-drawer-quantity-btn" data-key="${key}" data-action="increase" data-quantity="${quantity}">
+                <i class="ph ph-plus"></i>
+              </button>
+            </div>
+          </div>
+          <button class="Fract-drawer-item-remove" data-key="${key}" aria-label="Remove item">
+            <i class="ph ph-trash" style="font-size: 20px;"></i>
+          </button>
+        </div>
+      `;
+    }
+
+    async updateQuantity(key, quantity) {
+      try {
+        const response = await fetch('/cart/change.js', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ id: key, quantity: quantity })
+        });
+        const cart = await response.json();
+        this.renderCart(cart);
+      } catch (error) {
+        console.error('Error updating quantity:', error);
+      }
+    }
+
+    async removeItem(key) {
+      try {
+        const response = await fetch('/cart/change.js', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ id: key, quantity: 0 })
+        });
+        const cart = await response.json();
+        this.renderCart(cart);
+      } catch (error) {
+        console.error('Error removing item:', error);
+      }
+    }
+
+    updateSubtotal(totalPrice) {
+      this.subtotalElement.textContent = this.formatMoney(totalPrice);
+    }
+
+    formatMoney(cents) {
+      const amount = (cents / 100).toFixed(2);
+      return `£${amount}`;
+    }
+  }
+
+  // Initialize cart drawer when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      new CartDrawer();
     });
-  });
+  } else {
+    new CartDrawer();
+  }
 
-  // Open drawer automatically when cart is updated
-  document.addEventListener('cart:updated', () => {
-    fetchCart();
-    openDrawer();
-  });
+  // Helper function to open cart drawer from anywhere
+  window.openCartDrawer = function() {
+    document.dispatchEvent(new CustomEvent('cart:open'));
+  };
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const productId = '{{ product.id }}';
+  const form = document.getElementById(`product-form-${productId}`);
+  if (!form) return;
 
-  // Initial load: update cart
-  fetchCart();
+  const addButton = form.querySelector('.add-to-cart');
+  const variantIdInput = document.getElementById(`selected-variant-id-${productId}`);
+  const quantityInput = form.querySelector(`#qty-${productId}`);
+
+  // Avoid multiple event listeners
+  if (addButton.dataset.bound) return;
+  addButton.dataset.bound = true;
+
+  // Open cart drawer helper
+  function openCartDrawer() {
+    document.dispatchEvent(new CustomEvent('cart:open'));
+  }
+
+  // Update cart icon badge helper
+  async function updateCartBadge() {
+    try {
+      const res = await fetch('/cart.js', { headers: { 'Accept': 'application/json' } });
+      const cart = await res.json();
+      const cartLink = document.querySelector('a[href="{{ routes.cart_url }}"]');
+      if (!cartLink) return;
+
+      let sup = cartLink.querySelector('sup');
+      if (!sup) {
+        sup = document.createElement('sup');
+        cartLink.prepend(sup);
+      }
+
+      sup.textContent = cart.item_count > 0 ? cart.item_count : '';
+    } catch (err) {
+      console.error('Error updating cart badge', err);
+    }
+  }
+
+  // Add to cart click handler
+  addButton.addEventListener('click', async function(e) {
+    e.preventDefault();
+
+    const variantId = variantIdInput.value;
+    const quantity = Math.max(parseInt(quantityInput.value) || 1, 1);
+
+    try {
+      // Add item via AJAX
+      await fetch('/cart/add.js', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ id: variantId, quantity: quantity })
+      });
+
+      // Trigger drawer update & open
+      document.dispatchEvent(new CustomEvent('cart:update'));
+      openCartDrawer();
+
+      // Update cart icon
+      updateCartBadge();
+    } catch (err) {
+      console.error('Error adding to cart', err);
+    }
+  });
 });
 </script>
-
-
-<style>
-/* Minimal drawer styling */
-.cart-drawer { position: fixed; top:0; right:0; width:360px; height:100%; background:#fff; box-shadow:-2px 0 12px rgba(0,0,0,0.2); transform:translateX(100%); transition: transform 0.3s ease; z-index:9999; }
-.cart-drawer.open { transform:translateX(0); }
-.cart-drawer-overlay { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.4); opacity:0; visibility:hidden; transition:opacity 0.3s; z-index:9998; }
-.cart-drawer.open ~ .cart-drawer-overlay { opacity:1; visibility:visible; }
-.cart-drawer-content { display:flex; flex-direction:column; height:100%; }
-.cart-drawer-header { display:flex; justify-content:space-between; align-items:center; padding:1rem; border-bottom:1px solid #eee; }
-.cart-drawer-items { flex:1; overflow-y:auto; padding:1rem; }
-.cart-drawer-footer { padding:1rem; border-top:1px solid #eee; display:flex; flex-direction:column; gap:0.5rem; }
-.cart-drawer-item { display:flex; margin-bottom:1rem; gap:1rem; }
-.cart-image img { width:60px; height:60px; object-fit:cover; }
-.cart-info { flex:1; }
-.quantity-selector { display:flex; align-items:center; gap:0.25rem; }
-.line-through { text-decoration: line-through; opacity:0.5; margin-right:0.25rem; }
-.free-label { font-weight:bold; color:#000; }
-.checkout-btn, .continue-shopping-btn { width:100%; text-align:center; }
-</style>
