@@ -138,6 +138,7 @@
         class="variant-button{% if variant == current_variant %} active{% endif %}"
         data-variant-id="{{ variant.id }}"
         data-max="{{ variant.inventory_quantity }}"
+        data-available="{{ variant.available }}"
         {% unless variant.available %}disabled{% endunless %}
       >
         {{ variant.title }}
@@ -181,31 +182,27 @@
 </div>
   <div class="product-extras">
 {% if section.settings.show-stock-indicator %}
-  {% assign total_inventory = 0 %}
+  {% assign current_variant = product.selected_or_first_available_variant %}
+  {% assign current_inventory = current_variant.inventory_quantity %}
+  {% assign in_stock = current_variant.available %}
 
-  {% for variant in product.variants %}
-    {% assign total_inventory = total_inventory | plus: variant.inventory_quantity %}
-  {% endfor %}
-
-  {% assign in_stock = product.available %}
-
-  <div class="stock-indicator-wrapper">
+  <div class="stock-indicator-wrapper" data-stock-indicator>
     {% if in_stock %}
-      {% if total_inventory < 11 %}
-        <div class="stock-indicator low-stock">
+      {% if current_inventory < 11 %}
+        <div class="stock-indicator low-stock" data-stock-indicator-state>
           <span class="circle"></span>
-          <span>Limited Stock</span>
+          <span class="stock-indicator-text">Limited Stock</span>
         </div>
       {% else %}
-        <div class="stock-indicator in-stock">
+        <div class="stock-indicator in-stock" data-stock-indicator-state>
           <span class="circle"></span>
-          <span>In Stock</span>
+          <span class="stock-indicator-text">In Stock</span>
         </div>
       {% endif %}
     {% else %}
-      <div class="stock-indicator out-of-stock">
+      <div class="stock-indicator out-of-stock" data-stock-indicator-state>
         <span class="circle"></span>
-        <span>Out of Stock</span>
+        <span class="stock-indicator-text">Out of Stock</span>
       </div>
     {% endif %}
   </div>
@@ -256,22 +253,9 @@
 
   {% if section.settings.show_custom_content %}
     <details class="accordion-item">
-      <summary>Shipping</summary>
+      <summary>1 Order = 1 Tree</summary>
       <div class="accordion-content">
-<p>
-  <strong>UK Delivery</strong><br><br>
-  Standard Delivery (Royal Mail 48): Estimated delivery within 2–3 working days from dispatch.<br>
-  Free Delivery: Enjoy free standard delivery on all UK orders over £80.<br><br>
-
-  <strong>International Delivery</strong><br><br>
-  Europe: Estimated delivery 5–7 working days.<br>
-  United States: Estimated delivery 7–10 working days.<br><br>
-
-  <strong>Please Note:</strong><br><br>
-  International shipping is available for Europe and the United States only.<br>
-  Delivery times are estimates and may vary due to customs processing or unforeseen delays.
-</p>
-
+        <p>Small actions, big impact: every order plants a tree</p>
       </div>
     </details>
   {% endif %}
@@ -449,19 +433,52 @@
       const max = getMaxForVariant(currentVariantId);
       if (max === null) {
         qtyInput.removeAttribute('max');
-        return;
-      }
-      qtyInput.max = String(max);
-      if (Number(qtyInput.value) > max) {
-        qtyInput.value = max;
+      } else {
+        qtyInput.max = String(max);
+        if (Number(qtyInput.value) > max) {
+          qtyInput.value = max;
+        }
       }
     }
 
-    // Initial max on load
+    function updateStockIndicator(variantId) {
+      const wrapper = document.querySelector('.stock-indicator-wrapper[data-stock-indicator]');
+      if (!wrapper) return;
+
+      const stateEl = wrapper.querySelector('[data-stock-indicator-state]');
+      const textEl = wrapper.querySelector('.stock-indicator-text');
+      if (!stateEl || !textEl) return;
+
+      const button = formEl.querySelector(`.variant-button[data-variant-id="${variantId}"]`);
+      if (!button) return;
+
+      const rawMax = button.getAttribute('data-max');
+      const rawAvailable = button.getAttribute('data-available');
+      const max = rawMax !== null && rawMax !== '' ? Number(rawMax) : null;
+      const available = rawAvailable === 'true';
+
+      let statusText = 'In Stock';
+      let cssClass = 'in-stock';
+
+      if (!available || max === 0) {
+        statusText = 'Out of Stock';
+        cssClass = 'out-of-stock';
+      } else if (max !== null && !isNaN(max) && max < 11) {
+        statusText = 'Limited Stock';
+        cssClass = 'low-stock';
+      }
+
+      stateEl.classList.remove('in-stock', 'low-stock', 'out-of-stock');
+      stateEl.classList.add(cssClass);
+      textEl.textContent = statusText;
+    }
+
+    // Initial max and stock indicator on load
     const initialQtyInput = formEl.querySelector('.quantity-selector .qty-input');
     const initialVariantInput = document.getElementById(`selected-variant-id-${productId}`);
     if (initialQtyInput && initialVariantInput) {
       applyMax(initialQtyInput, initialVariantInput);
+      updateStockIndicator(initialVariantInput.value);
     }
 
     // Delegated click handling for variant buttons and qty +/- inside this product form
@@ -485,6 +502,9 @@
 
         const qtyInput = form.querySelector('.quantity-selector .qty-input');
         applyMax(qtyInput, variantIdInput);
+        if (variantIdInput) {
+          updateStockIndicator(variantIdInput.value);
+        }
         return;
       }
 
