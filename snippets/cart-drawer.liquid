@@ -99,59 +99,119 @@ document.addEventListener('DOMContentLoaded', function() {
   const closeBtn = drawer.querySelector('.cart-drawer-close');
   const continueBtn = drawer.querySelector('.continue-shopping-btn');
 
-  function openDrawer() { drawer.classList.add('open'); }
-  function closeDrawer() { drawer.classList.remove('open'); }
+  // Open / Close Drawer
+  function openDrawer() {
+    drawer.classList.add('open');
+    overlay.style.visibility = 'visible';
+    overlay.style.opacity = 1;
+  }
+
+  function closeDrawer() {
+    drawer.classList.remove('open');
+    overlay.style.opacity = 0;
+    setTimeout(() => overlay.style.visibility = 'hidden', 300);
+  }
 
   overlay.addEventListener('click', closeDrawer);
   closeBtn.addEventListener('click', closeDrawer);
   continueBtn.addEventListener('click', closeDrawer);
 
-  // Quantity buttons
+  // Cart Icon opens drawer
+  const cartIcon = document.getElementById('cart-icon');
+  if (cartIcon) {
+    cartIcon.addEventListener('click', function(e) {
+      e.preventDefault();
+      fetchCart();
+      openDrawer();
+    });
+  }
+
+  // Quantity buttons inside drawer
   drawer.querySelectorAll('.quantity-selector').forEach(container => {
     const input = container.querySelector('.qty-input');
     const btnPlus = container.querySelector('.plus');
     const btnMinus = container.querySelector('.minus');
 
-    btnPlus.addEventListener('click', () => { input.value = Number(input.value) + 1; input.dispatchEvent(new Event('change')); });
-    btnMinus.addEventListener('click', () => { if(input.value>1){ input.value = Number(input.value)-1; input.dispatchEvent(new Event('change')); } });
+    btnPlus.addEventListener('click', () => {
+      input.value = Number(input.value) + 1;
+      input.dispatchEvent(new Event('change'));
+    });
+
+    btnMinus.addEventListener('click', () => {
+      const min = Number(input.min) || 1;
+      if (Number(input.value) > min) {
+        input.value = Number(input.value) - 1;
+        input.dispatchEvent(new Event('change'));
+      }
+    });
 
     input.addEventListener('change', () => {
+      const lineIndex = Array.from(drawer.querySelectorAll('.qty-input')).indexOf(input);
       const formData = new FormData();
-      formData.append(`updates[]`, input.value);
-      fetch('/cart/update.js', { method: 'POST', body: formData }).then(() => fetchCart());
+      formData.append(`updates[${lineIndex}]`, input.value);
+      fetch('/cart/update.js', { method: 'POST', body: formData })
+        .then(() => fetchCart());
     });
   });
 
-  // Fetch and update cart totals
-  const subtotalEl = drawer.querySelector('#cart-subtotal');
-  const shippingEl = drawer.querySelector('#cart-shipping');
-  const discountEl = drawer.querySelector('#cart-discount');
-  const totalEl = drawer.querySelector('#cart-total');
+  // Fetch cart and update drawer items/totals
+  function fetchCart() {
+    fetch('/cart.js')
+      .then(res => res.json())
+      .then(cart => {
+        const subtotalEl = drawer.querySelector('#cart-subtotal');
+        const shippingEl = drawer.querySelector('#cart-shipping');
+        const discountEl = drawer.querySelector('#cart-discount');
+        const totalEl = drawer.querySelector('#cart-total');
+
+        // Pseudo subtotal includes free items
+        let pseudoSubtotal = 0;
+        cart.items.forEach(item => pseudoSubtotal += item.original_line_price);
+
+        // Shipping: free if subtotal >= £80
+        let shippingCents = pseudoSubtotal >= 8000 ? 0 : 399;
+
+        subtotalEl.textContent = formatMoney(pseudoSubtotal);
+        shippingEl.textContent = shippingCents === 0 ? 'Free' : formatMoney(shippingCents);
+        discountEl.textContent = cart.total_discount > 0 ? '-' + formatMoney(cart.total_discount) : 'Add at Checkout';
+        totalEl.textContent = formatMoney(cart.total_price + shippingCents);
+
+        // Optional: update cart item count in header
+        const cartCountEl = document.querySelector('#cart-icon sup');
+        if(cartCountEl) cartCountEl.textContent = cart.item_count;
+      });
+  }
 
   function formatMoney(cents) {
-    return new Intl.NumberFormat('en-GB', { style:'currency', currency:'GBP' }).format(cents/100);
+    return new Intl.NumberFormat('en-GB', { style: 'currency', currency: 'GBP' }).format(cents / 100);
   }
 
-  function fetchCart() {
-    fetch('/cart.js').then(r => r.json()).then(cart => {
-      let pseudoSubtotal = 0;
-      cart.items.forEach(item => pseudoSubtotal += item.original_line_price);
-      let shippingCents = pseudoSubtotal >= 8000 ? 0 : 399;
-      subtotalEl.textContent = formatMoney(pseudoSubtotal);
-      shippingEl.textContent = shippingCents===0?'Free':formatMoney(shippingCents);
-      discountEl.textContent = cart.total_discount>0?'-'+formatMoney(cart.total_discount):'Add at Checkout';
-      totalEl.textContent = formatMoney(cart.total_price + shippingCents);
+  // Auto open drawer when an AJAX Add to Cart form is submitted
+  document.querySelectorAll('form[action^="/cart/add"]').forEach(form => {
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const formData = new FormData(form);
+      fetch('/cart/add.js', { method: 'POST', body: formData })
+        .then(res => res.json())
+        .then(item => {
+          // Trigger custom cart updated event
+          const event = new Event('cart:updated');
+          document.dispatchEvent(event);
+        });
     });
-  }
-
-  fetchCart();
-
-  // Example: Open drawer when cart icon clicked
-  document.querySelectorAll('.cart-icon').forEach(icon => {
-    icon.addEventListener('click', openDrawer);
   });
+
+  // Open drawer automatically when cart is updated
+  document.addEventListener('cart:updated', () => {
+    fetchCart();
+    openDrawer();
+  });
+
+  // Initial load: update cart
+  fetchCart();
 });
 </script>
+
 
 <style>
 /* Minimal drawer styling */
