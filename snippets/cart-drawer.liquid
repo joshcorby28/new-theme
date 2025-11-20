@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web/src/regular/style.css" />
 
 <style>
-  .shopdev .Fract-drawer {
+  .hidden-future .Fract-drawer {
     position: fixed;
     top: 0;
     right: -100%;
@@ -16,11 +16,11 @@
     flex-direction: column;
   }
 
-  .shopdev .Fract-drawer.is-open {
+  .hidden-future .Fract-drawer.is-open {
     right: 0;
   }
 
-  .shopdev .Fract-drawer-overlay {
+  .hidden-future .Fract-drawer-overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -33,12 +33,12 @@
     z-index: 9998;
   }
 
-  .shopdev .Fract-drawer-overlay.is-visible {
+  .hidden-future .Fract-drawer-overlay.is-visible {
     opacity: 1;
     visibility: visible;
   }
 
-  .shopdev .Fract-drawer-header {
+  .hidden-future .Fract-drawer-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -46,14 +46,14 @@
     border-bottom: 1px solid #e5e5e5;
   }
 
-  .shopdev .Fract-drawer-title {
+  .hidden-future .Fract-drawer-title {
     font-size: 20px;
     font-weight: 600;
-    color: #000000;
+    color: #1b1b1b;
     margin: 0;
   }
 
-  .shopdev .Fract-drawer-close {
+  .hidden-future .Fract-drawer-close {
     background: none;
     border: none;
     cursor: pointer;
@@ -61,21 +61,21 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #000000;
+    color: #1b1b1b;
     transition: opacity 0.2s ease;
   }
 
-  .shopdev .Fract-drawer-close:hover {
+  .hidden-future .Fract-drawer-close:hover {
     opacity: 0.6;
   }
 
-  .shopdev .Fract-drawer-body {
+  .hidden-future .Fract-drawer-body {
     flex: 1;
     overflow-y: auto;
     padding: 24px;
   }
 
-  .shopdev .Fract-drawer-empty {
+  .hidden-future .Fract-drawer-empty {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -85,29 +85,29 @@
     color: #666666;
   }
 
-  .shopdev .Fract-drawer-empty-icon {
+  .hidden-future .Fract-drawer-empty-icon {
     font-size: 48px;
     margin-bottom: 16px;
     opacity: 0.3;
   }
 
-  .shopdev .Fract-drawer-empty-text {
+  .hidden-future .Fract-drawer-empty-text {
     font-size: 16px;
     margin-bottom: 24px;
   }
 
-  .shopdev .Fract-drawer-items {
+  .hidden-future .Fract-drawer-items {
     display: flex;
     flex-direction: column;
     gap: 24px;
   }
 
-  .shopdev .Fract-drawer-item {
+  .hidden-future .Fract-drawer-item {
     display: flex;
     gap: 16px;
   }
 
-  .shopdev .Fract-drawer-item-image {
+  .hidden-future .Fract-drawer-item-image {
     width: 100px;
     height: 100px;
     flex-shrink: 0;
@@ -116,20 +116,20 @@
     background-color: #f5f5f5;
   }
 
-  .shopdev .Fract-drawer-item-image img {
+  .hidden-future .Fract-drawer-item-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
 
-  .shopdev .Fract-drawer-item-details {
+  .hidden-future .Fract-drawer-item-details {
     flex: 1;
     display: flex;
     flex-direction: column;
     gap: 8px;
   }
 
-  .shopdev .Fract-drawer-item-title {
+  .hidden-future .Fract-drawer-item-title {
     font-size: 14px;
     font-weight: 500;
     color: #000000;
@@ -137,25 +137,25 @@
     margin: 0;
   }
 
-  .shopdev .Fract-drawer-item-variant {
+  .hidden-future .Fract-drawer-item-variant {
     font-size: 12px;
     color: #666666;
   }
 
-  .shopdev .Fract-drawer-item-price {
+  .hidden-future .Fract-drawer-item-price {
     font-size: 14px;
-    color: #000000;
+    color: #1b1b1b;
     font-weight: 500;
   }
 
-  .shopdev .Fract-drawer-item-quantity {
+  .hidden-future .Fract-drawer-item-quantity {
     display: flex;
     align-items: center;
     gap: 12px;
     margin-top: 8px;
   }
 
-  .shopdev .Fract-drawer-quantity-btn {
+  .hidden-future .Fract-drawer-quantity-btn {
     width: 28px;
     height: 28px;
     border: 1px solid #e5e5e5;
@@ -168,22 +168,22 @@
     transition: background-color 0.2s ease;
   }
 
-  .shopdev .Fract-drawer-quantity-btn:hover {
+  .hidden-future .Fract-drawer-quantity-btn:hover {
     background-color: #f5f5f5;
   }
 
-  .shopdev .Fract-drawer-quantity-btn:disabled {
+  .hidden-future .Fract-drawer-quantity-btn:disabled {
     opacity: 0.3;
     cursor: not-allowed;
   }
 
-  .shopdev .Fract-drawer-quantity-value {
+  .hidden-future .Fract-drawer-quantity-value {
     font-size: 14px;
     min-width: 24px;
     text-align: center;
   }
 
-  .shopdev .Fract-drawer-item-remove {
+  .hidden-future .Fract-drawer-item-remove {
     background: none;
     border: none;
     cursor: pointer;
@@ -193,39 +193,39 @@
     align-self: flex-start;
   }
 
-  .shopdev .Fract-drawer-item-remove:hover {
-    color: #000000;
+  .hidden-future .Fract-drawer-item-remove:hover {
+    color: #1b1b1b;
   }
 
-  .shopdev .Fract-drawer-footer {
+  .hidden-future .Fract-drawer-footer {
     padding: 24px;
     border-top: 1px solid #e5e5e5;
     background-color: #ffffff;
   }
 
-  .shopdev .Fract-drawer-subtotal {
+  .hidden-future .Fract-drawer-subtotal {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 16px;
   }
 
-  .shopdev .Fract-drawer-subtotal-label {
+  .hidden-future .Fract-drawer-subtotal-label {
     font-size: 16px;
     font-weight: 500;
-    color: #000000;
+    color: #1b1b1b;
   }
 
-  .shopdev .Fract-drawer-subtotal-value {
+  .hidden-future .Fract-drawer-subtotal-value {
     font-size: 18px;
     font-weight: 600;
-    color: #000000;
+    color: #1b1b1b;
   }
 
-  .shopdev .Fract-drawer-checkout-btn {
+  .hidden-future .Fract-drawer-checkout-btn {
     width: 100%;
     padding: 16px;
-    background-color: #000000;
+    background-color: #1b1b1b;
     color: #ffffff;
     border: none;
     border-radius: 4px;
@@ -235,11 +235,11 @@
     transition: background-color 0.2s ease;
   }
 
-  .shopdev .Fract-drawer-checkout-btn:hover {
+  .hidden-future .Fract-drawer-checkout-btn:hover {
     background-color: #333333;
   }
 
-  .shopdev .Fract-drawer-note {
+  .hidden-future .Fract-drawer-note {
     font-size: 12px;
     color: #666666;
     text-align: center;
@@ -247,18 +247,18 @@
   }
 
   @media (max-width: 480px) {
-    .shopdev .Fract-drawer {
+    .hidden-future .Fract-drawer {
       max-width: 100%;
     }
 
-    .shopdev .Fract-drawer-item-image {
+    .hidden-future .Fract-drawer-item-image {
       width: 80px;
       height: 80px;
     }
   }
 </style>
 
-<div class="shopdev">
+<div class="hidden-future">
   <div class="Fract-drawer-overlay" id="cartDrawerOverlay"></div>
 
   <div class="Fract-drawer" id="cartDrawer">
@@ -284,7 +284,7 @@
 
   <div class="Fract-drawer-footer" id="cartDrawerFooter" style="display: none;">
     <div class="Fract-drawer-subtotal">
-      <span class="Fract-drawer-subtotal-label">Subtotal</span>
+      <span class="Fract-drawer-subtotal-label">subtotal</span>
       <span class="Fract-drawer-subtotal-value" id="cartSubtotal">£0.00</span>
     </div>
     <button class="Fract-drawer-checkout-btn" id="checkoutButton">
