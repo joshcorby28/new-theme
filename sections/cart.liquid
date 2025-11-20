@@ -89,35 +89,41 @@
     {% endfor %}
   </table>
 <div class="fract-footer-cart">
-  <div class="cart-summary">
-    <div class="cart-summary-row">
-      <span class="label">Subtotal</span>
-      <span class="value" id="cart-subtotal">{{ cart.total_price | money }}</span>
-    </div>
-    
-    <div class="cart-summary-row">
-      <span class="label">Shipping</span>
-      <span class="value" id="cart-shipping">£3.99</span>
-    </div>
+{% assign pseudo_subtotal = 0 %}
 
-    {% if cart.total_discount > 0 %}
-      <div class="cart-summary-row">
-        <span class="label">Discounts</span>
-        <span class="value" id="cart-discount">-{{ cart.total_discount | money }}</span>
-      </div>
-    {% else %}
-      <div class="cart-summary-row">
-        <span class="label">Discounts</span>
-        <span class="value" id="cart-discount">Add at Checkout</span>
-      </div>
-    {% endif %}
+{% for item in cart.items %}
+  {% assign pseudo_subtotal = pseudo_subtotal | plus: item.original_price | times: item.quantity %}
+{% endfor %}
 
-    <!-- New Total Row -->
-    <div class="cart-summary-row cart-total">
-      <span class="label"><strong>Total</strong></span>
-      <span style="font-size:18px; font-weight:bold;" class="value" id="cart-total"><strong>{{ cart.total_price | money }}</strong></span>
-    </div>
+<div class="cart-summary">
+  <div class="cart-summary-row">
+    <span class="label">Subtotal</span>
+    <span class="value" id="cart-subtotal">{{ pseudo_subtotal | money }}</span>
   </div>
+
+  <div class="cart-summary-row">
+    <span class="label">Shipping</span>
+    <span class="value" id="cart-shipping">£3.99</span>
+  </div>
+
+  {% if cart.total_discount > 0 %}
+    <div class="cart-summary-row">
+      <span class="label">Discounts</span>
+      <span class="value" id="cart-discount">-{{ cart.total_discount | money }}</span>
+    </div>
+  {% else %}
+    <div class="cart-summary-row">
+      <span class="label">Discounts</span>
+      <span class="value" id="cart-discount">Add at Checkout</span>
+    </div>
+  {% endif %}
+
+  <div class="cart-summary-row cart-total">
+    <span class="label"><strong>Total</strong></span>
+    <span style="font-size:18px; font-weight:bold;" class="value" id="cart-total"><strong>{{ cart.total_price | money }}</strong></span>
+  </div>
+</div>
+
 
   <button class="fract-primary button-skew" type="submit" name="checkout" value="{{ 'cart.checkout' | t }}">
     {{ 'cart.checkout' | t }}
