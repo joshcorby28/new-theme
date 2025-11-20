@@ -9,13 +9,14 @@
 {{ 'fract-cart.css' | asset_url | stylesheet_tag: preload: true }}
 
 <div class="main-cart-title">
-<h1 class="cart-title">{{ 'cart.title' | t }}</h1> <span class="item-count">({{ cart.item_count }} item{% if cart.item_count != 1 %}s{% endif %})</span>
+  <h1 class="cart-title">{{ 'cart.title' | t }}</h1>
+  <span class="item-count">({{ cart.item_count }} item{% if cart.item_count != 1 %}s{% endif %})</span>
 </div>
 
 <form class="fract-cart" action="{{ routes.cart_url }}" method="post">
   <table class="main-cart-items">
     {% for item in cart.items %}
-     <tr class="cart-item">
+      <tr class="cart-item">
         <td class="cart-image-and-title">
           {% render 'image', image: item.image, url: item.url %}
           <div class="title-and-remove">
@@ -33,6 +34,7 @@
                 {% endif %}
               </div>
             {% endif %}
+
             {% if section.settings.show-stock-indicator %}
               {% assign inventory = item.variant.inventory_quantity %}
               {% assign in_stock = item.variant.available %}
@@ -58,20 +60,25 @@
               </div>
             {% endif %}
 
-      
             {{ 'cart.remove' | t | link_to: item.url_to_remove }}
           </div>
         </td>
-      <td>
-      <span class="cart-item-price">
-        {{ item.original_line_price | money }}
-        {% if item.variant.compare_at_price > item.variant.price %}
-          <span class="compare-at-price" style="text-decoration: line-through; color: #888; font-size:12px; font-weight:normal">
-            {{ item.variant.compare_at_price | money }}
+
+        <td>
+          <span class="cart-item-price">
+            {% if item.line_price == 0 and item.original_line_price > 0 %}
+              {{ item.original_line_price | money }} <span style="color: #28a745; font-weight:bold;">(Free)</span>
+            {% else %}
+              {{ item.original_line_price | money }}
+            {% endif %}
+            {% if item.variant.compare_at_price > item.variant.price %}
+              <span class="compare-at-price" style="text-decoration: line-through; color: #888; font-size:12px; font-weight:normal">
+                {{ item.variant.compare_at_price | money }}
+              </span>
+            {% endif %}
           </span>
-        {% endif %}
-      </span>
-      </td>
+        </td>
+
         <td>
           <div class="quantity-selector">
             <button type="button" class="qty-btn minus">-</button>
@@ -88,106 +95,112 @@
       </tr>
     {% endfor %}
   </table>
-<div class="fract-footer-cart">
-{% assign pseudo_subtotal = 0 %}
 
-{% for item in cart.items %}
-  {% assign pseudo_subtotal = pseudo_subtotal | plus: item.original_price | times: item.quantity %}
-{% endfor %}
+  <div class="fract-footer-cart">
+    {% assign pseudo_subtotal = 0 %}
+    {% for item in cart.items %}
+      {% assign pseudo_subtotal = pseudo_subtotal | plus: item.original_line_price %}
+    {% endfor %}
 
-<div class="cart-summary">
-  <div class="cart-summary-row">
-    <span class="label">Subtotal</span>
-    <span class="value" id="cart-subtotal">{{ pseudo_subtotal | money }}</span>
-  </div>
+    {% assign shipping_cost = 3.99 %}
+    {% if pseudo_subtotal >= 8000 %}
+      {% assign shipping_cost = 0 %}
+    {% endif %}
 
-  <div class="cart-summary-row">
-    <span class="label">Shipping</span>
-    <span class="value" id="cart-shipping">£3.99</span>
-  </div>
+    <div class="cart-summary">
+      <div class="cart-summary-row">
+        <span class="label">Subtotal</span>
+        <span class="value" id="cart-subtotal">{{ pseudo_subtotal | money }}</span>
+      </div>
 
-  {% if cart.total_discount > 0 %}
-    <div class="cart-summary-row">
-      <span class="label">Discounts</span>
-      <span class="value" id="cart-discount">-{{ cart.total_discount | money }}</span>
+      <div class="cart-summary-row">
+        <span class="label">Shipping</span>
+        <span class="value" id="cart-shipping">
+          {% if shipping_cost == 0 %}Free{% else %}{{ shipping_cost | money }}{% endif %}
+        </span>
+      </div>
+
+      {% if cart.total_discount > 0 %}
+        <div class="cart-summary-row">
+          <span class="label">Discounts</span>
+          <span class="value" id="cart-discount">-{{ cart.total_discount | money }}</span>
+        </div>
+      {% else %}
+        <div class="cart-summary-row">
+          <span class="label">Discounts</span>
+          <span class="value" id="cart-discount">Add at Checkout</span>
+        </div>
+      {% endif %}
+
+      <div class="cart-summary-row cart-total">
+        <span class="label"><strong>Total</strong></span>
+        <span style="font-size:18px; font-weight:bold;" class="value" id="cart-total"><strong>{{ cart.total_price | money }}</strong></span>
+      </div>
     </div>
-  {% else %}
-    <div class="cart-summary-row">
-      <span class="label">Discounts</span>
-      <span class="value" id="cart-discount">Add at Checkout</span>
-    </div>
-  {% endif %}
 
-  <div class="cart-summary-row cart-total">
-    <span class="label"><strong>Total</strong></span>
-    <span style="font-size:18px; font-weight:bold;" class="value" id="cart-total"><strong>{{ cart.total_price | money }}</strong></span>
-  </div>
-</div>
-
-
-  <button class="fract-primary button-skew" type="submit" name="checkout" value="{{ 'cart.checkout' | t }}">
-    {{ 'cart.checkout' | t }}
-  </button>
-  <a style="width:100%" href="{{ routes.all_products_collection_url }}" class="fract-secondary button-skew continue-shopping">
+    <button class="fract-primary button-skew" type="submit" name="checkout" value="{{ 'cart.checkout' | t }}">
+      {{ 'cart.checkout' | t }}
+    </button>
+    <a style="width:100%" href="{{ routes.all_products_collection_url }}" class="fract-secondary button-skew continue-shopping">
       Continue Shopping
-  </a>
-</div>
+    </a>
+  </div>
 </form>
 
 <script>
-  document.addEventListener("DOMContentLoaded", function() {
-    const subtotalEl = document.querySelector('#cart-subtotal');
-    const shippingEl = document.querySelector('#cart-shipping');
-    const discountEl = document.querySelector('#cart-discount');
-    const totalEl = document.querySelector('#cart-total');
+document.addEventListener("DOMContentLoaded", function() {
+  const subtotalEl = document.querySelector('#cart-subtotal');
+  const shippingEl = document.querySelector('#cart-shipping');
+  const discountEl = document.querySelector('#cart-discount');
+  const totalEl = document.querySelector('#cart-total');
 
-    function formatMoney(cents) {
-      return new Intl.NumberFormat('en-GB', {
-        style: 'currency',
-        currency: 'GBP'
-      }).format(cents / 100);
-    }
+  function formatMoney(cents) {
+    return new Intl.NumberFormat('en-GB', {
+      style: 'currency',
+      currency: 'GBP'
+    }).format(cents / 100);
+  }
 
-    function updateTotals(cart) {
-      const subtotal = cart.total_price / 100;
-      const discount = cart.total_discount / 100;
-      let shipping = subtotal >= 80 ? 0 : 3.99;
-      const total = subtotal - discount + shipping;
+  function updateTotals(cart) {
+    // Pseudo subtotal includes free items
+    let pseudoSubtotal = 0;
+    cart.items.forEach(item => {
+      pseudoSubtotal += item.original_line_price;
+    });
 
-      // Update DOM
-      subtotalEl.textContent = formatMoney(cart.total_price);
-      shippingEl.textContent = shipping === 0 ? 'Free' : formatMoney(shipping * 100);
-      if (discount > 0) {
-        discountEl.textContent = '-' + formatMoney(cart.total_discount);
-      } else {
-        discountEl.textContent = 'Add at Checkout';
-      }
-      totalEl.textContent = formatMoney(total * 100);
-    }
+    let discount = cart.total_discount;
+    let shipping = pseudoSubtotal >= 8000 ? 0 : 399; // in cents
+    let total = cart.total_price; // Shopify total (after discounts)
 
-    // Fetch and update cart on load
+    subtotalEl.textContent = formatMoney(pseudoSubtotal);
+    shippingEl.textContent = shipping === 0 ? 'Free' : formatMoney(shipping);
+    discountEl.textContent = discount > 0 ? '-' + formatMoney(discount) : 'Add at Checkout';
+    totalEl.textContent = formatMoney(total);
+  }
+
+  // Fetch cart on load
+  fetch('/cart.js')
+    .then(res => res.json())
+    .then(cart => updateTotals(cart));
+
+  // Listen for Shopify cart updates
+  document.addEventListener('cart:updated', () => {
     fetch('/cart.js')
       .then(res => res.json())
       .then(cart => updateTotals(cart));
-
-    // Listen for Shopify cart updates
-    document.addEventListener('cart:updated', () => {
-      fetch('/cart.js')
-        .then(res => res.json())
-        .then(cart => updateTotals(cart));
-    });
-
-    // Fallback for quantity inputs changing
-    document.body.addEventListener('change', (e) => {
-      if (e.target.name && e.target.name.includes('updates')) {
-        setTimeout(() => {
-          fetch('/cart.js')
-            .then(res => res.json())
-            .then(cart => updateTotals(cart));
-        }, 400);
-      }
-    });
   });
+
+  // Fallback for quantity inputs changing
+  document.body.addEventListener('change', (e) => {
+    if (e.target.name && e.target.name.includes('updates')) {
+      setTimeout(() => {
+        fetch('/cart.js')
+          .then(res => res.json())
+          .then(cart => updateTotals(cart));
+      }, 400);
+    }
+  });
+});
 </script>
 
 
