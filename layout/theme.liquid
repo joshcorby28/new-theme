@@ -331,56 +331,7 @@ const interval = setInterval(() => {
 }, 100); // check every 100ms
 
 </script>
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  const DISCOUNT_CODE = 'FIRSTDROP10';
 
-  async function applyDiscount() {
-    try {
-      const cart = await fetch('/cart.js').then(r => r.json());
-
-      // Prevent re-applying
-      if (cart.attributes && cart.attributes._discountApplied === DISCOUNT_CODE) return;
-
-      // Mark attribute
-      await fetch('/cart/update.js', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          attributes: { _discountApplied: DISCOUNT_CODE }
-        })
-      });
-
-      // Apply discount silently (no redirect)
-      await fetch(`/discount/${DISCOUNT_CODE}?redirect=/cart`, { method: 'GET' });
-
-    } catch (err) {
-      console.error('Auto-discount error:', err);
-    }
-  }
-
-  // Always run once on load
-  applyDiscount();
-
-  // 🔥 Universal AJAX listeners used by all modern themes
-  const events = [
-    'cart:updated',
-    'cart:update',
-    'cart:change',
-    'ajaxProduct:added',
-    'product:added',
-    'addToCart',
-    'added.ajaxCart',
-    'cart.requestComplete' // used by many apps
-  ];
-
-  events.forEach(ev => document.addEventListener(ev, applyDiscount));
-
-  // 🔥 MutationObserver fallback for themes with zero events
-  const cartObserver = new MutationObserver(() => applyDiscount());
-  cartObserver.observe(document.body, { childList: true, subtree: true });
-});
-</script>
 
 
     {% sections 'footer-group' %}
