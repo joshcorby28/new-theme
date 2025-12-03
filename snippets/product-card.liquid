@@ -72,11 +72,7 @@
 
 </style>
 <div class="drop-badge">
-  {% if product.collections contains collections['hoodies'] %}
-    Free Tee with any Hoodie
-  {% elsif product.collections contains collections['tees'] %}
-    Free with any Hoodie
-  {% elsif product.tags contains 'blanks' %}
+ {% if product.tags contains 'blanks' %}
     Heavyweight Blank
   {% elsif product.tags contains 'comingsoon' %}
     Coming Soon
