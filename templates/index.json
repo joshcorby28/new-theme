@@ -87,8 +87,8 @@
         "item_gap_mobile": 30,
         "bg-color": "#000000",
         "text-color": "#ffffff",
-        "bg-color-sub": "#eef2f4",
-        "text-color-sub": "#1b1b1b",
+        "bg-color-sub": "#d55653",
+        "text-color-sub": "#ffffff",
         "padding_top": 14,
         "padding_bottom": 14,
         "custom_class": "header-scroll-bar"

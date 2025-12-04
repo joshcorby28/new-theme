@@ -57,10 +57,10 @@
         "speed": 30,
         "item_gap": 50,
         "item_gap_mobile": 30,
-        "bg-color": "#f2f1ef",
+        "bg-color": "#d55653",
         "text-color": "#222222",
-        "bg-color-sub": "#f2f1ef",
-        "text-color-sub": "#222222",
+        "bg-color-sub": "#d55653",
+        "text-color-sub": "#ffffff",
         "padding_top": 10,
         "padding_bottom": 10,
         "custom_class": ""
