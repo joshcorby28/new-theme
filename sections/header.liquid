@@ -65,6 +65,15 @@
 
     <!-- Icons (Account, Cart, etc.) -->
     <div class="header__icons">
+      <!-- 🌍 Currency Selector -->
+<div class="currency-selector">
+  <select id="currency-switcher">
+    <option value="GBP" {% if cart.currency.iso_code == 'GBP' %}selected{% endif %}>GBP £</option>
+    <option value="USD" {% if cart.currency.iso_code == 'USD' %}selected{% endif %}>USD $</option>
+    <option value="EUR" {% if cart.currency.iso_code == 'EUR' %}selected{% endif %}>EUR €</option>
+  </select>
+</div>
+
       <a href="#" id="open-search-modal" aria-label="Open Search">
       {% if section.settings.search-true %}
         {{ 'icon-search.svg' | inline_asset_content }}
@@ -344,3 +353,36 @@ document.addEventListener('DOMContentLoaded', function() {
 }
 {% endschema %}
 
+
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const currencySelect = document.getElementById("currency-switcher");
+
+  currencySelect.addEventListener("change", function () {
+    const newCurrency = this.value;
+
+    fetch(`/currency?currency=${newCurrency}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" }
+    }).then(() => {
+      location.reload(); // Refresh so prices update
+    });
+  });
+});
+</script>
+
+<style>
+  .currency-selector select {
+  padding: 4px 6px;
+  font-size: 13px;
+  border: 1px solid #ddd;
+  background: white;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.currency-selector select:hover {
+  border-color: #aaa;
+}
+</style>
