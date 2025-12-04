@@ -8,26 +8,30 @@
 {{ 'fract-product.css' | asset_url | stylesheet_tag: preload: true }}
 
 <div class="fract-main-product">
-<div class="product-images">
-  {% if section.settings.image_layout == 'slider' %}
-    <div class="swiper product-gallery-swiper">
-    <div class="swiper-wrapper">
-      {% for image in product.images %}
-        <div class="swiper-slide">
-          <img src="{{ image | image_url: width: 900 }}" class="product-image" />
+<div class="product-images-mask">
+  <div class="product-images">
+    {% if section.settings.image_layout == 'slider' %}
+      <div class="swiper product-gallery-swiper">
+        <div class="swiper-wrapper">
+          {% for image in product.images %}
+            <div class="swiper-slide">
+              <img src="{{ image | image_url: width: 900 }}" class="product-image" />
+            </div>
+          {% endfor %}
         </div>
-      {% endfor %}
-    </div>
-      <div class="swiper-buttons">
-     <div class="swiper-button-prev-smarte">{% render 'icon-arrow-new' %}</div>
-     <div class="swiper-button-next-smarte">{% render 'icon-arrow-new' %}</div>
+        <div class="swiper-buttons">
+          <div class="swiper-button-prev-smarte">{% render 'icon-arrow-new' %}</div>
+          <div class="swiper-button-next-smarte">{% render 'icon-arrow-new' %}</div>
+        </div>
       </div>
+    {% else %}
+      {% for image in product.images %}
+        <img src="{{ image | image_url: width: 900 }}" class="product-image" />
+      {% endfor %}
+    {% endif %}
   </div>
-  {% else %}
-    {% for image in product.images %}
-      <img src="{{ image | image_url: width: 900 }}" class="product-image" />
-    {% endfor %}
-  {% endif %}
+  <!-- Mask overlay -->
+  <div class="fade-top-mask"></div>
 </div>
 
 <div class="right-side-product">
