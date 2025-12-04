@@ -16,6 +16,7 @@
     },
     "video_hero_Nx9Hwg": {
       "type": "video-hero",
+      "disabled": true,
       "name": "Video Hero",
       "settings": {
         "width_mode": "full_width",
