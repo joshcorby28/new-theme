@@ -37,7 +37,7 @@
   {% assign percent_off = savings | times: 100 | divided_by: product.compare_at_price %}
 
   <div class="drop-badge">
-    {{ percent_off | round }}% OFF
+    {{ percent_off | round }}% OFF - WINTER SALE
   </div>
 
 {% elsif product.tags contains 'comingsoon' %}
