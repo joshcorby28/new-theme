@@ -80,13 +80,14 @@
     data-show-only-reviews-count="true"
   ></div>
 {% endif %}
-
+      <p class="product-card__price">
         {% if product.compare_at_price > product.price %}
           <h4 class="price--sale">{{ product.price | money }}</span>
           <h4 class="price--compare">{{ product.compare_at_price | money }}</span>
         {% else %}
           <h4 class="price--regular">{{ product.price | money }}</span>
         {% endif %}
+      </p>
   {% assign current_product = product %}
 {% assign related_products = product.metafields.custom.related_products.value %}
 
