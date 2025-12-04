@@ -34,7 +34,7 @@
 >
   <div style="" class="fract-scrolling-promotion-section ">
     <fract-scrolling-promotion
-      class="fract-scrolling-promotion scroll--{{ section.id }} fract-scrolling-promotion--{{ section.settings.direction }}"
+      class="fract-scrolling-promotion fract-scrolling-promotion--{{ section.settings.direction }}"
     >
       <div class="m-promotion">
         {% for block in section.blocks %}
@@ -61,7 +61,7 @@
 </section>
 
 <script>
-  if (!customElements.get('fract-scrolling-promotion.scroll--{{ section.id }}')) {
+  if (!customElements.get('fract-scrolling-promotion')) {
     class e extends HTMLElement {
       constructor() {
         super();
