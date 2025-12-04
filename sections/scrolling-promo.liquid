@@ -61,42 +61,43 @@
 </section>
 
 <script>
-  if (!customElements.get('fract-scrolling-promotion')) {
-    class e extends HTMLElement {
-      constructor() {
-        super();
-      }
-      connectedCallback() {
-        (this.promotion = this.querySelector('.m-promotion')), this.init();
-      }
-      init() {
-        if (1 === this.childElementCount) {
-          this.promotion.classList.add('m-promotion--animated');
-          for (let e = 0; e < 10; e++)
-            (this.clone = this.promotion.cloneNode(!0)),
-              this.clone.setAttribute('aria-hidden', !0),
-              this.appendChild(this.clone);
-          new IntersectionObserver(
-            (e, t) => {
-              e.forEach((e) => {
-                e.isIntersecting ? this.scrollingPlay() : this.scrollingPause();
-              });
-            },
-            {
-              rootMargin: '0px 0px 50px 0px',
-            }
-          ).observe(this);
-        }
-      }
-      scrollingPlay() {
-        this.classList.remove('fract-scrolling-promotion--paused');
-      }
-      scrollingPause() {
-        this.classList.add('fract-scrolling-promotion--paused');
-      }
+if (!customElements.get('fract-scrolling-promotion')) {
+  class ScrollingPromo extends HTMLElement {
+    constructor() { super(); }
+    connectedCallback() {
+      this.promotion = this.querySelector('.m-promotion');
+      if (!this.promotion) return;
+      this.init();
     }
-    customElements.define('fract-scrolling-promotion', e);
+    init() {
+      this.promotion.classList.add('m-promotion--animated');
+      // Clone for seamless scrolling
+      for (let i = 0; i < 10; i++) {
+        const clone = this.promotion.cloneNode(true);
+        clone.setAttribute('aria-hidden', 'true');
+        this.appendChild(clone);
+      }
+
+      // Observe visibility for play/pause
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach(entry => {
+            entry.isIntersecting ? this.scrollingPlay() : this.scrollingPause();
+          });
+        },
+        { rootMargin: '0px 0px 50px 0px' }
+      );
+
+      observer.observe(this);
+    }
+
+    scrollingPlay() { this.classList.remove('fract-scrolling-promotion--paused'); }
+    scrollingPause() { this.classList.add('fract-scrolling-promotion--paused'); }
   }
+
+  customElements.define('fract-scrolling-promotion', ScrollingPromo);
+}
+
 </script>
 
 {% schema %}
