@@ -630,28 +630,6 @@
 
 </script>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-  const fadeMask = document.querySelector('.fade-top-mask');
-  if (!fadeMask) return;
-
-  let lastScroll = window.scrollY;
-
-  window.addEventListener('scroll', function() {
-    const currentScroll = window.scrollY;
-
-    if (currentScroll < lastScroll && currentScroll > 50) {
-      // scrolling up
-      fadeMask.classList.add('active');
-    } else {
-      // scrolling down or near top
-      fadeMask.classList.remove('active');
-    }
-
-    lastScroll = currentScroll;
-  });
-});
-</script>
 
 
 {% comment %} Variant button JS is handled in the main quantity/variant script above {% endcomment %}
