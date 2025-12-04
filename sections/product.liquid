@@ -630,6 +630,27 @@
       });
     });
   });
+  document.addEventListener('DOMContentLoaded', function() {
+  const fadeMask = document.querySelector('.fade-top-mask');
+  if (!fadeMask) return;
+
+  let lastScroll = window.scrollY;
+
+  window.addEventListener('scroll', function() {
+    const currentScroll = window.scrollY;
+
+    if (currentScroll < lastScroll && currentScroll > 50) {
+      // Scrolling up
+      fadeMask.classList.add('active');
+    } else {
+      // Scrolling down or at top
+      fadeMask.classList.remove('active');
+    }
+
+    lastScroll = currentScroll;
+  });
+});
+
 </script>
 
 
