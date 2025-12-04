@@ -23,6 +23,9 @@
   </head>
 
   <body id="hidden-theme">
+      {% if template == 'index' %}
+    <div class="fade-top-mask"></div>
+      {% endif %}
     {% render 'cart-drawer' %}
     {% # Grunge Overlay Effect %}
        {% if settings['grunge-effect'] %} <canvas id="grain-canvas"></canvas>{% endif %}
