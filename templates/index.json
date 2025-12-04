@@ -81,7 +81,7 @@
       "name": "Scrolling Prom0",
       "settings": {
         "container": "w-full",
-        "direction": "left",
+        "direction": "right",
         "speed": 14,
         "item_gap": 50,
         "item_gap_mobile": 30,
