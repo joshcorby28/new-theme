@@ -61,59 +61,54 @@
 </section>
 
 <script>
-class FractScrollingPromotion extends HTMLElement {
-  constructor() {
-    super();
-    this.promotion = null;
-  }
+if (!customElements.get('fract-scrolling-promotion')) {
 
-  connectedCallback() {
-    this.promotion = this.querySelector('.m-promotion');
-    if (!this.promotion) return;
-    this.init();
-  }
+  class FractScrollingPromotion extends HTMLElement {
+    constructor() {
+      super();
+      this.promotion = null;
+    }
 
-  init() {
-    // Only animate if there's at least 1 child
-    if (this.promotion.children.length > 0) {
-      this.promotion.classList.add('m-promotion--animated');
+    connectedCallback() {
+      this.promotion = this.querySelector('.m-promotion');
+      if (!this.promotion) return;
+      this.init();
+    }
 
-      // Clone the items to loop
-      for (let i = 0; i < 10; i++) {
-        const clone = this.promotion.cloneNode(true);
-        clone.setAttribute('aria-hidden', 'true');
-        this.appendChild(clone);
+    init() {
+      if (this.promotion.children.length > 0) {
+        this.promotion.classList.add('m-promotion--animated');
+
+        for (let i = 0; i < 10; i++) {
+          const clone = this.promotion.cloneNode(true);
+          clone.setAttribute('aria-hidden', 'true');
+          this.appendChild(clone);
+        }
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              entry.isIntersecting ? this.scrollingPlay() : this.scrollingPause();
+            });
+          },
+          { rootMargin: '0px 0px 50px 0px' }
+        );
+
+        observer.observe(this);
       }
+    }
 
-      // Intersection observer
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              this.scrollingPlay();
-            } else {
-              this.scrollingPause();
-            }
-          });
-        },
-        { rootMargin: '0px 0px 50px 0px' }
-      );
+    scrollingPlay() {
+      this.classList.remove('fract-scrolling-promotion--paused');
+    }
 
-      observer.observe(this);
+    scrollingPause() {
+      this.classList.add('fract-scrolling-promotion--paused');
     }
   }
 
-  scrollingPlay() {
-    this.classList.remove('fract-scrolling-promotion--paused');
-  }
-
-  scrollingPause() {
-    this.classList.add('fract-scrolling-promotion--paused');
-  }
-}
-
-if (!customElements.get('fract-scrolling-promotion')) {
   customElements.define('fract-scrolling-promotion', FractScrollingPromotion);
+
 }
 
 </script>
