@@ -50,6 +50,50 @@
         "secondary_button_style": "fract-secondary"
       }
     },
+    "scrolling_promo_D6GEMB": {
+      "type": "scrolling-promo",
+      "blocks": {
+        "announcement_QMGNDA": {
+          "type": "announcement",
+          "settings": {
+            "custom_svg": "",
+            "icon_size": "medium",
+            "text": "WINTER <b>SALE</b>",
+            "text_size": 16,
+            "text_link": ""
+          }
+        },
+        "announcement_UbjLEw": {
+          "type": "announcement",
+          "settings": {
+            "custom_svg": "",
+            "icon_size": "medium",
+            "text": "<b>UP TO 25%</b> OFF ALL ITEMS",
+            "text_size": 16,
+            "text_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "announcement_QMGNDA",
+        "announcement_UbjLEw"
+      ],
+      "name": "Scrolling Prom0",
+      "settings": {
+        "container": "w-full",
+        "direction": "left",
+        "speed": 14,
+        "item_gap": 50,
+        "item_gap_mobile": 30,
+        "bg-color": "#000000",
+        "text-color": "#ffffff",
+        "bg-color-sub": "#eef2f4",
+        "text-color-sub": "#1b1b1b",
+        "padding_top": 20,
+        "padding_bottom": 20,
+        "custom_class": ""
+      }
+    },
     "fract_product_swiper_HtXeWr": {
       "type": "fract-product-swiper",
       "name": "Product Slider",
@@ -115,6 +159,7 @@
   },
   "order": [
     "video_hero_fQNxfR",
+    "scrolling_promo_D6GEMB",
     "fract_product_swiper_HtXeWr",
     "expandable_collection_grid_UUaqBh"
   ]
