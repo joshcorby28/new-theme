@@ -70,6 +70,23 @@
   pointer-events: none; /* so hover still works */
 }
 
+.price--sale {
+  color: #d60000;
+  font-weight: bold;
+  margin-right: 6px;
+}
+
+.price--compare {
+  text-decoration: line-through;
+  opacity: 0.7;
+  font-size: 0.9em;
+}
+
+.price--regular {
+  font-weight: 500;
+}
+
+
 </style>
 <div class="drop-badge">
  {% if product.tags contains 'blanks' %}
@@ -85,8 +102,16 @@
     <div class="product-card__info">
       <h3 class="product-card__title">{{ product.title }}</h3>
       <p class="product-card__price">
-        {{ product.price | money }}
+
+        {% if product.compare_at_price > product.price %}
+          <span class="price--sale">{{ product.price | money }}</span>
+          <span class="price--compare">{{ product.compare_at_price | money }}</span>
+        {% else %}
+          <span class="price--regular">{{ product.price | money }}</span>
+        {% endif %}
+
       </p>
+
 
  {% assign total_inventory = 0 %}
 
