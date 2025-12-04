@@ -50,6 +50,7 @@
         "announcement_8TjAGd",
         "announcement_DEELTG"
       ],
+      "disabled": true,
       "name": "Scrolling promo",
       "settings": {
         "container": "w-full",
