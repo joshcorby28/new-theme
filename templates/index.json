@@ -53,30 +53,41 @@
     "scrolling_promo_D6GEMB": {
       "type": "scrolling-promo",
       "blocks": {
-        "announcement_QMGNDA": {
-          "type": "announcement",
-          "settings": {
-            "custom_svg": "",
-            "icon_size": "medium",
-            "text": "WINTER <b>SALE</b>",
-            "text_size": 16,
-            "text_link": ""
-          }
-        },
         "announcement_UbjLEw": {
           "type": "announcement",
           "settings": {
             "custom_svg": "",
             "icon_size": "medium",
-            "text": "<b>UP TO 25%</b> OFF ALL ITEMS",
+            "text": "<b>25% OFF</b> TEES",
+            "text_size": 16,
+            "text_link": ""
+          }
+        },
+        "announcement_QMGNDA": {
+          "type": "announcement",
+          "settings": {
+            "custom_svg": "",
+            "icon_size": "medium",
+            "text": "<b>20-22% OFF</b> HOODIES",
+            "text_size": 16,
+            "text_link": ""
+          }
+        },
+        "announcement_Pk3JzB": {
+          "type": "announcement",
+          "settings": {
+            "custom_svg": "",
+            "icon_size": "medium",
+            "text": "<b>25% OFF</b> JOGGERS",
             "text_size": 16,
             "text_link": ""
           }
         }
       },
       "block_order": [
+        "announcement_UbjLEw",
         "announcement_QMGNDA",
-        "announcement_UbjLEw"
+        "announcement_Pk3JzB"
       ],
       "name": "Scrolling Prom0",
       "settings": {
