@@ -89,9 +89,9 @@
         "text-color": "#ffffff",
         "bg-color-sub": "#eef2f4",
         "text-color-sub": "#1b1b1b",
-        "padding_top": 20,
-        "padding_bottom": 20,
-        "custom_class": ""
+        "padding_top": 14,
+        "padding_bottom": 14,
+        "custom_class": "header-scroll-bar"
       }
     },
     "fract_product_swiper_HtXeWr": {
