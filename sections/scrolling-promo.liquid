@@ -18,7 +18,7 @@
     width: 100%;
     z-index: 9;
   }
-  #fract-scrolling-promotion-section--{{ section.id }} .fract-scrolling-promotion-section {
+  .fract-scrolling-promotion-section {
     padding-top: {{ section.settings.padding_top }}px;
     padding-bottom: {{ section.settings.padding_bottom }}px;
     margin: 0 auto;
@@ -36,7 +36,6 @@
   <div class="fract-scrolling-promotion-section">
     <fract-scrolling-promotion
       class="fract-scrolling-promotion fract-scrolling-promotion--{{ section.settings.direction }}"
-      data-initialized="false"
     >
       <div class="m-promotion">
         {% for block in section.blocks %}
@@ -62,77 +61,58 @@
   </div>
 </section>
 
-{% if section.index == 1 or section.index == nil %}
 <script>
-  window.FractScrollingPromotionLoaded = window.FractScrollingPromotionLoaded || false;
-  
-  if (!window.FractScrollingPromotionLoaded) {
-    window.FractScrollingPromotionLoaded = true;
-    
+  (function() {
     if (!customElements.get('fract-scrolling-promotion')) {
       class FractScrollingPromotion extends HTMLElement {
         constructor() {
           super();
           this.promotion = null;
           this.observer = null;
-          this.initialized = false;
         }
         
         connectedCallback() {
-          // Prevent double initialization
-          if (this.getAttribute('data-initialized') === 'true') {
-            return;
-          }
-          
           this.promotion = this.querySelector('.m-promotion');
           if (this.promotion) {
             this.init();
-            this.setAttribute('data-initialized', 'true');
           }
         }
         
         disconnectedCallback() {
           if (this.observer) {
             this.observer.disconnect();
-            this.observer = null;
           }
-          this.initialized = false;
         }
         
         init() {
-          // Only init if we have exactly one promotion div (not already cloned)
-          const promotions = this.querySelectorAll('.m-promotion');
-          if (promotions.length !== 1) {
-            return;
-          }
-          
-          this.promotion.classList.add('m-promotion--animated');
-          
-          // Clone the promotion content multiple times for seamless scrolling
-          for (let i = 0; i < 10; i++) {
-            const clone = this.promotion.cloneNode(true);
-            clone.setAttribute('aria-hidden', 'true');
-            this.appendChild(clone);
-          }
-          
-          // Set up intersection observer for play/pause on visibility
-          this.observer = new IntersectionObserver(
-            (entries) => {
-              entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                  this.scrollingPlay();
-                } else {
-                  this.scrollingPause();
-                }
-              });
-            },
-            {
-              rootMargin: '0px 0px 50px 0px',
+          if (this.childElementCount === 1) {
+            this.promotion.classList.add('m-promotion--animated');
+            
+            // Clone the promotion content multiple times for seamless scrolling
+            for (let i = 0; i < 10; i++) {
+              const clone = this.promotion.cloneNode(true);
+              clone.setAttribute('aria-hidden', 'true');
+              this.appendChild(clone);
             }
-          );
-          
-          this.observer.observe(this);
-          this.initialized = true;
+            
+            // Set up intersection observer for play/pause on visibility
+            this.observer = new IntersectionObserver(
+              (entries) => {
+                entries.forEach((entry) => {
+                  if (entry.isIntersecting) {
+                    this.scrollingPlay();
+                  } else {
+                    this.scrollingPause();
+                  }
+                });
+              },
+              {
+                rootMargin: '0px 0px 50px 0px',
+              }
+            );
+            
+            this.observer.observe(this);
+          }
         }
         
         scrollingPlay() {
@@ -146,48 +126,8 @@
       
       customElements.define('fract-scrolling-promotion', FractScrollingPromotion);
     }
-  }
-  
-  // Initialize any elements that weren't initialized yet
-  document.addEventListener('DOMContentLoaded', function() {
-    const elements = document.querySelectorAll('fract-scrolling-promotion[data-initialized="false"]');
-    elements.forEach(el => {
-      if (el.getAttribute('data-initialized') === 'false') {
-        // Trigger connectedCallback manually if needed
-        const promotion = el.querySelector('.m-promotion');
-        if (promotion && el.querySelectorAll('.m-promotion').length === 1) {
-          el.promotion = promotion;
-          el.promotion.classList.add('m-promotion--animated');
-          
-          for (let i = 0; i < 10; i++) {
-            const clone = el.promotion.cloneNode(true);
-            clone.setAttribute('aria-hidden', 'true');
-            el.appendChild(clone);
-          }
-          
-          const observer = new IntersectionObserver(
-            (entries) => {
-              entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                  el.classList.remove('fract-scrolling-promotion--paused');
-                } else {
-                  el.classList.add('fract-scrolling-promotion--paused');
-                }
-              });
-            },
-            {
-              rootMargin: '0px 0px 50px 0px',
-            }
-          );
-          
-          observer.observe(el);
-          el.setAttribute('data-initialized', 'true');
-        }
-      }
-    });
-  });
+  })();
 </script>
-{% endif %}
 
 {% schema %}
 {
