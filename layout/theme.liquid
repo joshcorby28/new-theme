@@ -231,7 +231,29 @@
       </style>
 
     {{ content_for_layout }}
+  {% if template == 'index' %}
+    <style>
+      header {
+      position: absolute;
+      z-index: 9;
+      width: 100%;
+        background:transparent;
+      top:60px;
+      }
 
+      :root {
+        --page-width: {{ settings.page_width | divided_by: 10 }}rem;
+      }
+
+      .header__logo-link img {
+          filter: invert(1);}
+
+          .desktop-menu a,  .header__icons sup {
+          color:white;}
+          .header__icons path, circle {
+          stroke:white;}
+    </style>
+  {% endif %}
 <!-- Discount Popup Start -->
 <div id="discount-popup" class="discount-popup">
   <div class="popup-content">
