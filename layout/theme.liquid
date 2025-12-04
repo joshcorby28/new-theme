@@ -4,6 +4,7 @@
     <script src="https://js.squarecdn.com/square-marketplace.js" async></script>
     {% # Inlined CSS Variables %}
     {% render 'css-variables' %}
+<link href="https://fonts.googleapis.com/css2?family=Quantico:wght@400;700&display=swap" rel="stylesheet">
 
     {% # Load and preload the critical CSS %}
     {{ 'critical.css' | asset_url | stylesheet_tag: preload: true }}
