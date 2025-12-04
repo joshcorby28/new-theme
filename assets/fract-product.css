@@ -356,7 +356,6 @@ background: #D55653;
     padding: 5px;
     text-align: center;
 	text-transform:uppercase; 
-    font-weight:bold;
     color: white;
 }
 
@@ -403,6 +402,7 @@ background: #D55653;
 .price-main{
 display: flex
 ;
+    align-items: center;
     gap: 5px;
   }
 
