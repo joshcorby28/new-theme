@@ -87,13 +87,19 @@
 
 </style>
 <div class="drop-badge">
- {% if product.tags contains 'blanks' %}
-    Heavyweight Blank
+
+  {% if product.compare_at_price > product.price %}
+      {% assign savings = product.compare_at_price | minus: product.price %}
+      {% assign percent_off = savings | times: 100 | divided_by: product.compare_at_price %}
+      {{ percent_off | round }}% OFF
+  {% elsif product.tags contains 'blanks' %}
+      Heavyweight Blank
   {% elsif product.tags contains 'comingsoon' %}
-    Coming Soon
+      Coming Soon
   {% else %}
-    Discover The Unknown
+      Discover The Unknown
   {% endif %}
+
 </div>
 
 
