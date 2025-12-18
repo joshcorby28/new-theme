@@ -117,7 +117,7 @@
 ></div>
 {% endif %}
 
-      <div class="price-main">
+      <div style="margin-top:10px;" class="price-main">
         {% if product.compare_at_price > product.price %}
           <h4 style=" font-size: 20px;   font-weight:bold; color:#D55653;" class="price--sale">{{ product.price | money }}</h4>
           <h4 class="price--compare">{{ product.compare_at_price | money }}</h4>
