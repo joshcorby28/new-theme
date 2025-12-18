@@ -84,10 +84,12 @@
           font-size: 0.85rem; 
         }
         .star, svg {
-          fill: #1b1b1b !important;
           width: 14px !important;
           height: 14px !important;
         }
+
+        .star path {
+                  fill: #1b1b1b !important;}
       `;
       iframe.contentDocument.head.appendChild(style);
     } else {
