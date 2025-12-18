@@ -86,6 +86,24 @@
     data-show-only-reviews-count="true"
   ></div>
 {% endif %}
+
+<style>
+  /* Target the rating widget on collection pages */
+[data-dr="rating-widget"].collection-page {
+  margin: 10px 0; /* margin above and below */
+  color: #1b1b1b; /* text and star color */
+  font-size: 0.85rem; /* slightly smaller stars/text */
+}
+
+/* If stars are SVG or icon fonts, you might need to target them specifically */
+[data-dr="rating-widget"].collection-page .star,
+[data-dr="rating-widget"].collection-page svg {
+  fill: #1b1b1b; /* ensure SVG stars are colored correctly */
+  width: 14px;    /* adjust size */
+  height: 14px;   /* adjust size */
+  margin-right: 2px; /* optional spacing between stars */
+}
+</style>
       <div class="price-main">
         {% if product.compare_at_price > product.price %}
           <h4 style=" font-size: 20px;   font-weight:bold; color:#D55653;" class="price--sale">{{ product.price | money }}</h4>
