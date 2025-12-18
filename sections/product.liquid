@@ -50,60 +50,73 @@
 
 <div class="product-info">
   <h1>{{ product.title }}</h1>
-  {% assign prReviewCount = product.metafields.doran.prReviewCount | default: 0 %}
+{% assign prReviewCount = product.metafields.doran.prReviewCount | default: 0 %}
 {% if prReviewCount > 0 %}
-  <script type="text/javascript">
-    window.$prDoranInit = window.$prDoranInit || {};
-    window.$prDoranInit.ratingWidgetReview = window.$prDoranInit.ratingWidgetReview || {};
-    var productReview = {
-      reviewsCount: {{ product.metafields.doran.prReviewCount | default: 0 }},
-      averageRating: {{ product.metafields.doran.prAvgRating | default: 0 }},
-      stars1: {{ product.metafields.doran.prStar1 | default: 0 }},
-      stars2: {{ product.metafields.doran.prStar2 | default: 0 }},
-      stars3: {{ product.metafields.doran.prStar3 | default: 0 }},
-      stars4: {{ product.metafields.doran.prStar4 | default: 0 }},
-      stars5: {{ product.metafields.doran.prStar5 | default: 0 }}
-    }
-    if (typeof window.$prDoranInit.ratingWidgetReview['{{ product.id }}'] === 'undefined') {
-      window.$prDoranInit.ratingWidgetReview['{{ product.id }}'] = productReview;
+<script type="text/javascript">
+  window.$prDoranInit = window.$prDoranInit || {};
+  window.$prDoranInit.ratingWidgetReview = window.$prDoranInit.ratingWidgetReview || {};
+  
+  var productReview = {
+    reviewsCount: {{ product.metafields.doran.prReviewCount | default: 0 }},
+    averageRating: {{ product.metafields.doran.prAvgRating | default: 0 }},
+    stars1: {{ product.metafields.doran.prStar1 | default: 0 }},
+    stars2: {{ product.metafields.doran.prStar2 | default: 0 }},
+    stars3: {{ product.metafields.doran.prStar3 | default: 0 }},
+    stars4: {{ product.metafields.doran.prStar4 | default: 0 }},
+    stars5: {{ product.metafields.doran.prStar5 | default: 0 }}
+  };
+
+  if (typeof window.$prDoranInit.ratingWidgetReview['{{ product.id }}'] === 'undefined') {
+    window.$prDoranInit.ratingWidgetReview['{{ product.id }}'] = productReview;
+  } else {
+    var existingProductReview = window.$prDoranInit.ratingWidgetReview['{{ product.id }}'];
+    window.$prDoranInit.ratingWidgetReview['{{ product.id }}'] = Object.assign(existingProductReview, productReview);
+  }
+
+  // Wait a bit for the iframe to render, then inject styles
+  function styleRatingWidget() {
+    var iframe = document.querySelector('[data-product-id="{{ product.id }}"] iframe');
+    if (iframe && iframe.contentDocument) {
+      var style = document.createElement('style');
+      style.innerHTML = `
+        body { 
+          color: #1b1b1b; 
+          font-size: 0.85rem; 
+          margin: 10px 0; 
+        }
+        .star, svg {
+          fill: #1b1b1b !important;
+          width: 14px !important;
+          height: 14px !important;
+          margin-right: 2px;
+        }
+      `;
+      iframe.contentDocument.head.appendChild(style);
     } else {
-      var existingProductReview = window.$prDoranInit.ratingWidgetReview['{{ product.id }}'];
-      window.$prDoranInit.ratingWidgetReview['{{ product.id }}'] = Object.assign(existingProductReview, productReview);
+      // Retry if iframe isn't ready yet
+      setTimeout(styleRatingWidget, 200);
     }
-  </script>
-  <div
-    data-dr="rating-widget"
-    data-class-name="collection-page"
-    data-hide-detail="true"
-    data-product-id="{{ product.id }}"
-    data-reviews-count="{{ product.metafields.doran.prReviewCount | default: 0 }}"
-    data-average-rating="{{ product.metafields.doran.prAvgRating | default: 0 }}"
-    data-star1="{{ product.metafields.doran.prStar1 | default: 0 }}"
-    data-star2="{{ product.metafields.doran.prStar2 | default: 0 }}"
-    data-star3="{{ product.metafields.doran.prStar3 | default: 0 }}"
-    data-star4="{{ product.metafields.doran.prStar4 | default: 0 }}"
-    data-star5="{{ product.metafields.doran.prStar5 | default: 0 }}"
-    data-show-only-reviews-count="true"
-  ></div>
+  }
+
+  styleRatingWidget();
+</script>
+
+<div
+  data-dr="rating-widget"
+  data-class-name="collection-page"
+  data-hide-detail="true"
+  data-product-id="{{ product.id }}"
+  data-reviews-count="{{ product.metafields.doran.prReviewCount | default: 0 }}"
+  data-average-rating="{{ product.metafields.doran.prAvgRating | default: 0 }}"
+  data-star1="{{ product.metafields.doran.prStar1 | default: 0 }}"
+  data-star2="{{ product.metafields.doran.prStar2 | default: 0 }}"
+  data-star3="{{ product.metafields.doran.prStar3 | default: 0 }}"
+  data-star4="{{ product.metafields.doran.prStar4 | default: 0 }}"
+  data-star5="{{ product.metafields.doran.prStar5 | default: 0 }}"
+  data-show-only-reviews-count="true"
+></div>
 {% endif %}
 
-<style>
-  /* Target the rating widget on collection pages */
-[data-dr="rating-widget"].collection-page {
-  margin: 10px 0; /* margin above and below */
-  color: #1b1b1b; /* text and star color */
-  font-size: 0.85rem; /* slightly smaller stars/text */
-}
-
-/* If stars are SVG or icon fonts, you might need to target them specifically */
-[data-dr="rating-widget"].collection-page .star,
-[data-dr="rating-widget"].collection-page svg {
-  fill: #1b1b1b; /* ensure SVG stars are colored correctly */
-  width: 14px;    /* adjust size */
-  height: 14px;   /* adjust size */
-  margin-right: 2px; /* optional spacing between stars */
-}
-</style>
       <div class="price-main">
         {% if product.compare_at_price > product.price %}
           <h4 style=" font-size: 20px;   font-weight:bold; color:#D55653;" class="price--sale">{{ product.price | money }}</h4>
