@@ -9,6 +9,44 @@
 <div class="fade-top-mask"></div>
 
 <div class="fract-main-product">
+  {% unless product.available %}
+  <div class="sold-out-overlay" aria-hidden="true">
+    <div class="sold-out-overlay__content">
+      <h1>SOLD OUT</h1>
+      <p>This product is currently unavailable.</p>
+    </div>
+  </div>
+
+  <style>
+    .sold-out-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.92);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.sold-out-overlay__content {
+  color: #fff;
+  padding: 2rem;
+}
+
+.sold-out-overlay__content h1 {
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  letter-spacing: 0.15em;
+  margin-bottom: 1rem;
+}
+
+.sold-out-overlay__content p {
+  font-size: 1rem;
+  opacity: 0.8;
+  text-transform: uppercase;
+}
+</style>
+{% endunless %}
 <div class="product-images">
   {% if section.settings.image_layout == 'slider' %}
     <div class="swiper product-gallery-swiper">
