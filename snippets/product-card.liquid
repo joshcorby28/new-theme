@@ -35,9 +35,9 @@
     >
   {% endif %}
 
-  {% if product.tags contains 'comingsoon' %}
+      {% if total_inventory < 0 %}
     <div class="product-card__overlay">
-      Coming Soon
+      Sold Out
     </div>
   {% endif %}
 </div>
