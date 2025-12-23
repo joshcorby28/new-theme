@@ -18,15 +18,20 @@
   </div>
 
   <style>
-    .sold-out-overlay {
-  position: fixed;
+.fract-main-product {
+  position: relative;
+}
+
+.sold-out-overlay {
+  position: absolute; /* 🔑 NOT fixed */
   inset: 0;
-  background: rgba(0, 0, 0, 0.92);
-  z-index: 9999;
+  background: rgba(0, 0, 0, 0.9);
+  z-index: 50;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
+  pointer-events: all;
 }
 
 .sold-out-overlay__content {
@@ -35,16 +40,17 @@
 }
 
 .sold-out-overlay__content h1 {
-  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
   letter-spacing: 0.15em;
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
 }
 
 .sold-out-overlay__content p {
-  font-size: 1rem;
-  opacity: 0.8;
+  font-size: 0.9rem;
   text-transform: uppercase;
+  opacity: 0.8;
 }
+
 </style>
 {% endunless %}
 <div class="product-images">
