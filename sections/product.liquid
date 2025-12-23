@@ -215,7 +215,18 @@
       <button type="button" class="qty-btn plus">+</button>
     </div>
 
-    <button type="button" class="add-to-cart fract-primary">Add to cart</button>
+<button
+  type="button"
+  class="add-to-cart fract-primary{% unless product.available %} is-sold-out{% endunless %}"
+  {% unless product.available %}disabled{% endunless %}
+>
+  {% if product.available %}
+    Add to cart
+  {% else %}
+    Sold out
+  {% endif %}
+</button>
+
   </div>
 </div>
 
