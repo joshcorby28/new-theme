@@ -214,15 +214,15 @@
       <input type="number" id="qty-{{ product.id }}" min="1" value="1" class="qty-input"/>
       <button type="button" class="qty-btn plus">+</button>
     </div>
-{% assign current_variant = product.selected_or_first_available_variant %}
+{% assign current_variant_variant = product.selected_or_first_available_variant %}
 
 <button
   type="button"
-  class="add-to-cart fract-primary {% unless current_variant.available %}is-sold-out{% endunless %}"
-  {% unless current_variant.available %}disabled{% endunless %}
+  class="add-to-cart fract-primary {% unless current_variant_variant .available %}is-sold-out{% endunless %}"
+  {% unless current_variant_variant .available %}disabled{% endunless %}
   data-add-to-cart
 >
-  {% if current_variant.available %}
+  {% if current_variant_variant .available %}
     Add to cart
   {% else %}
     Sold out
