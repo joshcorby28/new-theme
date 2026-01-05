@@ -89,6 +89,7 @@
         "announcement_QMGNDA",
         "announcement_Pk3JzB"
       ],
+      "disabled": true,
       "name": "Scrolling Prom0",
       "settings": {
         "container": "w-full",
