@@ -11,6 +11,9 @@
   "sections": {
     "video_hero_fQNxfR": {
       "type": "video-hero",
+      "custom_css": [
+        "@media screen and (min-width: 750px) {.fract-theme-media-heading-template--23901924884808videoherofqnxfr, .fract-theme-media-text-template--23901924884808videoherofqnxfr {color: #1b1b1b; }}"
+      ],
       "settings": {
         "width_mode": "full_width",
         "container_width": 1200,
