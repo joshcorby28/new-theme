@@ -33,19 +33,10 @@
 
 <div class="right-side-product">
 <div class="fract-info-and-form">
-{% if product.compare_at_price > product.price %}
-  {% assign savings = product.compare_at_price | minus: product.price %}
-  {% assign percent_off = savings | times: 100 | divided_by: product.compare_at_price %}
 
   <div class="drop-badge">
     UY ANY 3 ITEMS GET 30% OFF ORDER
   </div>
-
-{% elsif product.tags contains 'comingsoon' %}
-  <div class="drop-badge">
-    Coming November 15th
-  </div>
-{% endif %}
 
 
 <div class="product-info">
