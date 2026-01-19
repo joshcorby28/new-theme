@@ -1,27 +1,6 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web/src/regular/style.css" />
 
 <style>
-  #free-shipping-bar {
-  margin: 15px 0;
-  font-size: 14px;
-}
-
-.shipping-progress {
-  width: 100%;
-  height: 8px;
-  background: #eee;
-  border-radius: 4px;
-  overflow: hidden;
-  margin-top: 6px;
-}
-
-.shipping-progress-fill {
-  height: 100%;
-  width: 0%;
-  background: #000;
-  transition: width 0.3s ease;
-}
-
   .hidden-future .Fract-drawer {
     position: fixed;
     top: 0;
@@ -290,13 +269,7 @@
   </div>
 
   <div class="Fract-drawer-body" id="cartDrawerBody">
-    <div id="free-shipping-bar" style="display:none;">
-      <p id="free-shipping-text"></p>
-      <div class="shipping-progress">
-        <div class="shipping-progress-fill"></div>
-      </div>
-    </div>
-
+    
     <div class="Fract-drawer-empty" id="emptyCartMessage">
       <div class="Fract-drawer-empty-icon">
         <i class="ph ph-shopping-cart"></i>
@@ -633,55 +606,3 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 </script>
-
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-  const FREE_SHIPPING_THRESHOLD = 6000; // £60 in pence
-
-  const bar = document.getElementById("free-shipping-bar");
-  const text = document.getElementById("free-shipping-text");
-  const fill = document.querySelector(".shipping-progress-fill");
-
-  if (!bar) return;
-
-  function updateShippingBar(cartTotal) {
-    bar.style.display = "block";
-
-    if (cartTotal >= FREE_SHIPPING_THRESHOLD) {
-      text.innerHTML = "🎉 You’ve qualified for <strong>FREE shipping!</strong>";
-      fill.style.width = "100%";
-    } else {
-      const remaining = (FREE_SHIPPING_THRESHOLD - cartTotal) / 100;
-      const progress = Math.min((cartTotal / FREE_SHIPPING_THRESHOLD) * 100, 100);
-
-      text.innerHTML = `Spend <strong>£${remaining.toFixed(2)}</strong> more for FREE shipping`;
-      fill.style.width = progress + "%";
-    }
-  }
-
-  function fetchCart() {
-    fetch('/cart.js')
-      .then(response => response.json())
-      .then(cart => updateShippingBar(cart.total_price));
-  }
-
-  // Initial load
-  fetchCart();
-
-  // Listen for AJAX cart updates
-  document.addEventListener("cart:updated", fetchCart);
-  document.addEventListener("ajaxProduct:added", fetchCart);
-
-  // Fallback for themes without events
-  const originalFetch = window.fetch;
-  window.fetch = function () {
-    return originalFetch.apply(this, arguments).then(response => {
-      if (response.url.includes('/cart/add') || response.url.includes('/cart/change')) {
-        fetchCart();
-      }
-      return response;
-    });
-  };
-});
-</script>
-
