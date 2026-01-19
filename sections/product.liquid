@@ -161,9 +161,6 @@
     {% endfor %}
   </div>
 {% endif %}
-  <div class="drop-badge">
-    ORDER BEFORE 5PM <b>FOR SAME DAY DISPATCH</b>
-  </div>
 </div>
 <div class="product-form" id="product-form-{{ product.id }}">
   {% assign current_variant = product.selected_or_first_available_variant %}
@@ -270,12 +267,7 @@
   {% if usp_point %}
     <div class="product-usp-point">      
       <div class="usp-point">
-      <span class="icon" aria-hidden="true">
-        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-          <path d="M5 13l4 4L19 7" />
-        </svg>
-      </span>
-       <span>{{ usp_point.value }}</span>
+ORDER BEFORE 5PM FOR SAME DAY DISPATCH
       </div>
     </div>
   {% endif %}
