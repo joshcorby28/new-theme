@@ -1,5 +1,5 @@
 
-<footer class="main-footer">
+<div class="main-footer">
 <div class="newsletter" style="--align: {{ section.settings.alignment }};">
   <form method="post" action="/contact" class="signup-box" id="contact_form" novalidate>
     <label for="email" class="signup-text">
@@ -96,7 +96,7 @@
   <footer class="footer-wrap">
   <div class="footer-text">HIDDEN FUTURE</div>
 
-</footer>
+  </div>
 
 {% stylesheet %}
 .footer-wrap {
@@ -113,7 +113,7 @@
   transform: translateY(25%); /* pushes text downward */
 }
 
-  footer {
+  .main-footer {
     margin-top: 0;
     border-top:1px solid var(--text-color);
   }
@@ -125,7 +125,7 @@
     margin: 0 auto;
     justify-content: space-between;
   }
-  footer a {
+  .main-footer a {
     text-decoration: none;
     color: var(--text-color);
   }
@@ -133,8 +133,8 @@
     font-size: 12px;
     color: var(--text-color);
   }
-  footer .footer__links,
-  footer .footer__payment {
+  .main-footer .footer__links,
+  .main-footer .footer__payment {
     display: flex;
     gap: 1rem;
     font-size: 12px;
