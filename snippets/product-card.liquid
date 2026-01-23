@@ -22,6 +22,10 @@
 <div class="product-card">
   <a href="{{ product.url }}" class="product-card__link">
 <div class="{% if product.tags contains 'comingsoon'  %}coming-soon{%endif%} product-card__image-wrapper">
+  {% if product.compare_at_price > product.price %}
+  <div class="sale-badge">On Sale</div>
+{% endif %}
+
   {% assign first_image = product.featured_image %}
   {% assign second_image = product.images[1] %}
 
