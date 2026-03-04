@@ -9,7 +9,7 @@
  */
 {
   "current": {
-    "grunge-effect": false,
+    "grunge-effect": true,
     "grain-opacity": 0.1,
     "spin-logo": false,
     "logo": "shopify://shop_images/New_Project_6_1_1.png",
