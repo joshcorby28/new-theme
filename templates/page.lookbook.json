@@ -11,10 +11,21 @@
   "sections": {
     "main": {
       "type": "page",
+      "disabled": true,
       "settings": {}
+    },
+    "grid_motion_ezRLcg": {
+      "type": "grid-motion",
+      "name": "Scroll Grid Motion",
+      "settings": {
+        "heading": "let's scroll.",
+        "subheading": "Converted to Shopify section",
+        "end_text": "fin."
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "grid_motion_ezRLcg"
   ]
 }
