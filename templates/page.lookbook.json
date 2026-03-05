@@ -16,6 +16,34 @@
     },
     "grid_motion_ezRLcg": {
       "type": "grid-motion",
+      "blocks": {
+        "image_CCYBUN": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/image_17.jpg",
+            "layer": "layer1"
+          }
+        },
+        "image_Cyr4zg": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/IMG_4693_1.jpg",
+            "layer": "layer2"
+          }
+        },
+        "image_P8QPgp": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/IMG_4693_2.jpg",
+            "layer": "layer3"
+          }
+        }
+      },
+      "block_order": [
+        "image_CCYBUN",
+        "image_Cyr4zg",
+        "image_P8QPgp"
+      ],
       "name": "Scroll Grid Motion",
       "settings": {
         "heading": "let's scroll.",
