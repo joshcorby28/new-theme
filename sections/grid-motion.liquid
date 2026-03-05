@@ -1,0 +1,326 @@
+<section class="scroll-grid-motion">
+  <div class="content-wrap">
+    
+    <header>
+      <h1 class="fluid">{{ section.settings.heading }}</h1>
+      <h2 class="fluid">{{ section.settings.subheading }}</h2>
+    </header>
+
+    <main>
+      <section>
+        <div class="content">
+          <div class="grid">
+
+            <div class="layer">
+              {% for block in section.blocks %}
+                {% if block.settings.layer == 'layer1' %}
+                <div {{ block.shopify_attributes }}>
+                  {% if block.settings.image %}
+                    <img 
+                      src="{{ block.settings.image | image_url: width: 800 }}"
+                      alt="{{ block.settings.image.alt | escape }}"
+                      loading="lazy"
+                    >
+                  {% endif %}
+                </div>
+                {% endif %}
+              {% endfor %}
+            </div>
+
+            <div class="layer">
+              {% for block in section.blocks %}
+                {% if block.settings.layer == 'layer2' %}
+                <div {{ block.shopify_attributes }}>
+                  {% if block.settings.image %}
+                    <img 
+                      src="{{ block.settings.image | image_url: width: 800 }}"
+                      alt="{{ block.settings.image.alt | escape }}"
+                      loading="lazy"
+                    >
+                  {% endif %}
+                </div>
+                {% endif %}
+              {% endfor %}
+            </div>
+
+            <div class="layer">
+              {% for block in section.blocks %}
+                {% if block.settings.layer == 'layer3' %}
+                <div {{ block.shopify_attributes }}>
+                  {% if block.settings.image %}
+                    <img 
+                      src="{{ block.settings.image | image_url: width: 800 }}"
+                      alt="{{ block.settings.image.alt | escape }}"
+                      loading="lazy"
+                    >
+                  {% endif %}
+                </div>
+                {% endif %}
+              {% endfor %}
+            </div>
+
+            <div class="scaler">
+              {% if section.settings.center_image %}
+              <img
+                src="{{ section.settings.center_image | image_url: width: 1600 }}"
+                alt="{{ section.settings.center_image.alt | escape }}"
+              >
+              {% endif %}
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="fluid">{{ section.settings.end_text }}</h2>
+      </section>
+
+    </main>
+  </div>
+</section>
+
+
+<style>
+
+.scroll-grid-motion *,
+.scroll-grid-motion *::before,
+.scroll-grid-motion *::after {
+  box-sizing: border-box;
+}
+
+.scroll-grid-motion{
+  background:#000;
+  color:#fff;
+}
+
+.scroll-grid-motion :root {
+  --gutter:2rem;
+}
+
+@media (max-width:600px){
+  .scroll-grid-motion :root{
+    --gutter:1rem;
+  }
+}
+
+.scroll-grid-motion header{
+  min-height:100vh;
+  display:grid;
+  align-content:center;
+  max-width:calc(100% - (2 * var(--gutter)));
+  padding-left:48px;
+}
+
+.scroll-grid-motion .fluid{
+  font-size:clamp(4rem,12vw,12rem);
+  line-height:0.6;
+  margin:0;
+}
+
+.scroll-grid-motion h2.fluid{
+  font-size:clamp(.5rem,2vw,1.5rem);
+  padding-top:48px;
+}
+
+.scroll-grid-motion main section:first-of-type{
+  min-height:240vh;
+}
+
+.scroll-grid-motion .content{
+  min-height:100vh;
+  width:100vw;
+  display:flex;
+  place-items:center;
+  position:sticky;
+  top:0;
+  overflow:hidden;
+}
+
+.scroll-grid-motion main section:last-of-type{
+  min-height:100vh;
+  display:grid;
+  place-items:center;
+}
+
+.scroll-grid-motion .grid{
+  --offset:0;
+  --container-width:1600px;
+  --gap:clamp(10px,7.35vw,80px);
+
+  width:var(--container-width);
+  max-width:calc(100% - (2 * var(--gutter)));
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  grid-template-rows:repeat(3,auto);
+  gap:var(--gap);
+  margin:0 auto;
+  align-content:center;
+  position:absolute;
+  top:50%;
+  left:50%;
+  translate:-50% -50%;
+}
+
+.scroll-grid-motion .layer{
+  display:grid;
+  grid-column:1/-1;
+  grid-row:1/-1;
+  grid-template-columns:subgrid;
+  grid-template-rows:subgrid;
+}
+
+.scroll-grid-motion .grid img{
+  width:100%;
+  aspect-ratio:4/5;
+  object-fit:cover;
+  border-radius:1rem;
+}
+
+.scroll-grid-motion .scaler{
+  position:relative;
+  grid-area:2/3;
+}
+
+.scroll-grid-motion .scaler img{
+  position:absolute;
+  top:50%;
+  left:50%;
+  translate:-50% -50%;
+  object-fit:cover;
+  border-radius:1rem;
+  width:100%;
+  height:100%;
+}
+
+</style>
+
+
+<script type="module">
+
+import { animate, scroll, cubicBezier } from 'https://cdn.jsdelivr.net/npm/motion@11.11.16/+esm';
+
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+if(!prefersReducedMotion){
+
+const image = document.querySelector('.scroll-grid-motion .scaler img');
+const firstSection = document.querySelector('.scroll-grid-motion main section:first-of-type');
+const layers = document.querySelectorAll('.scroll-grid-motion .grid > .layer');
+
+const naturalWidth = image.offsetWidth;
+const naturalHeight = image.offsetHeight;
+
+const viewportWidth = window.innerWidth;
+const viewportHeight = window.innerHeight;
+
+scroll(
+  animate(image,{
+    width:[viewportWidth,naturalWidth],
+    height:[viewportHeight,naturalHeight]
+  },{
+    width:{ easing:cubicBezier(0.65,0,0.35,1)},
+    height:{ easing:cubicBezier(0.42,0,0.58,1)}
+  }),
+  {
+    target:firstSection,
+    offset:['start start','80% end end']
+  }
+);
+
+layers.forEach((layer,index)=>{
+
+  const endOffset = `${1 - (index * 0.05)} end`;
+
+  scroll(
+    animate(layer,{
+      opacity:[0,0,1]
+    },{
+      offset:[0,0.55,1],
+      easing:cubicBezier(0.61,1,0.88,1)
+    }),
+    {
+      target:firstSection,
+      offset:['start start',endOffset]
+    }
+  );
+
+  scroll(
+    animate(layer,{
+      scale:[0,0,1]
+    },{
+      offset:[0,0.3,1],
+      easing:cubicBezier(0.42,0,0.58,1)
+    }),
+    {
+      target:firstSection,
+      offset:['start start',endOffset]
+    }
+  );
+
+});
+
+}
+
+</script>
+
+
+{% schema %}
+{
+  "name": "Scroll Grid Motion",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "let's scroll."
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Converted to Shopify section"
+    },
+    {
+      "type": "image_picker",
+      "id": "center_image",
+      "label": "Center image"
+    },
+    {
+      "type": "text",
+      "id": "end_text",
+      "label": "Bottom text",
+      "default": "fin."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Grid image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "select",
+          "id": "layer",
+          "label": "Layer",
+          "options": [
+            { "value": "layer1", "label": "Layer 1 (Outer)" },
+            { "value": "layer2", "label": "Layer 2 (Inner)" },
+            { "value": "layer3", "label": "Layer 3 (Center top/bottom)" }
+          ],
+          "default": "layer1"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Scroll Grid Motion"
+    }
+  ]
+}
+{% endschema %}
