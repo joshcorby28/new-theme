@@ -121,7 +121,8 @@
     "video_hero_qcktb7": {
       "type": "video-hero",
       "custom_css": [
-        "@media screen and (min-width: 750px) {.fract-theme-media-heading-template--23901924884808videoherofqnxfr, .fract-theme-media-text-template--23901924884808videoherofqnxfr {color: #1b1b1b; }}"
+        "@media screen and (min-width: 750px) {.fract-theme-media-heading-template--23901924884808videoherofqnxfr, .fract-theme-media-text-template--23901924884808videoherofqnxfr {color: #1b1b1b; }}",
+        ".fract-theme-media-text-block-template--23901924884808videoheroqcktb7 {height: 600px;}"
       ],
       "settings": {
         "width_mode": "full_width",
@@ -142,18 +143,18 @@
         "use_overlay": true,
         "overlay_color": "#1b1b1b",
         "overlay_opacity": 15,
-        "heading": "discover the unknown",
-        "text": "BUY ANY 3 ITEMS <b>GET 30% OFF ORDER</b>",
+        "heading": "drop two",
+        "text": "coming soon",
         "content_position": "middle",
         "text_alignment": "left",
-        "heading_color": "#ffffff",
+        "heading_color": "#1b1b1b",
         "heading_size": 32,
         "heading_size_mobile": 20,
-        "text_color": "#ffffff",
+        "text_color": "#1b1b1b",
         "text_size": 16,
         "text_size_mobile": 14,
         "text-uppercase": true,
-        "show_buttons": true,
+        "show_buttons": false,
         "primary_button_text": "shop now",
         "primary_button_link": "shopify://collections/all-products",
         "primary_button_style": "fract-secondary",
