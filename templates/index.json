@@ -111,6 +111,9 @@
     },
     "fract_product_swiper_HtXeWr": {
       "type": "fract-product-swiper",
+      "custom_css": [
+        ".swiper {margin-top: 36px;}"
+      ],
       "name": "Product Slider",
       "settings": {
         "main-title": "",
