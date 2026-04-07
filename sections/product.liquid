@@ -265,11 +265,15 @@
 
   {% assign usp_point = product.metafields.custom.usp_point %}
   {% if usp_point %}
-    <div class="product-usp-point">      
-      <div class="usp-point">
-ORDER BEFORE 5PM FOR SAME DAY DISPATCH
-      </div>
-    </div>
+<div class="product-usp-point">      
+  <div class="usp-point">
+    {% if product.tags contains 'drop-two' %}
+      PRE ORDER - SHIPPING IN NEXT TWO WEEKS
+    {% else %}
+      ORDER BEFORE 5PM FOR SAME DAY DISPATCH
+    {% endif %}
+  </div>
+</div>
   {% endif %}
           </div>
             <div class="custom-accordion">
