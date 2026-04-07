@@ -213,17 +213,20 @@
 
 <button
   type="button"
-  class="add-to-cart fract-primary {% unless current_variant_variant .available %}is-sold-out{% endunless %}"
-  {% unless current_variant_variant .available %}disabled{% endunless %}
+  class="add-to-cart fract-primary {% unless current_variant.available %}is-sold-out{% endunless %}"
+  {% unless current_variant.available %}disabled{% endunless %}
   data-add-to-cart
 >
-  {% if current_variant_variant .available %}
-    Add to cart
+  {% if current_variant.available %}
+    {% if product.tags contains 'drop-two' %}
+      PRE-ORDER
+    {% else %}
+      Add to cart
+    {% endif %}
   {% else %}
     Sold out
   {% endif %}
 </button>
-
 
   </div>
 </div>
