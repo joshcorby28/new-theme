@@ -34,10 +34,15 @@
 <div class="right-side-product">
 <div class="fract-info-and-form">
 
+{% if product.tags contains 'drop-two' %}
+  <div style="background:#FF4137;" class="drop-badge">
+    PRE ORDER - DROP TWO
+  </div>
+{% else %}
   <div style="background:#FF4137;" class="drop-badge">
     ACTIVATE RESET SALE
   </div>
-
+{% endif %}
 
 <div class="product-info">
   <h1>{{ product.title }}</h1>
