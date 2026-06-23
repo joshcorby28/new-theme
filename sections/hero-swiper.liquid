@@ -226,10 +226,6 @@
   .hero-slide {
     position: relative;
     overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    justify-content: var(--hero-justify);
-    align-items: var(--hero-align);
     height: 100%;
   }
 
@@ -264,11 +260,13 @@
   }
 
   .hero-slide__content {
-    position: relative;
+    position: absolute;
+    inset: 0;
     z-index: 2;
-    width: 100%;
     display: flex;
-    justify-content: var(--hero-align);
+    flex-direction: column;
+    justify-content: var(--hero-justify);
+    align-items: var(--hero-align);
     padding: var(--hero-content-padding);
     box-sizing: border-box;
     padding-bottom: calc(var(--hero-content-padding) + 60px);
