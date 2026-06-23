@@ -181,6 +181,114 @@
         "main-title": "shop by type",
         "button-text": "Shop All"
       }
+    },
+    "hero_swiper_7YbQmp": {
+      "type": "hero-swiper",
+      "blocks": {
+        "slide_H3397N": {
+          "type": "slide",
+          "settings": {
+            "eyebrow": "",
+            "heading": "13 mins. 1 shot. 1 goal.",
+            "subheading": "Clinical from Marcus.",
+            "text_color": "#ffffff",
+            "button_text": "Shop Now",
+            "button_url": "",
+            "button_style": "secondary",
+            "button_bg": "",
+            "button_text_color": "",
+            "button_2_text": "",
+            "button_2_url": "",
+            "button_2_style": "secondary",
+            "overlay_enabled": false,
+            "overlay_color": "#000000",
+            "overlay_opacity": 40
+          }
+        },
+        "slide_gVydng": {
+          "type": "slide",
+          "settings": {
+            "eyebrow": "",
+            "heading": "New season. New kit.",
+            "subheading": "Be ready for kick off.",
+            "text_color": "#ffffff",
+            "button_text": "Explore",
+            "button_url": "",
+            "button_style": "secondary",
+            "button_bg": "",
+            "button_text_color": "",
+            "button_2_text": "",
+            "button_2_url": "",
+            "button_2_style": "secondary",
+            "overlay_enabled": false,
+            "overlay_color": "#000000",
+            "overlay_opacity": 40
+          }
+        },
+        "slide_CbWknC": {
+          "type": "slide",
+          "settings": {
+            "eyebrow": "",
+            "heading": "Born to play.",
+            "subheading": "Gear up with the pros.",
+            "text_color": "#ffffff",
+            "button_text": "Shop Now",
+            "button_url": "",
+            "button_style": "secondary",
+            "button_bg": "",
+            "button_text_color": "",
+            "button_2_text": "",
+            "button_2_url": "",
+            "button_2_style": "secondary",
+            "overlay_enabled": false,
+            "overlay_color": "#000000",
+            "overlay_opacity": 40
+          }
+        }
+      },
+      "block_order": [
+        "slide_H3397N",
+        "slide_gVydng",
+        "slide_CbWknC"
+      ],
+      "name": "Hero Slider",
+      "settings": {
+        "height_type": "large",
+        "custom_height": 700,
+        "image_position": "center center",
+        "text_position": "bottom-left",
+        "content_padding": 48,
+        "content_max_width": 560,
+        "heading_tag": "h2",
+        "heading_size": 2,
+        "heading_size_mobile": 22,
+        "heading_size_max": 100,
+        "heading_weight": "700",
+        "heading_transform": "none",
+        "heading_tracking": "-0.02",
+        "subheading_size": 16,
+        "eyebrow_size": 13,
+        "eyebrow_transform": "uppercase",
+        "animate_text": true,
+        "overlay_enabled": true,
+        "overlay_color": "#000000",
+        "overlay_opacity": 35,
+        "transition_effect": "fade",
+        "slide_speed": 700,
+        "autoplay": true,
+        "autoplay_speed": 2000,
+        "loop": true,
+        "pause_on_hover": true,
+        "show_pagination": true,
+        "pagination_bullet_style": "pill",
+        "pagination_size": 8,
+        "pagination_color": "#ffffff",
+        "pagination_active_color": "#ffffff",
+        "show_play_pause": true,
+        "controls_position": "bottom-left",
+        "show_arrows": false,
+        "arrow_color": "#ffffff"
+      }
     }
   },
   "order": [
@@ -188,6 +296,7 @@
     "video_hero_fQNxfR",
     "scrolling_promo_D6GEMB",
     "fract_product_swiper_HtXeWr",
-    "expandable_collection_grid_UUaqBh"
+    "expandable_collection_grid_UUaqBh",
+    "hero_swiper_7YbQmp"
   ]
 }
