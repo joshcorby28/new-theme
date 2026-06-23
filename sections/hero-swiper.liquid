@@ -230,6 +230,7 @@
     flex-direction: column;
     justify-content: var(--hero-justify);
     align-items: var(--hero-align);
+    height: 100%;
   }
 
   .hero-slide__image {
@@ -377,25 +378,88 @@
     width: auto;
   }
 
+  /* SVG ring bullets */
   .hero-swiper__pagination .swiper-pagination-bullet {
-    background: var(--pagination-color);
-    opacity: 0.5;
+    background: transparent;
+    opacity: 1;
     width: {{ section.settings.pagination_size }}px;
     height: {{ section.settings.pagination_size }}px;
-    border-radius: 50%;
-    transition: opacity 0.2s, transform 0.2s, width 0.3s;
+    border-radius: 0;
     margin: 0;
+    padding: 0;
     cursor: pointer;
+    flex-shrink: 0;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero-bullet {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .hero-bullet svg {
+    display: block;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+
+  .hero-bullet__track {
+    fill: none;
+    stroke: var(--pagination-color);
+    stroke-opacity: 0.35;
+    stroke-width: 1.5;
+  }
+
+  .hero-bullet__progress {
+    fill: none;
+    stroke: var(--pagination-active-color);
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    transform-origin: center;
+    transform: rotate(-90deg);
+    transition: stroke-opacity 0.2s;
+    stroke-opacity: 0;
+  }
+
+  .hero-bullet__dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--pagination-color);
+    opacity: 0.5;
+    display: block;
+    transition: opacity 0.2s, background 0.2s, transform 0.2s;
+    position: relative;
+    z-index: 1;
     flex-shrink: 0;
   }
 
-  .hero-swiper__pagination .swiper-pagination-bullet-active {
+  .swiper-pagination-bullet-active .hero-bullet__dot {
     background: var(--pagination-active-color);
     opacity: 1;
-    {% if section.settings.pagination_style == 'pill' %}
-    width: {{ section.settings.pagination_size | times: 3 }}px;
-    border-radius: 99px;
-    {% endif %}
+    transform: scale(1.25);
+  }
+
+  .swiper-pagination-bullet-active .hero-bullet__progress {
+    stroke-opacity: 1;
+    animation: hero-ring-fill var(--ring-duration, 5000ms) linear forwards;
+  }
+
+  .hero-swiper__pagination.is-paused .swiper-pagination-bullet-active .hero-bullet__progress {
+    animation-play-state: paused;
+  }
+
+  @keyframes hero-ring-fill {
+    from { stroke-dashoffset: var(--ring-circ); }
+    to   { stroke-dashoffset: 0; }
   }
 
   /* Play/Pause */
@@ -516,11 +580,37 @@
     var paginationType = '{{ section.settings.pagination_bullet_style }}';
     var showPagination = {{ section.settings.show_pagination | json }};
     var showPlayPause = {{ section.settings.show_play_pause | json }};
+    var bulletSize = {{ section.settings.pagination_size }};
+    var isFraction = paginationType === 'fraction';
+
+    // SVG ring geometry
+    var strokeW = 1.5;
+    var r = (bulletSize / 2) - strokeW;
+    var circ = +(2 * Math.PI * r).toFixed(3);
+    var cx = bulletSize / 2;
+    var transitionMs = parseInt('{{ section.settings.slide_speed }}', 10) || 600;
+
+    var paginationEl = section.querySelector('.hero-swiper__pagination');
+
+    // Set CSS vars for ring animation
+    if (paginationEl) {
+      paginationEl.style.setProperty('--ring-duration', (speed + transitionMs) + 'ms');
+      paginationEl.style.setProperty('--ring-circ', circ + 'px');
+    }
+
+    function restartRingAnimation(paginationEl) {
+      var active = paginationEl && paginationEl.querySelector('.swiper-pagination-bullet-active .hero-bullet__progress');
+      if (!active) return;
+      active.style.animation = 'none';
+      // Force reflow to restart animation
+      void active.getBoundingClientRect();
+      active.style.animation = '';
+    }
 
     var swiperConfig = {
       loop: loop,
       effect: effect,
-      speed: parseInt('{{ section.settings.slide_speed }}', 10) || 600,
+      speed: transitionMs,
       grabCursor: true,
       a11y: { enabled: true },
       keyboard: { enabled: true },
@@ -539,11 +629,28 @@
     }
 
     if (showPagination) {
-      swiperConfig.pagination = {
-        el: section.querySelector('.hero-swiper__pagination'),
-        type: paginationType === 'fraction' ? 'fraction' : 'bullets',
-        clickable: paginationType !== 'fraction',
-      };
+      if (isFraction) {
+        swiperConfig.pagination = {
+          el: paginationEl,
+          type: 'fraction',
+        };
+      } else {
+        swiperConfig.pagination = {
+          el: paginationEl,
+          type: 'bullets',
+          clickable: true,
+          renderBullet: function (index, className) {
+            return '<span class="' + className + ' hero-bullet" style="width:' + bulletSize + 'px;height:' + bulletSize + 'px;">' +
+              '<svg viewBox="0 0 ' + bulletSize + ' ' + bulletSize + '" aria-hidden="true">' +
+                '<circle class="hero-bullet__track" cx="' + cx + '" cy="' + cx + '" r="' + r + '"/>' +
+                '<circle class="hero-bullet__progress" cx="' + cx + '" cy="' + cx + '" r="' + r + '"' +
+                  ' stroke-dasharray="' + circ + '" stroke-dashoffset="' + circ + '"/>' +
+              '</svg>' +
+              '<span class="hero-bullet__dot"></span>' +
+            '</span>';
+          },
+        };
+      }
     }
 
     if ({{ section.settings.show_arrows | json }}) {
@@ -555,6 +662,13 @@
 
     var swiper = new Swiper(section.querySelector('.hero-swiper'), swiperConfig);
 
+    // Restart ring on slide change (fires after transition starts)
+    if (showPagination && !isFraction) {
+      swiper.on('slideChangeTransitionStart', function () {
+        restartRingAnimation(paginationEl);
+      });
+    }
+
     // Play/pause button
     if (showPlayPause && autoplay) {
       var btn = section.querySelector('.hero-swiper__play-pause');
@@ -562,12 +676,15 @@
         btn.addEventListener('click', function () {
           if (swiper.autoplay.running) {
             swiper.autoplay.stop();
+            paginationEl && paginationEl.classList.add('is-paused');
             btn.classList.add('is-paused');
             btn.setAttribute('aria-label', 'Play slideshow');
           } else {
             swiper.autoplay.start();
+            paginationEl && paginationEl.classList.remove('is-paused');
             btn.classList.remove('is-paused');
             btn.setAttribute('aria-label', 'Pause slideshow');
+            restartRingAnimation(paginationEl);
           }
         });
       }
@@ -850,7 +967,7 @@
       "id": "autoplay_speed",
       "label": "Autoplay delay (ms)",
       "min": 1000,
-      "max": 3000,
+      "max": 5000,
       "step": 500,
       "default": 2000
     },
@@ -881,21 +998,20 @@
       "id": "pagination_bullet_style",
       "label": "Pagination style",
       "options": [
-        { "value": "bullets", "label": "Dots" },
-        { "value": "pill", "label": "Pill (active expands)" },
+        { "value": "bullets", "label": "Ring (animated fill)" },
         { "value": "fraction", "label": "Fraction (1 / 4)" }
       ],
-      "default": "pill"
+      "default": "bullets"
     },
     {
       "type": "range",
       "id": "pagination_size",
-      "label": "Dot size (px)",
-      "min": 4,
-      "max": 16,
-      "step": 1,
-      "default": 8,
-      "info": "Not used for fraction style"
+      "label": "Bullet size (px)",
+      "min": 16,
+      "max": 40,
+      "step": 2,
+      "default": 24,
+      "info": "Diameter of the ring bullet. Not used for fraction style."
     },
     {
       "type": "color",
